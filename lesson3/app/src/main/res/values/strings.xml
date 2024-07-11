@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Lesson3</string>
+    <string name="title_label">Профиль</string>
+    <string name="profile_name_label">Иван \nИванов \nИванович</string>
+    <string name="dob_label">Дата рождения: \n01.01.2001</string>
+    <string name="city_tv_label">Город</string>
+    <string name="user_city_label">Саратов</string>
+    <string name="about_tv_label">О себе</string>
+    <string name="user_about_tv_label">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="edit_profile_button_label">Редактировать профиль</string>
 </resources>
