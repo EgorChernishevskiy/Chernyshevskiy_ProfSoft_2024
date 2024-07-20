@@ -18,7 +18,7 @@ class SecondActivity : AppCompatActivity() {
 
         val message = intent.getStringExtra("message")
 
-        binding.showNotificationButton.setOnClickListener {
+        binding.buttonShowNotification.setOnClickListener {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
