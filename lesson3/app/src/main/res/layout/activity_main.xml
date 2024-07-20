@@ -15,19 +15,17 @@
 
 
     <ImageView
-        android:id="@+id/backButton"
+        android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="19dp"
         android:src="@drawable/baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/titleTv"
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
@@ -37,7 +35,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
-        app:layout_constraintStart_toEndOf="@+id/backButton"
+        app:layout_constraintStart_toEndOf="@+id/buttonBack"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -47,10 +45,10 @@
         android:layout_marginTop="16dp"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTv" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
     <ImageView
-        android:id="@+id/profileImage"
+        android:id="@+id/ImageViewProfile"
         android:layout_width="68dp"
         android:layout_height="63dp"
         android:layout_marginStart="20dp"
@@ -59,47 +57,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <View
         android:id="@+id/nameDobContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="228dp"
+        android:layout_height="81dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/name_dob_container_bg"
-        android:orientation="vertical"
-        android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/profileImage"
+        app:layout_constraintBottom_toBottomOf="@id/ImageViewProfile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/profileImage"
-        app:layout_constraintTop_toTopOf="@id/profileImage">
+        app:layout_constraintStart_toEndOf="@id/ImageViewProfile"
+        app:layout_constraintTop_toTopOf="@id/ImageViewProfile" />
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/profile_name_label"
-            android:textColor="@color/black"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/dob"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="51dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/dob_label"
-            android:textColor="@color/black"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/name"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/cityTv"
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/profile_name_label"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/nameDobContainer"
+        app:layout_constraintTop_toTopOf="@+id/nameDobContainer" />
+
+    <TextView
+        android:id="@+id/textViewDob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/dob_label"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/nameDobContainer"
+        app:layout_constraintStart_toEndOf="@+id/textViewName"
+        app:layout_constraintTop_toTopOf="@+id/nameDobContainer" />
+
+
+    <TextView
+        android:id="@+id/textViewCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -112,7 +112,7 @@
         app:layout_constraintTop_toBottomOf="@id/rectangle" />
 
     <TextView
-        android:id="@+id/userCityTv"
+        android:id="@+id/textViewUserCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -122,10 +122,10 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cityTv" />
+        app:layout_constraintTop_toBottomOf="@id/textViewCity" />
 
     <TextView
-        android:id="@+id/aboutTv"
+        android:id="@+id/textViewAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -135,10 +135,10 @@
         android:textColor="@color/dark_grey"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userCityTv" />
+        app:layout_constraintTop_toBottomOf="@id/textViewUserCity" />
 
     <TextView
-        android:id="@+id/userAboutTv"
+        android:id="@+id/textViewUserAbout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -150,10 +150,10 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aboutTv" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewAbout" />
 
     <Button
-        android:id="@+id/editProfileButton"
+        android:id="@+id/buttonEditProfile"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginStart="16dp"
@@ -166,6 +166,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userAboutTv" />
+        app:layout_constraintTop_toBottomOf="@id/textViewUserAbout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
