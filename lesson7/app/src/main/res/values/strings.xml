@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Lesson7</string>
+    <string name="tv_title_label">Погода</string>
+    <string name="tv_city_label">City</string>
+    <string name="tv_temperature_label">Temperature</string>
+    <string name="tv_feels_like_label">Feels like</string>
+    <string name="tv_min_max_label">Min/Max</string>
+    <string name="tv_pressure_label">Pressure</string>
+    <string name="tv_humidity_label">Humidity</string>
+    <string name="tv_visibility_label">Visibility</string>
+    <string name="tv_wind_speed_label">Wind speed</string>
+    <string name="tv_wind_gust_label">Wind gust</string>
+    <string name="tv_wind_direction_label">Wind direction</string>
+    <string name="tv_description_label">Description</string>
+</resources>
