@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">lesson10</string>
+    <string name="edit_screen_header">Редактирование профиля</string>
+    <string name="ic_back_description">Назад</string>
+    <string name="name_label">"Имя: "</string>
+    <string name="surname_label">"Фамилия: "</string>
+    <string name="middle_name_label">"Отчество: "</string>
+    <string name="dob_label">"Дата рождения: "</string>
+    <string name="button_save_label">Сохранить</string>
+    <string name="profile_screen_header">Профиль</string>
+    <string name="profile_image_description">Аватар</string>
+    <string name="city_label">Город</string>
+    <string name="city_name_label">Саратов</string>
+    <string name="about_label">О себе</string>
+    <string name="about_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna...</string>
+    <string name="button_edit_profile_label">Редактировать профиль</string>
+    <string name="button_profile_label">Профиль</string>
+    <string name="main_page_header">Главная</string>
+</resources>
