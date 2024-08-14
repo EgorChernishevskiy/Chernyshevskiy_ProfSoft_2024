@@ -23,6 +23,10 @@ class AuthViewModel(
         when (event) {
             is AuthEvent.Login -> login(event.phoneNumber, event.password)
             is AuthEvent.Register -> register(event.firstName, event.lastName, event.phoneNumber, event.password)
+            is AuthEvent.OnFirstNameChange -> uiState = uiState.copy(firstName = event.firstName)
+            is AuthEvent.OnLastNameChange -> uiState = uiState.copy(lastName = event.lastName)
+            is AuthEvent.OnPhoneNumberChange -> uiState = uiState.copy(phoneNumber = event.phoneNumber)
+            is AuthEvent.OnPasswordChange -> uiState = uiState.copy(password = event.password)
         }
     }
 

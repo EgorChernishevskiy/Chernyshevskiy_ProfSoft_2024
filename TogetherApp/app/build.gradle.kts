@@ -71,7 +71,10 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    // di
+    //di
     implementation ("io.insert-koin:koin-android:3.4.0")
     implementation ("io.insert-koin:koin-androidx-compose:3.4.0")
+
+    //fonts
+    implementation ("androidx.compose.ui:ui-text-google-fonts:1.4.3")
 }
