@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.togetherapp.presentation.ui.LoginScreen
-import com.example.togetherapp.presentation.ui.RegisterScreen
+import com.example.togetherapp.presentation.ui.loginscreen.LoginScreen
+import com.example.togetherapp.presentation.ui.registerscreen.RegisterScreen
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 
 @Composable

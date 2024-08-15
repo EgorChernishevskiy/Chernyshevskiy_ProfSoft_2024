@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">TogetherApp</string>
+    <string name="register_text_label">Регистрация</string>
+    <string name="register_subtext_label">Пожалуйста, введите данные для новой учетной записи</string>
+    <string name="first_name_textfield">Имя</string>
+    <string name="last_name_textfield">Фамилия</string>
+    <string name="phone_number_textfield">Номер телефона</string>
+    <string name="password_textfield">Пароль</string>
+    <string name="login_with_account_text_label">Войти с учетной записью</string>
+    <string name="button_login_text_label">Войти</string>
+    <string name="login_text_label">Вход</string>
+    <string name="login_subtext_text_label">Пожалуйста, войдите для продолжения</string>
 </resources>

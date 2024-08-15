@@ -1,0 +1,2052 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffec94987d4, pid=9656, tid=2816
+#
+# JRE version: OpenJDK Runtime Environment (17.0.10) (build 17.0.10+0--11609105)
+# Java VM: OpenJDK 64-Bit Server VM (17.0.10+0--11609105, mixed mode, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# Problematic frame:
+# V  [jvm.dll+0x3787d4]
+#
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: org.jetbrains.kotlin.cli.jvm.K2JVMCompiler @E:\Chernyshevskiy_ProfSoft_2024\TogetherApp\app\build\20240815_2393510217238273874.compiler.options
+
+Host: Intel(R) Core(TM) i5-10400F CPU @ 2.90GHz, 12 cores, 15G,  Windows 10 , 64 bit Build 19041 (10.0.19041.4597)
+Time: Thu Aug 15 18:29:35 2024  Windows 10 , 64 bit Build 19041 (10.0.19041.4597) elapsed time: 2.226502 seconds (0d 0h 0m 2s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001ce2d87e0e0):  JavaThread "main" [_thread_in_vm, id=2816, stack(0x000000af4c100000,0x000000af4c200000)]
+
+Stack: [0x000000af4c100000,0x000000af4c200000],  sp=0x000000af4c1fb8d0,  free space=1006k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x3787d4]
+V  [jvm.dll+0x6d3a15]
+V  [jvm.dll+0x56c0e3]
+V  [jvm.dll+0x56dfdc]
+V  [jvm.dll+0x56e488]
+V  [jvm.dll+0x38ba9b]
+V  [jvm.dll+0x38b552]
+C  0x000001ce382a917f
+
+The last pc belongs to getfield (printed below).
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.doResolveCallOrGetCachedResults(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Lorg/jetbrains/kotlin/resolve/calls/CallResolver$ResolutionTask;Lorg/jetbrains/kotlin/resolve/calls/tasks/TracingStrategy;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+134
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.lambda$computeTasksAndResolveCall$0(Lorg/jetbrains/kotlin/resolve/calls/tower/NewResolutionOldInference$ResolutionKind;Lorg/jetbrains/kotlin/name/Name;Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Lorg/jetbrains/kotlin/resolve/calls/tasks/TracingStrategy;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+19
+j  org.jetbrains.kotlin.resolve.calls.CallResolver$$Lambda$301+0x000000080067a758.invoke()Ljava/lang/Object;+20
+j  org.jetbrains.kotlin.util.PerformanceCounter.time(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;+25
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.computeTasksAndResolveCall(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Lorg/jetbrains/kotlin/name/Name;Lorg/jetbrains/kotlin/resolve/calls/tasks/TracingStrategy;Lorg/jetbrains/kotlin/resolve/calls/tower/NewResolutionOldInference$ResolutionKind;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+51
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.computeTasksAndResolveCall(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Lorg/jetbrains/kotlin/name/Name;Lorg/jetbrains/kotlin/psi/KtReferenceExpression;Lorg/jetbrains/kotlin/resolve/calls/tower/NewResolutionOldInference$ResolutionKind;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+54
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.resolveSimpleProperty(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+61
+j  org.jetbrains.kotlin.resolve.calls.CallExpressionResolver.getVariableType(Lorg/jetbrains/kotlin/psi/KtSimpleNameExpression;Lorg/jetbrains/kotlin/resolve/scopes/receivers/Receiver;Lorg/jetbrains/kotlin/com/intellij/lang/ASTNode;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lkotlin/Pair;+59
+j  org.jetbrains.kotlin.resolve.calls.CallExpressionResolver.getSimpleNameExpressionTypeInfo(Lorg/jetbrains/kotlin/psi/KtSimpleNameExpression;Lorg/jetbrains/kotlin/resolve/scopes/receivers/Receiver;Lorg/jetbrains/kotlin/com/intellij/lang/ASTNode;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;Lorg/jetbrains/kotlin/resolve/calls/smartcasts/DataFlowInfo;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+38
+j  org.jetbrains.kotlin.resolve.calls.CallExpressionResolver.getSimpleNameExpressionTypeInfo(Lorg/jetbrains/kotlin/psi/KtSimpleNameExpression;Lorg/jetbrains/kotlin/resolve/scopes/receivers/Receiver;Lorg/jetbrains/kotlin/com/intellij/lang/ASTNode;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+33
+j  org.jetbrains.kotlin.types.expressions.BasicExpressionTypingVisitor.visitSimpleNameExpression(Lorg/jetbrains/kotlin/psi/KtSimpleNameExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+48
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher.visitSimpleNameExpression(Lorg/jetbrains/kotlin/psi/KtSimpleNameExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+15
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher$ForDeclarations.visitSimpleNameExpression(Lorg/jetbrains/kotlin/psi/KtSimpleNameExpression;Ljava/lang/Object;)Ljava/lang/Object;+6
+j  org.jetbrains.kotlin.psi.KtNameReferenceExpression.accept(Lorg/jetbrains/kotlin/psi/KtVisitor;Ljava/lang/Object;)Ljava/lang/Object;+12
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher.lambda$getTypeInfo$0(Lorg/jetbrains/kotlin/psi/KtExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;Lorg/jetbrains/kotlin/psi/KtVisitor;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+43
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher$$Lambda$297+0x0000000800635418.invoke()Ljava/lang/Object;+16
+j  org.jetbrains.kotlin.util.PerformanceCounter.time(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;+25
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher.getTypeInfo(Lorg/jetbrains/kotlin/psi/KtExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;Lorg/jetbrains/kotlin/psi/KtVisitor;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+24
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher.getTypeInfo(Lorg/jetbrains/kotlin/psi/KtExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+13
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingServices.getTypeInfo(Lorg/jetbrains/kotlin/psi/KtExpression;Lorg/jetbrains/kotlin/resolve/calls/context/ResolutionContext;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+27
+j  org.jetbrains.kotlin.types.expressions.DoubleColonExpressionResolver.resolveExpressionOnLHS(Lorg/jetbrains/kotlin/psi/KtExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/DoubleColonLHS$Expression;+21
+j  org.jetbrains.kotlin.types.expressions.DoubleColonExpressionResolver.access$resolveExpressionOnLHS(Lorg/jetbrains/kotlin/types/expressions/DoubleColonExpressionResolver;Lorg/jetbrains/kotlin/psi/KtExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/DoubleColonLHS$Expression;+3
+j  org.jetbrains.kotlin.types.expressions.DoubleColonExpressionResolver$resolveDoubleColonLHS$resultForExpr$2.invoke(Lorg/jetbrains/kotlin/psi/KtExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/DoubleColonLHS$Expression;+21
+j  org.jetbrains.kotlin.types.expressions.DoubleColonExpressionResolver$resolveDoubleColonLHS$resultForExpr$2.invoke(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;+9
+j  org.jetbrains.kotlin.types.expressions.DoubleColonExpressionResolver.tryResolveLHS(Lorg/jetbrains/kotlin/psi/KtDoubleColonExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;)Lorg/jetbrains/kotlin/types/expressions/DoubleColonExpressionResolver$LHSResolutionResult;+94
+j  org.jetbrains.kotlin.types.expressions.DoubleColonExpressionResolver.resolveDoubleColonLHS$frontend(Lorg/jetbrains/kotlin/psi/KtDoubleColonExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/DoubleColonLHS;+39
+j  org.jetbrains.kotlin.types.expressions.DoubleColonExpressionResolver.visitClassLiteralExpression(Lorg/jetbrains/kotlin/psi/KtClassLiteralExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+55
+j  org.jetbrains.kotlin.types.expressions.BasicExpressionTypingVisitor.visitClassLiteralExpression(Lorg/jetbrains/kotlin/psi/KtClassLiteralExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+18
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher.visitClassLiteralExpression(Lorg/jetbrains/kotlin/psi/KtClassLiteralExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+15
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher$ForDeclarations.visitClassLiteralExpression(Lorg/jetbrains/kotlin/psi/KtClassLiteralExpression;Ljava/lang/Object;)Ljava/lang/Object;+6
+j  org.jetbrains.kotlin.psi.KtClassLiteralExpression.accept(Lorg/jetbrains/kotlin/psi/KtVisitor;Ljava/lang/Object;)Ljava/lang/Object;+11
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher.lambda$getTypeInfo$0(Lorg/jetbrains/kotlin/psi/KtExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;Lorg/jetbrains/kotlin/psi/KtVisitor;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+43
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher$$Lambda$297+0x0000000800635418.invoke()Ljava/lang/Object;+16
+j  org.jetbrains.kotlin.util.PerformanceCounter.time(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;+25
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher.getTypeInfo(Lorg/jetbrains/kotlin/psi/KtExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;Lorg/jetbrains/kotlin/psi/KtVisitor;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+24
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingVisitorDispatcher.getTypeInfo(Lorg/jetbrains/kotlin/psi/KtExpression;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+13
+j  org.jetbrains.kotlin.types.expressions.ExpressionTypingServices.getTypeInfo(Lorg/jetbrains/kotlin/psi/KtExpression;Lorg/jetbrains/kotlin/resolve/calls/context/ResolutionContext;)Lorg/jetbrains/kotlin/types/expressions/KotlinTypeInfo;+27
+j  org.jetbrains.kotlin.resolve.calls.tower.PSICallResolver.resolveValueArgument(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Lorg/jetbrains/kotlin/resolve/calls/smartcasts/DataFlowInfo;Lorg/jetbrains/kotlin/psi/ValueArgument;ZLorg/jetbrains/kotlin/resolve/calls/tasks/TracingStrategy;)Lorg/jetbrains/kotlin/resolve/calls/tower/PSIKotlinCallArgument;+270
+j  org.jetbrains.kotlin.resolve.calls.tower.PSICallResolver.resolveArgumentsInParenthesis(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Ljava/util/List;ZLorg/jetbrains/kotlin/resolve/calls/tasks/TracingStrategy;)Ljava/util/List;+111
+j  org.jetbrains.kotlin.resolve.calls.tower.PSICallResolver.toKotlinCall(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Lorg/jetbrains/kotlin/resolve/calls/model/KotlinCallKind;Lorg/jetbrains/kotlin/psi/Call;Lorg/jetbrains/kotlin/name/Name;Lorg/jetbrains/kotlin/resolve/calls/tasks/TracingStrategy;ZLorg/jetbrains/kotlin/resolve/scopes/receivers/Receiver;)Lorg/jetbrains/kotlin/resolve/calls/tower/PSIKotlinCallImpl;+144
+j  org.jetbrains.kotlin.resolve.calls.tower.PSICallResolver.runResolutionAndInferenceForGivenCandidates(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Ljava/util/Collection;Lorg/jetbrains/kotlin/resolve/calls/tasks/TracingStrategy;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+197
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.doResolveCallOrGetCachedResults(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Lorg/jetbrains/kotlin/resolve/calls/CallResolver$ResolutionTask;Lorg/jetbrains/kotlin/resolve/calls/tasks/TracingStrategy;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+208
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.lambda$computeTasksFromCandidatesAndResolvedCall$1(Ljava/util/Collection;Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Lorg/jetbrains/kotlin/resolve/calls/tasks/TracingStrategy;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+24
+j  org.jetbrains.kotlin.resolve.calls.CallResolver$$Lambda$296+0x00000008006302f0.invoke()Ljava/lang/Object;+16
+j  org.jetbrains.kotlin.util.PerformanceCounter.time(Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;+25
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.computeTasksFromCandidatesAndResolvedCall(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Ljava/util/Collection;Lorg/jetbrains/kotlin/resolve/calls/tasks/TracingStrategy;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+39
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.computeTasksFromCandidatesAndResolvedCall(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Lorg/jetbrains/kotlin/psi/KtReferenceExpression;Ljava/util/Collection;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+38
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.resolveConstructorCall(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Lorg/jetbrains/kotlin/psi/KtReferenceExpression;Lorg/jetbrains/kotlin/types/KotlinType;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+62
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.resolveCallForConstructor(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;Lorg/jetbrains/kotlin/psi/KtConstructorCalleeExpression;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+269
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.resolveFunctionCall(Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+151
+j  org.jetbrains.kotlin.resolve.calls.CallResolver.resolveFunctionCall(Lorg/jetbrains/kotlin/resolve/BindingTrace;Lorg/jetbrains/kotlin/resolve/scopes/LexicalScope;Lorg/jetbrains/kotlin/psi/Call;Lorg/jetbrains/kotlin/types/KotlinType;Lorg/jetbrains/kotlin/resolve/calls/smartcasts/DataFlowInfo;ZLorg/jetbrains/kotlin/resolve/calls/components/InferenceSession;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+90
+j  org.jetbrains.kotlin.resolve.AnnotationResolverImpl.resolveAnnotationCall(Lorg/jetbrains/kotlin/psi/KtAnnotationEntry;Lorg/jetbrains/kotlin/resolve/scopes/LexicalScope;Lorg/jetbrains/kotlin/resolve/BindingTrace;)Lorg/jetbrains/kotlin/resolve/calls/results/OverloadResolutionResults;+69
+j  org.jetbrains.kotlin.resolve.lazy.descriptors.LazyAnnotationDescriptor$valueArgumentsWithSourceInfo$2.invoke()Ljava/util/Map;+34
+j  org.jetbrains.kotlin.resolve.lazy.descriptors.LazyAnnotationDescriptor$valueArgumentsWithSourceInfo$2.invoke()Ljava/lang/Object;+1
+J 3167 c1 org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue.invoke()Ljava/lang/Object; (257 bytes) @ 0x000001ce31374974 [0x000001ce31374200+0x0000000000000774]
+J 3168 c1 org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedNotNullLazyValue.invoke()Ljava/lang/Object; (35 bytes) @ 0x000001ce31376234 [0x000001ce313761c0+0x0000000000000074]
+J 3179 c1 org.jetbrains.kotlin.storage.StorageKt.getValue(Lorg/jetbrains/kotlin/storage/NotNullLazyValue;Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object; (19 bytes) @ 0x000001ce31378b04 [0x000001ce31378520+0x00000000000005e4]
+j  org.jetbrains.kotlin.resolve.lazy.descriptors.LazyAnnotationDescriptor.getValueArgumentsWithSourceInfo()Ljava/util/Map;+10
+j  org.jetbrains.kotlin.resolve.lazy.descriptors.LazyAnnotationDescriptor.access$getValueArgumentsWithSourceInfo(Lorg/jetbrains/kotlin/resolve/lazy/descriptors/LazyAnnotationDescriptor;)Ljava/util/Map;+1
+j  org.jetbrains.kotlin.resolve.lazy.descriptors.LazyAnnotationDescriptor$allValueArguments$2.invoke()Ljava/util/Map;+4
+j  org.jetbrains.kotlin.resolve.lazy.descriptors.LazyAnnotationDescriptor$allValueArguments$2.invoke()Ljava/lang/Object;+1
+J 3167 c1 org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue.invoke()Ljava/lang/Object; (257 bytes) @ 0x000001ce31374974 [0x000001ce31374200+0x0000000000000774]
+J 3168 c1 org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedNotNullLazyValue.invoke()Ljava/lang/Object; (35 bytes) @ 0x000001ce31376234 [0x000001ce313761c0+0x0000000000000074]
+J 3179 c1 org.jetbrains.kotlin.storage.StorageKt.getValue(Lorg/jetbrains/kotlin/storage/NotNullLazyValue;Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object; (19 bytes) @ 0x000001ce31378b04 [0x000001ce31378520+0x00000000000005e4]
+j  org.jetbrains.kotlin.resolve.lazy.descriptors.LazyAnnotationDescriptor.getAllValueArguments()Ljava/util/Map;+10
+j  org.jetbrains.kotlin.resolve.lazy.descriptors.LazyAnnotationDescriptor.forceResolveAllContents()V+9
+j  org.jetbrains.kotlin.resolve.lazy.ForceResolveUtil.doForceResolveAllContents(Ljava/lang/Object;)V+16
+j  org.jetbrains.kotlin.resolve.lazy.ForceResolveUtil.forceResolveAllContents(Lorg/jetbrains/kotlin/descriptors/annotations/Annotations;)V+39
+j  org.jetbrains.kotlin.resolve.LazyTopDownAnalyzer.createFunctionDescriptors(Lorg/jetbrains/kotlin/resolve/TopDownAnalysisContext;Ljava/util/List;)V+72
+j  org.jetbrains.kotlin.resolve.LazyTopDownAnalyzer.analyzeDeclarations(Lorg/jetbrains/kotlin/resolve/TopDownAnalysisMode;Ljava/util/Collection;Lorg/jetbrains/kotlin/resolve/calls/smartcasts/DataFlowInfo;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;)Lorg/jetbrains/kotlin/resolve/TopDownAnalysisContext;+178
+j  org.jetbrains.kotlin.resolve.LazyTopDownAnalyzer.analyzeDeclarations$default(Lorg/jetbrains/kotlin/resolve/LazyTopDownAnalyzer;Lorg/jetbrains/kotlin/resolve/TopDownAnalysisMode;Ljava/util/Collection;Lorg/jetbrains/kotlin/resolve/calls/smartcasts/DataFlowInfo;Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingContext;ILjava/lang/Object;)Lorg/jetbrains/kotlin/resolve/TopDownAnalysisContext;+31
+j  org.jetbrains.kotlin.cli.jvm.compiler.TopDownAnalyzerFacadeForJVM.analyzeFilesWithJavaIntegration(Lorg/jetbrains/kotlin/com/intellij/openapi/project/Project;Ljava/util/Collection;Lorg/jetbrains/kotlin/resolve/BindingTrace;Lorg/jetbrains/kotlin/config/CompilerConfiguration;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lorg/jetbrains/kotlin/com/intellij/psi/search/GlobalSearchScope;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lorg/jetbrains/kotlin/resolve/TargetEnvironment;)Lorg/jetbrains/kotlin/analyzer/AnalysisResult;+281
+j  org.jetbrains.kotlin.cli.jvm.compiler.TopDownAnalyzerFacadeForJVM.analyzeFilesWithJavaIntegration$default(Lorg/jetbrains/kotlin/com/intellij/openapi/project/Project;Ljava/util/Collection;Lorg/jetbrains/kotlin/resolve/BindingTrace;Lorg/jetbrains/kotlin/config/CompilerConfiguration;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lorg/jetbrains/kotlin/com/intellij/psi/search/GlobalSearchScope;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lorg/jetbrains/kotlin/resolve/TargetEnvironment;ILjava/lang/Object;)Lorg/jetbrains/kotlin/analyzer/AnalysisResult;+111
+j  org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler$analyze$1.invoke()Lorg/jetbrains/kotlin/analyzer/AnalysisResult;+274
+j  org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler$analyze$1.invoke()Ljava/lang/Object;+1
+j  org.jetbrains.kotlin.cli.common.messages.AnalyzerWithCompilerReport.analyzeAndReport(Ljava/util/Collection;Lkotlin/jvm/functions/Function0;)V+16
+j  org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler.analyze(Lorg/jetbrains/kotlin/cli/jvm/compiler/KotlinCoreEnvironment;)Lorg/jetbrains/kotlin/analyzer/AnalysisResult;+153
+j  org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler.compileModules$cli(Lorg/jetbrains/kotlin/cli/jvm/compiler/KotlinCoreEnvironment;Ljava/io/File;Ljava/util/List;Z)Z+408
+j  org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler.compileModules$cli$default(Lorg/jetbrains/kotlin/cli/jvm/compiler/KotlinToJVMBytecodeCompiler;Lorg/jetbrains/kotlin/cli/jvm/compiler/KotlinCoreEnvironment;Ljava/io/File;Ljava/util/List;ZILjava/lang/Object;)Z+17
+j  org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(Lorg/jetbrains/kotlin/cli/common/arguments/K2JVMCompilerArguments;Lorg/jetbrains/kotlin/config/CompilerConfiguration;Lorg/jetbrains/kotlin/com/intellij/openapi/Disposable;Lorg/jetbrains/kotlin/utils/KotlinPaths;)Lorg/jetbrains/kotlin/cli/common/ExitCode;+1069
+j  org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(Lorg/jetbrains/kotlin/cli/common/arguments/CommonCompilerArguments;Lorg/jetbrains/kotlin/config/CompilerConfiguration;Lorg/jetbrains/kotlin/com/intellij/openapi/Disposable;Lorg/jetbrains/kotlin/utils/KotlinPaths;)Lorg/jetbrains/kotlin/cli/common/ExitCode;+9
+j  org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(Lorg/jetbrains/kotlin/cli/common/messages/MessageCollector;Lorg/jetbrains/kotlin/config/Services;Lorg/jetbrains/kotlin/cli/common/arguments/CommonCompilerArguments;)Lorg/jetbrains/kotlin/cli/common/ExitCode;+219
+j  org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(Lorg/jetbrains/kotlin/cli/common/messages/MessageCollector;Lorg/jetbrains/kotlin/config/Services;Lorg/jetbrains/kotlin/cli/common/arguments/CommonToolArguments;)Lorg/jetbrains/kotlin/cli/common/ExitCode;+7
+j  org.jetbrains.kotlin.cli.common.CLITool.exec(Lorg/jetbrains/kotlin/cli/common/messages/MessageCollector;Lorg/jetbrains/kotlin/config/Services;Lorg/jetbrains/kotlin/cli/common/arguments/CommonToolArguments;)Lorg/jetbrains/kotlin/cli/common/ExitCode;+76
+j  org.jetbrains.kotlin.cli.common.CLITool.exec(Ljava/io/PrintStream;Lorg/jetbrains/kotlin/config/Services;Lorg/jetbrains/kotlin/cli/common/messages/MessageRenderer;[Ljava/lang/String;)Lorg/jetbrains/kotlin/cli/common/ExitCode;+239
+j  org.jetbrains.kotlin.cli.common.CLITool.exec(Ljava/io/PrintStream;Lorg/jetbrains/kotlin/cli/common/messages/MessageRenderer;[Ljava/lang/String;)Lorg/jetbrains/kotlin/cli/common/ExitCode;+25
+j  org.jetbrains.kotlin.cli.common.CLITool$Companion.doMainNoExit(Lorg/jetbrains/kotlin/cli/common/CLITool;[Ljava/lang/String;Lorg/jetbrains/kotlin/cli/common/messages/MessageRenderer;)Lorg/jetbrains/kotlin/cli/common/ExitCode;+39
+j  org.jetbrains.kotlin.cli.common.CLITool$Companion.doMainNoExit$default(Lorg/jetbrains/kotlin/cli/common/CLITool$Companion;Lorg/jetbrains/kotlin/cli/common/CLITool;[Ljava/lang/String;Lorg/jetbrains/kotlin/cli/common/messages/MessageRenderer;ILjava/lang/Object;)Lorg/jetbrains/kotlin/cli/common/ExitCode;+16
+j  org.jetbrains.kotlin.cli.common.CLITool$Companion.doMain(Lorg/jetbrains/kotlin/cli/common/CLITool;[Ljava/lang/String;)V+57
+j  org.jetbrains.kotlin.cli.jvm.K2JVMCompiler$Companion.main([Ljava/lang/String;)V+20
+j  org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.main([Ljava/lang/String;)V+4
+v  ~StubRoutines::call_stub
+
+siginfo: EXCEPTION_ACCESS_VIOLATION (0xc0000005), reading address 0xffffffffffffffff
+
+
+Registers:
+RAX=0x000001ce5200dad0, RBX=0x0000000800630538, RCX=0x400001ce4c8bbbb0, RDX=0x00007ffec9a73668
+RSP=0x000000af4c1fb8d0, RBP=0x0000000701c00000, RSI=0x000001ce5200dad0, RDI=0x0000000000000000
+R8 =0x0000000800630538, R9 =0x0000000000000010, R10=0x000001ce2d87b6c0, R11=0x000000af4c1fba70
+R12=0x0000000800630538, R13=0x00000008004ba2c8, R14=0x000000af4c1fbd20, R15=0x000000af4c1fbd20
+RIP=0x00007ffec94987d4, EFLAGS=0x0000000000010206
+
+
+Register to memory mapping:
+
+RIP=0x00007ffec94987d4 jvm.dll
+RAX=0x000001ce5200dad0 points into unknown readable memory: 0x00000000d57210f3 | f3 10 72 d5 00 00 00 00
+RBX=0x0000000800630538 is pointing into metadata
+RCX=0x400001ce4c8bbbb0 is an unknown value
+RDX=0x00007ffec9a73668 jvm.dll
+RSP=0x000000af4c1fb8d0 is pointing into the stack for thread: 0x000001ce2d87e0e0
+RBP=0x0000000701c00000 is an oop: jdk.internal.loader.ClassLoaders$AppClassLoader 
+{0x0000000701c00000} - klass: 'jdk/internal/loader/ClassLoaders$AppClassLoader'
+ - ---- fields (total size 13 words):
+ - private 'defaultAssertionStatus' 'Z' @12  false
+ - private final 'parent' 'Ljava/lang/ClassLoader;' @24  a 'jdk/internal/loader/ClassLoaders$PlatformClassLoader'{0x0000000701c01d98} (e03803b3)
+ - private final 'name' 'Ljava/lang/String;' @28  "app"{0x0000000701fc03e8} (e03f807d)
+ - private final 'unnamedModule' 'Ljava/lang/Module;' @32  a 'java/lang/Module'{0x0000000701c41790} (e03882f2)
+ - private final 'nameAndId' 'Ljava/lang/String;' @36  "'app'"{0x0000000701fca498} (e03f9493)
+ - private final 'parallelLockMap' 'Ljava/util/concurrent/ConcurrentHashMap;' @40  a 'java/util/concurrent/ConcurrentHashMap'{0x0000000701f6d6a0} (e03edad4)
+ - private final 'package2certs' 'Ljava/util/concurrent/ConcurrentHashMap;' @44  a 'java/util/concurrent/ConcurrentHashMap'{0x0000000701f5bff8} (e03eb7ff)
+ - private final 'classes' 'Ljava/util/ArrayList;' @48  a 'java/util/ArrayList'{0x0000000701e22210} (e03c4442)
+ - private final 'defaultDomain' 'Ljava/security/ProtectionDomain;' @52  a 'java/security/ProtectionDomain'{0x0000000701e221a0} (e03c4434)
+ - private final 'packages' 'Ljava/util/concurrent/ConcurrentHashMap;' @56  a 'java/util/concurrent/ConcurrentHashMap'{0x0000000701e148e8} (e03c291d)
+ - private final 'libraries' 'Ljdk/internal/loader/NativeLibraries;' @60  a 'jdk/internal/loader/NativeLibraries'{0x0000000701e14888} (e03c2911)
+ - final 'assertionLock' 'Ljava/lang/Object;' @64  a 'java/lang/Object'{0x0000000701e14878} (e03c290f)
+ - private 'packageAssertionStatus' 'Ljava/util/Map;' @68  NULL (0)
+ - 'classAssertionStatus' 'Ljava/util/Map;' @72  NULL (0)
+ - private volatile 'classLoaderValueMap' 'Ljava/util/concurrent/ConcurrentHashMap;' @76  a 'java/util/concurrent/ConcurrentHashMap'{0x0000000701e0b410} (e03c1682)
+ - private final 'pdcache' 'Ljava/util/Map;' @80  a 'java/util/concurrent/ConcurrentHashMap'{0x0000000701e0b218} (e03c1643)
+ - private final 'parent' 'Ljdk/internal/loader/BuiltinClassLoader;' @84  a 'jdk/internal/loader/ClassLoaders$PlatformClassLoader'{0x0000000701c01d98} (e03803b3)
+ - private synchronized 'ucp' 'Ljdk/internal/loader/URLClassPath;' @88  a 'jdk/internal/loader/URLClassPath'{0x0000000701e09af0} (e03c135e)
+ - private final 'nameToModule' 'Ljava/util/Map;' @92  a 'java/util/concurrent/ConcurrentHashMap'{0x0000000701e09810} (e03c1302)
+ - private final 'moduleToReader' 'Ljava/util/Map;' @96  a 'java/util/concurrent/ConcurrentHashMap'{0x0000000701e09518} (e03c12a3)
+ - private volatile 'resourceCache' 'Ljava/lang/ref/SoftReference;' @100  a 'java/lang/ref/SoftReference'{0x0000000701e093c0} (e03c1278)
+RSI=0x000001ce5200dad0 points into unknown readable memory: 0x00000000d57210f3 | f3 10 72 d5 00 00 00 00
+RDI=0x0 is NULL
+R8 =0x0000000800630538 is pointing into metadata
+R9 =0x0000000000000010 is an unknown value
+R10=0x000001ce2d87b6c0 points into unknown readable memory: 0x0000020000000005 | 05 00 00 00 00 02 00 00
+R11=0x000000af4c1fba70 is pointing into the stack for thread: 0x000001ce2d87e0e0
+R12=0x0000000800630538 is pointing into metadata
+R13=0x00000008004ba2c8 is a pointer to class: 
+org.jetbrains.kotlin.resolve.calls.CallResolver {0x00000008004ba2d0}
+ - instance size:     7
+ - klass size:        92
+ - access:            public synchronized 
+ - state:             fully_initialized
+ - name:              'org/jetbrains/kotlin/resolve/calls/CallResolver'
+ - super:             'java/lang/Object'
+ - sub:               
+ - arrays:            NULL
+ - methods:           Array<T>(0x000001ce4f007710)
+ - method ordering:   Array<T>(0x000001ce4d000018)
+ - default_methods:   Array<T>(0x0000000000000000)
+ - local interfaces:  Array<T>(0x000001ce4d000058)
+ - trans. interfaces: Array<T>(0x000001ce4d000058)
+ - constants:         constant pool [1365]/operands[35] {0x000001ce4f008008} for 'org/jetbrains/kotlin/resolve/calls/CallResolver' cache=0x000001ce4f0db498
+ - class loader data:  loader data: 0x000001ce4c8bbbb0 for instance a 'jdk/internal/loader/ClassLoaders$AppClassLoader'{0x0000000701c00000}
+ - source file:       'CallResolver.java'
+ - class annotations:       Array<T>(0x0000000000000000)
+ - class type annotations:  Array<T>(0x0000000000000000)
+ - field annotations:       Array<T>(0x0000000000000000)
+ - field type annotations:  Array<T>(0x0000000000000000)
+ - inner classes:     Array<T>(0x000001ce4f00f398)
+ - nest members:     Array<T>(0x000001ce4d000028)
+ - permitted subclasses:     Array<T>(0x000001ce4d000028)
+ - java mirror:       a 'java/lang/Class'{0x0000000702282a48} = 'org/jetbrains/kotlin/resolve/calls/CallResolver'
+ - vtable length      27  (start addr: 0x00000008004ba4b8)
+ - itable length      2 (start addr: 0x00000008004ba590)
+ - ---- static fields (1 words):
+ - private static final 'callResolvePerfCounter' 'Lorg/jetbrains/kotlin/util/PerformanceCounter;' @112 
+ - static final synthetic '$assertionsDisabled' 'Z' @116 
+ - ---- non-static fields (11 words):
+ - private 'expressionTypingServices' 'Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingServices;' @12 
+ - private 'typeResolver' 'Lorg/jetbrains/kotlin/resolve/TypeResolver;' @16 
+ - private 'argumentTypeResolver' 'Lorg/jetbrains/kotlin/resolve/calls/ArgumentTypeResolver;' @20 
+ - private 'genericCandidateResolver' 'Lorg/jetbrains/kotlin/resolve/calls/GenericCandidateResolver;' @24 
+ - private 'callCompleter' 'Lorg/jetbrains/kotlin/resolve/calls/CallCompleter;' @28 
+ - private 'syntheticScopes' 'Lorg/jetbrains/kotlin/resolve/scopes/SyntheticScopes;' @32 
+ - private 'newResolutionOldInference' 'Lorg/jetbrains/kotlin/resolve/calls/tower/NewResolutionOldInference;' @36 
+ - private 'PSICallResolver' 'Lorg/jetbrains/kotlin/resolve/calls/tower/PSICallResolver;' @40 
+ - private final 'dataFlowValueFactory' 'Lorg/jetbrains/kotlin/resolve/calls/smartcasts/DataFlowValueFactory;' @44 
+ - private final 'builtIns' 'Lorg/jetbrains/kotlin/builtins/KotlinBuiltIns;' @48 
+ - private final 'languageVersionSettings' 'Lorg/jetbrains/kotlin/config/LanguageVersionSettings;' @52 
+ - non-static oop maps: 12-52 
+R14=0x000000af4c1fbd20 is pointing into the stack for thread: 0x000001ce2d87e0e0
+R15=0x000000af4c1fbd20 is pointing into the stack for thread: 0x000001ce2d87e0e0
+
+
+Top of Stack: (sp=0x000000af4c1fb8d0)
+0x000000af4c1fb8d0:   000000080067a758 000000af4c1fbaf8
+0x000000af4c1fb8e0:   00000008004ba2c8 00000008004ba2c8
+0x000000af4c1fb8f0:   00000008004ba2c8 00007ffec97f3a15
+0x000000af4c1fb900:   0000000000000008 0000000800630538
+0x000000af4c1fb910:   0000000800630538 00000000000003d8
+0x000000af4c1fb920:   000000af4c1fbc80 00007ffec968c0e3
+0x000000af4c1fb930:   0000000800630538 000001ce2d87e0e0
+0x000000af4c1fb940:   000001ce2d87e0e0 00000000000003d8
+0x000000af4c1fb950:   0000000000000001 00007ffec949d800
+0x000000af4c1fb960:   000001ce2d87e0e0 000001ce2d87e5d0
+0x000000af4c1fb970:   000001ce2d87e9a8 00007ffec93e45c9
+0x000000af4c1fb980:   000000af4c1fb9e0 00007ffec9473346
+0x000000af4c1fb990:   000000af4c1fbd28 0000000800630538
+0x000000af4c1fb9a0:   000000af4c1fbd20 000001ce2d87e0e0
+0x000000af4c1fb9b0:   0000000000000000 00007ffec93e6004
+0x000000af4c1fb9c0:   000001ce4fbe7580 000000af4c1fbd20
+0x000000af4c1fb9d0:   000001ce4fbe7580 000000af4c1fba30
+0x000000af4c1fb9e0:   000001ce4fbe7580 000001ce2d87e0e0
+0x000000af4c1fb9f0:   000001ce4fbe7898 000001ce5140a890
+0x000000af4c1fba00:   0000000000000003 00007ffec9496c86
+0x000000af4c1fba10:   000001ce4fbe7580 0000000800630538
+0x000000af4c1fba20:   000001ce4c0b6370 000000080067a758
+0x000000af4c1fba30:   000001ce4fbe7898 000001ce4fbe7580
+0x000000af4c1fba40:   000001ce2d87e0e0 0000000300000000
+0x000000af4c1fba50:   000001ce00000012 000000af00000000
+0x000000af4c1fba60:   0000184250c0cd14 0000000000000000
+0x000000af4c1fba70:   000000af4c1fbd20 000001ce4c0b6370
+0x000000af4c1fba80:   0000000800630538 00007ffec9496585
+0x000000af4c1fba90:   0000000800630538 00000008004ba2c8
+0x000000af4c1fbaa0:   00000000000000b4 0000000800630538
+0x000000af4c1fbab0:   000001ce5140a890 00007ffec968dfdc
+0x000000af4c1fbac0:   000001ce2d87e0e0 000001ce2d87e0e0 
+
+Instructions: (pc=0x00007ffec94987d4)
+0x00007ffec94986d4:   48 8b 48 10 48 85 c9 74 26 48 85 db 74 21 48 3b
+0x00007ffec94986e4:   cb 73 0d bd ff ff ff ff 85 ed 40 0f 94 c6 eb 1b
+0x00007ffec94986f4:   40 0f 95 c5 85 ed 40 0f 94 c6 eb 0f 48 8b cd 48
+0x00007ffec9498704:   3b cb 40 0f 94 c6 48 85 db 74 08 48 8b cb e8 19
+0x00007ffec9498714:   57 43 00 49 83 3e 00 74 13 49 8b d5 48 8b cf e8
+0x00007ffec9498724:   68 46 d3 ff 49 8b ce e8 40 46 d3 ff 4c 8b 6c 24
+0x00007ffec9498734:   60 4c 39 7f 18 74 0c 4c 89 77 10 4c 89 7f 18 4c
+0x00007ffec9498744:   89 67 20 4c 8b 7c 24 20 40 0f b6 c6 4c 8b 74 24
+0x00007ffec9498754:   68 4c 8b 64 24 58 48 83 c4 28 5f 5e 5d 5b c3 cc
+0x00007ffec9498764:   cc cc cc cc cc cc cc cc cc cc cc cc 48 89 5c 24
+0x00007ffec9498774:   08 48 89 6c 24 10 48 89 74 24 18 57 48 83 ec 20
+0x00007ffec9498784:   48 8b 81 98 00 00 00 48 8b f1 33 ff 48 8b da 48
+0x00007ffec9498794:   8b 48 08 48 85 c9 75 04 8b ef eb 09 ff 15 7a 68
+0x00007ffec94987a4:   7a 00 48 8b e8 48 8b 16 48 8b ce ff 92 90 00 00
+0x00007ffec94987b4:   00 81 7b 08 00 00 00 c0 48 8b f0 7d 07 48 8b 9b
+0x00007ffec94987c4:   10 01 00 00 39 7b 08 7e 27 48 8b 8b 98 00 00 00
+0x00007ffec94987d4:   48 8b 49 08 48 85 c9 74 09 ff 15 3d 68 7a 00 48
+0x00007ffec94987e4:   8b f8 48 8b 13 48 8b cb ff 92 90 00 00 00 eb 03
+0x00007ffec94987f4:   48 8b c7 48 3b ef 75 09 48 3b f0 75 04 b0 01 eb
+0x00007ffec9498804:   02 32 c0 48 8b 5c 24 30 48 8b 6c 24 38 48 8b 74
+0x00007ffec9498814:   24 40 48 83 c4 20 5f c3 cc cc cc cc 48 3b ca 74
+0x00007ffec9498824:   2f 48 8b 81 c8 01 00 00 48 63 08 85 c9 7e 1e 4c
+0x00007ffec9498834:   8b c1 33 c9 48 83 c0 08 0f 1f 40 00 48 39 10 74
+0x00007ffec9498844:   0f 48 ff c1 48 83 c0 08 49 3b c8 7c ef 32 c0 c3
+0x00007ffec9498854:   b0 01 c3 cc cc cc cc cc cc cc cc cc 48 8b 81 28
+0x00007ffec9498864:   01 00 00 48 85 c0 74 0c 48 3b 05 55 21 85 00 74
+0x00007ffec9498874:   03 b0 01 c3 32 c0 c3 cc cc cc cc cc 40 53 48 83
+0x00007ffec9498884:   ec 20 48 8b d9 48 8b 89 98 00 00 00 e8 9b 96 44
+0x00007ffec9498894:   00 84 c0 74 27 8b 83 a4 00 00 00 c1 e8 1a a8 01
+0x00007ffec94988a4:   75 1a 48 8b 03 48 8b cb ff 90 88 00 00 00 80 78
+0x00007ffec94988b4:   50 00 75 08 b0 01 48 83 c4 20 5b c3 32 c0 48 83
+0x00007ffec94988c4:   c4 20 5b c3 cc cc cc cc cc cc cc cc 40 53 48 83 
+
+
+Stack slot to memory mapping:
+stack at sp + 0 slots: 0x000000080067a758 is a pointer to class: 
+org.jetbrains.kotlin.resolve.calls.CallResolver$$Lambda$301/0x000000080067a758 {0x000000080067a760}
+ - instance size:     4
+ - klass size:        73
+ - access:            final synchronized synthetic 
+ - state:             fully_initialized
+ - name:              'org/jetbrains/kotlin/resolve/calls/CallResolver$$Lambda$301+0x000000080067a758'
+ - super:             'java/lang/Object'
+ - sub:               
+ - arrays:            NULL
+ - methods:           Array<T>(0x000001ce4fe51ba8)
+ - method ordering:   Array<T>(0x000001ce4d000018)
+ - default_methods:   Array<T>(0x0000000000000000)
+ - local interfaces:  Array<T>(0x000001ce4fe51b50)
+ - trans. interfaces: Array<T>(0x000001ce4fe51d28)
+ - constants:         constant pool [42] {0x000001ce4fe51998} for 'org/jetbrains/kotlin/resolve/calls/CallResolver$$Lambda$301+0x000000080067a758' cache=0x000001ce4fe51d40
+ - class loader data:  loader data: 0x000001ce4c8bbbb0 for instance a 'jdk/internal/loader/ClassLoaders$AppClassLoader'{0x0000000701c00000}
+ - class annotations:       Array<T>(0x0000000000000000)
+ - class type annotations:  Array<T>(0x0000000000000000)
+ - field annotations:       Array<T>(0x0000000000000000)
+ - field type annotations:  Array<T>(0x0000000000000000)
+ - inner classes:     Array<T>(0x000001ce4d000028)
+ - nest members:     Array<T>(0x000001ce4d000028)
+ - permitted subclasses:     Array<T>(0x000001ce4d000028)
+ - java mirror:       a 'java/lang/Class'{0x00000007057efa50} = 'org/jetbrains/kotlin/resolve/calls/CallResolver$$Lambda$301+0x000000080067a758'
+ - vtable length      5  (start addr: 0x000000080067a948)
+ - itable length      5 (start addr: 0x000000080067a970)
+ - ---- static fields (0 words):
+ - ---- non-static fields (5 words):
+ - private final 'arg$1' 'Lorg/jetbrains/kotlin/resolve/calls/CallResolver;' @12 
+ - private final 'arg$2' 'Lorg/jetbrains/kotlin/resolve/calls/tower/NewResolutionOldInference$ResolutionKind;' @16 
+ - private final 'arg$3' 'Lorg/jetbrains/kotlin/name/Name;' @20 
+ - private final 'arg$4' 'Lorg/jetbrains/kotlin/resolve/calls/context/BasicCallResolutionContext;' @24 
+ - private final 'arg$5' 'Lorg/jetbrains/kotlin/resolve/calls/tasks/TracingStrategy;' @28 
+ - non-static oop maps: 12-28 
+stack at sp + 1 slots: 0x000000af4c1fbaf8 is pointing into the stack for thread: 0x000001ce2d87e0e0
+stack at sp + 2 slots: 0x00000008004ba2c8 is a pointer to class: 
+org.jetbrains.kotlin.resolve.calls.CallResolver {0x00000008004ba2d0}
+ - instance size:     7
+ - klass size:        92
+ - access:            public synchronized 
+ - state:             fully_initialized
+ - name:              'org/jetbrains/kotlin/resolve/calls/CallResolver'
+ - super:             'java/lang/Object'
+ - sub:               
+ - arrays:            NULL
+ - methods:           Array<T>(0x000001ce4f007710)
+ - method ordering:   Array<T>(0x000001ce4d000018)
+ - default_methods:   Array<T>(0x0000000000000000)
+ - local interfaces:  Array<T>(0x000001ce4d000058)
+ - trans. interfaces: Array<T>(0x000001ce4d000058)
+ - constants:         constant pool [1365]/operands[35] {0x000001ce4f008008} for 'org/jetbrains/kotlin/resolve/calls/CallResolver' cache=0x000001ce4f0db498
+ - class loader data:  loader data: 0x000001ce4c8bbbb0 for instance a 'jdk/internal/loader/ClassLoaders$AppClassLoader'{0x0000000701c00000}
+ - source file:       'CallResolver.java'
+ - class annotations:       Array<T>(0x0000000000000000)
+ - class type annotations:  Array<T>(0x0000000000000000)
+ - field annotations:       Array<T>(0x0000000000000000)
+ - field type annotations:  Array<T>(0x0000000000000000)
+ - inner classes:     Array<T>(0x000001ce4f00f398)
+ - nest members:     Array<T>(0x000001ce4d000028)
+ - permitted subclasses:     Array<T>(0x000001ce4d000028)
+ - java mirror:       a 'java/lang/Class'{0x0000000702282a48} = 'org/jetbrains/kotlin/resolve/calls/CallResolver'
+ - vtable length      27  (start addr: 0x00000008004ba4b8)
+ - itable length      2 (start addr: 0x00000008004ba590)
+ - ---- static fields (1 words):
+ - private static final 'callResolvePerfCounter' 'Lorg/jetbrains/kotlin/util/PerformanceCounter;' @112 
+ - static final synthetic '$assertionsDisabled' 'Z' @116 
+ - ---- non-static fields (11 words):
+ - private 'expressionTypingServices' 'Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingServices;' @12 
+ - private 'typeResolver' 'Lorg/jetbrains/kotlin/resolve/TypeResolver;' @16 
+ - private 'argumentTypeResolver' 'Lorg/jetbrains/kotlin/resolve/calls/ArgumentTypeResolver;' @20 
+ - private 'genericCandidateResolver' 'Lorg/jetbrains/kotlin/resolve/calls/GenericCandidateResolver;' @24 
+ - private 'callCompleter' 'Lorg/jetbrains/kotlin/resolve/calls/CallCompleter;' @28 
+ - private 'syntheticScopes' 'Lorg/jetbrains/kotlin/resolve/scopes/SyntheticScopes;' @32 
+ - private 'newResolutionOldInference' 'Lorg/jetbrains/kotlin/resolve/calls/tower/NewResolutionOldInference;' @36 
+ - private 'PSICallResolver' 'Lorg/jetbrains/kotlin/resolve/calls/tower/PSICallResolver;' @40 
+ - private final 'dataFlowValueFactory' 'Lorg/jetbrains/kotlin/resolve/calls/smartcasts/DataFlowValueFactory;' @44 
+ - private final 'builtIns' 'Lorg/jetbrains/kotlin/builtins/KotlinBuiltIns;' @48 
+ - private final 'languageVersionSettings' 'Lorg/jetbrains/kotlin/config/LanguageVersionSettings;' @52 
+ - non-static oop maps: 12-52 
+stack at sp + 3 slots: 0x00000008004ba2c8 is a pointer to class: 
+org.jetbrains.kotlin.resolve.calls.CallResolver {0x00000008004ba2d0}
+ - instance size:     7
+ - klass size:        92
+ - access:            public synchronized 
+ - state:             fully_initialized
+ - name:              'org/jetbrains/kotlin/resolve/calls/CallResolver'
+ - super:             'java/lang/Object'
+ - sub:               
+ - arrays:            NULL
+ - methods:           Array<T>(0x000001ce4f007710)
+ - method ordering:   Array<T>(0x000001ce4d000018)
+ - default_methods:   Array<T>(0x0000000000000000)
+ - local interfaces:  Array<T>(0x000001ce4d000058)
+ - trans. interfaces: Array<T>(0x000001ce4d000058)
+ - constants:         constant pool [1365]/operands[35] {0x000001ce4f008008} for 'org/jetbrains/kotlin/resolve/calls/CallResolver' cache=0x000001ce4f0db498
+ - class loader data:  loader data: 0x000001ce4c8bbbb0 for instance a 'jdk/internal/loader/ClassLoaders$AppClassLoader'{0x0000000701c00000}
+ - source file:       'CallResolver.java'
+ - class annotations:       Array<T>(0x0000000000000000)
+ - class type annotations:  Array<T>(0x0000000000000000)
+ - field annotations:       Array<T>(0x0000000000000000)
+ - field type annotations:  Array<T>(0x0000000000000000)
+ - inner classes:     Array<T>(0x000001ce4f00f398)
+ - nest members:     Array<T>(0x000001ce4d000028)
+ - permitted subclasses:     Array<T>(0x000001ce4d000028)
+ - java mirror:       a 'java/lang/Class'{0x0000000702282a48} = 'org/jetbrains/kotlin/resolve/calls/CallResolver'
+ - vtable length      27  (start addr: 0x00000008004ba4b8)
+ - itable length      2 (start addr: 0x00000008004ba590)
+ - ---- static fields (1 words):
+ - private static final 'callResolvePerfCounter' 'Lorg/jetbrains/kotlin/util/PerformanceCounter;' @112 
+ - static final synthetic '$assertionsDisabled' 'Z' @116 
+ - ---- non-static fields (11 words):
+ - private 'expressionTypingServices' 'Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingServices;' @12 
+ - private 'typeResolver' 'Lorg/jetbrains/kotlin/resolve/TypeResolver;' @16 
+ - private 'argumentTypeResolver' 'Lorg/jetbrains/kotlin/resolve/calls/ArgumentTypeResolver;' @20 
+ - private 'genericCandidateResolver' 'Lorg/jetbrains/kotlin/resolve/calls/GenericCandidateResolver;' @24 
+ - private 'callCompleter' 'Lorg/jetbrains/kotlin/resolve/calls/CallCompleter;' @28 
+ - private 'syntheticScopes' 'Lorg/jetbrains/kotlin/resolve/scopes/SyntheticScopes;' @32 
+ - private 'newResolutionOldInference' 'Lorg/jetbrains/kotlin/resolve/calls/tower/NewResolutionOldInference;' @36 
+ - private 'PSICallResolver' 'Lorg/jetbrains/kotlin/resolve/calls/tower/PSICallResolver;' @40 
+ - private final 'dataFlowValueFactory' 'Lorg/jetbrains/kotlin/resolve/calls/smartcasts/DataFlowValueFactory;' @44 
+ - private final 'builtIns' 'Lorg/jetbrains/kotlin/builtins/KotlinBuiltIns;' @48 
+ - private final 'languageVersionSettings' 'Lorg/jetbrains/kotlin/config/LanguageVersionSettings;' @52 
+ - non-static oop maps: 12-52 
+stack at sp + 4 slots: 0x00000008004ba2c8 is a pointer to class: 
+org.jetbrains.kotlin.resolve.calls.CallResolver {0x00000008004ba2d0}
+ - instance size:     7
+ - klass size:        92
+ - access:            public synchronized 
+ - state:             fully_initialized
+ - name:              'org/jetbrains/kotlin/resolve/calls/CallResolver'
+ - super:             'java/lang/Object'
+ - sub:               
+ - arrays:            NULL
+ - methods:           Array<T>(0x000001ce4f007710)
+ - method ordering:   Array<T>(0x000001ce4d000018)
+ - default_methods:   Array<T>(0x0000000000000000)
+ - local interfaces:  Array<T>(0x000001ce4d000058)
+ - trans. interfaces: Array<T>(0x000001ce4d000058)
+ - constants:         constant pool [1365]/operands[35] {0x000001ce4f008008} for 'org/jetbrains/kotlin/resolve/calls/CallResolver' cache=0x000001ce4f0db498
+ - class loader data:  loader data: 0x000001ce4c8bbbb0 for instance a 'jdk/internal/loader/ClassLoaders$AppClassLoader'{0x0000000701c00000}
+ - source file:       'CallResolver.java'
+ - class annotations:       Array<T>(0x0000000000000000)
+ - class type annotations:  Array<T>(0x0000000000000000)
+ - field annotations:       Array<T>(0x0000000000000000)
+ - field type annotations:  Array<T>(0x0000000000000000)
+ - inner classes:     Array<T>(0x000001ce4f00f398)
+ - nest members:     Array<T>(0x000001ce4d000028)
+ - permitted subclasses:     Array<T>(0x000001ce4d000028)
+ - java mirror:       a 'java/lang/Class'{0x0000000702282a48} = 'org/jetbrains/kotlin/resolve/calls/CallResolver'
+ - vtable length      27  (start addr: 0x00000008004ba4b8)
+ - itable length      2 (start addr: 0x00000008004ba590)
+ - ---- static fields (1 words):
+ - private static final 'callResolvePerfCounter' 'Lorg/jetbrains/kotlin/util/PerformanceCounter;' @112 
+ - static final synthetic '$assertionsDisabled' 'Z' @116 
+ - ---- non-static fields (11 words):
+ - private 'expressionTypingServices' 'Lorg/jetbrains/kotlin/types/expressions/ExpressionTypingServices;' @12 
+ - private 'typeResolver' 'Lorg/jetbrains/kotlin/resolve/TypeResolver;' @16 
+ - private 'argumentTypeResolver' 'Lorg/jetbrains/kotlin/resolve/calls/ArgumentTypeResolver;' @20 
+ - private 'genericCandidateResolver' 'Lorg/jetbrains/kotlin/resolve/calls/GenericCandidateResolver;' @24 
+ - private 'callCompleter' 'Lorg/jetbrains/kotlin/resolve/calls/CallCompleter;' @28 
+ - private 'syntheticScopes' 'Lorg/jetbrains/kotlin/resolve/scopes/SyntheticScopes;' @32 
+ - private 'newResolutionOldInference' 'Lorg/jetbrains/kotlin/resolve/calls/tower/NewResolutionOldInference;' @36 
+ - private 'PSICallResolver' 'Lorg/jetbrains/kotlin/resolve/calls/tower/PSICallResolver;' @40 
+ - private final 'dataFlowValueFactory' 'Lorg/jetbrains/kotlin/resolve/calls/smartcasts/DataFlowValueFactory;' @44 
+ - private final 'builtIns' 'Lorg/jetbrains/kotlin/builtins/KotlinBuiltIns;' @48 
+ - private final 'languageVersionSettings' 'Lorg/jetbrains/kotlin/config/LanguageVersionSettings;' @52 
+ - non-static oop maps: 12-52 
+stack at sp + 5 slots: 0x00007ffec97f3a15 jvm.dll
+stack at sp + 6 slots: 0x0000000000000008 is an unknown value
+stack at sp + 7 slots: 0x0000000800630538 is pointing into metadata
+
+getfield  180 getfield  [0x000001ce382a90e0, 0x000001ce382a9340]  608 bytes
+[MachCode]
+  0x000001ce382a90e0: 4883 ec08 | c5fa 1104 | 24eb 1f48 | 83ec 10c5 | fb11 0424 | eb14 4883 | ec10 4889 | 0424 48c7 
+  0x000001ce382a9100: 4424 0800 | 0000 00eb | 0150 410f | b755 0148 | 8b4d d0c1 | e202 8b5c | d120 c1eb | 1081 e3ff 
+  0x000001ce382a9120: 0000 0081 | fbb4 0000 | 000f 84b6 | 0000 00bb | b400 0000 | e805 0000 | 00e9 9b00 | 0000 488b 
+  0x000001ce382a9140: d348 8d44 | 2408 4c89 | 6dc0 498b | cfc5 f877 | 4989 afa8 | 0200 0049 | 8987 9802 | 0000 4883 
+  0x000001ce382a9160: ec20 f7c4 | 0f00 0000 | 0f84 1a00 | 0000 4883 | ec08 49ba | f0b4 4ac9 | fe7f 0000 | 41ff d248 
+  0x000001ce382a9180: 83c4 08e9 | 0d00 0000 | 49ba f0b4 | 4ac9 fe7f | 0000 41ff | d248 83c4 | 2049 c787 | 9802 0000 
+  0x000001ce382a91a0: 0000 0000 | 49c7 87a8 | 0200 0000 | 0000 0049 | c787 a002 | 0000 0000 | 0000 c5f8 | 7749 817f 
+  0x000001ce382a91c0: 0800 0000 | 000f 8405 | 0000 00e9 | 307d feff | 4c8b 6dc0 | 4c8b 75c8 | c341 0fb7 | 5501 488b 
+  0x000001ce382a91e0: 4dd0 c1e2 | 0248 8b5c | d130 8b44 | d138 4159 | 493b 01c1 | e81c 83e0 | 0f0f 8515 | 0000 0041 
+  0x000001ce382a9200: 0fbe 0419 | 5041 b9cc | 0000 0045 | 884d 00e9 | 0501 0000 | 83f8 010f | 8515 0000 | 0041 0fb6 
+  0x000001ce382a9220: 0419 5041 | b9cc 0000 | 0045 884d | 00e9 e700 | 0000 83f8 | 080f 8518 | 0000 0041 | 8b04 1948 
+  0x000001ce382a9240: c1e0 0350 | 41b9 cb00 | 0000 4588 | 4d00 e9c6 | 0000 0083 | f804 0f85 | 1400 0000 | 418b 0419 
+  0x000001ce382a9260: 5041 b9d0 | 0000 0045 | 884d 00e9 | a900 0000 | 83f8 020f | 8515 0000 | 0041 0fb7 | 0419 5041 
+  0x000001ce382a9280: b9cd 0000 | 0045 884d | 00e9 8b00 | 0000 83f8 | 030f 8515 | 0000 0041 | 0fbf 0419 | 5041 b9d2 
+  0x000001ce382a92a0: 0000 0045 | 884d 00e9 | 6d00 0000 | 83f8 050f | 8524 0000 | 0049 8b04 | 1948 83ec | 1048 8904 
+  0x000001ce382a92c0: 2448 c744 | 2408 0000 | 0000 41b9 | d100 0000 | 4588 4d00 | e940 0000 | 0083 f806 | 0f85 1e00 
+  0x000001ce382a92e0: 0000 c4c1 | 7a10 0419 | 4883 ec08 | c5fa 1104 | 2441 b9cf | 0000 0045 | 884d 00e9 | 1900 0000 
+  0x000001ce382a9300: c4c1 7b10 | 0419 4883 | ec10 c5fb | 1104 2441 | b9ce 0000 | 0045 884d | 0041 0fb6 | 5d03 4983 
+  0x000001ce382a9320: c503 49ba | 80ae cdc9 | fe7f 0000 | 41ff 24da | 0000 0000 | 0000 0000 | 0000 0000 | 0000 0000 
+[/MachCode]
+
+Compiled method (c1)    2252 3167   !   3       org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke (257 bytes)
+ total in heap  [0x000001ce31373e90,0x000001ce31375f90] = 8448
+ relocation     [0x000001ce31373fe8,0x000001ce313741f0] = 520
+ main code      [0x000001ce31374200,0x000001ce31375620] = 5152
+ stub code      [0x000001ce31375620,0x000001ce31375798] = 376
+ oops           [0x000001ce31375798,0x000001ce313757a0] = 8
+ metadata       [0x000001ce313757a0,0x000001ce313757b8] = 24
+ scopes data    [0x000001ce313757b8,0x000001ce313759c0] = 520
+ scopes pcs     [0x000001ce313759c0,0x000001ce31375ca0] = 736
+ dependencies   [0x000001ce31375ca0,0x000001ce31375ca8] = 8
+ handler table  [0x000001ce31375ca8,0x000001ce31375ef8] = 592
+ nul chk table  [0x000001ce31375ef8,0x000001ce31375f90] = 152
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Entry Point]
+  # {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue'
+  #           [sp+0xb0]  (sp of caller)
+  0x000001ce31374200: 448b 5208 | 49bb 0000 | 0000 0800 | 0000 4d03 | d34c 3bd0 
+
+  0x000001ce31374214: ;   {runtime_call ic_miss_stub}
+  0x000001ce31374214: 0f85 66ce | f606 660f | 1f44 0000 
+[Verified Entry Point]
+  0x000001ce31374220: 8984 2400 | 90ff ff55 | 4881 eca0 | 0000 0048 | 8954 2440 
+
+  0x000001ce31374234: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374234: 48be f853 | 744f ce01 | 0000 8bbe | cc00 0000 | 83c7 0289 | becc 0000 | 0081 e7fe | 0700 0083 
+  0x000001ce31374254: ff00 0f84 | 5d11 0000 | 8b72 1448 | c1e6 0348 | 83fe 0075 
+
+  0x000001ce31374268: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374268: 1648 b8f8 | 5374 4fce | 0100 0080 | 8809 0100 | 0001 e9d2 
+
+  0x000001ce3137427c: ;   {metadata('org/jetbrains/kotlin/storage/LockBasedStorageManager$NotValue')}
+  0x000001ce3137427c: 0000 0048 | b910 c61b | 0008 0000 | 008b 5e08 | 49ba 0000 | 0000 0800 | 0000 4903 | da48 3bcb 
+  0x000001ce3137429c: 0f85 9300 
+
+  0x000001ce313742a0: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce313742a0: 0000 48b8 | f853 744f | ce01 0000 | 8b4e 0849 | ba00 0000 | 0008 0000 | 0049 03ca | 483b 8820 
+  0x000001ce313742c0: 0100 0075 | 0d48 8380 | 2801 0000 | 01e9 8400 | 0000 483b | 8830 0100 | 0075 0d48 | 8380 3801 
+  0x000001ce313742e0: 0000 01e9 | 6e00 0000 | 4881 b820 | 0100 0000 | 0000 0075 | 1748 8988 | 2001 0000 | 48c7 8028 
+  0x000001ce31374300: 0100 0001 | 0000 00e9 | 4a00 0000 | 4881 b830 | 0100 0000 | 0000 0075 | 1748 8988 | 3001 0000 
+  0x000001ce31374320: 48c7 8038 | 0100 0001 | 0000 00e9 | 2600 0000 | e921 0000 
+
+  0x000001ce31374334: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374334: 0048 b8f8 | 5374 4fce | 0100 0048 | 83a8 1001 | 0000 01e9 | 0500 0000 | e905 0000 | 0048 33ff 
+  0x000001ce31374354: eb0a 48bf | 0100 0000 | 0000 0000 
+
+  0x000001ce31374360: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374360: 83ff 0048 | bff8 5374 | 4fce 0100 | 0048 bb58 | 0100 0000 | 0000 000f | 840a 0000 | 0048 bb48 
+  0x000001ce31374380: 0100 0000 | 0000 0048 | 8b04 1f48 | 8d40 0148 | 8904 1f0f | 8499 0c00 | 008b 720c | 48c1 e603 
+  0x000001ce313743a0: ; implicit exception: dispatches to 0x000001ce313753da
+  0x000001ce313743a0: 8b76 0c48 | c1e6 0348 | 3b06 488b 
+
+  0x000001ce313743ac: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce313743ac: fe48 bbf8 | 5374 4fce | 0100 008b | 7f08 49ba | 0000 0000 | 0800 0000 | 4903 fa48 | 3bbb 8801 
+  0x000001ce313743cc: 0000 750d | 4883 8390 | 0100 0001 | e966 0000 | 0048 3bbb | 9801 0000 | 750d 4883 | 83a0 0100 
+  0x000001ce313743ec: 0001 e950 | 0000 0048 | 81bb 8801 | 0000 0000 | 0000 7517 | 4889 bb88 | 0100 0048 | c783 9001 
+  0x000001ce3137440c: 0000 0100 | 0000 e92c | 0000 0048 | 81bb 9801 | 0000 0000 | 0000 7517 | 4889 bb98 | 0100 0048 
+  0x000001ce3137442c: c783 a001 | 0000 0100 | 0000 e908 | 0000 0048 | 8383 7801 | 0000 0148 | 8bd6 0f1f | 8000 0000 
+  0x000001ce3137444c: 0048 b860 | 0241 0008 
+
+  0x000001ce31374454: ;   {virtual_call}
+  0x000001ce31374454: 0000 00e8 
+
+  0x000001ce31374458: ; ImmutableOopMap {[64]=Oop }
+                      ;*invokeinterface lock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@24 (line 386)
+  0x000001ce31374458: 04f8 0000 | 488b 5424 | 408b 7214 | 48c1 e603 | 4883 fe00 
+
+  0x000001ce3137446c: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce3137446c: 7516 48bb | f853 744f | ce01 0000 | 808b a901 | 0000 01e9 | d200 0000 
+
+  0x000001ce31374484: ;   {metadata('org/jetbrains/kotlin/storage/LockBasedStorageManager$NotValue')}
+  0x000001ce31374484: 48b8 10c6 | 1b00 0800 | 0000 8b7e | 0849 ba00 | 0000 0008 | 0000 0049 | 03fa 483b | c70f 8593 
+  0x000001ce313744a4: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce313744a4: 0000 0048 | bbf8 5374 | 4fce 0100 | 008b 4608 | 49ba 0000 | 0000 0800 | 0000 4903 | c248 3b83 
+  0x000001ce313744c4: c001 0000 | 750d 4883 | 83c8 0100 | 0001 e984 | 0000 0048 | 3b83 d001 | 0000 750d | 4883 83d8 
+  0x000001ce313744e4: 0100 0001 | e96e 0000 | 0048 81bb | c001 0000 | 0000 0000 | 7517 4889 | 83c0 0100 | 0048 c783 
+  0x000001ce31374504: c801 0000 | 0100 0000 | e94a 0000 | 0048 81bb | d001 0000 | 0000 0000 | 7517 4889 | 83d0 0100 
+  0x000001ce31374524: 0048 c783 | d801 0000 | 0100 0000 | e926 0000 | 00e9 2100 
+
+  0x000001ce31374538: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374538: 0000 48bb | f853 744f | ce01 0000 | 4883 abb0 | 0100 0001 | e905 0000 | 00e9 0500 | 0000 4d33 
+  0x000001ce31374558: c0eb 0a49 | b801 0000 | 0000 0000 | 0041 83f8 
+
+  0x000001ce31374568: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374568: 0049 b8f8 | 5374 4fce | 0100 0048 | bff8 0100 | 0000 0000 | 000f 840a | 0000 0048 | bfe8 0100 
+  0x000001ce31374588: 0000 0000 | 0049 8b1c | 3848 8d5b | 0149 891c | 380f 8493 
+
+  0x000001ce3137459c: ;   {oop(a 'org/jetbrains/kotlin/storage/LockBasedStorageManager$NotValue'{0x0000000701ec2198})}
+  0x000001ce3137459c: 0900 0049 | b898 21ec | 0107 0000 | 0049 3bf0 
+
+  0x000001ce313745ac: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce313745ac: 49b8 f853 | 744f ce01 | 0000 48bf | 5002 0000 | 0000 0000 | 0f85 0a00 | 0000 48bf | 6002 0000 
+  0x000001ce313745cc: 0000 0000 | 498b 1c38 | 488d 5b01 | 4989 1c38 | 0f85 5001 | 0000 4889 
+
+  0x000001ce313745e4: ;   {oop(a 'org/jetbrains/kotlin/storage/LockBasedStorageManager$NotValue'{0x0000000701ec2180})}
+  0x000001ce313745e4: 7424 4849 | b880 21ec | 0107 0000 | 0041 0fbe | 7f38 83ff | 000f 85e5 | 0d00 004d | 8bd0 49c1 
+  0x000001ce31374604: ea03 4489 | 5214 f083 | 4424 c000 | 488b fa49 | 33f8 48c1 | ef15 4883 | ff00 0f85 | df0d 0000 
+  0x000001ce31374624: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374624: 4c8b c248 | bff8 5374 | 4fce 0100 | 0045 8b40 | 0849 ba00 | 0000 0008 | 0000 004d | 03c2 4c3b 
+  0x000001ce31374644: 8780 0200 | 0075 0d48 | 8387 8802 | 0000 01e9 | 6600 0000 | 4c3b 8790 | 0200 0075 | 0d48 8387 
+  0x000001ce31374664: 9802 0000 | 01e9 5000 | 0000 4881 | bf80 0200 | 0000 0000 | 0075 174c | 8987 8002 | 0000 48c7 
+  0x000001ce31374684: 8788 0200 | 0001 0000 | 00e9 2c00 | 0000 4881 | bf90 0200 | 0000 0000 | 0075 174c | 8987 9002 
+  0x000001ce313746a4: 0000 48c7 | 8798 0200 | 0001 0000 | 00e9 0800 | 0000 4883 | 8770 0200 | 0001 41b8 | 0100 0000 
+  0x000001ce313746c4: 488b fa48 | 8bd7 6666 | 9048 b8ff | ffff ffff 
+
+  0x000001ce313746d4: ;   {virtual_call}
+  0x000001ce313746d4: ffff ffe8 
+
+  0x000001ce313746d8: ; ImmutableOopMap {[64]=Oop [72]=Oop }
+                      ;*invokevirtual recursionDetected {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@76 (line 393)
+  0x000001ce313746d8: a4cf f606 | 488b d048 | 8944 2450 | 9048 b8ff | ffff ffff 
+
+  0x000001ce313746ec: ;   {virtual_call}
+  0x000001ce313746ec: ffff ffe8 
+
+  0x000001ce313746f0: ; ImmutableOopMap {[64]=Oop [72]=Oop [80]=Oop }
+                      ;*invokevirtual isFallThrough {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@81 (line 394)
+  0x000001ce313746f0: 8ccf f606 
+
+  0x000001ce313746f4: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce313746f4: 83f8 0049 | b8f8 5374 | 4fce 0100 | 0048 baf0 | 0200 0000 | 0000 000f | 840a 0000 | 0048 bae0 
+  0x000001ce31374714: 0200 0000 | 0000 0049 | 8b34 1048 | 8d76 0149 | 8934 100f | 8402 0700 | 0048 8b74 
+
+  0x000001ce31374730: ;   {oop(a 'org/jetbrains/kotlin/storage/LockBasedStorageManager$NotValue'{0x0000000701ec2180})}
+  0x000001ce31374730: 2448 49ba | 8021 ec01 | 0700 0000 
+
+  0x000001ce3137473c: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce3137473c: 493b f249 | b8f8 5374 | 4fce 0100 | 0048 ba70 | 0300 0000 | 0000 000f | 850a 0000 | 0048 ba80 
+  0x000001ce3137475c: 0300 0000 | 0000 0049 | 8b34 1048 | 8d76 0149 | 8934 100f | 8508 0100 | 0048 8b54 
+
+  0x000001ce31374778: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374778: 2440 49b8 | f853 744f | ce01 0000 | 8b52 0849 | ba00 0000 | 0008 0000 | 0049 03d2 | 493b 90a0 
+  0x000001ce31374798: 0300 0075 | 0d49 8380 | a803 0000 | 01e9 6600 | 0000 493b | 90b0 0300 | 0075 0d49 | 8380 b803 
+  0x000001ce313747b8: 0000 01e9 | 5000 0000 | 4981 b8a0 | 0300 0000 | 0000 0075 | 1749 8990 | a003 0000 | 49c7 80a8 
+  0x000001ce313747d8: 0300 0001 | 0000 00e9 | 2c00 0000 | 4981 b8b0 | 0300 0000 | 0000 0075 | 1749 8990 | b003 0000 
+  0x000001ce313747f8: 49c7 80b8 | 0300 0001 | 0000 00e9 | 0800 0000 | 4983 8090 | 0300 0001 | 41b8 0000 | 0000 488b 
+  0x000001ce31374818: 5424 4066 | 9048 b8ff | ffff ffff 
+
+  0x000001ce31374824: ;   {virtual_call}
+  0x000001ce31374824: ffff ffe8 
+
+  0x000001ce31374828: ; ImmutableOopMap {[64]=Oop }
+                      ;*invokevirtual recursionDetected {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@115 (line 400)
+  0x000001ce31374828: 54ce f606 | 488b d048 | 8944 2458 | 9048 b8ff | ffff ffff 
+
+  0x000001ce3137483c: ;   {virtual_call}
+  0x000001ce3137483c: ffff ffe8 
+
+  0x000001ce31374840: ; ImmutableOopMap {[64]=Oop [88]=Oop }
+                      ;*invokevirtual isFallThrough {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@120 (line 401)
+  0x000001ce31374840: 3cce f606 
+
+  0x000001ce31374844: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374844: 83f8 0048 | baf8 5374 | 4fce 0100 | 0048 be10 | 0400 0000 | 0000 000f | 840a 0000 | 0048 be00 
+  0x000001ce31374864: 0400 0000 | 0000 0048 | 8b3c 3248 | 8d7f 0148 | 893c 320f | 84b2 0400 | 0048 8b54 
+
+  0x000001ce31374880: ;   {oop(a 'org/jetbrains/kotlin/storage/LockBasedStorageManager$NotValue'{0x0000000701ec2198})}
+  0x000001ce31374880: 2440 48be | 9821 ec01 | 0700 0000 | 410f be7f | 3883 ff00 | 0f85 810b | 0000 4c8b | d649 c1ea 
+  0x000001ce313748a0: 0344 8952 | 14f0 8344 | 24c0 0048 | 8bfa 4833 | fe48 c1ef | 1548 83ff | 000f 857b | 0b00 008b 
+  0x000001ce313748c0: 7210 48c1 | e603 483b | 0648 8bfe 
+
+  0x000001ce313748cc: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce313748cc: 48bb f853 | 744f ce01 | 0000 8b7f | 0849 ba00 | 0000 0008 | 0000 0049 | 03fa 483b | bba0 0400 
+  0x000001ce313748ec: 0075 0d48 | 8383 a804 | 0000 01e9 | 6600 0000 | 483b bbb0 | 0400 0075 | 0d48 8383 | b804 0000 
+  0x000001ce3137490c: 01e9 5000 | 0000 4881 | bba0 0400 | 0000 0000 | 0075 1748 | 89bb a004 | 0000 48c7 | 83a8 0400 
+  0x000001ce3137492c: 0001 0000 | 00e9 2c00 | 0000 4881 | bbb0 0400 | 0000 0000 | 0075 1748 | 89bb b004 | 0000 48c7 
+  0x000001ce3137494c: 83b8 0400 | 0001 0000 | 00e9 0800 | 0000 4883 | 8390 0400 | 0001 488b | d648 b8b0 | 4732 53ce 
+  0x000001ce3137496c: ;   {virtual_call}
+  0x000001ce3137496c: 0100 00e8 
+
+  0x000001ce31374970: ; ImmutableOopMap {[64]=Oop }
+                      ;*invokeinterface invoke {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@156 (line 408)
+  0x000001ce31374970: 3c87 0107 | 4889 4424 | 6048 8b54 
+
+  0x000001ce3137497c: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce3137497c: 2440 49b8 | f853 744f | ce01 0000 | 8b52 0849 | ba00 0000 | 0008 0000 | 0049 03d2 | 493b 90d8 
+  0x000001ce3137499c: 0400 0075 | 0d49 8380 | e004 0000 | 01e9 6600 | 0000 493b | 90e8 0400 | 0075 0d49 | 8380 f004 
+  0x000001ce313749bc: 0000 01e9 | 5000 0000 | 4981 b8d8 | 0400 0000 | 0000 0075 | 1749 8990 | d804 0000 | 49c7 80e0 
+  0x000001ce313749dc: 0400 0001 | 0000 00e9 | 2c00 0000 | 4981 b8e8 | 0400 0000 | 0000 0075 | 1749 8990 | e804 0000 
+  0x000001ce313749fc: 49c7 80f0 | 0400 0001 | 0000 00e9 | 0800 0000 | 4983 80c8 | 0400 0001 | 4c8b c048 | 8b54 2440 
+  0x000001ce31374a1c: 9048 b8ff | ffff ffff 
+
+  0x000001ce31374a24: ;   {virtual_call}
+  0x000001ce31374a24: ffff ffe8 
+
+  0x000001ce31374a28: ; ImmutableOopMap {[64]=Oop [96]=Oop }
+                      ;*invokevirtual postCompute {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@164 (line 412)
+  0x000001ce31374a28: 5c8d 0107 | 410f be47 | 3883 f800 | 488b 5424 | 400f 8518 | 0a00 0048 | 8b44 2460 | 4c8b d049 
+  0x000001ce31374a48: c1ea 0344 | 8952 14f0 | 8344 24c0 | 0048 8bf2 | 4833 f048 | c1ee 1548 | 83fe 000f | 850d 0a00 
+  0x000001ce31374a68: 00e9 ed01 | 0000 498b | 87e0 0300 | 004d 33d2 | 4d89 97e0 | 0300 004d | 33d2 4d89 | 97e8 0300 
+  0x000001ce31374a88: 0048 8944 | 2468 488b | d066 0f1f 
+
+  0x000001ce31374a94: ;   {static_call}
+  0x000001ce31374a94: 4400 00e8 
+
+  0x000001ce31374a98: ; ImmutableOopMap {[104]=Oop [64]=Oop }
+                      ;*invokestatic isProcessCanceledException {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@190 (line 418)
+  0x000001ce31374a98: e4ce f606 
+
+  0x000001ce31374a9c: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374a9c: 83f8 0048 | baf8 5374 | 4fce 0100 | 0048 be58 | 0500 0000 | 0000 000f | 850a 0000 | 0048 be48 
+  0x000001ce31374abc: 0500 0000 | 0000 0048 | 8b3c 3248 | 8d7f 0148 | 893c 320f | 85aa 0600 | 0048 8b54 | 2440 8b72 
+  0x000001ce31374adc: 1448 c1e6 
+
+  0x000001ce31374ae0: ;   {oop(a 'org/jetbrains/kotlin/storage/LockBasedStorageManager$NotValue'{0x0000000701ec2198})}
+  0x000001ce31374ae0: 0348 bf98 | 21ec 0107 | 0000 0048 
+
+  0x000001ce31374aec: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374aec: 3bf7 48be | f853 744f | ce01 0000 | 48bf a005 | 0000 0000 | 0000 0f85 | 0a00 0000 | 48bf b005 
+  0x000001ce31374b0c: 0000 0000 | 0000 488b | 1c3e 488d | 5b01 4889 | 1c3e 0f85 | 7205 0000 | 488b 4424 
+
+  0x000001ce31374b28: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374b28: 6848 bef8 | 5374 4fce | 0100 0048 | 8386 c005 
+
+  0x000001ce31374b38: ;   {metadata(method data for {method} {0x000001ce4e041b08} 'escapeThrowable' '(Ljava/lang/Throwable;)Ljava/lang/Object;' in 'org/jetbrains/kotlin/utils/WrappedValues')}
+  0x000001ce31374b38: 0000 0148 | be60 5d74 | 4fce 0100 | 008b becc | 0000 0083 | c702 89be | cc00 0000 | 81e7 feff 
+  0x000001ce31374b58: 1f00 83ff | 000f 842b | 0900 0048 
+
+  0x000001ce31374b64: ;   {metadata(method data for {method} {0x000001ce4e041b08} 'escapeThrowable' '(Ljava/lang/Throwable;)Ljava/lang/Object;' in 'org/jetbrains/kotlin/utils/WrappedValues')}
+  0x000001ce31374b64: 83f8 0048 | be60 5d74 | 4fce 0100 | 0048 bf10 | 0100 0000 | 0000 000f | 850a 0000 | 0048 bf20 
+  0x000001ce31374b84: 0100 0000 | 0000 0048 | 8b1c 3e48 | 8d5b 0148 | 891c 3e0f | 851f 0000 
+
+  0x000001ce31374b9c: ;   {metadata(method data for {method} {0x000001ce4e041b08} 'escapeThrowable' '(Ljava/lang/Throwable;)Ljava/lang/Object;' in 'org/jetbrains/kotlin/utils/WrappedValues')}
+  0x000001ce31374b9c: 0048 be60 | 5d74 4fce | 0100 0048 | 8386 3001 | 0000 01ba | 0300 0000 
+
+  0x000001ce31374bb4: ;   {static_call}
+  0x000001ce31374bb4: 6666 90e8 
+
+  0x000001ce31374bb8: ; ImmutableOopMap {[64]=Oop [104]=Oop }
+                      ;*invokestatic $$$reportNull$$$0 {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.utils.WrappedValues::escapeThrowable@5
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@220 (line 426)
+  0x000001ce31374bb8: c4cd f606 
+
+  0x000001ce31374bbc: ;   {metadata('org/jetbrains/kotlin/utils/WrappedValues$ThrowableWrapper')}
+  0x000001ce31374bbc: 48ba a8e0 | 1b00 0800 | 0000 80ba | 5b01 0000 | 040f 85e1 | 0800 0049 | 8b87 0801 | 0000 488d 
+  0x000001ce31374bdc: 7810 493b | bf18 0100 | 000f 87c9 | 0800 0049 | 89bf 0801 | 0000 48c7 | 0001 0000 | 0048 8bca 
+  0x000001ce31374bfc: 49ba 0000 | 0000 0800 | 0000 492b | ca89 4808 | 4833 c989 | 480c 4833 | c94c 8bc0 
+
+  0x000001ce31374c18: ;   {metadata(method data for {method} {0x000001ce4e041b08} 'escapeThrowable' '(Ljava/lang/Throwable;)Ljava/lang/Object;' in 'org/jetbrains/kotlin/utils/WrappedValues')}
+  0x000001ce31374c18: 49b9 605d | 744f ce01 | 0000 4983 | 8140 0100 | 0001 4c8b 
+
+  0x000001ce31374c2c: ;   {oop(NULL)}
+  0x000001ce31374c2c: 4424 6849 | b900 0000 | 0000 0000 | 0048 8bd0 | 4889 4424 | 7066 0f1f 
+
+  0x000001ce31374c44: ;   {optimized virtual_call}
+  0x000001ce31374c44: 4400 00e8 
+
+  0x000001ce31374c48: ; ImmutableOopMap {[64]=Oop [104]=Oop [112]=Oop }
+                      ;*invokespecial <init> {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.utils.WrappedValues::escapeThrowable@14 (line 67)
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@220 (line 426)
+  0x000001ce31374c48: 34c7 f606 | 488b 4424 | 7048 8b54 | 2440 e907 | 0400 008b | 520c 48c1 | e203 8b52 | 0c48 c1e2 
+  0x000001ce31374c68: 0348 3b02 
+
+  0x000001ce31374c6c: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374c6c: 488b f248 | bff8 5374 | 4fce 0100 | 008b 7608 | 49ba 0000 | 0000 0800 | 0000 4903 | f248 3bb7 
+  0x000001ce31374c8c: 1005 0000 | 750d 4883 | 8718 0500 | 0001 e966 | 0000 0048 | 3bb7 2005 | 0000 750d | 4883 8728 
+  0x000001ce31374cac: 0500 0001 | e950 0000 | 0048 81bf | 1005 0000 | 0000 0000 | 7517 4889 | b710 0500 | 0048 c787 
+  0x000001ce31374ccc: 1805 0000 | 0100 0000 | e92c 0000 | 0048 81bf | 2005 0000 | 0000 0000 | 7517 4889 | b720 0500 
+  0x000001ce31374cec: 0048 c787 | 2805 0000 | 0100 0000 | e908 0000 | 0048 8387 | 0005 0000 | 0148 b860 | 0241 0008 
+  0x000001ce31374d0c: ;   {virtual_call}
+  0x000001ce31374d0c: 0000 00e8 
+
+  0x000001ce31374d10: ; ImmutableOopMap {[96]=Oop }
+                      ;*invokeinterface unlock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@181 (line 432)
+  0x000001ce31374d10: 2c19 0000 | 488b 4424 | 6048 81c4 | a000 0000 
+
+  0x000001ce31374d20: ;   {poll_return}
+  0x000001ce31374d20: 5d49 3ba7 | 5003 0000 | 0f87 9d07 | 0000 c348 | 8b44 2458 | 488b d066 | 0f1f 4400 | 0048 b8ff 
+  0x000001ce31374d40: ffff ffff 
+
+  0x000001ce31374d44: ;   {virtual_call}
+  0x000001ce31374d44: ffff ffe8 
+
+  0x000001ce31374d48: ; ImmutableOopMap {[64]=Oop }
+                      ;*invokevirtual getValue {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@127 (line 402)
+  0x000001ce31374d48: 34c9 f606 | 4889 4424 | 7848 8b54 | 2440 8b52 | 0c48 c1e2 | 038b 520c | 48c1 e203 
+
+  0x000001ce31374d64: ; implicit exception: dispatches to 0x000001ce313754e6
+  0x000001ce31374d64: 483b 0248 
+
+  0x000001ce31374d68: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374d68: 8bf2 48bf | f853 744f | ce01 0000 | 8b76 0849 | ba00 0000 | 0008 0000 | 0049 03f2 | 483b b768 
+  0x000001ce31374d88: 0400 0075 | 0d48 8387 | 7004 0000 | 01e9 6600 | 0000 483b | b778 0400 | 0075 0d48 | 8387 8004 
+  0x000001ce31374da8: 0000 01e9 | 5000 0000 | 4881 bf68 | 0400 0000 | 0000 0075 | 1748 89b7 | 6804 0000 | 48c7 8770 
+  0x000001ce31374dc8: 0400 0001 | 0000 00e9 | 2c00 0000 | 4881 bf78 | 0400 0000 | 0000 0075 | 1748 89b7 | 7804 0000 
+  0x000001ce31374de8: 48c7 8780 | 0400 0001 | 0000 00e9 | 0800 0000 | 4883 8758 | 0400 0001 | 0f1f 4400 | 0048 b8ff 
+  0x000001ce31374e08: ffff ffff 
+
+  0x000001ce31374e0c: ;   {virtual_call}
+  0x000001ce31374e0c: ffff ffe8 
+
+  0x000001ce31374e10: ; ImmutableOopMap {[120]=Oop }
+                      ;*invokeinterface unlock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@138 (line 432)
+  0x000001ce31374e10: 6cc8 f606 | 488b 4424 | 7848 81c4 | a000 0000 
+
+  0x000001ce31374e20: ;   {poll_return}
+  0x000001ce31374e20: 5d49 3ba7 | 5003 0000 | 0f87 bd06 | 0000 c348 | 8b44 2450 | 488b d066 | 0f1f 4400 | 0048 b8ff 
+  0x000001ce31374e40: ffff ffff 
+
+  0x000001ce31374e44: ;   {virtual_call}
+  0x000001ce31374e44: ffff ffe8 
+
+  0x000001ce31374e48: ; ImmutableOopMap {[64]=Oop }
+                      ;*invokevirtual getValue {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@88 (line 395)
+  0x000001ce31374e48: 34c8 f606 | 4889 8424 | 8000 0000 | 488b 5424 | 408b 520c | 48c1 e203 
+
+  0x000001ce31374e60: ; implicit exception: dispatches to 0x000001ce31375501
+  0x000001ce31374e60: 8b52 0c48 | c1e2 0348 | 3b02 488b 
+
+  0x000001ce31374e6c: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374e6c: f248 bff8 | 5374 4fce | 0100 008b | 7608 49ba | 0000 0000 | 0800 0000 | 4903 f248 | 3bb7 4803 
+  0x000001ce31374e8c: 0000 750d | 4883 8750 | 0300 0001 | e966 0000 | 0048 3bb7 | 5803 0000 | 750d 4883 | 8760 0300 
+  0x000001ce31374eac: 0001 e950 | 0000 0048 | 81bf 4803 | 0000 0000 | 0000 7517 | 4889 b748 | 0300 0048 | c787 5003 
+  0x000001ce31374ecc: 0000 0100 | 0000 e92c | 0000 0048 | 81bf 5803 | 0000 0000 | 0000 7517 | 4889 b758 | 0300 0048 
+  0x000001ce31374eec: c787 6003 | 0000 0100 | 0000 e908 | 0000 0048 | 8387 3803 | 0000 0166 | 9048 b8ff | ffff ffff 
+  0x000001ce31374f0c: ;   {virtual_call}
+  0x000001ce31374f0c: ffff ffe8 
+
+  0x000001ce31374f10: ; ImmutableOopMap {[128]=Oop }
+                      ;*invokeinterface unlock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@99 (line 432)
+  0x000001ce31374f10: 6cc7 f606 | 488b 8424 | 8000 0000 | 4881 c4a0 | 0000 005d 
+
+  0x000001ce31374f24: ;   {poll_return}
+  0x000001ce31374f24: 493b a750 | 0300 000f | 87da 0500 
+
+  0x000001ce31374f30: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374f30: 00c3 48bf | f853 744f | ce01 0000 | 4883 8708 | 0200 0001 
+
+  0x000001ce31374f44: ;   {static_call}
+  0x000001ce31374f44: 488b d6e8 
+
+  0x000001ce31374f48: ; ImmutableOopMap {[64]=Oop }
+                      ;*invokestatic unescapeThrowable {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@42 (line 389)
+  0x000001ce31374f48: 34ca f606 | 4889 8424 | 8800 0000 | 488b 5424 | 408b 520c | 48c1 e203 
+
+  0x000001ce31374f60: ; implicit exception: dispatches to 0x000001ce31375521
+  0x000001ce31374f60: 8b52 0c48 | c1e2 0348 | 3b02 488b 
+
+  0x000001ce31374f6c: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31374f6c: f248 bff8 | 5374 4fce | 0100 008b | 7608 49ba | 0000 0000 | 0800 0000 | 4903 f248 | 3bb7 2802 
+  0x000001ce31374f8c: 0000 750d | 4883 8730 | 0200 0001 | e966 0000 | 0048 3bb7 | 3802 0000 | 750d 4883 | 8740 0200 
+  0x000001ce31374fac: 0001 e950 | 0000 0048 | 81bf 2802 | 0000 0000 | 0000 7517 | 4889 b728 | 0200 0048 | c787 3002 
+  0x000001ce31374fcc: 0000 0100 | 0000 e92c | 0000 0048 | 81bf 3802 | 0000 0000 | 0000 7517 | 4889 b738 | 0200 0048 
+  0x000001ce31374fec: c787 4002 | 0000 0100 | 0000 e908 | 0000 0048 | 8387 1802 | 0000 0166 | 9048 b8ff | ffff ffff 
+  0x000001ce3137500c: ;   {virtual_call}
+  0x000001ce3137500c: ffff ffe8 
+
+  0x000001ce31375010: ; ImmutableOopMap {[136]=Oop }
+                      ;*invokeinterface unlock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@53 (line 432)
+  0x000001ce31375010: 6cc6 f606 | 488b 8424 | 8800 0000 | 4881 c4a0 | 0000 005d 
+
+  0x000001ce31375024: ;   {poll_return}
+  0x000001ce31375024: 493b a750 | 0300 000f | 87fa 0400 
+
+  0x000001ce31375030: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31375030: 00c3 48ba | f853 744f | ce01 0000 | 4883 8268 | 0100 0001 
+
+  0x000001ce31375044: ;   {static_call}
+  0x000001ce31375044: 488b d6e8 
+
+  0x000001ce31375048: ; ImmutableOopMap {}
+                      ;*invokestatic unescapeThrowable {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@13 (line 384)
+  0x000001ce31375048: b445 0000 | 4881 c4a0 | 0000 005d 
+
+  0x000001ce31375054: ;   {poll_return}
+  0x000001ce31375054: 493b a750 | 0300 000f | 87e0 0400 | 00c3 450f | be47 3841 | 83f8 000f | 85e6 0400 | 004c 8bd0 
+  0x000001ce31375074: 49c1 ea03 | 4489 5214 | f083 4424 | c000 4c8b | c24c 33c0 | 49c1 e815 | 4983 f800 | 0f85 e104 
+  0x000001ce31375094: 0000 448b | 420c 49c1 
+
+  0x000001ce3137509c: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce3137509c: e003 48be | f853 744f | ce01 0000 | 4883 86d0 | 0500 0001 
+
+  0x000001ce313750b0: ; implicit exception: dispatches to 0x000001ce3137558f
+  0x000001ce313750b0: 418b 7010 | 48c1 e603 
+
+  0x000001ce313750b8: ; implicit exception: dispatches to 0x000001ce31375594
+  0x000001ce313750b8: 483b 064c 
+
+  0x000001ce313750bc: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce313750bc: 8bc6 48bf | f853 744f | ce01 0000 | 458b 4008 | 49ba 0000 | 0000 0800 | 0000 4d03 | c24c 3b87 
+  0x000001ce313750dc: f005 0000 | 750d 4883 | 87f8 0500 | 0001 e966 | 0000 004c | 3b87 0006 | 0000 750d | 4883 8708 
+  0x000001ce313750fc: 0600 0001 | e950 0000 | 0048 81bf | f005 0000 | 0000 0000 | 7517 4c89 | 87f0 0500 | 0048 c787 
+  0x000001ce3137511c: f805 0000 | 0100 0000 | e92c 0000 | 0048 81bf | 0006 0000 | 0000 0000 | 7517 4c89 | 8700 0600 
+  0x000001ce3137513c: 0048 c787 | 0806 0000 | 0100 0000 | e908 0000 | 0048 8387 | e005 0000 | 014c 8b44 | 2468 488b 
+  0x000001ce3137515c: d648 b8ff | ffff ffff 
+
+  0x000001ce31375164: ;   {virtual_call}
+  0x000001ce31375164: ffff ffe8 
+
+  0x000001ce31375168: ; ImmutableOopMap {[64]=Oop }
+                      ;*invokeinterface handleException {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@234 (line 428)
+  0x000001ce31375168: 14c5 f606 
+
+  0x000001ce3137516c: ; implicit exception: dispatches to 0x000001ce31375599
+                      ; ImmutableOopMap {[64]=Oop rax=Oop }
+                      ;*athrow {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@239 (line 428)
+                      ;   {section_word}
+  0x000001ce3137516c: 483b 0048 | ba6f 5137 | 31ce 0100 
+
+  0x000001ce31375178: ;   {runtime_call handle_exception_nofpu Runtime1 stub}
+  0x000001ce31375178: 00e8 021f | 0107 9048 | 8b44 2468 | 488b 7424 
+
+  0x000001ce31375188: ;   {oop(a 'org/jetbrains/kotlin/storage/LockBasedStorageManager$NotValue'{0x0000000701ec21b0})}
+  0x000001ce31375188: 4048 bab0 | 21ec 0107 | 0000 0041 | 0fbe 7f38 | 83ff 000f | 85fd 0300 | 004c 8bd2 | 49c1 ea03 
+  0x000001ce313751a8: 4489 5614 | f083 4424 | c000 488b | fe48 33fa | 48c1 ef15 | 4883 ff00 | 0f85 f703 | 0000 4883 
+  0x000001ce313751c8: f800 7516 
+
+  0x000001ce313751cc: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce313751cc: 48bf f853 | 744f ce01 | 0000 808f | 6105 0000 | 01e9 d300 
+
+  0x000001ce313751e0: ;   {metadata('java/lang/RuntimeException')}
+  0x000001ce313751e0: 0000 48bb | 683f 0400 | 0800 0000 | 8b78 0849 | ba00 0000 | 0008 0000 | 0049 03fa | 483b 5f48 
+  0x000001ce31375200: 0f85 9300 
+
+  0x000001ce31375204: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31375204: 0000 48bf | f853 744f | ce01 0000 | 8b58 0849 | ba00 0000 | 0008 0000 | 0049 03da | 483b 9f78 
+  0x000001ce31375224: 0500 0075 | 0d48 8387 | 8005 0000 | 01e9 7f00 | 0000 483b | 9f88 0500 | 0075 0d48 | 8387 9005 
+  0x000001ce31375244: 0000 01e9 | 6900 0000 | 4881 bf78 | 0500 0000 | 0000 0075 | 1748 899f | 7805 0000 | 48c7 8780 
+  0x000001ce31375264: 0500 0001 | 0000 00e9 | 4500 0000 | 4881 bf88 | 0500 0000 | 0000 0075 | 1748 899f | 8805 0000 
+  0x000001ce31375284: 48c7 8790 | 0500 0001 | 0000 00e9 | 2100 0000 | e91c 0000 
+
+  0x000001ce31375298: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31375298: 0048 bff8 | 5374 4fce | 0100 0048 | 83af 6805 | 0000 01e9 | 2503 0000 | e900 0000 
+
+  0x000001ce313752b4: ; ImmutableOopMap {rsi=Oop [64]=Oop rax=Oop }
+                      ;*athrow {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@207 (line 421)
+  0x000001ce313752b4: 0048 3b00 
+
+  0x000001ce313752b8: ;   {section_word}
+  0x000001ce313752b8: 48ba b852 | 3731 ce01 
+
+  0x000001ce313752c0: ;   {runtime_call handle_exception_nofpu Runtime1 stub}
+  0x000001ce313752c0: 0000 e8b9 | 1d01 0790 | 488b 7424 | 4049 8b87 | e003 0000 | 4d33 d24d | 8997 e003 | 0000 4d33 
+  0x000001ce313752e0: d24d 8997 | e803 0000 | 4889 8424 | 9000 0000 | 8b56 0c48 | c1e2 038b | 520c 48c1 | e203 483b 
+  0x000001ce31375300: 0248 8bf2 
+
+  0x000001ce31375304: ;   {metadata(method data for {method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce31375304: 48bf f853 | 744f ce01 | 0000 8b76 | 0849 ba00 | 0000 0008 | 0000 0049 | 03f2 483b | b728 0600 
+  0x000001ce31375324: 0075 0d48 | 8387 3006 | 0000 01e9 | 6600 0000 | 483b b738 | 0600 0075 | 0d48 8387 | 4006 0000 
+  0x000001ce31375344: 01e9 5000 | 0000 4881 | bf28 0600 | 0000 0000 | 0075 1748 | 89b7 2806 | 0000 48c7 | 8730 0600 
+  0x000001ce31375364: 0001 0000 | 00e9 2c00 | 0000 4881 | bf38 0600 | 0000 0000 | 0075 1748 | 89b7 3806 | 0000 48c7 
+  0x000001ce31375384: 8740 0600 | 0001 0000 | 00e9 0800 | 0000 4883 | 8718 0600 | 0001 6666 | 9048 b8ff | ffff ffff 
+  0x000001ce313753a4: ;   {virtual_call}
+  0x000001ce313753a4: ffff ffe8 
+
+  0x000001ce313753a8: ; ImmutableOopMap {[144]=Oop }
+                      ;*invokeinterface unlock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@249 (line 432)
+  0x000001ce313753a8: d4c2 f606 | 488b 8424 | 9000 0000 | e953 0200 
+
+  0x000001ce313753b8: ;   {metadata({method} {0x000001ce4eaf3020} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedLazyValue')}
+  0x000001ce313753b8: 0049 ba18 | 30af 4ece | 0100 004c | 8954 2408 | 48c7 0424 | ffff ffff 
+
+  0x000001ce313753d0: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ce313753d0: e8ab 5501 
+
+  0x000001ce313753d4: ; ImmutableOopMap {rdx=Oop [64]=Oop }
+                      ;*synchronization entry
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@-1 (line 383)
+  0x000001ce313753d4: 07e9 82ee 
+
+  0x000001ce313753d8: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce313753d8: ffff e8c1 
+
+  0x000001ce313753dc: ; ImmutableOopMap {rdx=Oop [64]=Oop }
+                      ;*getfield lock {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@21 (line 386)
+                      ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce313753dc: 0401 07e8 
+
+  0x000001ce313753e0: ; ImmutableOopMap {rdx=Oop [64]=Oop rsi=Oop }
+                      ;*invokeinterface lock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@24 (line 386)
+  0x000001ce313753e0: bc04 0107 | 8b7a 1448 | c1e7 0348 | 83ff 000f | 840a f2ff | ff48 893c 
+
+  0x000001ce313753f8: ;   {runtime_call g1_pre_barrier_slow}
+  0x000001ce313753f8: 24e8 825b | 0107 e9fc | f1ff ff49 | 83f8 000f | 8417 f2ff | ff48 8914 
+
+  0x000001ce31375410: ;   {runtime_call g1_post_barrier_slow}
+  0x000001ce31375410: 24e8 6a5e | 0107 e909 | f2ff ff8b | 7a14 48c1 | e703 4883 | ff00 0f84 | 6ef4 ffff | 4889 3c24 
+  0x000001ce31375430: ;   {runtime_call g1_pre_barrier_slow}
+  0x000001ce31375430: e84b 5b01 | 07e9 60f4 | ffff 4883 | fe00 0f84 | 7bf4 ffff | 4889 1424 
+
+  0x000001ce31375448: ;   {runtime_call g1_post_barrier_slow}
+  0x000001ce31375448: e833 5e01 | 07e9 6df4 
+
+  0x000001ce31375450: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce31375450: ffff e849 
+
+  0x000001ce31375454: ; ImmutableOopMap {rdx=Oop [64]=Oop rsi=Oop }
+                      ;*invokeinterface invoke {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@156 (line 408)
+  0x000001ce31375454: 0401 078b | 4214 48c1 | e003 4883 | f800 0f84 | d7f5 ffff | 4889 0424 
+
+  0x000001ce3137546c: ;   {runtime_call g1_pre_barrier_slow}
+  0x000001ce3137546c: e80f 5b01 | 07e9 c9f5 | ffff 4883 | f800 0f84 | e9f5 ffff | 4889 1424 
+
+  0x000001ce31375484: ;   {runtime_call g1_post_barrier_slow}
+  0x000001ce31375484: e8f7 5d01 | 07e9 dbf5 
+
+  0x000001ce3137548c: ;   {metadata({method} {0x000001ce4e041b08} 'escapeThrowable' '(Ljava/lang/Throwable;)Ljava/lang/Object;' in 'org/jetbrains/kotlin/utils/WrappedValues')}
+  0x000001ce3137548c: ffff 49ba | 001b 044e | ce01 0000 | 4c89 5424 | 0848 c704 | 24ff ffff 
+
+  0x000001ce313754a4: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ce313754a4: ffe8 d654 
+
+  0x000001ce313754a8: ; ImmutableOopMap {rdx=Oop [64]=Oop rax=Oop [104]=Oop }
+                      ;*synchronization entry
+                      ; - org.jetbrains.kotlin.utils.WrappedValues::escapeThrowable@-1
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@220 (line 426)
+  0x000001ce313754a8: 0107 e9b4 
+
+  0x000001ce313754ac: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce313754ac: f6ff ffe8 
+
+  0x000001ce313754b0: ; ImmutableOopMap {[64]=Oop [104]=Oop }
+                      ;*new {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.utils.WrappedValues::escapeThrowable@8 (line 67)
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@220 (line 426)
+  0x000001ce313754b0: ec03 0107 
+
+  0x000001ce313754b4: ;   {runtime_call fast_new_instance_init_check Runtime1 stub}
+  0x000001ce313754b4: 488b d2e8 
+
+  0x000001ce313754b8: ; ImmutableOopMap {[64]=Oop [104]=Oop }
+                      ;*new {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.utils.WrappedValues::escapeThrowable@8 (line 67)
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@220 (line 426)
+  0x000001ce313754b8: c40f 0107 | e954 f7ff 
+
+  0x000001ce313754c0: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce313754c0: ffe8 da03 
+
+  0x000001ce313754c4: ; ImmutableOopMap {[96]=Oop }
+                      ;*getfield lock {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@178 (line 432)
+                      ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce313754c4: 0107 e8d5 
+
+  0x000001ce313754c8: ; ImmutableOopMap {[96]=Oop rdx=Oop }
+                      ;*invokeinterface unlock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@181 (line 432)
+                      ;   {internal_word}
+  0x000001ce313754c8: 0301 0749 | ba21 4d37 | 31ce 0100 | 004d 8997 | 6803 0000 
+
+  0x000001ce313754dc: ;   {runtime_call SafepointBlob}
+  0x000001ce313754dc: e91f 25f7 
+
+  0x000001ce313754e0: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce313754e0: 06e8 ba03 
+
+  0x000001ce313754e4: ; ImmutableOopMap {[120]=Oop }
+                      ;*getfield lock {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@135 (line 432)
+                      ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce313754e4: 0107 e8b5 
+
+  0x000001ce313754e8: ; ImmutableOopMap {[120]=Oop rdx=Oop }
+                      ;*invokeinterface unlock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@138 (line 432)
+                      ;   {internal_word}
+  0x000001ce313754e8: 0301 0749 | ba21 4e37 | 31ce 0100 | 004d 8997 | 6803 0000 
+
+  0x000001ce313754fc: ;   {runtime_call SafepointBlob}
+  0x000001ce313754fc: e9ff 24f7 
+
+  0x000001ce31375500: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce31375500: 06e8 9a03 
+
+  0x000001ce31375504: ; ImmutableOopMap {[128]=Oop }
+                      ;*getfield lock {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@96 (line 432)
+                      ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce31375504: 0107 e895 
+
+  0x000001ce31375508: ; ImmutableOopMap {[128]=Oop rdx=Oop }
+                      ;*invokeinterface unlock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@99 (line 432)
+                      ;   {internal_word}
+  0x000001ce31375508: 0301 0749 | ba24 4f37 | 31ce 0100 | 004d 8997 | 6803 0000 
+
+  0x000001ce3137551c: ;   {runtime_call SafepointBlob}
+  0x000001ce3137551c: e9df 24f7 
+
+  0x000001ce31375520: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce31375520: 06e8 7a03 
+
+  0x000001ce31375524: ; ImmutableOopMap {[136]=Oop }
+                      ;*getfield lock {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@50 (line 432)
+                      ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce31375524: 0107 e875 
+
+  0x000001ce31375528: ; ImmutableOopMap {[136]=Oop rdx=Oop }
+                      ;*invokeinterface unlock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@53 (line 432)
+                      ;   {internal_word}
+  0x000001ce31375528: 0301 0749 | ba24 5037 | 31ce 0100 | 004d 8997 | 6803 0000 
+
+  0x000001ce3137553c: ;   {runtime_call SafepointBlob}
+  0x000001ce3137553c: e9bf 24f7 
+
+  0x000001ce31375540: ;   {internal_word}
+  0x000001ce31375540: 0649 ba54 | 5037 31ce | 0100 004d | 8997 6803 
+
+  0x000001ce31375550: ;   {runtime_call SafepointBlob}
+  0x000001ce31375550: 0000 e9a9 | 24f7 0644 | 8b42 1449 | c1e0 0349 | 83f8 000f | 8408 fbff | ff4c 8904 
+
+  0x000001ce3137556c: ;   {runtime_call g1_pre_barrier_slow}
+  0x000001ce3137556c: 24e8 0e5a | 0107 e9fa | faff ff48 | 83f8 000f | 8415 fbff | ff48 8914 
+
+  0x000001ce31375584: ;   {runtime_call g1_post_barrier_slow}
+  0x000001ce31375584: 24e8 f65c | 0107 e907 
+
+  0x000001ce3137558c: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce3137558c: fbff ffe8 
+
+  0x000001ce31375590: ; ImmutableOopMap {[104]=Oop rdx=Oop [64]=Oop }
+                      ;*getfield exceptionHandlingStrategy {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.jetbrains.kotlin.storage.LockBasedStorageManager::access$100@1 (line 34)
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@230 (line 428)
+  0x000001ce31375590: 0c03 0107 
+
+  0x000001ce31375594: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce31375594: e807 0301 
+
+  0x000001ce31375598: ; ImmutableOopMap {[104]=Oop rdx=Oop [64]=Oop rsi=Oop }
+                      ;*invokeinterface handleException {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@234 (line 428)
+                      ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce31375598: 07e8 0203 
+
+  0x000001ce3137559c: ; ImmutableOopMap {[64]=Oop rax=Oop }
+                      ;*athrow {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@239 (line 428)
+  0x000001ce3137559c: 0107 8b7e | 1448 c1e7 | 0348 83ff | 000f 84f2 | fbff ff48 
+
+  0x000001ce313755b0: ;   {runtime_call g1_pre_barrier_slow}
+  0x000001ce313755b0: 893c 24e8 | c859 0107 | e9e4 fbff | ff48 83fa | 000f 84ff | fbff ff48 
+
+  0x000001ce313755c8: ;   {runtime_call g1_post_barrier_slow}
+  0x000001ce313755c8: 8934 24e8 | b05c 0107 | e9f1 fbff | ff48 8904 
+
+  0x000001ce313755d8: ;   {runtime_call throw_class_cast_exception Runtime1 stub}
+  0x000001ce313755d8: 24e8 c226 
+
+  0x000001ce313755dc: ; ImmutableOopMap {rsi=Oop [64]=Oop }
+                      ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@204 (line 421)
+                      ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce313755dc: 0107 e8bd 
+
+  0x000001ce313755e0: ; ImmutableOopMap {rsi=Oop [64]=Oop rax=Oop }
+                      ;*athrow {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@207 (line 421)
+                      ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce313755e0: 0201 07e8 
+
+  0x000001ce313755e4: ; ImmutableOopMap {[144]=Oop }
+                      ;*getfield lock {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@246 (line 432)
+  0x000001ce313755e4: b802 0107 
+
+  0x000001ce313755e8: ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000001ce313755e8: e8b3 0201 
+
+  0x000001ce313755ec: ; ImmutableOopMap {[144]=Oop rdx=Oop }
+                      ;*invokeinterface unlock {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedLazyValue::invoke@249 (line 432)
+  0x000001ce313755ec: 0790 9049 | 8b87 e003 | 0000 49c7 | 87e0 0300 | 0000 0000 | 0049 c787 | e803 0000 | 0000 0000 
+  0x000001ce3137560c: 4881 c4a0 | 0000 005d 
+
+  0x000001ce31375614: ;   {runtime_call unwind_exception Runtime1 stub}
+  0x000001ce31375614: e9e7 22f8 | 06f4 f4f4 | f4f4 f4f4 
+[Stub Code]
+  0x000001ce31375620: ;   {no_reloc}
+  0x000001ce31375620: 0f1f 4400 
+
+  0x000001ce31375624: ;   {static_stub}
+  0x000001ce31375624: 0048 bb00 | 0000 0000 
+
+  0x000001ce3137562c: ;   {runtime_call}
+  0x000001ce3137562c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375634: ;   {static_stub}
+  0x000001ce31375634: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137563c: ;   {runtime_call}
+  0x000001ce3137563c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375644: ;   {static_stub}
+  0x000001ce31375644: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137564c: ;   {runtime_call}
+  0x000001ce3137564c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375654: ;   {static_stub}
+  0x000001ce31375654: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137565c: ;   {runtime_call}
+  0x000001ce3137565c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375664: ;   {static_stub}
+  0x000001ce31375664: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137566c: ;   {runtime_call}
+  0x000001ce3137566c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375674: ;   {static_stub}
+  0x000001ce31375674: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137567c: ;   {runtime_call}
+  0x000001ce3137567c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375684: ;   {static_stub}
+  0x000001ce31375684: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137568c: ;   {runtime_call}
+  0x000001ce3137568c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375694: ;   {static_stub}
+  0x000001ce31375694: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137569c: ;   {runtime_call}
+  0x000001ce3137569c: 0000 00e9 | fbff ffff 
+
+  0x000001ce313756a4: ;   {static_stub}
+  0x000001ce313756a4: 9048 bb00 | 0000 0000 
+
+  0x000001ce313756ac: ;   {runtime_call}
+  0x000001ce313756ac: 0000 00e9 | fbff ffff 
+
+  0x000001ce313756b4: ;   {static_stub}
+  0x000001ce313756b4: 9048 bb00 | 0000 0000 
+
+  0x000001ce313756bc: ;   {runtime_call}
+  0x000001ce313756bc: 0000 00e9 | fbff ffff 
+
+  0x000001ce313756c4: ;   {static_stub}
+  0x000001ce313756c4: 9048 bb00 | 0000 0000 
+
+  0x000001ce313756cc: ;   {runtime_call}
+  0x000001ce313756cc: 0000 00e9 | fbff ffff 
+
+  0x000001ce313756d4: ;   {static_stub}
+  0x000001ce313756d4: 9048 bb00 | 0000 0000 
+
+  0x000001ce313756dc: ;   {runtime_call}
+  0x000001ce313756dc: 0000 00e9 | fbff ffff 
+
+  0x000001ce313756e4: ;   {static_stub}
+  0x000001ce313756e4: 9048 bb00 | 0000 0000 
+
+  0x000001ce313756ec: ;   {runtime_call}
+  0x000001ce313756ec: 0000 00e9 | fbff ffff 
+
+  0x000001ce313756f4: ;   {static_stub}
+  0x000001ce313756f4: 9048 bb00 | 0000 0000 
+
+  0x000001ce313756fc: ;   {runtime_call}
+  0x000001ce313756fc: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375704: ;   {static_stub}
+  0x000001ce31375704: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137570c: ;   {runtime_call}
+  0x000001ce3137570c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375714: ;   {static_stub}
+  0x000001ce31375714: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137571c: ;   {runtime_call}
+  0x000001ce3137571c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375724: ;   {static_stub}
+  0x000001ce31375724: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137572c: ;   {runtime_call}
+  0x000001ce3137572c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375734: ;   {static_stub}
+  0x000001ce31375734: 9048 bbd0 | 1c04 4ece 
+
+  0x000001ce3137573c: ;   {runtime_call I2C/C2I adapters}
+  0x000001ce3137573c: 0100 00e9 | 1506 f706 
+
+  0x000001ce31375744: ;   {static_stub}
+  0x000001ce31375744: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137574c: ;   {runtime_call}
+  0x000001ce3137574c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31375754: ;   {static_stub}
+  0x000001ce31375754: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137575c: ;   {runtime_call}
+  0x000001ce3137575c: 0000 00e9 | fbff ffff 
+[Exception Handler]
+  0x000001ce31375764: ;   {runtime_call handle_exception_from_callee Runtime1 stub}
+  0x000001ce31375764: e817 1f01 
+
+  0x000001ce31375768: ;   {external_word}
+  0x000001ce31375768: 0748 b9a0 | 7da5 c9fe | 7f00 0048 
+
+  0x000001ce31375774: ;   {runtime_call}
+  0x000001ce31375774: 83e4 f049 | baf0 e46d | c9fe 7f00 | 0041 ffd2 
+
+  0x000001ce31375784: ;   {section_word}
+  0x000001ce31375784: f449 ba85 | 5737 31ce | 0100 0041 
+
+  0x000001ce31375790: ;   {runtime_call DeoptimizationBlob}
+  0x000001ce31375790: 52e9 0a15 | f706 f4f4 
+[/MachCode]
+
+
+Compiled method (c1)    2278 3168       3       org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedNotNullLazyValue::invoke (35 bytes)
+ total in heap  [0x000001ce31376010,0x000001ce31376408] = 1016
+ relocation     [0x000001ce31376168,0x000001ce313761b8] = 80
+ main code      [0x000001ce313761c0,0x000001ce31376320] = 352
+ stub code      [0x000001ce31376320,0x000001ce31376378] = 88
+ oops           [0x000001ce31376378,0x000001ce31376380] = 8
+ metadata       [0x000001ce31376380,0x000001ce31376388] = 8
+ scopes data    [0x000001ce31376388,0x000001ce313763b0] = 40
+ scopes pcs     [0x000001ce313763b0,0x000001ce31376400] = 80
+ dependencies   [0x000001ce31376400,0x000001ce31376408] = 8
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Entry Point]
+  # {method} {0x000001ce4eaf1f00} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedNotNullLazyValue'
+  #           [sp+0x40]  (sp of caller)
+  0x000001ce313761c0: 448b 5208 | 49bb 0000 | 0000 0800 | 0000 4d03 | d34c 3bd0 
+
+  0x000001ce313761d4: ;   {runtime_call ic_miss_stub}
+  0x000001ce313761d4: 0f85 a6ae | f606 660f | 1f44 0000 
+[Verified Entry Point]
+  0x000001ce313761e0: 8984 2400 | 90ff ff55 | 4883 ec30 
+
+  0x000001ce313761ec: ;   {metadata(method data for {method} {0x000001ce4eaf1f00} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedNotNullLazyValue')}
+  0x000001ce313761ec: 48be a880 | 744f ce01 | 0000 8bbe | cc00 0000 | 83c7 0289 | becc 0000 | 0081 e7fe | 0700 0083 
+  0x000001ce3137620c: ff00 0f84 | a800 0000 
+
+  0x000001ce31376214: ;   {metadata(method data for {method} {0x000001ce4eaf1f00} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedNotNullLazyValue')}
+  0x000001ce31376214: 488b f248 | bfa8 8074 | 4fce 0100 | 0048 8387 | 1001 0000 | 0166 0f1f 
+
+  0x000001ce3137622c: ;   {optimized virtual_call}
+  0x000001ce3137622c: 4400 00e8 
+
+  0x000001ce31376230: ; ImmutableOopMap {}
+                      ;*invokespecial invoke {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedNotNullLazyValue::invoke@1 (line 527)
+  0x000001ce31376230: ecdf ffff 
+
+  0x000001ce31376234: ;   {metadata(method data for {method} {0x000001ce4eaf1f00} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedNotNullLazyValue')}
+  0x000001ce31376234: 48ba a880 | 744f ce01 | 0000 ff82 | 2001 0000 | 4883 f800 
+
+  0x000001ce31376248: ;   {metadata(method data for {method} {0x000001ce4eaf1f00} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedNotNullLazyValue')}
+  0x000001ce31376248: 48ba a880 | 744f ce01 | 0000 48be | 7001 0000 | 0000 0000 | 0f85 0a00 | 0000 48be | 8001 0000 
+  0x000001ce31376268: 0000 0000 | 488b 3c32 | 488d 7f01 | 4889 3c32 | 0f85 2b00 | 0000 4889 
+
+  0x000001ce31376280: ;   {metadata(method data for {method} {0x000001ce4eaf1f00} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedNotNullLazyValue')}
+  0x000001ce31376280: 4424 2048 | baa8 8074 | 4fce 0100 | 0048 8382 | 9001 0000 | 01ba 0200 | 0000 0f1f 
+
+  0x000001ce3137629c: ;   {static_call}
+  0x000001ce3137629c: 4400 00e8 
+
+  0x000001ce313762a0: ; ImmutableOopMap {[32]=Oop }
+                      ;*invokestatic $$$reportNull$$$0 {reexecute=0 rethrow=0 return_oop=0}
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedNotNullLazyValue::invoke@31 (line 529)
+  0x000001ce313762a0: dcb6 f606 | 488b 4424 | 2048 83c4 
+
+  0x000001ce313762ac: ;   {poll_return}
+  0x000001ce313762ac: 305d 493b | a750 0300 | 000f 8722 | 0000 00c3 
+
+  0x000001ce313762bc: ;   {metadata({method} {0x000001ce4eaf1f00} 'invoke' '()Ljava/lang/Object;' in 'org/jetbrains/kotlin/storage/LockBasedStorageManager$LockBasedNotNullLazyValue')}
+  0x000001ce313762bc: 49ba f81e | af4e ce01 | 0000 4c89 | 5424 0848 | c704 24ff 
+
+  0x000001ce313762d0: ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000001ce313762d0: ffff ffe8 
+
+  0x000001ce313762d4: ; ImmutableOopMap {rdx=Oop }
+                      ;*synchronization entry
+                      ; - org.jetbrains.kotlin.storage.LockBasedStorageManager$LockBasedNotNullLazyValue::invoke@-1 (line 527)
+  0x000001ce313762d4: a846 0107 | e937 ffff 
+
+  0x000001ce313762dc: ;   {internal_word}
+  0x000001ce313762dc: ff49 baae | 6237 31ce | 0100 004d | 8997 6803 
+
+  0x000001ce313762ec: ;   {runtime_call SafepointBlob}
+  0x000001ce313762ec: 0000 e90d | 17f7 0690 | 9049 8b87 | e003 0000 | 49c7 87e0 | 0300 0000 | 0000 0049 | c787 e803 
+  0x000001ce3137630c: 0000 0000 | 0000 4883 
+
+  0x000001ce31376314: ;   {runtime_call unwind_exception Runtime1 stub}
+  0x000001ce31376314: c430 5de9 | e415 f806 | f4f4 f4f4 
+[Stub Code]
+  0x000001ce31376320: ;   {no_reloc}
+  0x000001ce31376320: 0f1f 4400 
+
+  0x000001ce31376324: ;   {static_stub}
+  0x000001ce31376324: 0048 bb00 | 0000 0000 
+
+  0x000001ce3137632c: ;   {runtime_call}
+  0x000001ce3137632c: 0000 00e9 | fbff ffff 
+
+  0x000001ce31376334: ;   {static_stub}
+  0x000001ce31376334: 9048 bb00 | 0000 0000 
+
+  0x000001ce3137633c: ;   {runtime_call}
+  0x000001ce3137633c: 0000 00e9 | fbff ffff 
+[Exception Handler]
+  0x000001ce31376344: ;   {runtime_call handle_exception_from_callee Runtime1 stub}
+  0x000001ce31376344: e837 1301 
+
+  0x000001ce31376348: ;   {external_word}
+  0x000001ce31376348: 0748 b9a0 | 7da5 c9fe | 7f00 0048 
+
+  0x000001ce31376354: ;   {runtime_call}
+  0x000001ce31376354: 83e4 f049 | baf0 e46d | c9fe 7f00 | 0041 ffd2 
+
+  0x000001ce31376364: ;   {section_word}
+  0x000001ce31376364: f449 ba65 | 6337 31ce | 0100 0041 
+
+  0x000001ce31376370: ;   {runtime_call DeoptimizationBlob}
+  0x000001ce31376370: 52e9 2a09 | f706 f4f4 
+[/MachCode]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000001ce532e0e30, length=14, elements={
+0x000001ce2d87e0e0, 0x000001ce4c188800, 0x000001ce4c189680, 0x000001ce4c78f820,
+0x000001ce4c7902f0, 0x000001ce4c790cb0, 0x000001ce4c7ad400, 0x000001ce4c7ae000,
+0x000001ce4c7b0920, 0x000001ce4c7b1320, 0x000001ce4c92bfb0, 0x000001ce4c9409e0,
+0x000001ce4c9d0350, 0x000001ce53361860
+}
+
+Java Threads: ( => current thread )
+=>0x000001ce2d87e0e0 JavaThread "main" [_thread_in_vm, id=2816, stack(0x000000af4c100000,0x000000af4c200000)]
+  0x000001ce4c188800 JavaThread "Reference Handler" daemon [_thread_blocked, id=9032, stack(0x000000af4c800000,0x000000af4c900000)]
+  0x000001ce4c189680 JavaThread "Finalizer" daemon [_thread_blocked, id=9644, stack(0x000000af4c900000,0x000000af4ca00000)]
+  0x000001ce4c78f820 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=11172, stack(0x000000af4ca00000,0x000000af4cb00000)]
+  0x000001ce4c7902f0 JavaThread "Attach Listener" daemon [_thread_blocked, id=12676, stack(0x000000af4cb00000,0x000000af4cc00000)]
+  0x000001ce4c790cb0 JavaThread "Service Thread" daemon [_thread_blocked, id=2548, stack(0x000000af4cc00000,0x000000af4cd00000)]
+  0x000001ce4c7ad400 JavaThread "Monitor Deflation Thread" daemon [_thread_blocked, id=15144, stack(0x000000af4cd00000,0x000000af4ce00000)]
+  0x000001ce4c7ae000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=10092, stack(0x000000af4ce00000,0x000000af4cf00000)]
+  0x000001ce4c7b0920 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=9000, stack(0x000000af4cf00000,0x000000af4d000000)]
+  0x000001ce4c7b1320 JavaThread "Sweeper thread" daemon [_thread_blocked, id=11148, stack(0x000000af4d000000,0x000000af4d100000)]
+  0x000001ce4c92bfb0 JavaThread "Notification Thread" daemon [_thread_blocked, id=6196, stack(0x000000af4d100000,0x000000af4d200000)]
+  0x000001ce4c9409e0 JavaThread "Common-Cleaner" daemon [_thread_blocked, id=1484, stack(0x000000af4d300000,0x000000af4d400000)]
+  0x000001ce4c9d0350 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=6404, stack(0x000000af4d400000,0x000000af4d500000)]
+  0x000001ce53361860 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=9836, stack(0x000000af4e000000,0x000000af4e100000)]
+
+Other Threads:
+  0x000001ce4c181ad0 VMThread "VM Thread" [stack: 0x000000af4c700000,0x000000af4c800000] [id=6328]
+  0x000001ce4c92e4a0 WatcherThread [stack: 0x000000af4d200000,0x000000af4d300000] [id=3176]
+  0x000001ce2d8e7670 GCTaskThread "GC Thread#0" [stack: 0x000000af4c200000,0x000000af4c300000] [id=2204]
+  0x000001ce513c5280 GCTaskThread "GC Thread#1" [stack: 0x000000af4d500000,0x000000af4d600000] [id=9660]
+  0x000001ce513c5540 GCTaskThread "GC Thread#2" [stack: 0x000000af4d600000,0x000000af4d700000] [id=7784]
+  0x000001ce513c5800 GCTaskThread "GC Thread#3" [stack: 0x000000af4d700000,0x000000af4d800000] [id=10816]
+  0x000001ce513c5ac0 GCTaskThread "GC Thread#4" [stack: 0x000000af4d800000,0x000000af4d900000] [id=11864]
+  0x000001ce513c5d80 GCTaskThread "GC Thread#5" [stack: 0x000000af4d900000,0x000000af4da00000] [id=7664]
+  0x000001ce51c2ac30 GCTaskThread "GC Thread#6" [stack: 0x000000af4da00000,0x000000af4db00000] [id=3272]
+  0x000001ce51c97f20 GCTaskThread "GC Thread#7" [stack: 0x000000af4db00000,0x000000af4dc00000] [id=7488]
+  0x000001ce51c981e0 GCTaskThread "GC Thread#8" [stack: 0x000000af4dc00000,0x000000af4dd00000] [id=1556]
+  0x000001ce51f944a0 GCTaskThread "GC Thread#9" [stack: 0x000000af4df00000,0x000000af4e000000] [id=5912]
+  0x000001ce2d8f84c0 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000af4c300000,0x000000af4c400000] [id=13280]
+  0x000001ce2d8fb6a0 ConcurrentGCThread "G1 Conc#0" [stack: 0x000000af4c400000,0x000000af4c500000] [id=8916]
+  0x000001ce51c2a430 ConcurrentGCThread "G1 Conc#1" [stack: 0x000000af4dd00000,0x000000af4de00000] [id=15000]
+  0x000001ce51c2a6f0 ConcurrentGCThread "G1 Conc#2" [stack: 0x000000af4de00000,0x000000af4df00000] [id=14420]
+  0x000001ce2d93d790 ConcurrentGCThread "G1 Refine#0" [stack: 0x000000af4c500000,0x000000af4c600000] [id=9432]
+  0x000001ce51cec880 ConcurrentGCThread "G1 Refine#1" [stack: 0x000000af4e100000,0x000000af4e200000] [id=11812]
+  0x000001ce524ab450 ConcurrentGCThread "G1 Refine#2" [stack: 0x000000af4e200000,0x000000af4e300000] [id=11644]
+  0x000001ce527c8820 ConcurrentGCThread "G1 Refine#3" [stack: 0x000000af4e300000,0x000000af4e400000] [id=1684]
+  0x000001ce2d93e1c0 ConcurrentGCThread "G1 Service" [stack: 0x000000af4c600000,0x000000af4c700000] [id=15312]
+
+Threads with active compile tasks:
+
+VM state: not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x0000000701000000, size: 4080 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) not mapped
+Compressed class space mapped at: 0x0000000800000000-0x0000000840000000, reserved size: 1073741824
+Narrow klass base: 0x0000000800000000, Narrow klass shift: 0, Narrow klass range: 0x40000000
+
+GC Precious Log:
+ CPUs: 12 total, 12 available
+ Memory: 16315M
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Enabled (Zero based)
+ Heap Region Size: 2M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 256M
+ Heap Max Capacity: 4080M
+ Pre-touch: Disabled
+ Parallel Workers: 10
+ Concurrent Workers: 3
+ Concurrent Refinement Workers: 10
+ Periodic GC: Disabled
+
+Heap:
+ garbage-first heap   total 86016K, used 40053K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 8 young (16384K), 1 survivors (2048K)
+ Metaspace       used 53482K, committed 53696K, reserved 1114112K
+  class space    used 6511K, committed 6592K, reserved 1048576K
+
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, OA=open archive, CA=closed archive, TAMS=top-at-mark-start (previous, next)
+|   0|0x0000000701000000, 0x0000000701200000, 0x0000000701200000|100%|HS|  |TAMS 0x0000000701200000, 0x0000000701000000| Complete 
+|   1|0x0000000701200000, 0x0000000701400000, 0x0000000701400000|100%|HC|  |TAMS 0x0000000701400000, 0x0000000701200000| Complete 
+|   2|0x0000000701400000, 0x0000000701600000, 0x0000000701600000|100%|HS|  |TAMS 0x0000000701400000, 0x0000000701400000| Complete 
+|   3|0x0000000701600000, 0x0000000701800000, 0x0000000701800000|100%| O|  |TAMS 0x0000000701800000, 0x0000000701600000| Untracked 
+|   4|0x0000000701800000, 0x0000000701a00000, 0x0000000701a00000|100%| O|  |TAMS 0x0000000701a00000, 0x0000000701800000| Untracked 
+|   5|0x0000000701a00000, 0x0000000701bcfc00, 0x0000000701c00000| 90%| O|  |TAMS 0x0000000701bcfc00, 0x0000000701a00000| Untracked 
+|   6|0x0000000701c00000, 0x0000000701e00000, 0x0000000701e00000|100%| O|  |TAMS 0x0000000701e00000, 0x0000000701c00000| Untracked 
+|   7|0x0000000701e00000, 0x0000000702000000, 0x0000000702000000|100%| O|  |TAMS 0x0000000702000000, 0x0000000701e00000| Untracked 
+|   8|0x0000000702000000, 0x0000000702200000, 0x0000000702200000|100%| O|  |TAMS 0x0000000702200000, 0x0000000702000000| Untracked 
+|   9|0x0000000702200000, 0x0000000702400000, 0x0000000702400000|100%| O|  |TAMS 0x0000000702200000, 0x0000000702200000| Untracked 
+|  10|0x0000000702400000, 0x0000000702600000, 0x0000000702600000|100%| O|  |TAMS 0x0000000702400000, 0x0000000702400000| Untracked 
+|  11|0x0000000702600000, 0x0000000702600000, 0x0000000702800000|  0%| F|  |TAMS 0x0000000702600000, 0x0000000702600000| Untracked 
+|  12|0x0000000702800000, 0x0000000702800000, 0x0000000702a00000|  0%| F|  |TAMS 0x0000000702800000, 0x0000000702800000| Untracked 
+|  13|0x0000000702a00000, 0x0000000702c00000, 0x0000000702c00000|100%| O|  |TAMS 0x0000000702a00000, 0x0000000702a00000| Untracked 
+|  14|0x0000000702c00000, 0x0000000702e00000, 0x0000000702e00000|100%| O|  |TAMS 0x0000000702c00000, 0x0000000702c00000| Untracked 
+|  15|0x0000000702e00000, 0x0000000702e00000, 0x0000000703000000|  0%| F|  |TAMS 0x0000000702e00000, 0x0000000702e00000| Untracked 
+|  16|0x0000000703000000, 0x0000000703000000, 0x0000000703200000|  0%| F|  |TAMS 0x0000000703000000, 0x0000000703000000| Untracked 
+|  17|0x0000000703200000, 0x0000000703200000, 0x0000000703400000|  0%| F|  |TAMS 0x0000000703200000, 0x0000000703200000| Untracked 
+|  18|0x0000000703400000, 0x0000000703400000, 0x0000000703600000|  0%| F|  |TAMS 0x0000000703400000, 0x0000000703400000| Untracked 
+|  19|0x0000000703600000, 0x0000000703600000, 0x0000000703800000|  0%| F|  |TAMS 0x0000000703600000, 0x0000000703600000| Untracked 
+|  20|0x0000000703800000, 0x0000000703800000, 0x0000000703a00000|  0%| F|  |TAMS 0x0000000703800000, 0x0000000703800000| Untracked 
+|  21|0x0000000703a00000, 0x0000000703b4d818, 0x0000000703c00000| 65%| S|CS|TAMS 0x0000000703a00000, 0x0000000703a00000| Complete 
+|  22|0x0000000703c00000, 0x0000000703c00000, 0x0000000703e00000|  0%| F|  |TAMS 0x0000000703c00000, 0x0000000703c00000| Untracked 
+|  23|0x0000000703e00000, 0x0000000703e00000, 0x0000000704000000|  0%| F|  |TAMS 0x0000000703e00000, 0x0000000703e00000| Untracked 
+|  24|0x0000000704000000, 0x0000000704000000, 0x0000000704200000|  0%| F|  |TAMS 0x0000000704000000, 0x0000000704000000| Untracked 
+|  25|0x0000000704200000, 0x0000000704200000, 0x0000000704400000|  0%| F|  |TAMS 0x0000000704200000, 0x0000000704200000| Untracked 
+|  26|0x0000000704400000, 0x0000000704400000, 0x0000000704600000|  0%| F|  |TAMS 0x0000000704400000, 0x0000000704400000| Untracked 
+|  27|0x0000000704600000, 0x0000000704600000, 0x0000000704800000|  0%| F|  |TAMS 0x0000000704600000, 0x0000000704600000| Untracked 
+|  28|0x0000000704800000, 0x0000000704800000, 0x0000000704a00000|  0%| F|  |TAMS 0x0000000704800000, 0x0000000704800000| Untracked 
+|  29|0x0000000704a00000, 0x0000000704a00000, 0x0000000704c00000|  0%| F|  |TAMS 0x0000000704a00000, 0x0000000704a00000| Untracked 
+|  30|0x0000000704c00000, 0x0000000704c00000, 0x0000000704e00000|  0%| F|  |TAMS 0x0000000704c00000, 0x0000000704c00000| Untracked 
+|  31|0x0000000704e00000, 0x0000000704e00000, 0x0000000705000000|  0%| F|  |TAMS 0x0000000704e00000, 0x0000000704e00000| Untracked 
+|  32|0x0000000705000000, 0x0000000705000000, 0x0000000705200000|  0%| F|  |TAMS 0x0000000705000000, 0x0000000705000000| Untracked 
+|  33|0x0000000705200000, 0x0000000705200000, 0x0000000705400000|  0%| F|  |TAMS 0x0000000705200000, 0x0000000705200000| Untracked 
+|  34|0x0000000705400000, 0x0000000705400000, 0x0000000705600000|  0%| F|  |TAMS 0x0000000705400000, 0x0000000705400000| Untracked 
+|  35|0x0000000705600000, 0x0000000705800000, 0x0000000705800000|100%| E|  |TAMS 0x0000000705600000, 0x0000000705600000| Complete 
+|  36|0x0000000705800000, 0x0000000705a00000, 0x0000000705a00000|100%| E|CS|TAMS 0x0000000705800000, 0x0000000705800000| Complete 
+|  37|0x0000000705a00000, 0x0000000705c00000, 0x0000000705c00000|100%| E|CS|TAMS 0x0000000705a00000, 0x0000000705a00000| Complete 
+|  38|0x0000000705c00000, 0x0000000705e00000, 0x0000000705e00000|100%| E|CS|TAMS 0x0000000705c00000, 0x0000000705c00000| Complete 
+|  39|0x0000000705e00000, 0x0000000706000000, 0x0000000706000000|100%| E|CS|TAMS 0x0000000705e00000, 0x0000000705e00000| Complete 
+| 106|0x000000070e400000, 0x000000070e600000, 0x000000070e600000|100%| E|CS|TAMS 0x000000070e400000, 0x000000070e400000| Complete 
+| 127|0x0000000710e00000, 0x0000000711000000, 0x0000000711000000|100%| E|CS|TAMS 0x0000000710e00000, 0x0000000710e00000| Complete 
+
+Card table byte_map: [0x000001ce40ac0000,0x000001ce412c0000] _byte_map_base: 0x000001ce3d2b8000
+
+Marking Bits (Prev, Next): (CMBitMap*) 0x000001ce2d8e7c90, (CMBitMap*) 0x000001ce2d8e7cd0
+ Prev Bits: [0x000001ce41ac0000, 0x000001ce45a80000)
+ Next Bits: [0x000001ce45a80000, 0x000001ce49a40000)
+
+Polling page: 0x000001ce2b7a0000
+
+Metaspace:
+
+Usage:
+  Non-class:     45.87 MB used.
+      Class:      6.36 MB used.
+       Both:     52.23 MB used.
+
+Virtual space:
+  Non-class space:       64.00 MB reserved,      46.00 MB ( 72%) committed,  1 nodes.
+      Class space:        1.00 GB reserved,       6.44 MB ( <1%) committed,  1 nodes.
+             Both:        1.06 GB reserved,      52.44 MB (  5%) committed. 
+
+Chunk freelists:
+   Non-Class:  1.67 MB
+       Class:  9.51 MB
+        Both:  11.18 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 58.69 MB
+CDS: off
+MetaspaceReclaimPolicy: balanced
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - new_chunks_are_fully_committed: 0.
+ - uncommit_free_chunks: 1.
+ - use_allocation_guard: 0.
+ - handle_deallocations: 1.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 6.
+num_arena_births: 208.
+num_arena_deaths: 0.
+num_vsnodes_births: 2.
+num_vsnodes_deaths: 0.
+num_space_committed: 838.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 6.
+num_chunks_taken_from_freelist: 1774.
+num_chunk_merges: 6.
+num_chunk_splits: 1498.
+num_chunks_enlarged: 1348.
+num_inconsistent_stats: 0.
+
+CodeHeap 'non-profiled nmethods': size=120000Kb used=1926Kb max_used=1926Kb free=118073Kb
+ bounds [0x000001ce38830000, 0x000001ce38aa0000, 0x000001ce3fd60000]
+CodeHeap 'profiled nmethods': size=120000Kb used=7934Kb max_used=7934Kb free=112065Kb
+ bounds [0x000001ce30d60000, 0x000001ce31520000, 0x000001ce38290000]
+CodeHeap 'non-nmethods': size=5760Kb used=1279Kb max_used=1371Kb free=4480Kb
+ bounds [0x000001ce38290000, 0x000001ce38500000, 0x000001ce38830000]
+ total_blobs=4578 nmethods=3985 adapters=505
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (20 events):
+Event: 2.214 Thread 0x000001ce4c7b0920 nmethod 3974 0x000001ce3151c690 code [0x000001ce3151c820, 0x000001ce3151c918]
+Event: 2.215 Thread 0x000001ce4c7b0920 3977       2       org.jetbrains.kotlin.metadata.ProtoBuf$Class::getTypeParameterCount (10 bytes)
+Event: 2.215 Thread 0x000001ce4c7b0920 nmethod 3977 0x000001ce3151c990 code [0x000001ce3151cb20, 0x000001ce3151cc48]
+Event: 2.215 Thread 0x000001ce4c7b0920 3979       2       java.util.LinkedHashMap::<init> (11 bytes)
+Event: 2.215 Thread 0x000001ce4c7b0920 nmethod 3979 0x000001ce3151cd10 code [0x000001ce3151cec0, 0x000001ce3151d008]
+Event: 2.215 Thread 0x000001ce4c7b0920 3978       2       org.jetbrains.kotlin.metadata.ProtoBuf$PackageFragment::getClass_ (14 bytes)
+Event: 2.215 Thread 0x000001ce4c7b0920 nmethod 3978 0x000001ce3151d110 code [0x000001ce3151d2c0, 0x000001ce3151d428]
+Event: 2.215 Thread 0x000001ce4c7b0920 3980       2       org.jetbrains.kotlin.cli.jvm.compiler.KotlinCliJavaFileManagerImpl$knownClassNamesInPackage$1::invoke (16 bytes)
+Event: 2.215 Thread 0x000001ce4c7b0920 nmethod 3980 0x000001ce3151d510 code [0x000001ce3151d6c0, 0x000001ce3151d868]
+Event: 2.215 Thread 0x000001ce4c7b0920 3981       2       org.jetbrains.kotlin.name.ClassId::isNestedClass (19 bytes)
+Event: 2.215 Thread 0x000001ce4c7b0920 nmethod 3981 0x000001ce3151d990 code [0x000001ce3151db40, 0x000001ce3151dcc8]
+Event: 2.216 Thread 0x000001ce4c7b0920 3982       2       org.jetbrains.kotlin.metadata.jvm.JvmProtoBuf$JvmPropertySignature::getSerializedSize (140 bytes)
+Event: 2.216 Thread 0x000001ce4c7b0920 nmethod 3982 0x000001ce3151de10 code [0x000001ce3151e080, 0x000001ce3151e598]
+Event: 2.216 Thread 0x000001ce4c7b0920 3984       2       org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedClassDescriptor$DeserializedClassTypeConstructor::getParameters (13 bytes)
+Event: 2.216 Thread 0x000001ce4c7b0920 nmethod 3984 0x000001ce3151e990 code [0x000001ce3151eb40, 0x000001ce3151ecc8]
+Event: 2.216 Thread 0x000001ce4c7b0920 3983       1       org.jetbrains.kotlin.serialization.deserialization.DeserializationContext::getTypeTable (5 bytes)
+Event: 2.216 Thread 0x000001ce4c7b0920 nmethod 3983 0x000001ce389fa710 code [0x000001ce389fa8a0, 0x000001ce389fa978]
+Event: 2.217 Thread 0x000001ce53361860 nmethod 3808 0x000001ce389faa10 code [0x000001ce389fac40, 0x000001ce389fb708]
+Event: 2.217 Thread 0x000001ce53361860 3976       4       org.jetbrains.kotlin.protobuf.CodedOutputStream::writeMessage (12 bytes)
+Event: 2.218 Thread 0x000001ce4c7b0920 3986       2       jdk.internal.org.objectweb.asm.Type::getTypeInternal (199 bytes)
+
+GC Heap History (20 events):
+Event: 0.334 GC heap before
+{Heap before GC invocations=0 (full 0):
+ garbage-first heap   total 262144K, used 24576K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 11 young (22528K), 0 survivors (0K)
+ Metaspace       used 12945K, committed 12992K, reserved 1114112K
+  class space    used 1237K, committed 1280K, reserved 1048576K
+}
+Event: 0.335 GC heap after
+{Heap after GC invocations=1 (full 0):
+ garbage-first heap   total 262144K, used 6623K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 2 young (4096K), 2 survivors (4096K)
+ Metaspace       used 12945K, committed 12992K, reserved 1114112K
+  class space    used 1237K, committed 1280K, reserved 1048576K
+}
+Event: 0.702 GC heap before
+{Heap before GC invocations=1 (full 0):
+ garbage-first heap   total 262144K, used 39391K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 19 young (38912K), 2 survivors (4096K)
+ Metaspace       used 21374K, committed 21504K, reserved 1114112K
+  class space    used 2347K, committed 2432K, reserved 1048576K
+}
+Event: 0.705 GC heap after
+{Heap after GC invocations=2 (full 0):
+ garbage-first heap   total 262144K, used 8357K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 3 survivors (6144K)
+ Metaspace       used 21374K, committed 21504K, reserved 1114112K
+  class space    used 2347K, committed 2432K, reserved 1048576K
+}
+Event: 0.944 GC heap before
+{Heap before GC invocations=3 (full 0):
+ garbage-first heap   total 40960K, used 28837K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 14 young (28672K), 3 survivors (6144K)
+ Metaspace       used 28540K, committed 28736K, reserved 1114112K
+  class space    used 3568K, committed 3648K, reserved 1048576K
+}
+Event: 0.947 GC heap after
+{Heap after GC invocations=4 (full 0):
+ garbage-first heap   total 40960K, used 9418K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 3 survivors (6144K)
+ Metaspace       used 28540K, committed 28736K, reserved 1114112K
+  class space    used 3568K, committed 3648K, reserved 1048576K
+}
+Event: 1.044 GC heap before
+{Heap before GC invocations=4 (full 0):
+ garbage-first heap   total 40960K, used 29898K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 12 young (24576K), 3 survivors (6144K)
+ Metaspace       used 29324K, committed 29568K, reserved 1114112K
+  class space    used 3622K, committed 3712K, reserved 1048576K
+}
+Event: 1.051 GC heap after
+{Heap after GC invocations=5 (full 0):
+ garbage-first heap   total 40960K, used 16248K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 2 young (4096K), 2 survivors (4096K)
+ Metaspace       used 29324K, committed 29568K, reserved 1114112K
+  class space    used 3622K, committed 3712K, reserved 1048576K
+}
+Event: 1.184 GC heap before
+{Heap before GC invocations=5 (full 0):
+ garbage-first heap   total 40960K, used 28536K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 8 young (16384K), 2 survivors (4096K)
+ Metaspace       used 32973K, committed 33216K, reserved 1114112K
+  class space    used 4238K, committed 4352K, reserved 1048576K
+}
+Event: 1.190 GC heap after
+{Heap after GC invocations=6 (full 0):
+ garbage-first heap   total 40960K, used 18271K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 32973K, committed 33216K, reserved 1114112K
+  class space    used 4238K, committed 4352K, reserved 1048576K
+}
+Event: 1.270 GC heap before
+{Heap before GC invocations=6 (full 0):
+ garbage-first heap   total 40960K, used 26463K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 6 young (12288K), 1 survivors (2048K)
+ Metaspace       used 34485K, committed 34688K, reserved 1114112K
+  class space    used 4395K, committed 4480K, reserved 1048576K
+}
+Event: 1.274 GC heap after
+{Heap after GC invocations=7 (full 0):
+ garbage-first heap   total 151552K, used 17736K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 34485K, committed 34688K, reserved 1114112K
+  class space    used 4395K, committed 4480K, reserved 1048576K
+}
+Event: 1.319 GC heap before
+{Heap before GC invocations=7 (full 0):
+ garbage-first heap   total 151552K, used 21832K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 4 young (8192K), 1 survivors (2048K)
+ Metaspace       used 35751K, committed 35968K, reserved 1114112K
+  class space    used 4541K, committed 4672K, reserved 1048576K
+}
+Event: 1.321 GC heap after
+{Heap after GC invocations=8 (full 0):
+ garbage-first heap   total 151552K, used 18239K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 35751K, committed 35968K, reserved 1114112K
+  class space    used 4541K, committed 4672K, reserved 1048576K
+}
+Event: 1.713 GC heap before
+{Heap before GC invocations=9 (full 0):
+ garbage-first heap   total 69632K, used 57151K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 21 young (43008K), 1 survivors (2048K)
+ Metaspace       used 44512K, committed 44736K, reserved 1114112K
+  class space    used 5444K, committed 5568K, reserved 1048576K
+}
+Event: 1.719 GC heap after
+{Heap after GC invocations=10 (full 0):
+ garbage-first heap   total 69632K, used 22300K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 3 young (6144K), 3 survivors (6144K)
+ Metaspace       used 44512K, committed 44736K, reserved 1114112K
+  class space    used 5444K, committed 5568K, reserved 1048576K
+}
+Event: 2.051 GC heap before
+{Heap before GC invocations=10 (full 0):
+ garbage-first heap   total 69632K, used 53020K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 17 young (34816K), 3 survivors (6144K)
+ Metaspace       used 52268K, committed 52480K, reserved 1114112K
+  class space    used 6393K, committed 6464K, reserved 1048576K
+}
+Event: 2.058 GC heap after
+{Heap after GC invocations=11 (full 0):
+ garbage-first heap   total 69632K, used 26663K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 2 young (4096K), 2 survivors (4096K)
+ Metaspace       used 52268K, committed 52480K, reserved 1114112K
+  class space    used 6393K, committed 6464K, reserved 1048576K
+}
+Event: 2.125 GC heap before
+{Heap before GC invocations=11 (full 0):
+ garbage-first heap   total 69632K, used 51239K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 14 young (28672K), 2 survivors (4096K)
+ Metaspace       used 52613K, committed 52864K, reserved 1114112K
+  class space    used 6413K, committed 6528K, reserved 1048576K
+}
+Event: 2.128 GC heap after
+{Heap after GC invocations=12 (full 0):
+ garbage-first heap   total 86016K, used 27765K [0x0000000701000000, 0x0000000800000000)
+  region size 2048K, 1 young (2048K), 1 survivors (2048K)
+ Metaspace       used 52613K, committed 52864K, reserved 1114112K
+  class space    used 6413K, committed 6528K, reserved 1048576K
+}
+
+Dll operation events (2 events):
+Event: 0.003 Loaded shared library E:\Android\AndroidStudio\jbr\bin\java.dll
+Event: 0.838 Loaded shared library E:\Android\AndroidStudio\jbr\bin\verify.dll
+
+Deoptimization events (20 events):
+Event: 2.079 Thread 0x000001ce2d87e0e0 DEOPT PACKING pc=0x000001ce310b19be sp=0x000000af4c1fb8c0
+Event: 2.079 Thread 0x000001ce2d87e0e0 DEOPT UNPACKING pc=0x000001ce382e7143 sp=0x000000af4c1fad38 mode 0
+Event: 2.131 Thread 0x000001ce2d87e0e0 DEOPT PACKING pc=0x000001ce31487ce3 sp=0x000000af4c1fc4c0
+Event: 2.131 Thread 0x000001ce2d87e0e0 DEOPT UNPACKING pc=0x000001ce382e7143 sp=0x000000af4c1fb9c8 mode 0
+Event: 2.134 Thread 0x000001ce2d87e0e0 DEOPT PACKING pc=0x000001ce31487ce3 sp=0x000000af4c1fc4c0
+Event: 2.134 Thread 0x000001ce2d87e0e0 DEOPT UNPACKING pc=0x000001ce382e7143 sp=0x000000af4c1fb9c8 mode 0
+Event: 2.143 Thread 0x000001ce2d87e0e0 DEOPT PACKING pc=0x000001ce31487ce3 sp=0x000000af4c1fc4c0
+Event: 2.143 Thread 0x000001ce2d87e0e0 DEOPT UNPACKING pc=0x000001ce382e7143 sp=0x000000af4c1fb9c8 mode 0
+Event: 2.144 Thread 0x000001ce2d87e0e0 DEOPT PACKING pc=0x000001ce31487ce3 sp=0x000000af4c1fc4c0
+Event: 2.144 Thread 0x000001ce2d87e0e0 DEOPT UNPACKING pc=0x000001ce382e7143 sp=0x000000af4c1fb9c8 mode 0
+Event: 2.152 Thread 0x000001ce2d87e0e0 DEOPT PACKING pc=0x000001ce31487ce3 sp=0x000000af4c1fc4c0
+Event: 2.152 Thread 0x000001ce2d87e0e0 DEOPT UNPACKING pc=0x000001ce382e7143 sp=0x000000af4c1fb9c8 mode 0
+Event: 2.155 Thread 0x000001ce2d87e0e0 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000001ce389d8848 relative=0x0000000000000d88
+Event: 2.155 Thread 0x000001ce2d87e0e0 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001ce389d8848 method=org.jetbrains.kotlin.metadata.ProtoBuf$Type.getSerializedSize()I @ 176 c2
+Event: 2.155 Thread 0x000001ce2d87e0e0 DEOPT PACKING pc=0x000001ce389d8848 sp=0x000000af4c1fc3b0
+Event: 2.155 Thread 0x000001ce2d87e0e0 DEOPT UNPACKING pc=0x000001ce382e69a3 sp=0x000000af4c1fc370 mode 2
+Event: 2.215 Thread 0x000001ce2d87e0e0 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000001ce389f4264 relative=0x00000000000019a4
+Event: 2.215 Thread 0x000001ce2d87e0e0 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001ce389f4264 method=org.jetbrains.kotlin.metadata.ProtoBuf$Type.writeTo(Lorg/jetbrains/kotlin/protobuf/CodedOutputStream;)V @ 160 c2
+Event: 2.215 Thread 0x000001ce2d87e0e0 DEOPT PACKING pc=0x000001ce389f4264 sp=0x000000af4c1fbf40
+Event: 2.215 Thread 0x000001ce2d87e0e0 DEOPT UNPACKING pc=0x000001ce382e69a3 sp=0x000000af4c1fbf28 mode 2
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (20 events):
+Event: 0.732 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000702fe8018}: 'int java.lang.invoke.DelegatingMethodHandle$Holder.reinvoke_L(java.lang.Object, java.lang.Object, java.lang.Object, long, int)'> (0x0000000702fe8018) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 0.740 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000702c903d8}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000702c903d8) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 0.742 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000702cb80c0}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object)'> (0x0000000702cb80c0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 0.751 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000702d959d0}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000702d959d0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 0.787 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x00000007028b7d20}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000007028b7d20) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 0.821 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x00000007024734a8}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStaticInit(java.lang.Object, java.lang.Object)'> (0x00000007024734a8) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 0.878 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x00000007021f74a0}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object)'> (0x00000007021f74a0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 0.882 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000701e42dc0}: 'int java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object)'> (0x0000000701e42dc0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 0.891 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000701ed9ed8}: 'java.lang.Object java.lang.invoke.Invokers$Holder.invokeExact_MT(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x0000000701ed9ed8) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 1.148 Thread 0x000001ce2d87e0e0 Implicit null exception at 0x000001ce388499f2 to 0x000001ce3884a04c
+Event: 1.218 Thread 0x000001ce2d87e0e0 Implicit null exception at 0x000001ce3884aef2 to 0x000001ce3884b56c
+Event: 1.241 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x000000070e7a6020}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object, java.lang.Object)'> (0x000000070e7a6020) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 1.598 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000703017ca0}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, java.lang.Object, int)'> (0x0000000703017ca0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 1.676 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000702c0f838}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x0000000702c0f838) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 1.676 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000702c13ec0}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x0000000702c13ec0) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 1.677 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000702c17d30}: 'java.lang.Object java.lang.invoke.Invokers$Holder.linkToTargetMethod(java.lang.Object, java.lang.Object, int, java.lang.Object)'> (0x0000000702c17d30) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 1.948 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x00000007043f3c88}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x00000007043f3c88) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 1.948 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x00000007043fd6c8}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, int)'> (0x00000007043fd6c8) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 1.949 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x0000000704005d90}: 'java.lang.Object java.lang.invoke.Invokers$Holder.linkToTargetMethod(java.lang.Object, java.lang.Object, java.lang.Object, int, java.lang.Object)'> (0x0000000704005d90) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+Event: 2.218 Thread 0x000001ce2d87e0e0 Exception <a 'java/lang/NoSuchMethodError'{0x00000007057f0408}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)'> (0x00000007057f0408) 
+thrown [s\src\hotspot\share\interpreter\linkResolver.cpp, line 771]
+
+VM Operations (20 events):
+Event: 1.764 Executing VM operation: HandshakeAllThreads
+Event: 1.764 Executing VM operation: HandshakeAllThreads done
+Event: 1.809 Executing VM operation: HandshakeAllThreads
+Event: 1.809 Executing VM operation: HandshakeAllThreads done
+Event: 1.818 Executing VM operation: HandshakeAllThreads
+Event: 1.818 Executing VM operation: HandshakeAllThreads done
+Event: 1.851 Executing VM operation: ICBufferFull
+Event: 1.851 Executing VM operation: ICBufferFull done
+Event: 1.892 Executing VM operation: HandshakeAllThreads
+Event: 1.892 Executing VM operation: HandshakeAllThreads done
+Event: 1.963 Executing VM operation: HandshakeAllThreads
+Event: 1.963 Executing VM operation: HandshakeAllThreads done
+Event: 1.970 Executing VM operation: HandshakeAllThreads
+Event: 1.970 Executing VM operation: HandshakeAllThreads done
+Event: 2.051 Executing VM operation: G1CollectForAllocation
+Event: 2.058 Executing VM operation: G1CollectForAllocation done
+Event: 2.125 Executing VM operation: G1CollectForAllocation
+Event: 2.129 Executing VM operation: G1CollectForAllocation done
+Event: 2.202 Executing VM operation: HandshakeAllThreads
+Event: 2.202 Executing VM operation: HandshakeAllThreads done
+
+Events (20 events):
+Event: 1.791 loading class java/util/stream/ReferencePipeline$2$1
+Event: 1.791 loading class java/util/stream/ReferencePipeline$2$1 done
+Event: 1.791 loading class java/util/stream/IntPipeline$1$1
+Event: 1.791 loading class java/util/stream/Sink$ChainedInt
+Event: 1.791 loading class java/util/stream/Sink$OfInt
+Event: 1.791 loading class java/util/function/IntConsumer
+Event: 1.791 loading class java/util/function/IntConsumer done
+Event: 1.791 loading class java/util/stream/Sink$OfInt done
+Event: 1.791 loading class java/util/stream/Sink$ChainedInt done
+Event: 1.791 loading class java/util/stream/IntPipeline$1$1 done
+Event: 1.800 loading class java/util/AbstractList$SubList$1
+Event: 1.800 loading class java/util/AbstractList$SubList$1 done
+Event: 1.854 loading class java/text/StringCharacterIterator
+Event: 1.854 loading class java/text/CharacterIterator
+Event: 1.854 loading class java/text/CharacterIterator done
+Event: 1.854 loading class java/text/StringCharacterIterator done
+Event: 1.932 loading class java/util/function/ToIntFunction
+Event: 1.932 loading class java/util/function/ToIntFunction done
+Event: 1.959 loading class java/util/Collections$SingletonMap
+Event: 1.959 loading class java/util/Collections$SingletonMap done
+
+
+Dynamic libraries:
+0x00007ff651810000 - 0x00007ff65181a000 	E:\Android\AndroidStudio\jbr\bin\java.exe
+0x00007ffefe5d0000 - 0x00007ffefe7c8000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffefd700000 - 0x00007ffefd7c1000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffefbfb0000 - 0x00007ffefc2a6000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffefc360000 - 0x00007ffefc460000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffef71d0000 - 0x00007ffef71e7000 	E:\Android\AndroidStudio\jbr\bin\jli.dll
+0x00007ffee4c40000 - 0x00007ffee4c5b000 	E:\Android\AndroidStudio\jbr\bin\VCRUNTIME140.dll
+0x00007ffefd7d0000 - 0x00007ffefd96f000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffefc300000 - 0x00007ffefc322000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffefd970000 - 0x00007ffefd99b000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffeef8e0000 - 0x00007ffeefb7a000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.4355_none_60b8b9eb71f62e16\COMCTL32.dll
+0x00007ffefbc80000 - 0x00007ffefbd97000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffefc6c0000 - 0x00007ffefc75e000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffefc560000 - 0x00007ffefc5fd000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffefccc0000 - 0x00007ffefccef000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffee6730000 - 0x00007ffee673c000 	E:\Android\AndroidStudio\jbr\bin\vcruntime140_1.dll
+0x00007ffeced30000 - 0x00007ffecedbd000 	E:\Android\AndroidStudio\jbr\bin\msvcp140.dll
+0x00007ffec9120000 - 0x00007ffec9da3000 	E:\Android\AndroidStudio\jbr\bin\server\jvm.dll
+0x00007ffefc610000 - 0x00007ffefc6c0000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffefdc70000 - 0x00007ffefdd10000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffefd0b0000 - 0x00007ffefd1d3000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffefc330000 - 0x00007ffefc357000 	C:\WINDOWS\System32\bcrypt.dll
+0x00007ffefb680000 - 0x00007ffefb6cb000 	C:\WINDOWS\SYSTEM32\POWRPROF.dll
+0x00007ffeef070000 - 0x00007ffeef097000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffefb040000 - 0x00007ffefb049000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffef3f70000 - 0x00007ffef3f7a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffefc8f0000 - 0x00007ffefc95b000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffefb2e0000 - 0x00007ffefb2f2000 	C:\WINDOWS\SYSTEM32\UMPDC.dll
+0x00007ffef8e20000 - 0x00007ffef8e32000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ffefb470000 - 0x00007ffefb47a000 	E:\Android\AndroidStudio\jbr\bin\jimage.dll
+0x00007ffefb6d0000 - 0x00007ffefb8b4000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007ffefb410000 - 0x00007ffefb444000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007ffefc460000 - 0x00007ffefc4e2000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffef8210000 - 0x00007ffef8235000 	E:\Android\AndroidStudio\jbr\bin\java.dll
+0x00007ffefb120000 - 0x00007ffefb138000 	E:\Android\AndroidStudio\jbr\bin\zip.dll
+0x00007ffefdd10000 - 0x00007ffefe47c000 	C:\WINDOWS\System32\SHELL32.dll
+0x00007ffef96b0000 - 0x00007ffef9e4e000 	C:\WINDOWS\SYSTEM32\windows.storage.dll
+0x00007ffefc960000 - 0x00007ffefccb3000 	C:\WINDOWS\System32\combase.dll
+0x00007ffefafa0000 - 0x00007ffefafce000 	C:\WINDOWS\SYSTEM32\Wldp.dll
+0x00007ffefda80000 - 0x00007ffefdb4d000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ffefd650000 - 0x00007ffefd6fd000 	C:\WINDOWS\System32\SHCORE.dll
+0x00007ffefcff0000 - 0x00007ffefd045000 	C:\WINDOWS\System32\shlwapi.dll
+0x00007ffefbbb0000 - 0x00007ffefbbd4000 	C:\WINDOWS\SYSTEM32\profapi.dll
+0x00007ffef8290000 - 0x00007ffef82a9000 	E:\Android\AndroidStudio\jbr\bin\net.dll
+0x00007ffef3070000 - 0x00007ffef317a000 	C:\WINDOWS\SYSTEM32\WINHTTP.dll
+0x00007ffefae70000 - 0x00007ffefaeda000 	C:\WINDOWS\system32\mswsock.dll
+0x00007ffef81f0000 - 0x00007ffef8206000 	E:\Android\AndroidStudio\jbr\bin\nio.dll
+0x00007ffef7990000 - 0x00007ffef79a0000 	E:\Android\AndroidStudio\jbr\bin\verify.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;E:\Android\AndroidStudio\jbr\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.4355_none_60b8b9eb71f62e16;E:\Android\AndroidStudio\jbr\bin\server
+
+VM Arguments:
+java_command: org.jetbrains.kotlin.cli.jvm.K2JVMCompiler @E:\Chernyshevskiy_ProfSoft_2024\TogetherApp\app\build\20240815_2393510217238273874.compiler.options
+java_class_path (initial): E:\Android\gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-compiler-embeddable\1.9.0\2c8c3a7402becca891f12739b3e9fd2dc2adbd7a\kotlin-compiler-embeddable-1.9.0.jar;E:\Android\gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\1.9.0\8ee15ef0c67dc83d874f412d84378d7f0eb50b63\kotlin-stdlib-1.9.0.jar;E:\Android\gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-script-runtime\1.9.0\4b3102cbbb7e1b58d9d1adf89563f00069ffa7d1\kotlin-script-runtime-1.9.0.jar;E:\Android\gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-reflect\1.6.10\1cbe9c92c12a94eea200d23c2bbaedaf3daf5132\kotlin-reflect-1.6.10.jar;E:\Android\gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-daemon-embeddable\1.9.0\186543f5e28cf8d9a0290fecc2cf34301c40a65c\kotlin-daemon-embeddable-1.9.0.jar;E:\Android\gradle\caches\modules-2\files-2.1\org.jetbrains.intellij.deps\trove4j\1.0.20200330\3afb14d5f9ceb459d724e907a21145e8ff394f02\trove4j-1.0.20200330.jar;E:\Android\gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-common\1.9.0\cd65c21cfd1eec4d44ef09f9f52b6d9f8a720636\kotlin-stdlib-common-1.9.0.jar;E:\Android\gradle\caches\modules-2\files-2.1\org.jetbrains\annotations\13.0\919f0dfe192fb4e063e7dacadee7f8bb9a2672a9\annotations-13.0.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 2097152                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 268435456                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 4278190080                                {product} {ergonomic}
+   size_t MaxNewSize                               = 2566914048                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 2097152                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 4278190080                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+PATH=C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Users\Vil-g\AppData\Local\Microsoft\WindowsApps;C:\Users\Vil-g\AppData\Local\GitHubDesktop\bin
+USERNAME=Vil-g
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 165 Stepping 3, GenuineIntel
+TMP=C:\Users\Vil-g\AppData\Local\Temp
+TEMP=C:\Users\Vil-g\AppData\Local\Temp
+
+
+
+Periodic native trim disabled
+
+JNI global refs:
+JNI global refs: 9, weak refs: 0
+
+JNI global refs memory usage: 843, weak refs: 841
+
+OOME stack traces (most recent first):
+Classloader memory used:
+Loader jdk.internal.loader.ClassLoaders$AppClassLoader                                 : 5350K
+Loader bootstrap                                                                       : 1296K
+Loader java.net.URLClassLoader                                                         : 27531B
+Loader jdk.internal.reflect.DelegatingClassLoader                                      : 11094B
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 10 , 64 bit Build 19041 (10.0.19041.4597)
+OS uptime: 1 days 20:26 hours
+
+CPU: total 12 (initial active 12) (6 cores per cpu, 2 threads per core) family 6 model 165 stepping 3 microcode 0xcc, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt
+Processor Information for all 12 processors :
+  Max Mhz: 2904, Current Mhz: 2904, Mhz Limit: 2904
+
+Memory: 4k page, system-wide physical 16315M (2230M free)
+TotalPageFile size 24313M (AvailPageFile size 3853M)
+current process WorkingSet (physical memory assigned to process): 220M, peak: 228M
+current process commit charge ("private bytes"): 268M, peak: 374M
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.10+0--11609105) for windows-amd64 JRE (17.0.10+0--11609105), built on Mar 21 2024 19:10:56 by "androidbuild" with MS VC++ 16.10 / 16.11 (VS2019)
+
+END.
