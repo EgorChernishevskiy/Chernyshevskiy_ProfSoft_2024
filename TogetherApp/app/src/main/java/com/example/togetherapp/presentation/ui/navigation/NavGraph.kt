@@ -6,11 +6,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.togetherapp.presentation.ui.loginscreen.LoginScreen
 import com.example.togetherapp.presentation.ui.registerscreen.RegisterScreen
+import com.example.togetherapp.presentation.ui.splashscreen.SplashScreen
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 
 @Composable
 fun NavGraph(navController: NavHostController, authViewModel: AuthViewModel) {
-    NavHost(navController, startDestination = "login") {
+    NavHost(navController, startDestination = "splash") {
+        composable("splash") { SplashScreen(navController) }
         composable("login") { LoginScreen(viewModel = authViewModel, navController = navController) }
         composable("register") { RegisterScreen(viewModel = authViewModel, navController = navController) }
     }
