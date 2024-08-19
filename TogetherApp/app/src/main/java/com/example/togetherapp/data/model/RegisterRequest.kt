@@ -1,8 +1,9 @@
 package com.example.togetherapp.data.model
 
 data class RegisterRequest(
-    val firstName: String,
-    val lastName: String,
-    val phoneNumber: String,
-    val password: String
+    val name: String,
+    val surname: String,
+    val phone: String,
+    val passwordHashed: String,
+    val avatar: String
 )

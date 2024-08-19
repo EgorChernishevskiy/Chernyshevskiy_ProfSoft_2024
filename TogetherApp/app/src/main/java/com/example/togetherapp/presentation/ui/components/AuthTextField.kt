@@ -1,6 +1,7 @@
 package com.example.togetherapp.presentation.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -18,6 +19,8 @@ fun AuthTextField(
     onValueChange: (String) -> Unit,
     label: String,
     modifier: Modifier = Modifier,
+    isError: Boolean = false,
+    errorMessage: String? = null,
     isPassword: Boolean = false
 ) {
     TextField(
@@ -40,6 +43,17 @@ fun AuthTextField(
         ),
         shape = RoundedCornerShape(8.dp),
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
-        singleLine = true
+        singleLine = true,
+        isError = isError
     )
+    if (isError) {
+        errorMessage?.let {
+            Text(
+                text = it,
+                color = Color.Red,
+                fontSize = 12.sp,
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+            )
+        }
+    }
 }

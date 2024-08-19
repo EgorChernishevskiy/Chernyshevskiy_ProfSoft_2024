@@ -77,4 +77,7 @@ dependencies {
 
     //fonts
     implementation ("androidx.compose.ui:ui-text-google-fonts:1.4.3")
+
+    debugImplementation ("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 }

@@ -22,6 +22,7 @@ import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
 fun SplashScreenContent(
     modifier: Modifier = Modifier
 ) {
+
     Box(
         modifier = modifier
             .fillMaxSize()
