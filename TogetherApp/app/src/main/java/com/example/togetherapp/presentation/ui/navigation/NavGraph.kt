@@ -9,11 +9,12 @@ import com.example.togetherapp.presentation.ui.mainscreen.MainScreen
 import com.example.togetherapp.presentation.ui.registerscreen.RegisterScreen
 import com.example.togetherapp.presentation.ui.splashscreen.SplashScreen
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
+import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 
 @Composable
-fun NavGraph(navController: NavHostController, authViewModel: AuthViewModel) {
+fun NavGraph(navController: NavHostController, authViewModel: AuthViewModel, splashScreenViewModel: SplashScreenViewModel) {
     NavHost(navController, startDestination = "splash") {
-        composable("splash") { SplashScreen(navController) }
+        composable("splash") { SplashScreen(navController = navController, viewModel = splashScreenViewModel) }
         composable("login") { LoginScreen(viewModel = authViewModel, navController = navController) }
         composable("register") { RegisterScreen(viewModel = authViewModel, navController = navController) }
         composable("home") { MainScreen(navController) }

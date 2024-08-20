@@ -14,6 +14,7 @@ import com.example.togetherapp.domain.usecase.RegisterUseCase
 import com.example.togetherapp.domain.usecase.SaveTokenUseCase
 import com.example.togetherapp.domain.usecase.ValidateUseCase
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
+import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -57,6 +58,7 @@ val useCaseModule = module {
 
 val viewModelModule = module {
     viewModel { AuthViewModel(get(), get(), get(), get(), get()) }
+    viewModel { SplashScreenViewModel(get()) }
 }
 
 val appModules = listOf(networkModule, sharedPrefsModule, repositoryModule, useCaseModule, viewModelModule)

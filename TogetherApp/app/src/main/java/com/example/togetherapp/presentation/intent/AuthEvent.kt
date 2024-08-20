@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.state
+package com.example.togetherapp.presentation.intent
 
 sealed class AuthEvent {
     data class OnLoginPhoneNumberChange(val phoneNumber: String) : AuthEvent()

@@ -1,17 +1,13 @@
 package com.example.togetherapp.presentation.ui.splashscreen
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.example.togetherapp.presentation.ui.splashscreen.components.SplashScreenContent
+import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 
-private const val SPLASH_DELAY : Long = 2000
 
 @Composable
-fun SplashScreen(navController: NavHostController) {
-    SplashScreenContent()
-    android.os.Handler().postDelayed({
-        navController.navigate("login") {
-            popUpTo("splash") { inclusive = true }
-        }
-    }, SPLASH_DELAY)
+fun SplashScreen(navController: NavHostController, viewModel: SplashScreenViewModel) {
+    SplashScreenContent(Modifier,navController, viewModel)
 }

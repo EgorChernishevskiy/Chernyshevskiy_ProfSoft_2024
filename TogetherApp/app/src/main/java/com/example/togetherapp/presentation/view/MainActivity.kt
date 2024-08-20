@@ -8,17 +8,19 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.togetherapp.presentation.ui.navigation.NavGraph
 import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
+import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 
 class MainActivity : ComponentActivity() {
 
     private val authViewModel: AuthViewModel by viewModel()
+    private val splashScreenViewModel: SplashScreenViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             TogetherAppTheme {
                 val navController = rememberNavController()
-                NavGraph(navController = navController, authViewModel = authViewModel)
+                NavGraph(navController = navController, authViewModel = authViewModel, splashScreenViewModel = splashScreenViewModel)
             }
         }
     }

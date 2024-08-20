@@ -12,7 +12,7 @@ import com.example.togetherapp.domain.usecase.RegisterUseCase
 import com.example.togetherapp.domain.usecase.SaveTokenUseCase
 import com.example.togetherapp.domain.usecase.ValidateUseCase
 import com.example.togetherapp.domain.utils.hashPassword
-import com.example.togetherapp.presentation.state.AuthEvent
+import com.example.togetherapp.presentation.intent.AuthEvent
 import com.example.togetherapp.presentation.state.AuthState
 import kotlinx.coroutines.launch
 
