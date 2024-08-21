@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.intent
+package com.example.togetherapp.presentation.event
 
 sealed class AuthEvent {
     data class Login(val phoneNumber: String, val password: String) : AuthEvent()

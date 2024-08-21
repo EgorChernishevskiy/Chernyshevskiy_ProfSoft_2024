@@ -16,9 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.R
-import com.example.togetherapp.presentation.intent.AuthEvent
+import com.example.togetherapp.presentation.event.AuthEvent
 import com.example.togetherapp.presentation.state.AuthState
-import com.example.togetherapp.presentation.state.SplashScreenState
 import com.example.togetherapp.presentation.ui.components.AuthTextField
 import com.example.togetherapp.presentation.ui.components.Logo
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel

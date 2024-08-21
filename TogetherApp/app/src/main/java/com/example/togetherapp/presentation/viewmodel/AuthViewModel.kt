@@ -12,9 +12,8 @@ import com.example.togetherapp.domain.usecase.ValidateLastNameUseCase
 import com.example.togetherapp.domain.usecase.ValidatePasswordUseCase
 import com.example.togetherapp.domain.usecase.ValidatePhoneNumberUseCase
 import com.example.togetherapp.domain.utils.hashPassword
-import com.example.togetherapp.presentation.intent.AuthEvent
+import com.example.togetherapp.presentation.event.AuthEvent
 import com.example.togetherapp.presentation.state.AuthState
-import com.example.togetherapp.presentation.state.SplashScreenState
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
