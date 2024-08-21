@@ -1,7 +1,9 @@
 package com.example.togetherapp.domain.repository
 
+import com.example.togetherapp.domain.model.LoginParams
+import com.example.togetherapp.domain.model.RegisterParams
 
 interface AuthRepository {
-    suspend fun login(phone: String, passwordHashed: String): Result<String>
-    suspend fun register(firstName: String, lastName: String, phoneNumber: String, password: String): Result<String>
+    suspend fun login(params: LoginParams): Result<String>
+    suspend fun register(params: RegisterParams): Result<String>
 }

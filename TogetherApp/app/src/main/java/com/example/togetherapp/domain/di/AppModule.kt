@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.togetherapp.data.api.AuthApi
+import com.example.togetherapp.data.auth.UserAuth
+import com.example.togetherapp.data.auth.password.PasswordUserAuth
 import com.example.togetherapp.data.repository.AuthRepositoryImpl
 import com.example.togetherapp.data.repository.TokenRepositoryImplementation
 import com.example.togetherapp.domain.repository.AuthRepository
@@ -47,7 +49,8 @@ val sharedPrefsModule = module {
 }
 
 val repositoryModule = module {
-    single<AuthRepository> { AuthRepositoryImpl(get()) }
+    single<UserAuth> { PasswordUserAuth(get()) }
+    single<AuthRepository> { AuthRepositoryImpl(get(), get()) }
     single<TokenRepository> { TokenRepositoryImplementation(get()) }
 }
 

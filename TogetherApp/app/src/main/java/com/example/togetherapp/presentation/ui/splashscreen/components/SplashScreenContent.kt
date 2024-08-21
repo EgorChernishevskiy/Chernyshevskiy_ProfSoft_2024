@@ -34,7 +34,7 @@ fun SplashScreenContent(
 
     LaunchedEffect(state) {
         when {
-            state.navigateToHome -> navController.navigate("home") { //поменять на "home"
+            state.navigateToHome -> navController.navigate("login") { //поменять на "home"
                 popUpTo("splash") { inclusive = true }
             }
             state.navigateToLogin -> navController.navigate("login") {

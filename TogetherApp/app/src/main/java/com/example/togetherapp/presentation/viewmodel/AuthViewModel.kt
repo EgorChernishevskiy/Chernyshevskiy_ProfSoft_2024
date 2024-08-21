@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.togetherapp.domain.model.LoginParams
+import com.example.togetherapp.domain.model.RegisterParams
 import com.example.togetherapp.domain.usecase.LoginUseCase
 import com.example.togetherapp.domain.usecase.RegisterUseCase
 import com.example.togetherapp.domain.usecase.SaveTokenUseCase
@@ -117,7 +119,11 @@ class AuthViewModel(
         }
 
         val hashedPassword = hashPassword(_state.value?.loginPassword ?: "")
-        login(_state.value?.loginPhoneNumber ?: "", hashedPassword)
+        val loginParams = LoginParams(
+            phone = _state.value?.loginPhoneNumber ?: "",
+            passwordHashed = hashedPassword
+        )
+        login(loginParams)
     }
 
     private fun submitRegister() {
@@ -133,14 +139,19 @@ class AuthViewModel(
         }
 
         val hashedPassword = hashPassword(_state.value?.registerPassword ?: "")
-        register(_state.value?.firstName ?: "", _state.value?.lastName ?: "",
-            _state.value?.registerPhoneNumber ?: "", hashedPassword)
+        val registerParams = RegisterParams(
+            firstName = _state.value?.firstName ?: "",
+            lastName = _state.value?.lastName ?: "",
+            phoneNumber = _state.value?.registerPhoneNumber ?: "",
+            password = hashedPassword
+        )
+        register(registerParams)
     }
 
-    private fun login(phoneNumber: String, password: String) {
+    private fun login(params: LoginParams) {
         viewModelScope.launch {
             _state.value = _state.value?.copy(isLoading = true)
-            val result = loginUseCase(phoneNumber, password)
+            val result = loginUseCase(params)
             if (result.isSuccess) {
                 saveTokenUseCase(result.getOrNull() ?: "")
                 _state.value = _state.value?.copy(isLoading = false, loginSuccess = true)
@@ -151,15 +162,10 @@ class AuthViewModel(
         }
     }
 
-    private fun register(
-        firstName: String,
-        lastName: String,
-        phoneNumber: String,
-        password: String
-    ) {
+    private fun register(params: RegisterParams) {
         viewModelScope.launch {
             _state.value = _state.value?.copy(isLoading = true)
-            val result = registerUseCase(firstName, lastName, phoneNumber, password)
+            val result = registerUseCase(params)
             if (result.isSuccess) {
                 saveTokenUseCase(result.getOrNull() ?: "")
                 _state.value = _state.value?.copy(isLoading = false, registerSuccess = true)
