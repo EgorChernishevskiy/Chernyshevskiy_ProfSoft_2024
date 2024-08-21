@@ -6,6 +6,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.R
 import com.example.togetherapp.presentation.intent.AuthEvent
+import com.example.togetherapp.presentation.state.AuthState
 import com.example.togetherapp.presentation.ui.components.AuthTextField
 import com.example.togetherapp.presentation.ui.components.Logo
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
@@ -25,7 +28,9 @@ fun RegisterScreenContent(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    if (viewModel.state.registerSuccess) {
+    val state by viewModel.state.observeAsState(AuthState())
+
+    if (state.registerSuccess) {
         LaunchedEffect(Unit) {
             navController.navigate("home") {
                 popUpTo("register") { inclusive = true }
@@ -72,14 +77,14 @@ fun RegisterScreenContent(
 
         // Поле "Имя"
         AuthTextField(
-            value = viewModel.state.firstName,
+            value = state.firstName,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnFirstNameChange(it)) },
             label = stringResource(R.string.first_name_textfield),
-            errorMessage = viewModel.state.firstNameError
+            errorMessage = state.firstNameError
         )
-        if (viewModel.state.firstNameError != null) {
+        if (state.firstNameError != null) {
             Text(
-                text = viewModel.state.firstNameError!!,
+                text = state.firstNameError!!,
                 color = Color.Red,
                 modifier = Modifier
                     .align(Alignment.End)
@@ -90,14 +95,14 @@ fun RegisterScreenContent(
 
         // Поле "Фамилия"
         AuthTextField(
-            value = viewModel.state.lastName,
+            value = state.lastName,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnLastNameChange(it)) },
             label = stringResource(R.string.last_name_textfield),
-            errorMessage = viewModel.state.lastNameError
+            errorMessage = state.lastNameError
         )
-        if (viewModel.state.lastNameError != null) {
+        if (state.lastNameError != null) {
             Text(
-                text = viewModel.state.lastNameError!!,
+                text = state.lastNameError!!,
                 color = Color.Red,
                 modifier = Modifier
                     .align(Alignment.End)
@@ -108,14 +113,14 @@ fun RegisterScreenContent(
 
         // Поле "Номер телефона"
         AuthTextField(
-            value = viewModel.state.registerPhoneNumber,
+            value = state.registerPhoneNumber,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnRegisterPhoneNumberChange(it)) },
             label = stringResource(R.string.phone_number_textfield),
-            errorMessage = viewModel.state.registerPhoneNumberError
+            errorMessage = state.registerPhoneNumberError
         )
-        if (viewModel.state.registerPhoneNumberError != null) {
+        if (state.registerPhoneNumberError != null) {
             Text(
-                text = viewModel.state.registerPhoneNumberError!!,
+                text = state.registerPhoneNumberError!!,
                 color = Color.Red,
                 modifier = Modifier
                     .align(Alignment.End)
@@ -126,14 +131,14 @@ fun RegisterScreenContent(
 
         // Поле "Пароль"
         AuthTextField(
-            value = viewModel.state.registerPassword,
+            value = state.registerPassword,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnRegisterPasswordChange(it)) },
             label = stringResource(R.string.password_textfield),
             isPassword = true
         )
-        if (viewModel.state.registerPasswordError != null) {
+        if (state.registerPasswordError != null) {
             Text(
-                text = viewModel.state.registerPasswordError!!,
+                text = state.registerPasswordError!!,
                 color = Color.Red,
                 modifier = Modifier
                     .align(Alignment.End)
@@ -147,10 +152,10 @@ fun RegisterScreenContent(
             onClick = {
                 viewModel.handleEvent(
                     AuthEvent.Register(
-                        viewModel.state.firstName,
-                        viewModel.state.lastName,
-                        viewModel.state.registerPhoneNumber,
-                        viewModel.state.registerPassword
+                        state.firstName,
+                        state.lastName,
+                        state.registerPhoneNumber,
+                        state.registerPassword
                     )
                 )
             },
@@ -160,7 +165,7 @@ fun RegisterScreenContent(
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF333333))
         ) {
-            if (viewModel.state.isLoading) {
+            if (state.isLoading) {
                 CircularProgressIndicator()
             } else {
                 Text(

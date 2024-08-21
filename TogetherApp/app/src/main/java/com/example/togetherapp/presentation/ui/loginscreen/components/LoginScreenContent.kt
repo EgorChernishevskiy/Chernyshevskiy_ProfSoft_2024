@@ -5,6 +5,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,6 +17,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.R
 import com.example.togetherapp.presentation.intent.AuthEvent
+import com.example.togetherapp.presentation.state.AuthState
+import com.example.togetherapp.presentation.state.SplashScreenState
 import com.example.togetherapp.presentation.ui.components.AuthTextField
 import com.example.togetherapp.presentation.ui.components.Logo
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
@@ -25,9 +29,10 @@ fun LoginScreenContent(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val state by viewModel.state.observeAsState(AuthState())
     val snackbarHostState = remember { SnackbarHostState() }
 
-    if (viewModel.state.loginSuccess) {
+    if (state.loginSuccess) {
         LaunchedEffect(Unit) {
             navController.navigate("home") {
                 popUpTo("login") { inclusive = true }
@@ -35,8 +40,8 @@ fun LoginScreenContent(
         }
     }
 
-    LaunchedEffect(viewModel.state.errorMessage) {
-        viewModel.state.errorMessage?.let { errorMsg ->
+    LaunchedEffect(state.errorMessage) {
+        state.errorMessage?.let { errorMsg ->
             val result = snackbarHostState.showSnackbar(
                 message = errorMsg,
                 actionLabel = "OK"
@@ -88,14 +93,14 @@ fun LoginScreenContent(
 
         // Поле "Номер телефона"
         AuthTextField(
-            value = viewModel.state.loginPhoneNumber,
+            value = state.loginPhoneNumber,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnLoginPhoneNumberChange(it)) },
             label = stringResource(R.string.phone_number_textfield),
-            errorMessage = viewModel.state.loginPhoneNumberError
+            errorMessage = state.loginPhoneNumberError
         )
-        if (viewModel.state.loginPhoneNumberError != null) {
+        if (state.loginPhoneNumberError != null) {
             Text(
-                text = viewModel.state.loginPhoneNumberError!!,
+                text = state.loginPhoneNumberError!!,
                 color = Color.Red,
                 modifier = Modifier
                     .align(Alignment.End)
@@ -106,7 +111,7 @@ fun LoginScreenContent(
 
         // Поле "Пароль"
         AuthTextField(
-            value = viewModel.state.loginPassword,
+            value = state.loginPassword,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnLoginPasswordChange(it)) },
             label = stringResource(R.string.password_textfield),
             isPassword = true
@@ -119,8 +124,8 @@ fun LoginScreenContent(
             onClick = {
                 viewModel.handleEvent(
                     AuthEvent.Login(
-                        viewModel.state.loginPhoneNumber,
-                        viewModel.state.loginPassword
+                        state.loginPhoneNumber,
+                        state.loginPassword
                     )
                 )
             },
@@ -130,10 +135,9 @@ fun LoginScreenContent(
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF333333))
         ) {
-            if (viewModel.state.isLoading) {
+            if (state.isLoading) {
                 CircularProgressIndicator()
-            }
-            else {
+            } else {
                 Text(
                     text = stringResource(R.string.button_login_text_label),
                     color = Color.White,
