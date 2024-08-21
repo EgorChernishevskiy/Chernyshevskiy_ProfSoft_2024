@@ -1,5 +1,6 @@
 package com.example.togetherapp.presentation.ui.registerscreen.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -24,7 +25,7 @@ fun RegisterScreenContent(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    if (viewModel.uiState.registerSuccess) {
+    if (viewModel.state.registerSuccess) {
         LaunchedEffect(Unit) {
             navController.navigate("home") {
                 popUpTo("register") { inclusive = true }
@@ -36,13 +37,7 @@ fun RegisterScreenContent(
             .fillMaxSize()
             .padding(start = 16.dp, end = 16.dp)
     ) {
-        viewModel.uiState.errorMessage?.let { errorMsg ->
-            Text(
-                text = errorMsg,
-                color = Color.Red,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
-        }
+
         Spacer(modifier = Modifier.height(40.dp))
 
         // Логотип
@@ -77,38 +72,73 @@ fun RegisterScreenContent(
 
         // Поле "Имя"
         AuthTextField(
-            value = viewModel.uiState.firstName,
+            value = viewModel.state.firstName,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnFirstNameChange(it)) },
-            label = stringResource(R.string.first_name_textfield)
+            label = stringResource(R.string.first_name_textfield),
+            errorMessage = viewModel.state.firstNameError
         )
+        if (viewModel.state.firstNameError != null) {
+            Text(
+                text = viewModel.state.firstNameError!!,
+                color = Color.Red,
+                modifier = Modifier
+                    .align(Alignment.End)
+            )
+        }
 
         Spacer(modifier = Modifier.height(12.dp))
 
         // Поле "Фамилия"
         AuthTextField(
-            value = viewModel.uiState.lastName,
+            value = viewModel.state.lastName,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnLastNameChange(it)) },
-            label = stringResource(R.string.last_name_textfield)
+            label = stringResource(R.string.last_name_textfield),
+            errorMessage = viewModel.state.lastNameError
         )
+        if (viewModel.state.lastNameError != null) {
+            Text(
+                text = viewModel.state.lastNameError!!,
+                color = Color.Red,
+                modifier = Modifier
+                    .align(Alignment.End)
+            )
+        }
 
         Spacer(modifier = Modifier.height(12.dp))
 
         // Поле "Номер телефона"
         AuthTextField(
-            value = viewModel.uiState.registerPhoneNumber,
+            value = viewModel.state.registerPhoneNumber,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnRegisterPhoneNumberChange(it)) },
-            label = stringResource(R.string.phone_number_textfield)
+            label = stringResource(R.string.phone_number_textfield),
+            errorMessage = viewModel.state.registerPhoneNumberError
         )
+        if (viewModel.state.registerPhoneNumberError != null) {
+            Text(
+                text = viewModel.state.registerPhoneNumberError!!,
+                color = Color.Red,
+                modifier = Modifier
+                    .align(Alignment.End)
+            )
+        }
 
         Spacer(modifier = Modifier.height(12.dp))
 
         // Поле "Пароль"
         AuthTextField(
-            value = viewModel.uiState.registerPassword,
+            value = viewModel.state.registerPassword,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnRegisterPasswordChange(it)) },
             label = stringResource(R.string.password_textfield),
             isPassword = true
         )
+        if (viewModel.state.registerPasswordError != null) {
+            Text(
+                text = viewModel.state.registerPasswordError!!,
+                color = Color.Red,
+                modifier = Modifier
+                    .align(Alignment.End)
+            )
+        }
 
         Spacer(modifier = Modifier.height(60.dp))
 
@@ -117,10 +147,10 @@ fun RegisterScreenContent(
             onClick = {
                 viewModel.handleEvent(
                     AuthEvent.Register(
-                        viewModel.uiState.firstName,
-                        viewModel.uiState.lastName,
-                        viewModel.uiState.registerPhoneNumber,
-                        viewModel.uiState.registerPassword
+                        viewModel.state.firstName,
+                        viewModel.state.lastName,
+                        viewModel.state.registerPhoneNumber,
+                        viewModel.state.registerPassword
                     )
                 )
             },
@@ -130,10 +160,9 @@ fun RegisterScreenContent(
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF333333))
         ) {
-            if (viewModel.uiState.isLoading) {
+            if (viewModel.state.isLoading) {
                 CircularProgressIndicator()
-            }
-            else {
+            } else {
                 Text(
                     text = stringResource(R.string.register_text_label),
                     color = Color.White,

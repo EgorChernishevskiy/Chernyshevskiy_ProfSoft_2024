@@ -5,6 +5,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,10 +25,24 @@ fun LoginScreenContent(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    if (viewModel.uiState.loginSuccess) {
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    if (viewModel.state.loginSuccess) {
         LaunchedEffect(Unit) {
             navController.navigate("home") {
                 popUpTo("login") { inclusive = true }
+            }
+        }
+    }
+
+    LaunchedEffect(viewModel.state.errorMessage) {
+        viewModel.state.errorMessage?.let { errorMsg ->
+            val result = snackbarHostState.showSnackbar(
+                message = errorMsg,
+                actionLabel = "OK"
+            )
+            if (result == SnackbarResult.ActionPerformed) {
+                viewModel.handleEvent(AuthEvent.OnErrorMessageClear(errorMsg))
             }
         }
     }
@@ -37,13 +52,7 @@ fun LoginScreenContent(
             .fillMaxSize()
             .padding(start = 16.dp, end = 16.dp)
     ) {
-        viewModel.uiState.errorMessage?.let { errorMsg ->
-            Text(
-                text = errorMsg,
-                color = Color.Red,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
-        }
+        SnackbarHost(hostState = snackbarHostState)
 
         Spacer(modifier = Modifier.height(40.dp))
 
@@ -79,16 +88,25 @@ fun LoginScreenContent(
 
         // Поле "Номер телефона"
         AuthTextField(
-            value = viewModel.uiState.loginPhoneNumber,
+            value = viewModel.state.loginPhoneNumber,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnLoginPhoneNumberChange(it)) },
-            label = stringResource(R.string.phone_number_textfield)
+            label = stringResource(R.string.phone_number_textfield),
+            errorMessage = viewModel.state.loginPhoneNumberError
         )
+        if (viewModel.state.loginPhoneNumberError != null) {
+            Text(
+                text = viewModel.state.loginPhoneNumberError!!,
+                color = Color.Red,
+                modifier = Modifier
+                    .align(Alignment.End)
+            )
+        }
 
         Spacer(modifier = Modifier.height(12.dp))
 
         // Поле "Пароль"
         AuthTextField(
-            value = viewModel.uiState.loginPassword,
+            value = viewModel.state.loginPassword,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnLoginPasswordChange(it)) },
             label = stringResource(R.string.password_textfield),
             isPassword = true
@@ -101,8 +119,8 @@ fun LoginScreenContent(
             onClick = {
                 viewModel.handleEvent(
                     AuthEvent.Login(
-                        viewModel.uiState.loginPhoneNumber,
-                        viewModel.uiState.loginPassword
+                        viewModel.state.loginPhoneNumber,
+                        viewModel.state.loginPassword
                     )
                 )
             },
@@ -112,7 +130,7 @@ fun LoginScreenContent(
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF333333))
         ) {
-            if (viewModel.uiState.isLoading) {
+            if (viewModel.state.isLoading) {
                 CircularProgressIndicator()
             }
             else {

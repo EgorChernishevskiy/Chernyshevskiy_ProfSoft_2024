@@ -11,5 +11,11 @@ data class AuthState(
     val loginSuccess: Boolean = false,
     val registerSuccess: Boolean = false,
     val errorMessage: String? = null,
+    val firstNameError: String? = null,
+    val lastNameError: String? = null,
+    val loginPhoneNumberError: String? = null,
+    val loginPasswordError: String? = null,
+    val registerPhoneNumberError: String? = null,
+    val registerPasswordError: String? = null,
     val hasToken: Boolean = false
 )

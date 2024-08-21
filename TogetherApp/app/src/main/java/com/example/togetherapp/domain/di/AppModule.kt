@@ -12,7 +12,10 @@ import com.example.togetherapp.domain.usecase.CheckTokenUseCase
 import com.example.togetherapp.domain.usecase.LoginUseCase
 import com.example.togetherapp.domain.usecase.RegisterUseCase
 import com.example.togetherapp.domain.usecase.SaveTokenUseCase
-import com.example.togetherapp.domain.usecase.ValidateUseCase
+import com.example.togetherapp.domain.usecase.ValidateFirstNameUseCase
+import com.example.togetherapp.domain.usecase.ValidateLastNameUseCase
+import com.example.togetherapp.domain.usecase.ValidatePasswordUseCase
+import com.example.togetherapp.domain.usecase.ValidatePhoneNumberUseCase
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 import okhttp3.OkHttpClient
@@ -53,11 +56,15 @@ val useCaseModule = module {
     single { RegisterUseCase(get()) }
     single { CheckTokenUseCase(get()) }
     single { SaveTokenUseCase(get()) }
-    single { ValidateUseCase() }
+    single { ValidateFirstNameUseCase() }
+    single { ValidateLastNameUseCase() }
+    single { ValidatePhoneNumberUseCase() }
+    single { ValidatePasswordUseCase() }
+
 }
 
 val viewModelModule = module {
-    viewModel { AuthViewModel(get(), get(), get(), get(), get()) }
+    viewModel { AuthViewModel(get(), get(), get(), get(), get(), get(), get() ) }
     viewModel { SplashScreenViewModel(get()) }
 }
 
