@@ -82,6 +82,9 @@ dependencies {
     //fonts
     implementation ("androidx.compose.ui:ui-text-google-fonts:1.4.3")
 
+    implementation ("com.google.accompanist:accompanist-pager:0.31.0-beta")
+    implementation ("com.google.accompanist:accompanist-pager-indicators:0.31.0-beta")
+
     debugImplementation ("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 }

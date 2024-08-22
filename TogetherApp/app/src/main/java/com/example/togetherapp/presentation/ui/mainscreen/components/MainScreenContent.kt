@@ -1,6 +1,9 @@
 package com.example.togetherapp.presentation.ui.mainscreen.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -8,13 +11,18 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.togetherapp.R
 import com.example.togetherapp.presentation.ui.splashscreen.components.SplashScreenContent
 import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
+
+data class Course(val title: String, val tags: List<String>)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,10 +30,31 @@ fun MainScreenContent() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Главная") },
+                title = {
+                    Text(
+                        text = "Главная",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontSize = 20.sp
+                    )
+                },
+
                 actions = {
-                    IconButton(onClick = { /* Search action */ }) {
-                        Icon(Icons.Default.Search, contentDescription = null)
+                    IconButton(
+                        onClick = { /* Search action */ },
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color(0xFFD6B714))
+                            .width(36.dp)
+                            .height(36.dp),
+                    )
+                    {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_searchnormal),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .width(16.dp)
+                                .height(16.dp)
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
@@ -33,49 +62,168 @@ fun MainScreenContent() {
                 )
             )
         },
+
         bottomBar = {
             BottomNavigationBar()
         }
     ) { paddingValues ->
-        Column(modifier = Modifier.padding(paddingValues)) {
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(start = 16.dp, end = 16.dp)
+        ) {
+
+            Spacer(modifier = Modifier.height(20.dp))
+
             SectionTitle(title = "Ваши курсы", showAll = true)
-            CourseCard(title = "Основы Андроида", tags = listOf("View", "Компоненты андроид", "Создание проекта", "Intent", "Manifest"))
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+//            CourseCard(
+//                title = "Основы Андроида",
+//                tags = listOf(
+//                    "View",
+//                    "Компоненты андроид",
+//                    "Создание проекта",
+//                    "Intent",
+//                    "Manifest"
+//                )
+//            )
+
+            HorizontalCourseList(
+                courses = listOf(
+                    Course("Основы Андроида", listOf("View", "Компоненты андроид", "Создание проекта", "Intent", "Manifest")),
+                    Course("Продвинутый Android", listOf("Jetpack Compose", "Coroutines", "Hilt")),
+                    Course("Кроссплатформенная разработка", listOf("Flutter", "Kotlin Multiplatform", "React Native"))
+                )
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
             SectionTitle(title = "Ваши заметки", showAll = true)
-            NoteCard(title = "Для создания новой Activity", content = "Нужно лишь применить старый дедовский ви...", date = "12 июля")
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            NoteCard(
+                title = "Для создания новой Activity",
+                content = "Нужно лишь применить старый дедовский ви...",
+                date = "12 июля"
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
             SectionTitle(title = "Заметки сообщества", showAll = true)
-            CommunityNoteCard(userName = "Имя Фамилия", title = "Тест для текста в несколько строк. Это оче...", content = "н важный момент. Его нужно проверить пост...", date = "12 июля")
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            CommunityNoteCard(
+                userName = "Имя Фамилия",
+                title = "Тест для текста в несколько строк. Это оче...",
+                content = "н важный момент. Его нужно проверить пост...",
+                date = "12 июля"
+            )
         }
     }
 }
 
 @Composable
 fun BottomNavigationBar() {
-    NavigationBar {
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.Home, contentDescription = null) },
-            selected = true,
-            onClick = { /* Handle home click */ }
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
-            selected = false,
-            onClick = { /* Handle favorite click */ }
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.Add, contentDescription = null) },
-            selected = false,
-            onClick = { /* Handle add click */ }
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.Notifications, contentDescription = null) },
-            selected = false,
-            onClick = { /* Handle notifications click */ }
-        )
-        NavigationBarItem(
-            icon = { Icon(Icons.Default.Person, contentDescription = null) },
-            selected = false,
-            onClick = { /* Handle profile click */ }
-        )
+    Surface(
+        modifier = Modifier.height(56.dp),
+        color = Color.White,
+    ) {
+        Column {
+            Divider(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(1.dp),
+                color = Color.Gray
+            )
+            NavigationBar(
+                contentColor = Color.Black
+            ) {
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_nav_home),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .width(20.dp)
+                                .height(20.dp)
+                        )
+                    },
+                    selected = true,
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = Color(0x66D7D7D7)
+                    ),
+                    onClick = { /* Handle home click */ }
+                )
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_nav_favourite),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .width(20.dp)
+                                .height(20.dp)
+                        )
+                    },
+                    selected = false,
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = Color(0x66D7D7D7)
+                    ),
+                    onClick = { /* Handle favorite click */ }
+                )
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_nav_add_note),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .width(20.dp)
+                                .height(20.dp)
+                        )
+                    },
+                    selected = false,
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = Color(0x66D7D7D7)
+                    ),
+                    onClick = { /* Handle add click */ }
+                )
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_nav_chat),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .width(20.dp)
+                                .height(20.dp)
+                        )
+                    },
+                    selected = false,
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = Color(0x66D7D7D7)
+                    ),
+                    onClick = { /* Handle notifications click */ }
+                )
+                NavigationBarItem(
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_nav_profile),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .width(20.dp)
+                                .height(20.dp)
+                        )
+                    },
+                    selected = false,
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = Color(0x66D7D7D7)
+                    ),
+                    onClick = { /* Handle profile click */ }
+                )
+            }
+        }
     }
 }
 
@@ -83,33 +231,67 @@ fun BottomNavigationBar() {
 fun SectionTitle(title: String, showAll: Boolean) {
     Row(
         modifier = Modifier
+            .clip(RoundedCornerShape(8.dp))
+            .background(Color(0x7D7D7777))
             .fillMaxWidth()
-            .padding(8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+            .height(32.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = title, style = MaterialTheme.typography.titleMedium)
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier
+                .padding(start = 11.dp)
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Spacer(
+            modifier = Modifier
+                .background(Color.White)
+                .width(2.dp)
+                .height(32.dp)
+        )
+
         if (showAll) {
             TextButton(onClick = { /* Show all action */ }) {
-                Text(text = "Все")
+                Text(
+                    text = "Все",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight(500),
+                    color = Color(0xFF646464)
+                )
             }
         }
     }
 }
 
-@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun HorizontalCourseList(courses: List<Course>) {
+    LazyRow(
+        modifier = Modifier.padding(horizontal = 8.dp) // Отступ для всего списка
+    ) {
+        items(courses) { course ->
+            CourseCard(title = course.title, tags = course.tags)
+        }
+    }
+}
 @Composable
 fun CourseCard(title: String, tags: List<String>) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
+            .width(200.dp) // Установите ширину карточки
+            .padding(end = 8.dp), // Отступ между карточками
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFFFFD80C)
         ),
         shape = RoundedCornerShape(8.dp)
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = title, style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold))
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+            )
             Spacer(modifier = Modifier.height(8.dp))
             WrapContent(tags)
         }
@@ -118,23 +300,11 @@ fun CourseCard(title: String, tags: List<String>) {
 
 @Composable
 fun WrapContent(tags: List<String>) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+    Column(
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         tags.forEach { tag ->
-            Surface(
-                color = Color.Gray,
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier.padding(4.dp)
-            ) {
-                Text(
-                    text = tag,
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                    color = Color.White,
-                    fontSize = 12.sp
-                )
-            }
+            Text(text = tag)
         }
     }
 }
@@ -143,15 +313,17 @@ fun WrapContent(tags: List<String>) {
 fun NoteCard(title: String, content: String, date: String) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
+            .fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFFFFD80C)
         ),
         shape = RoundedCornerShape(8.dp)
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = title, style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold))
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+            )
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = content, style = MaterialTheme.typography.bodyMedium)
             Spacer(modifier = Modifier.height(8.dp))
@@ -165,7 +337,7 @@ fun CommunityNoteCard(userName: String, title: String, content: String, date: St
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(bottom = 20.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFFFFD80C)
         ),
@@ -174,7 +346,10 @@ fun CommunityNoteCard(userName: String, title: String, content: String, date: St
         Column(modifier = Modifier.padding(8.dp)) {
             Text(text = userName, style = MaterialTheme.typography.titleMedium)
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = title, style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold))
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+            )
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = content, style = MaterialTheme.typography.bodyMedium)
             Spacer(modifier = Modifier.height(8.dp))
