@@ -1,9 +1,12 @@
 package com.example.togetherapp.presentation.ui.mainscreen.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -90,7 +93,7 @@ fun MainScreenContent() {
 //                )
 //            )
 
-            HorizontalCourseList(
+            CustomHorizontalPager(
                 courses = listOf(
                     Course("Основы Андроида", listOf("View", "Компоненты андроид", "Создание проекта", "Intent", "Manifest")),
                     Course("Продвинутый Android", listOf("Jetpack Compose", "Coroutines", "Hilt")),
@@ -154,7 +157,8 @@ fun BottomNavigationBar() {
                     },
                     selected = true,
                     colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = Color(0x66D7D7D7)
+                        indicatorColor = Color(0x66D7D7D7),
+                        selectedIconColor = Color.Black
                     ),
                     onClick = { /* Handle home click */ }
                 )
@@ -170,7 +174,8 @@ fun BottomNavigationBar() {
                     },
                     selected = false,
                     colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = Color(0x66D7D7D7)
+                        indicatorColor = Color(0x66D7D7D7),
+                        selectedIconColor = Color.Black
                     ),
                     onClick = { /* Handle favorite click */ }
                 )
@@ -186,7 +191,8 @@ fun BottomNavigationBar() {
                     },
                     selected = false,
                     colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = Color(0x66D7D7D7)
+                        indicatorColor = Color(0x66D7D7D7),
+                        selectedIconColor = Color.Black
                     ),
                     onClick = { /* Handle add click */ }
                 )
@@ -202,7 +208,8 @@ fun BottomNavigationBar() {
                     },
                     selected = false,
                     colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = Color(0x66D7D7D7)
+                        indicatorColor = Color(0x66D7D7D7),
+                        selectedIconColor = Color.Black
                     ),
                     onClick = { /* Handle notifications click */ }
                 )
@@ -218,7 +225,8 @@ fun BottomNavigationBar() {
                     },
                     selected = false,
                     colors = NavigationBarItemDefaults.colors(
-                        indicatorColor = Color(0x66D7D7D7)
+                        indicatorColor = Color(0x66D7D7D7),
+                        selectedIconColor = Color.Black
                     ),
                     onClick = { /* Handle profile click */ }
                 )
@@ -265,7 +273,54 @@ fun SectionTitle(title: String, showAll: Boolean) {
         }
     }
 }
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun CustomHorizontalPager(courses: List<Course>) {
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        val pagerState = rememberPagerState(
+            pageCount = { courses.size }
+        )
 
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // HorizontalPager
+            HorizontalPager(
+                state = pagerState
+            ) { page ->
+                val course = courses[page]
+                CourseCard(
+                    title = course.title,
+                    tags = course.tags
+                )
+            }
+
+            // Indicators
+            Row(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .height(4.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                repeat(courses.size) { index ->
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = 4.dp)
+                            .height(4.dp)
+                            .background(
+                                color = if (pagerState.currentPage == index) Color.Black else Color.LightGray
+                            )
+                    )
+                }
+            }
+        }
+    }
+}
 @Composable
 fun HorizontalCourseList(courses: List<Course>) {
     LazyRow(

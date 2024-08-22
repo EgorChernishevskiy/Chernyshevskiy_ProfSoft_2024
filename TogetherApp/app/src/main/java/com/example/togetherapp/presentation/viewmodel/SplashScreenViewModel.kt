@@ -10,7 +10,7 @@ import com.example.togetherapp.presentation.state.SplashScreenState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-private const val SPLASH_DELAY: Long = 2000
+private const val SPLASH_DELAY: Long = 1000
 
 class SplashScreenViewModel(
     private val checkTokenUseCase: com.example.togetherapp.domain.usecase.CheckTokenUseCase

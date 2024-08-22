@@ -67,11 +67,3 @@ fun SplashScreenContent(
         )
     }
 }
-
-//@Preview
-//@Composable
-//private fun SplashScreenContentPreview() {
-//    TogetherAppTheme {
-//        SplashScreenContent()
-//    }
-//}
