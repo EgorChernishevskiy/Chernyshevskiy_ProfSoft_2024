@@ -1,4 +1,4 @@
-package com.example.togetherapp.domain.di
+package com.example.togetherapp.di
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -38,7 +38,7 @@ val networkModule = module {
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(AuthApi::class.java)
+            .create(com.example.togetherapp.data.api.AuthApi::class.java)
     }
 }
 
@@ -49,9 +49,17 @@ val sharedPrefsModule = module {
 }
 
 val repositoryModule = module {
-    single<UserAuth> { PasswordUserAuth(get()) }
-    single<AuthRepository> { AuthRepositoryImpl(get(), get()) }
-    single<TokenRepository> { TokenRepositoryImplementation(get()) }
+    single<com.example.togetherapp.data.auth.UserAuth> {
+        com.example.togetherapp.data.auth.password.PasswordUserAuth(
+            get()
+        )
+    }
+    single<AuthRepository> { com.example.togetherapp.data.repository.AuthRepositoryImpl(get()) }
+    single<TokenRepository> {
+        com.example.togetherapp.data.repository.TokenRepositoryImplementation(
+            get()
+        )
+    }
 }
 
 val useCaseModule = module {

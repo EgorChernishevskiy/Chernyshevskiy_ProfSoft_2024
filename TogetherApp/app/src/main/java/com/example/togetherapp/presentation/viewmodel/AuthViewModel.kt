@@ -19,13 +19,13 @@ import com.example.togetherapp.presentation.state.AuthState
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
-    private val loginUseCase: LoginUseCase,
-    private val registerUseCase: RegisterUseCase,
-    private val saveTokenUseCase: SaveTokenUseCase,
-    private val validateFirstNameUseCase: ValidateFirstNameUseCase,
-    private val validateLastNameUseCase: ValidateLastNameUseCase,
-    private val validatePhoneNumberUseCase: ValidatePhoneNumberUseCase,
-    private val validatePasswordUseCase: ValidatePasswordUseCase
+    private val loginUseCase: com.example.togetherapp.domain.usecase.LoginUseCase,
+    private val registerUseCase: com.example.togetherapp.domain.usecase.RegisterUseCase,
+    private val saveTokenUseCase: com.example.togetherapp.domain.usecase.SaveTokenUseCase,
+    private val validateFirstNameUseCase: com.example.togetherapp.domain.usecase.ValidateFirstNameUseCase,
+    private val validateLastNameUseCase: com.example.togetherapp.domain.usecase.ValidateLastNameUseCase,
+    private val validatePhoneNumberUseCase: com.example.togetherapp.domain.usecase.ValidatePhoneNumberUseCase,
+    private val validatePasswordUseCase: com.example.togetherapp.domain.usecase.ValidatePasswordUseCase
 ) : ViewModel() {
 
     private val _state = MutableLiveData(AuthState())
@@ -118,8 +118,9 @@ class AuthViewModel(
             return
         }
 
-        val hashedPassword = hashPassword(_state.value?.loginPassword ?: "")
-        val loginParams = LoginParams(
+        val hashedPassword =
+            com.example.togetherapp.domain.utils.hashPassword(_state.value?.loginPassword ?: "")
+        val loginParams = com.example.togetherapp.domain.model.LoginParams(
             phone = _state.value?.loginPhoneNumber ?: "",
             passwordHashed = hashedPassword
         )
@@ -138,8 +139,9 @@ class AuthViewModel(
             return
         }
 
-        val hashedPassword = hashPassword(_state.value?.registerPassword ?: "")
-        val registerParams = RegisterParams(
+        val hashedPassword =
+            com.example.togetherapp.domain.utils.hashPassword(_state.value?.registerPassword ?: "")
+        val registerParams = com.example.togetherapp.domain.model.RegisterParams(
             firstName = _state.value?.firstName ?: "",
             lastName = _state.value?.lastName ?: "",
             phoneNumber = _state.value?.registerPhoneNumber ?: "",
@@ -148,7 +150,7 @@ class AuthViewModel(
         register(registerParams)
     }
 
-    private fun login(params: LoginParams) {
+    private fun login(params: com.example.togetherapp.domain.model.LoginParams) {
         viewModelScope.launch {
             _state.value = _state.value?.copy(isLoading = true)
             val result = loginUseCase(params)
@@ -162,7 +164,7 @@ class AuthViewModel(
         }
     }
 
-    private fun register(params: RegisterParams) {
+    private fun register(params: com.example.togetherapp.domain.model.RegisterParams) {
         viewModelScope.launch {
             _state.value = _state.value?.copy(isLoading = true)
             val result = registerUseCase(params)

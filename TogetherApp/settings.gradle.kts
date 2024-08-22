@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "TogetherApp"
 include(":app")
- 
+include(":data")
+include(":domain")

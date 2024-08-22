@@ -1,6 +1,5 @@
 package com.example.togetherapp.data.repository
 
-import com.example.togetherapp.data.api.AuthApi
 import com.example.togetherapp.data.auth.UserAuth
 import com.example.togetherapp.data.auth.model.LoginRequest
 import com.example.togetherapp.data.auth.model.RegisterRequest
@@ -9,7 +8,6 @@ import com.example.togetherapp.domain.model.RegisterParams
 import com.example.togetherapp.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
-    private val authApiService: AuthApi,
     private val userAuth: UserAuth
 ) : AuthRepository {
     override suspend fun login(params: LoginParams): Result<String> {

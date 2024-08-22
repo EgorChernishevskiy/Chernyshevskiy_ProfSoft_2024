@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 private const val SPLASH_DELAY: Long = 2000
 
 class SplashScreenViewModel(
-    private val checkTokenUseCase: CheckTokenUseCase
+    private val checkTokenUseCase: com.example.togetherapp.domain.usecase.CheckTokenUseCase
 ) : ViewModel() {
 
     private val _state = MutableLiveData(SplashScreenState())
