@@ -1,7 +1,9 @@
 package com.example.togetherapp.presentation.ui.mainscreen.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -12,12 +14,19 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,34 +39,77 @@ data class Course(val title: String, val tags: List<String>)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenContent() {
+    var isSearching by remember { mutableStateOf(false) }
+    var searchQuery by remember { mutableStateOf("") }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        text = "Главная",
-                        style = MaterialTheme.typography.titleLarge,
-                        fontSize = 20.sp
-                    )
-                },
-
-                actions = {
-                    IconButton(
-                        onClick = { /* Search action */ },
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(Color(0xFFD6B714))
-                            .width(36.dp)
-                            .height(36.dp),
-                    )
-                    {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_searchnormal),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .width(16.dp)
-                                .height(16.dp)
+                    if (!isSearching) {
+                        Text(
+                            text = "Главная",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontSize = 20.sp
                         )
+                    } else {
+                        TextField(
+                            value = searchQuery,
+                            onValueChange = { searchQuery = it },
+                            placeholder = {
+                                if (searchQuery.isEmpty()) {
+                                    Text(
+                                        text = "Поиск",
+                                        color = Color(0xFF333333),
+                                        style = MaterialTheme.typography.titleSmall.copy(fontSize = 14.sp)
+                                    )
+                                }
+                            },
+                            leadingIcon = {
+                                Icon(
+                                    painter = painterResource(R.drawable.ic_searchnormal),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(48.dp)
+                                .padding(horizontal = 16.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(Color(0xFFD6B714)),
+                            colors = TextFieldDefaults.textFieldColors(
+                                containerColor = Color.Transparent,
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent,
+                                disabledIndicatorColor = Color.Transparent,
+                                errorIndicatorColor = Color.Transparent
+                            ),
+                            textStyle = TextStyle(
+                                fontSize = 14.sp
+                            ),
+                            singleLine = true
+                        )
+                    }
+                },
+                actions = {
+                    if (!isSearching) {
+                        IconButton(
+                            onClick = { isSearching = true },
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(Color(0xFFD6B714))
+                                .width(36.dp)
+                                .height(36.dp),
+                        ) {
+                            Icon(
+                                painter = painterResource(R.drawable.ic_searchnormal),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .width(16.dp)
+                                    .height(16.dp)
+                            )
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
@@ -82,22 +134,23 @@ fun MainScreenContent() {
 
             Spacer(modifier = Modifier.height(12.dp))
 
-//            CourseCard(
-//                title = "Основы Андроида",
-//                tags = listOf(
-//                    "View",
-//                    "Компоненты андроид",
-//                    "Создание проекта",
-//                    "Intent",
-//                    "Manifest"
-//                )
-//            )
-
             CustomHorizontalPager(
                 courses = listOf(
-                    Course("Основы Андроида", listOf("View", "Компоненты андроид", "Создание проекта", "Intent", "Manifest")),
+                    Course(
+                        "Основы Андроида",
+                        listOf(
+                            "View",
+                            "Компоненты андроид",
+                            "Создание проекта",
+                            "Intent",
+                            "Manifest"
+                        )
+                    ),
                     Course("Продвинутый Android", listOf("Jetpack Compose", "Coroutines", "Hilt")),
-                    Course("Кроссплатформенная разработка", listOf("Flutter", "Kotlin Multiplatform", "React Native"))
+                    Course(
+                        "Кроссплатформенная разработка",
+                        listOf("Flutter", "Kotlin Multiplatform", "React Native")
+                    )
                 )
             )
 
@@ -109,7 +162,7 @@ fun MainScreenContent() {
 
             NoteCard(
                 title = "Для создания новой Activity",
-                content = "Нужно лишь применить старый дедовский ви...",
+                content = "Нужно лишь применить старый дедовский виkkkkkk",
                 date = "12 июля"
             )
 
@@ -121,9 +174,9 @@ fun MainScreenContent() {
 
             CommunityNoteCard(
                 userName = "Имя Фамилия",
-                title = "Тест для текста в несколько строк. Это оче...",
-                content = "н важный момент. Его нужно проверить пост...",
-                date = "12 июля"
+                title = "Тест для текста в несколько строк. Это очемн важный момент. Его нужно проверить пост",
+                date = "12 июля",
+                userImage = painterResource(R.drawable.ic_searchnormal)
             )
         }
     }
@@ -132,8 +185,8 @@ fun MainScreenContent() {
 @Composable
 fun BottomNavigationBar() {
     Surface(
-        modifier = Modifier.height(56.dp),
         color = Color.White,
+        modifier = Modifier.height(56.dp)
     ) {
         Column {
             Divider(
@@ -273,6 +326,7 @@ fun SectionTitle(title: String, showAll: Boolean) {
         }
     }
 }
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CustomHorizontalPager(courses: List<Course>) {
@@ -287,9 +341,9 @@ fun CustomHorizontalPager(courses: List<Course>) {
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // HorizontalPager
             HorizontalPager(
-                state = pagerState
+                state = pagerState,
+                contentPadding = PaddingValues(end = 12.dp)
             ) { page ->
                 val course = courses[page]
                 CourseCard(
@@ -298,7 +352,6 @@ fun CustomHorizontalPager(courses: List<Course>) {
                 )
             }
 
-            // Indicators
             Row(
                 modifier = Modifier
                     .padding(16.dp)
@@ -321,97 +374,211 @@ fun CustomHorizontalPager(courses: List<Course>) {
         }
     }
 }
-@Composable
-fun HorizontalCourseList(courses: List<Course>) {
-    LazyRow(
-        modifier = Modifier.padding(horizontal = 8.dp) // Отступ для всего списка
-    ) {
-        items(courses) { course ->
-            CourseCard(title = course.title, tags = course.tags)
-        }
-    }
-}
+
 @Composable
 fun CourseCard(title: String, tags: List<String>) {
     Card(
         modifier = Modifier
-            .width(200.dp) // Установите ширину карточки
-            .padding(end = 8.dp), // Отступ между карточками
+            .fillMaxWidth()
+            .height(160.dp)
+            .padding(end = 8.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFFFFD80C)
         ),
         shape = RoundedCornerShape(8.dp)
     ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
-            )
+        Column(modifier = Modifier.padding(16.dp)) {
+            title.split(" ").forEach { word ->
+                Text(
+                    text = word,
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
             Spacer(modifier = Modifier.height(8.dp))
             WrapContent(tags)
         }
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun WrapContent(tags: List<String>) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+    FlowRow(
+        modifier = Modifier.fillMaxWidth(),
     ) {
         tags.forEach { tag ->
-            Text(text = tag)
+            Box(
+                modifier = Modifier
+                    .padding(horizontal = 4.dp, vertical = 4.dp)
+                    .border(
+                        width = 1.dp,
+                        color = Color(0xFF333333),
+                        shape = RoundedCornerShape(4.dp)
+                    )
+                    .padding(horizontal = 12.dp, vertical = 4.dp)
+            ) {
+                Text(
+                    text = tag,
+                    style = MaterialTheme.typography.bodySmall.copy()
+                )
+            }
         }
     }
 }
 
 @Composable
 fun NoteCard(title: String, content: String, date: String) {
-    Card(
+    Box(
         modifier = Modifier
             .fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFFFD80C)
-        ),
-        shape = RoundedCornerShape(8.dp)
+        contentAlignment = Alignment.TopEnd
     ) {
-        Column(modifier = Modifier.padding(8.dp)) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 12.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = Color(0xFFFFD80C)
+            ),
+            shape = RoundedCornerShape(8.dp)
+        ) {
+            Column(modifier = Modifier.padding(12.dp)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = content,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color(0xFF806B00),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
+
+        Row(
+            modifier = Modifier
+                .width(71.dp)
+                .height(30.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(Color(0xFF333333)),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
             Text(
-                text = title,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                text = date,
+                color = Color.White,
+                style = MaterialTheme.typography.bodySmall
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = content, style = MaterialTheme.typography.bodyMedium)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = date, style = MaterialTheme.typography.bodySmall)
         }
     }
 }
 
+
 @Composable
-fun CommunityNoteCard(userName: String, title: String, content: String, date: String) {
-    Card(
+fun CustomTitleText(title: String) {
+    val words = title.split(" ")
+    val firstLine = StringBuilder()
+    val secondLine = StringBuilder()
+    val thirdLine = StringBuilder()
+
+    for (word in words) {
+        when {
+            firstLine.isEmpty() || firstLine.length + word.length <= 20 -> firstLine.append("$word ")
+            secondLine.isEmpty() || secondLine.length + word.length <= 20 -> secondLine.append("$word ")
+            else -> thirdLine.append("$word ")
+        }
+    }
+
+    Column {
+        Text(
+            text = firstLine.toString().trim(),
+            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+        )
+        Text(
+            text = secondLine.toString().trim(),
+            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+        )
+        Text(
+            text = thirdLine.toString().trim(),
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color(0xFF806B00)
+        )
+    }
+}
+
+@Composable
+fun CommunityNoteCard(userName: String, title: String, userImage: Painter, date: String) {
+    Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 20.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFFFD80C)
-        ),
-        shape = RoundedCornerShape(8.dp)
+            .fillMaxWidth(),
+        contentAlignment = Alignment.TopEnd
     ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = userName, style = MaterialTheme.typography.titleMedium)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = content, style = MaterialTheme.typography.bodyMedium)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = date, style = MaterialTheme.typography.bodySmall)
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 12.dp, bottom = 20.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = Color(0xFFFFD80C)
+            ),
+            shape = RoundedCornerShape(8.dp)
+        ) {
+            Column(modifier = Modifier.padding(top = 26.dp, start = 12.dp, end = 12.dp, bottom = 10.dp)) {
+                CustomTitleText(title = title)
+            }
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color(0xFF333333))
+                    .height(30.dp)
+                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = userImage,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(14.dp)
+                        .padding(end = 4.dp)
+                )
+                Text(
+                    text = userName,
+                    color = Color.White,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Row(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color(0xFF333333))
+                    .height(30.dp)
+                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = date,
+                    color = Color.White,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
         }
     }
 }
+
 
 @Preview
 @Composable
