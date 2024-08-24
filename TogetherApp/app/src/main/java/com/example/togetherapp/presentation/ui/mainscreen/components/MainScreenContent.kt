@@ -36,6 +36,8 @@ import com.example.togetherapp.R
 import com.example.togetherapp.domain.model.Course
 import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
+import com.example.togetherapp.presentation.ui.components.CenteredProgressIndicator
+import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.ui.splashscreen.components.SplashScreenContent
 import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
@@ -141,52 +143,30 @@ fun MainScreenContent(
                 .padding(paddingValues)
                 .padding(start = 16.dp, end = 16.dp)
         ) {
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            SectionTitle(title = "Ваши курсы", showAll = true)
-
-            Spacer(modifier = Modifier.height(12.dp))
-
             when {
                 state.isLoading -> {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+                    CenteredProgressIndicator()
                 }
                 state.error != null -> {
-                    Text(text = "Ошибка: ${state.error}", color = Color.Red)
+                    ErrorMessage(
+                        errorMessage = state.error ?: "Что-то пошло не так",
+                        onRetryClick = { viewModel.handleEvent(MainScreenEvent.LoadCourses) }
+                    )
                 }
                 state.courses.isNotEmpty() -> {
-                    CustomHorizontalPager(courses = state.courses)
+                    YourCoursesTitle()
+
+                    MainScreenCards(state)
                 }
                 else -> {
+                    YourCoursesTitle()
+
                     Text(text = "Нет доступных курсов")
+
+                    MainScreenCards(state)
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
-
-            SectionTitle(title = "Ваши заметки", showAll = true)
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            NoteCard(
-                title = "Для создания новой Activity",
-                content = "Нужно лишь применить старый дедовский виkkkkkk",
-                date = "12 июля"
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            SectionTitle(title = "Заметки сообщества", showAll = true)
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            CommunityNoteCard(
-                userName = "Имя Фамилия",
-                title = "Тест для текста в несколько строк. Это очемн важный момент. Его нужно проверить пост",
-                date = "12 июля",
-                userImage = painterResource(R.drawable.ic_searchnormal)
-            )
         }
     }
 }

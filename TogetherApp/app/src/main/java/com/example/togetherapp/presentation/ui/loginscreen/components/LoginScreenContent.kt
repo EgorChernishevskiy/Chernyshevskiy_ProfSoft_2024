@@ -129,7 +129,7 @@ fun LoginScreenContent(
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF333333))
         ) {
             if (state.isLoading) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(color = Color(0xFFD6B714))
             } else {
                 Text(
                     text = stringResource(R.string.button_login_text_label),
