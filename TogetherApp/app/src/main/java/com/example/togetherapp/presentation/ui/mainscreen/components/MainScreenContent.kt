@@ -343,7 +343,7 @@ fun CustomHorizontalPager(courses: List<Course>) {
 
             Row(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(top = 8.dp, end = 16.dp)
                     .height(4.dp)
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween

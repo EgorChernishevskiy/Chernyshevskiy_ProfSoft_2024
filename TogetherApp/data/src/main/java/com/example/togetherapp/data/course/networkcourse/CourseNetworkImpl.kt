@@ -2,13 +2,14 @@ package com.example.togetherapp.data.course.networkcourse
 
 import com.example.togetherapp.data.api.CourseApi
 import com.example.togetherapp.data.course.model.CourseDto
+import com.example.togetherapp.data.model.CourseResponse
 import retrofit2.Response
 
 class CourseNetworkImpl(
     private val apiService: CourseApi
 ) : com.example.togetherapp.data.course.CourseNetwork {
 
-    override suspend fun getCourses(): Response<List<CourseDto>> {
+    override suspend fun getCourses(): Response<CourseResponse> {
         return apiService.getCourses()
     }
 

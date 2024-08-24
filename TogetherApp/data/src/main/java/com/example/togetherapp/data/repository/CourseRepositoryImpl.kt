@@ -13,7 +13,7 @@ class CourseRepositoryImpl(
     override suspend fun getCourses(): List<Course> {
         val response = apiRepository.getCourses()
         if (response.isSuccessful) {
-            return response.body()?.map { mapper.toDomain(it) } ?: emptyList()
+            return response.body()?.data?.map { mapper.toDomain(it) } ?: emptyList()
         } else {
             throw Exception("Failed to fetch courses: ${response.message()}")
         }
