@@ -48,14 +48,12 @@ fun SplashScreenContent(
             .fillMaxSize()
             .background(Color(0xFFFFD80C))
     ) {
-        // Лого
         Logo(
             modifier = Modifier
                 .align(Alignment.Center)
                 .width(65.dp)
         )
 
-        // Текст "ВМЕСТЕ"
         Image(
             painter = painterResource(id = R.drawable.together_label),
             contentDescription = null,

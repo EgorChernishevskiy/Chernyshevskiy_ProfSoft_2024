@@ -1,7 +1,7 @@
 package com.example.togetherapp.data.api
 
-import com.example.togetherapp.data.course.model.CourseDto
-import com.example.togetherapp.data.model.CourseResponse
+import com.example.togetherapp.data.model.course.CourseDto
+import com.example.togetherapp.data.model.course.CourseResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

@@ -174,7 +174,7 @@ fun RegisterScreenContent(
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF333333))
         ) {
             if (state.isLoading) {
-                CircularProgressIndicator(color = Color(0xFFD6B714))
+                CircularProgressIndicator(modifier = Modifier.size(30.dp), color = Color(0xFFD6B714))
             } else {
                 Text(
                     text = stringResource(R.string.register_text_label),

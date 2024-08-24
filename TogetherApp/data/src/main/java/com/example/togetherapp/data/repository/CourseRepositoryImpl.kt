@@ -1,17 +1,17 @@
 package com.example.togetherapp.data.repository
 
-import com.example.togetherapp.data.course.CourseNetwork
-import com.example.togetherapp.data.mappers.CourseMapper
-import com.example.togetherapp.domain.model.Course
+import com.example.togetherapp.data.api.CourseApi
+import com.example.togetherapp.data.mappers.course.CourseMapper
+import com.example.togetherapp.domain.model.course.Course
 import com.example.togetherapp.domain.repository.CourseRepository
 
 class CourseRepositoryImpl(
-    private val apiRepository: CourseNetwork,
+    private val apiService: CourseApi,
     private val mapper: CourseMapper
 ) : CourseRepository {
 
     override suspend fun getCourses(): List<Course> {
-        val response = apiRepository.getCourses()
+        val response = apiService.getCourses()
         if (response.isSuccessful) {
             return response.body()?.data?.map { mapper.toDomain(it) } ?: emptyList()
         } else {
@@ -20,7 +20,7 @@ class CourseRepositoryImpl(
     }
 
     override suspend fun getCourseById(courseId: String): Course {
-        val response = apiRepository.getCourseById(courseId)
+        val response = apiService.getCourseById(courseId)
         if (response.isSuccessful) {
             return response.body()?.let { mapper.toDomain(it) }
                 ?: throw Exception("Course not found")
@@ -31,7 +31,7 @@ class CourseRepositoryImpl(
 
     override suspend fun createCourse(course: Course): Course {
         val courseDto = mapper.toDto(course)
-        val response = apiRepository.createCourse(courseDto)
+        val response = apiService.createCourse(courseDto)
         if (response.isSuccessful) {
             return response.body()?.let { mapper.toDomain(it) }
                 ?: throw Exception("Failed to create course")

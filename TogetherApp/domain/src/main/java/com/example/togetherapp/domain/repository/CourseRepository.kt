@@ -1,6 +1,6 @@
 package com.example.togetherapp.domain.repository
 
-import com.example.togetherapp.domain.model.Course
+import com.example.togetherapp.domain.model.course.Course
 
 interface CourseRepository {
     suspend fun getCourses(): List<Course>

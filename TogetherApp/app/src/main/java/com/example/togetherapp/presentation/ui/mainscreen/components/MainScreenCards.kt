@@ -1,5 +1,7 @@
 package com.example.togetherapp.presentation.ui.mainscreen.components
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
@@ -7,17 +9,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.togetherapp.R
+import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
+import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MainScreenCards(state: MainScreenState){
+fun MainScreenCards(state: MainScreenState, viewModel: MainScreenViewModel){
     Spacer(modifier = Modifier.height(12.dp))
 
     CustomHorizontalPager(courses = state.courses)
 
     Spacer(modifier = Modifier.height(24.dp))
 
-    SectionTitle(title = "Ваши заметки", showAll = true)
+    SectionTitle(title = "Ваши заметки", showAll = true) {
+        viewModel.handleEvent(MainScreenEvent.ShowAllCourses)
+    }
+
 
     Spacer(modifier = Modifier.height(12.dp))
 
@@ -29,14 +37,18 @@ fun MainScreenCards(state: MainScreenState){
 
     Spacer(modifier = Modifier.height(20.dp))
 
-    SectionTitle(title = "Заметки сообщества", showAll = true)
+    SectionTitle(title = "Заметки сообщества", showAll = true) {
+        viewModel.handleEvent(MainScreenEvent.ShowAllCourses)
+    }
 
     Spacer(modifier = Modifier.height(12.dp))
 
-    CommunityNoteCard(
-        userName = "Имя Фамилия",
-        title = "Тест для текста в несколько строк. Это очемн важный момент. Его нужно проверить пост",
-        date = "12 июля",
-        userImage = painterResource(R.drawable.ic_searchnormal)
-    )
+    state.communityNote?.let { note ->
+        CommunityNoteCard(
+            userName = "${note.author.name} ${note.author.surname}",
+            title = note.title,
+            date = note.date,
+            userImageUrl = note.author.avatar
+        )
+    }
 }

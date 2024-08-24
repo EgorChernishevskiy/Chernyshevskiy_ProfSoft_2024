@@ -33,7 +33,7 @@ fun ErrorMessage(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_error_image), // Замените на ваш ресурс изображения
+            painter = painterResource(id = R.drawable.ic_error_image),
             contentDescription = null
         )
         Text(

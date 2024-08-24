@@ -4,12 +4,17 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.togetherapp.data.interceptor.TokenInterceptor
-import com.example.togetherapp.data.mappers.CourseMapper
-import com.example.togetherapp.data.mappers.CourseMapperImpl
+import com.example.togetherapp.data.mappers.auth.AuthMapper
+import com.example.togetherapp.data.mappers.auth.AuthMapperImpl
+import com.example.togetherapp.data.mappers.course.CourseMapper
+import com.example.togetherapp.data.mappers.course.CourseMapperImpl
+import com.example.togetherapp.data.mappers.note.NoteMapper
+import com.example.togetherapp.data.mappers.note.NoteMapperImpl
 import com.example.togetherapp.domain.repository.AuthRepository
 import com.example.togetherapp.domain.repository.CourseRepository
+import com.example.togetherapp.domain.repository.NoteRepository
 import com.example.togetherapp.domain.repository.TokenRepository
-import com.example.togetherapp.domain.usecase.GetCoursesUseCase
+import com.example.togetherapp.domain.usecase.course.GetCoursesUseCase
 import com.example.togetherapp.domain.usecase.auth.CheckTokenUseCase
 import com.example.togetherapp.domain.usecase.auth.LoginUseCase
 import com.example.togetherapp.domain.usecase.auth.RegisterUseCase
@@ -18,6 +23,7 @@ import com.example.togetherapp.domain.usecase.auth.ValidateFirstNameUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidateLastNameUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidatePasswordUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidatePhoneNumberUseCase
+import com.example.togetherapp.domain.usecase.note.GetNotesUseCase
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
@@ -49,6 +55,9 @@ val networkModule = module {
     single {
         get<Retrofit>().create(com.example.togetherapp.data.api.CourseApi::class.java)
     }
+    single {
+        get<Retrofit>().create(com.example.togetherapp.data.api.NoteApi::class.java)
+    }
 }
 
 val sharedPrefsModule = module {
@@ -58,14 +67,9 @@ val sharedPrefsModule = module {
 }
 
 val repositoryModule = module {
-    single<com.example.togetherapp.data.auth.UserAuth> {
-        com.example.togetherapp.data.auth.password.PasswordUserAuth(
-            get()
-        )
-    }
     single<AuthRepository> {
         com.example.togetherapp.data.repository.AuthRepositoryImpl(
-            get()
+            get(), get()
         )
     }
     single<TokenRepository> {
@@ -78,15 +82,17 @@ val repositoryModule = module {
             get(), get()
         )
     }
-    single<com.example.togetherapp.data.course.CourseNetwork> {
-        com.example.togetherapp.data.course.networkcourse.CourseNetworkImpl(
-            get()
+    single<NoteRepository> {
+        com.example.togetherapp.data.repository.NoteRepositoryImpl(
+            get(), get()
         )
     }
 }
 
 val mapperModule = module {
     single<CourseMapper> { CourseMapperImpl() }
+    single<NoteMapper> { NoteMapperImpl() }
+    single<AuthMapper> { AuthMapperImpl() }
 }
 
 
@@ -100,13 +106,13 @@ val useCaseModule = module {
     single { ValidatePhoneNumberUseCase() }
     single { ValidatePasswordUseCase() }
     single { GetCoursesUseCase(get()) }
-
+    single { GetNotesUseCase(get()) }
 }
 
 val viewModelModule = module {
-    viewModel { AuthViewModel(get(), get(), get(), get(), get(), get(), get() ) }
+    viewModel { AuthViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { SplashScreenViewModel(get()) }
-    viewModel { MainScreenViewModel(get()) }
+    viewModel { MainScreenViewModel(get(), get()) }
 }
 
 val appModules = listOf(

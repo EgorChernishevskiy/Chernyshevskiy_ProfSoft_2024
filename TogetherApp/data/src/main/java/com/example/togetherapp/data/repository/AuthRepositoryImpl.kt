@@ -1,31 +1,41 @@
 package com.example.togetherapp.data.repository
 
-import com.example.togetherapp.data.auth.UserAuth
-import com.example.togetherapp.data.auth.model.LoginRequest
-import com.example.togetherapp.data.auth.model.RegisterRequest
+import com.example.togetherapp.data.api.AuthApi
+import com.example.togetherapp.data.mappers.auth.AuthMapper
 import com.example.togetherapp.domain.model.auth.LoginParams
 import com.example.togetherapp.domain.model.auth.RegisterParams
 import com.example.togetherapp.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
-    private val userAuth: UserAuth
+    private val authApiService: AuthApi,
+    private val authMapper: AuthMapper
 ) : AuthRepository {
+
     override suspend fun login(params: LoginParams): Result<String> {
-        val loginRequest = LoginRequest(
-            phone = params.phone,
-            passwordHashed = params.passwordHashed
-        )
-        return userAuth.login(loginRequest)
+        val loginRequest = authMapper.toLoginRequest(params)
+        return try {
+            val response = authApiService.login(loginRequest)
+            if (response.isSuccessful) {
+                Result.success(response.body()?.data?.token ?: "")
+            } else {
+                Result.failure(Exception("Вход не удался"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     override suspend fun register(params: RegisterParams): Result<String> {
-        val registerRequest = RegisterRequest(
-            name = params.firstName,
-            surname = params.lastName,
-            phone = params.phoneNumber,
-            passwordHashed = params.password,
-            avatar = ""
-        )
-        return return userAuth.register(registerRequest)
+        val registerRequest = authMapper.toRegisterRequest(params)
+        return try {
+            val response = authApiService.register(registerRequest)
+            if (response.isSuccessful) {
+                Result.success(response.body()?.data?.token ?: "")
+            } else {
+                Result.failure(Exception("Регистрация не удалась"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }
