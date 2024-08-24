@@ -1,6 +1,6 @@
-package com.example.togetherapp.domain.usecase
+package com.example.togetherapp.domain.usecase.auth
 
-import com.example.togetherapp.domain.model.LoginParams
+import com.example.togetherapp.domain.model.auth.LoginParams
 import com.example.togetherapp.domain.repository.AuthRepository
 
 class LoginUseCase(private val authRepository: AuthRepository) {

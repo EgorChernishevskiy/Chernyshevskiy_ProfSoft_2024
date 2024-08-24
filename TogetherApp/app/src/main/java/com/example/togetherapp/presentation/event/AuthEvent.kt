@@ -9,5 +9,6 @@ sealed class AuthEvent {
     data class OnLoginPasswordChange(val password: String) : AuthEvent()
     data class OnRegisterPhoneNumberChange(val phoneNumber: String) : AuthEvent()
     data class OnRegisterPasswordChange(val password: String) : AuthEvent()
-    data class OnErrorMessageClear(val errorMessage: String): AuthEvent()
+    data class OnLoginErrorMessageClear(val errorMessage: String): AuthEvent()
+    data class OnRegisterErrorMessageClear(val errorMessage: String): AuthEvent()
 }

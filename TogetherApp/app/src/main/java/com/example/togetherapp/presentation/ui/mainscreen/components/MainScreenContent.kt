@@ -14,7 +14,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -31,14 +33,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.togetherapp.R
+import com.example.togetherapp.domain.model.Course
+import com.example.togetherapp.presentation.event.MainScreenEvent
+import com.example.togetherapp.presentation.state.MainScreenState
 import com.example.togetherapp.presentation.ui.splashscreen.components.SplashScreenContent
 import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
-
-data class Course(val title: String, val tags: List<String>)
+import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreenContent() {
+fun MainScreenContent(
+    viewModel: MainScreenViewModel
+) {
+
+    val state by viewModel.state.observeAsState(MainScreenState())
+
+    LaunchedEffect(Unit) {
+        viewModel.handleEvent(MainScreenEvent.LoadCourses)
+    }
+
     var isSearching by remember { mutableStateOf(false) }
     var searchQuery by remember { mutableStateOf("") }
 
@@ -121,6 +134,7 @@ fun MainScreenContent() {
         bottomBar = {
             BottomNavigationBar()
         }
+
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -134,25 +148,20 @@ fun MainScreenContent() {
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            CustomHorizontalPager(
-                courses = listOf(
-                    Course(
-                        "Основы Андроида",
-                        listOf(
-                            "View",
-                            "Компоненты андроид",
-                            "Создание проекта",
-                            "Intent",
-                            "Manifest"
-                        )
-                    ),
-                    Course("Продвинутый Android", listOf("Jetpack Compose", "Coroutines", "Hilt")),
-                    Course(
-                        "Кроссплатформенная разработка",
-                        listOf("Flutter", "Kotlin Multiplatform", "React Native")
-                    )
-                )
-            )
+            when {
+                state.isLoading -> {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+                }
+                state.error != null -> {
+                    Text(text = "Ошибка: ${state.error}", color = Color.Red)
+                }
+                state.courses.isNotEmpty() -> {
+                    CustomHorizontalPager(courses = state.courses)
+                }
+                else -> {
+                    Text(text = "Нет доступных курсов")
+                }
+            }
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -580,10 +589,10 @@ fun CommunityNoteCard(userName: String, title: String, userImage: Painter, date:
 }
 
 
-@Preview
-@Composable
-private fun MainScreenPreview() {
-    TogetherAppTheme {
-        MainScreenContent()
-    }
-}
+//@Preview
+//@Composable
+//private fun MainScreenPreview() {
+//    TogetherAppTheme {
+//        MainScreenContent()
+//    }
+//}

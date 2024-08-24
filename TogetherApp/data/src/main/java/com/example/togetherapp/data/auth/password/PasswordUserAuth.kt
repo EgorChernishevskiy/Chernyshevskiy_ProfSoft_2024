@@ -10,9 +10,9 @@ class PasswordUserAuth(private val authApiService: AuthApi) : UserAuth {
         return try {
             val response = authApiService.login(params)
             if (response.isSuccessful) {
-                Result.success(response.body()?.token ?: "")
+                Result.success(response.body()?.data?.token ?: "")
             } else {
-                Result.failure(Exception("Login failed"))
+                Result.failure(Exception("Вход не удался"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -23,9 +23,9 @@ class PasswordUserAuth(private val authApiService: AuthApi) : UserAuth {
         return try {
             val response = authApiService.register(params)
             if (response.isSuccessful) {
-                Result.success(response.body()?.token ?: "")
+                Result.success(response.body()?.data?.token ?: "")
             } else {
-                Result.failure(Exception("Registration failed"))
+                Result.failure(Exception("Регистрация не удалась"))
             }
         } catch (e: Exception) {
             Result.failure(e)

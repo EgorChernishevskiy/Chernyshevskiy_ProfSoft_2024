@@ -3,8 +3,8 @@ package com.example.togetherapp.data.repository
 import com.example.togetherapp.data.auth.UserAuth
 import com.example.togetherapp.data.auth.model.LoginRequest
 import com.example.togetherapp.data.auth.model.RegisterRequest
-import com.example.togetherapp.domain.model.LoginParams
-import com.example.togetherapp.domain.model.RegisterParams
+import com.example.togetherapp.domain.model.auth.LoginParams
+import com.example.togetherapp.domain.model.auth.RegisterParams
 import com.example.togetherapp.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(

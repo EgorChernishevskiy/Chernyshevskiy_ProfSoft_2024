@@ -4,28 +4,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.togetherapp.domain.model.LoginParams
-import com.example.togetherapp.domain.model.RegisterParams
-import com.example.togetherapp.domain.usecase.LoginUseCase
-import com.example.togetherapp.domain.usecase.RegisterUseCase
-import com.example.togetherapp.domain.usecase.SaveTokenUseCase
-import com.example.togetherapp.domain.usecase.ValidateFirstNameUseCase
-import com.example.togetherapp.domain.usecase.ValidateLastNameUseCase
-import com.example.togetherapp.domain.usecase.ValidatePasswordUseCase
-import com.example.togetherapp.domain.usecase.ValidatePhoneNumberUseCase
-import com.example.togetherapp.domain.utils.hashPassword
+import com.example.togetherapp.domain.model.auth.LoginParams
+import com.example.togetherapp.domain.model.auth.RegisterParams
+import com.example.togetherapp.domain.usecase.auth.LoginUseCase
+import com.example.togetherapp.domain.usecase.auth.RegisterUseCase
+import com.example.togetherapp.domain.usecase.auth.SaveTokenUseCase
+import com.example.togetherapp.domain.usecase.auth.ValidateFirstNameUseCase
+import com.example.togetherapp.domain.usecase.auth.ValidateLastNameUseCase
+import com.example.togetherapp.domain.usecase.auth.ValidatePasswordUseCase
+import com.example.togetherapp.domain.usecase.auth.ValidatePhoneNumberUseCase
 import com.example.togetherapp.presentation.event.AuthEvent
 import com.example.togetherapp.presentation.state.AuthState
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
-    private val loginUseCase: com.example.togetherapp.domain.usecase.LoginUseCase,
-    private val registerUseCase: com.example.togetherapp.domain.usecase.RegisterUseCase,
-    private val saveTokenUseCase: com.example.togetherapp.domain.usecase.SaveTokenUseCase,
-    private val validateFirstNameUseCase: com.example.togetherapp.domain.usecase.ValidateFirstNameUseCase,
-    private val validateLastNameUseCase: com.example.togetherapp.domain.usecase.ValidateLastNameUseCase,
-    private val validatePhoneNumberUseCase: com.example.togetherapp.domain.usecase.ValidatePhoneNumberUseCase,
-    private val validatePasswordUseCase: com.example.togetherapp.domain.usecase.ValidatePasswordUseCase
+    private val loginUseCase: LoginUseCase,
+    private val registerUseCase: RegisterUseCase,
+    private val saveTokenUseCase: SaveTokenUseCase,
+    private val validateFirstNameUseCase: ValidateFirstNameUseCase,
+    private val validateLastNameUseCase: ValidateLastNameUseCase,
+    private val validatePhoneNumberUseCase: ValidatePhoneNumberUseCase,
+    private val validatePasswordUseCase: ValidatePasswordUseCase
 ) : ViewModel() {
 
     private val _state = MutableLiveData(AuthState())
@@ -80,8 +79,11 @@ class AuthViewModel(
                 validateRegisterPassword()
             }
 
-            is AuthEvent.OnErrorMessageClear -> {
-                _state.value = _state.value?.copy(errorMessage = null)
+            is AuthEvent.OnLoginErrorMessageClear -> {
+                _state.value = _state.value?.copy(loginErrorMessage = null)
+            }
+            is AuthEvent.OnRegisterErrorMessageClear -> {
+                _state.value = _state.value?.copy(registerErrorMessage = null)
             }
         }
     }
@@ -120,7 +122,7 @@ class AuthViewModel(
 
         val hashedPassword =
             com.example.togetherapp.domain.utils.hashPassword(_state.value?.loginPassword ?: "")
-        val loginParams = com.example.togetherapp.domain.model.LoginParams(
+        val loginParams = LoginParams(
             phone = _state.value?.loginPhoneNumber ?: "",
             passwordHashed = hashedPassword
         )
@@ -132,7 +134,6 @@ class AuthViewModel(
         validateLastName()
         validateRegisterPhoneNumber()
         validateRegisterPassword()
-
         if (_state.value?.firstNameError != null || _state.value?.lastNameError != null ||
             _state.value?.registerPhoneNumberError != null || _state.value?.registerPasswordError != null
         ) {
@@ -141,7 +142,7 @@ class AuthViewModel(
 
         val hashedPassword =
             com.example.togetherapp.domain.utils.hashPassword(_state.value?.registerPassword ?: "")
-        val registerParams = com.example.togetherapp.domain.model.RegisterParams(
+        val registerParams = RegisterParams(
             firstName = _state.value?.firstName ?: "",
             lastName = _state.value?.lastName ?: "",
             phoneNumber = _state.value?.registerPhoneNumber ?: "",
@@ -150,7 +151,7 @@ class AuthViewModel(
         register(registerParams)
     }
 
-    private fun login(params: com.example.togetherapp.domain.model.LoginParams) {
+    private fun login(params: LoginParams) {
         viewModelScope.launch {
             _state.value = _state.value?.copy(isLoading = true)
             val result = loginUseCase(params)
@@ -159,12 +160,12 @@ class AuthViewModel(
                 _state.value = _state.value?.copy(isLoading = false, loginSuccess = true)
             } else {
                 _state.value =
-                    _state.value?.copy(isLoading = false, errorMessage = result.exceptionOrNull()?.message)
+                    _state.value?.copy(isLoading = false, loginErrorMessage = result.exceptionOrNull()?.message)
             }
         }
     }
 
-    private fun register(params: com.example.togetherapp.domain.model.RegisterParams) {
+    private fun register(params: RegisterParams) {
         viewModelScope.launch {
             _state.value = _state.value?.copy(isLoading = true)
             val result = registerUseCase(params)
@@ -173,7 +174,7 @@ class AuthViewModel(
                 _state.value = _state.value?.copy(isLoading = false, registerSuccess = true)
             } else {
                 _state.value =
-                    _state.value?.copy(isLoading = false, errorMessage = result.exceptionOrNull()?.message)
+                    _state.value?.copy(isLoading = false, registerErrorMessage = result.exceptionOrNull()?.message)
             }
         }
     }

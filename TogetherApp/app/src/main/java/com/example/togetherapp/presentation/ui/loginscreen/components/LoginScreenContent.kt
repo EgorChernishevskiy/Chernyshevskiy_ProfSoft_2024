@@ -39,14 +39,14 @@ fun LoginScreenContent(
         }
     }
 
-    LaunchedEffect(state.errorMessage) {
-        state.errorMessage?.let { errorMsg ->
+    LaunchedEffect(state.loginErrorMessage) {
+        state.loginErrorMessage?.let { errorMsg ->
             val result = snackbarHostState.showSnackbar(
                 message = errorMsg,
                 actionLabel = "OK"
             )
             if (result == SnackbarResult.ActionPerformed) {
-                viewModel.handleEvent(AuthEvent.OnErrorMessageClear(errorMsg))
+                viewModel.handleEvent(AuthEvent.OnLoginErrorMessageClear(errorMsg))
             }
         }
     }
@@ -60,7 +60,6 @@ fun LoginScreenContent(
 
         Spacer(modifier = Modifier.height(40.dp))
 
-        // Логотип
         Logo(
             modifier = Modifier
                 .padding(top = 94.dp)
@@ -69,7 +68,6 @@ fun LoginScreenContent(
 
         Spacer(modifier = Modifier.height(69.dp))
 
-        // Текст "Вход"
         Text(
             text = stringResource(R.string.login_text_label),
             style = MaterialTheme.typography.titleLarge,
@@ -79,7 +77,6 @@ fun LoginScreenContent(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Подтекст
         Text(
             text = stringResource(R.string.login_subtext_text_label),
             style = MaterialTheme.typography.bodyLarge,
@@ -90,7 +87,6 @@ fun LoginScreenContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Поле "Номер телефона"
         AuthTextField(
             value = state.loginPhoneNumber,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnLoginPhoneNumberChange(it)) },
@@ -108,7 +104,6 @@ fun LoginScreenContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Поле "Пароль"
         AuthTextField(
             value = state.loginPassword,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnLoginPasswordChange(it)) },
@@ -118,7 +113,6 @@ fun LoginScreenContent(
 
         Spacer(modifier = Modifier.height(150.dp))
 
-        // Кнопка "Войти"
         Button(
             onClick = {
                 viewModel.handleEvent(
@@ -147,7 +141,6 @@ fun LoginScreenContent(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Кнопка "Регистрация"
         TextButton(
             onClick = { navController.navigate("register") },
             modifier = Modifier

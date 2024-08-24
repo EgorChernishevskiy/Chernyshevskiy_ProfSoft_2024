@@ -1,6 +1,6 @@
-package com.example.togetherapp.domain.usecase
+package com.example.togetherapp.domain.usecase.auth
 
-import com.example.togetherapp.domain.model.ValidationResult
+import com.example.togetherapp.domain.model.auth.ValidationResult
 
 class ValidateFirstNameUseCase {
 

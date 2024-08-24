@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,6 +29,7 @@ fun RegisterScreenContent(
     modifier: Modifier = Modifier
 ) {
     val state by viewModel.state.observeAsState(AuthState())
+    val snackbarHostState = remember { SnackbarHostState() }
 
     if (state.registerSuccess) {
         LaunchedEffect(Unit) {
@@ -36,15 +38,29 @@ fun RegisterScreenContent(
             }
         }
     }
+
+    LaunchedEffect(state.registerErrorMessage) {
+        state.registerErrorMessage?.let { errorMsg ->
+            val result = snackbarHostState.showSnackbar(
+                message = errorMsg,
+                actionLabel = "OK"
+            )
+            if (result == SnackbarResult.ActionPerformed) {
+                viewModel.handleEvent(AuthEvent.OnRegisterErrorMessageClear(errorMsg))
+            }
+        }
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(start = 16.dp, end = 16.dp)
     ) {
 
+        SnackbarHost(hostState = snackbarHostState)
+
         Spacer(modifier = Modifier.height(40.dp))
 
-        // Логотип
         Logo(
             modifier = Modifier
                 .padding(top = 83.dp)
@@ -53,7 +69,6 @@ fun RegisterScreenContent(
 
         Spacer(modifier = Modifier.height(58.dp))
 
-        // Текст "Регистрация"
         Text(
             text = stringResource(R.string.register_text_label),
             style = MaterialTheme.typography.titleLarge,
@@ -63,7 +78,6 @@ fun RegisterScreenContent(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Подтекст
         Text(
             text = stringResource(R.string.register_subtext_label),
             style = MaterialTheme.typography.bodyLarge,
@@ -74,7 +88,6 @@ fun RegisterScreenContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Поле "Имя"
         AuthTextField(
             value = state.firstName,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnFirstNameChange(it)) },
@@ -92,7 +105,6 @@ fun RegisterScreenContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Поле "Фамилия"
         AuthTextField(
             value = state.lastName,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnLastNameChange(it)) },
@@ -110,7 +122,6 @@ fun RegisterScreenContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Поле "Номер телефона"
         AuthTextField(
             value = state.registerPhoneNumber,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnRegisterPhoneNumberChange(it)) },
@@ -128,7 +139,6 @@ fun RegisterScreenContent(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Поле "Пароль"
         AuthTextField(
             value = state.registerPassword,
             onValueChange = { viewModel.handleEvent(AuthEvent.OnRegisterPasswordChange(it)) },
@@ -146,7 +156,6 @@ fun RegisterScreenContent(
 
         Spacer(modifier = Modifier.height(60.dp))
 
-        // Кнопка "Регистрация"
         Button(
             onClick = {
                 viewModel.handleEvent(
@@ -177,7 +186,6 @@ fun RegisterScreenContent(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Кнопка "Войти"
         TextButton(
             onClick = { navController.navigate("login") },
             modifier = Modifier

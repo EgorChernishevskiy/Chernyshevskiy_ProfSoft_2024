@@ -8,8 +8,9 @@ import androidx.navigation.NavHostController
 import com.example.togetherapp.presentation.ui.loginscreen.components.LoginScreenContent
 import com.example.togetherapp.presentation.ui.mainscreen.components.MainScreenContent
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
+import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 
 @Composable
-fun MainScreen(navController: NavHostController) {
-    MainScreenContent()
+fun MainScreen(viewModel: MainScreenViewModel, navController: NavHostController) {
+    MainScreenContent(viewModel)
 }
