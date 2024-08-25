@@ -1,5 +1,5 @@
 package com.example.togetherapp.data.model.course
 
-data class CourseResponse(
+data class AllCoursesResponse(
     val data: List<CourseDto>
 )

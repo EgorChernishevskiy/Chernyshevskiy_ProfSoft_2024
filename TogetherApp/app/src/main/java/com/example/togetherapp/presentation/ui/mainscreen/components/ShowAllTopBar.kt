@@ -14,17 +14,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.togetherapp.R
 import com.example.togetherapp.presentation.event.MainScreenEvent
+import com.example.togetherapp.presentation.ui.components.IconButtonBack
 
 @Composable
 fun ShowAllTopBar(title: String, onHideAllClick: () -> Unit){
     Row(verticalAlignment = Alignment.CenterVertically) {
-        IconButton(onClick = { onHideAllClick() }) {
-            Icon(
-                painter = painterResource(R.drawable.ic_back_arrow),
-                contentDescription = null,
-                modifier = Modifier.size(20.dp)
-            )
-        }
+        IconButtonBack(onHideAllClick)
         Text(
             text = title,
             style = MaterialTheme.typography.titleLarge,

@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.togetherapp.R
 import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
@@ -33,7 +34,8 @@ import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenContent(
-    viewModel: MainScreenViewModel
+    viewModel: MainScreenViewModel,
+    navController: NavHostController,
 ) {
 
     val state by viewModel.state.observeAsState(MainScreenState())
@@ -166,7 +168,13 @@ fun MainScreenContent(
                         items(state.courses.size) { index ->
                             val course = state.courses[index]
                             Spacer(modifier = Modifier.height(20.dp))
-                            CourseCard(title = course.title, tags = course.tags)
+                            CourseCard(
+                                title = course.title,
+                                tags = course.tags,
+                                onClick = {
+                                    navController.navigate("details/${course.id}/${index}")
+                                }
+                            )
                         }
                     }
                 }
@@ -193,7 +201,7 @@ fun MainScreenContent(
                         viewModel.handleEvent(MainScreenEvent.ShowAllCourses)
                     }
 
-                    MainScreenCards(state, viewModel)
+                    MainScreenCards(state, viewModel, navController)
                 }
 
                 else -> {
@@ -218,7 +226,7 @@ fun MainScreenContent(
                         )
                     }
 
-                    MainScreenCards(state, viewModel)
+                    MainScreenCards(state, viewModel, navController)
                 }
             }
 

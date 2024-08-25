@@ -22,7 +22,7 @@ class CourseRepositoryImpl(
     override suspend fun getCourseById(courseId: String): Course {
         val response = apiService.getCourseById(courseId)
         if (response.isSuccessful) {
-            return response.body()?.let { mapper.toDomain(it) }
+            return response.body()?.data?.let { mapper.toDomain(it) }
                 ?: throw Exception("Course not found")
         } else {
             throw Exception("Failed to fetch course: ${response.message()}")

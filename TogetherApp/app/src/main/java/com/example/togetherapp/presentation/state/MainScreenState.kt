@@ -10,5 +10,6 @@ data  class MainScreenState (
     val isLoading: Boolean = false,
     val error: String? = null,
     val showAllCourses: Boolean = false,
-    val showAllNotes: Boolean = false
+    val showAllNotes: Boolean = false,
+    val selectedCourse: Course? = null
 )

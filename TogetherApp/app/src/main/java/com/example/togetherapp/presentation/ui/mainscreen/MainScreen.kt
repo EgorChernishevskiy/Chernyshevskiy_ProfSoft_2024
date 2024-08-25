@@ -1,5 +1,7 @@
 package com.example.togetherapp.presentation.ui.mainscreen
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,7 +12,8 @@ import com.example.togetherapp.presentation.ui.mainscreen.components.MainScreenC
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainScreen(viewModel: MainScreenViewModel, navController: NavHostController) {
-    MainScreenContent(viewModel)
+    MainScreenContent(viewModel, navController)
 }

@@ -1,5 +1,6 @@
 package com.example.togetherapp.presentation.ui.mainscreen.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,12 +17,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CourseCard(title: String, tags: List<String>) {
+fun CourseCard(title: String, tags: List<String>, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(160.dp)
-            .padding(end = 8.dp),
+            .padding(end = 8.dp)
+            .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFFFFD80C)
         ),

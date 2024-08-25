@@ -23,8 +23,10 @@ import com.example.togetherapp.domain.usecase.auth.ValidateFirstNameUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidateLastNameUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidatePasswordUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidatePhoneNumberUseCase
+import com.example.togetherapp.domain.usecase.course.GetCourseByIdUseCase
 import com.example.togetherapp.domain.usecase.note.GetNotesUseCase
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
+import com.example.togetherapp.presentation.viewmodel.DetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 import okhttp3.OkHttpClient
@@ -106,6 +108,7 @@ val useCaseModule = module {
     single { ValidatePhoneNumberUseCase() }
     single { ValidatePasswordUseCase() }
     single { GetCoursesUseCase(get()) }
+    single { GetCourseByIdUseCase(get()) }
     single { GetNotesUseCase(get()) }
 }
 
@@ -113,6 +116,7 @@ val viewModelModule = module {
     viewModel { AuthViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { SplashScreenViewModel(get()) }
     viewModel { MainScreenViewModel(get(), get()) }
+    viewModel { DetailsScreenViewModel(get()) }
 }
 
 val appModules = listOf(

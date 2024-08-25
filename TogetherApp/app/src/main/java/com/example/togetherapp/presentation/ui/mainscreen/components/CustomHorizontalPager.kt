@@ -17,11 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.togetherapp.domain.model.course.Course
+import com.example.togetherapp.presentation.event.MainScreenEvent
+import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CustomHorizontalPager(courses: List<Course>) {
+fun CustomHorizontalPager(courses: List<Course>, navController: NavHostController) {
     Box(
         modifier = Modifier.fillMaxWidth(),
     ) {
@@ -40,7 +43,8 @@ fun CustomHorizontalPager(courses: List<Course>) {
                 val course = courses[page]
                 CourseCard(
                     title = course.title,
-                    tags = course.tags
+                    tags = course.tags,
+                    onClick = { navController.navigate("details/${course.id}/${page}") }
                 )
             }
 

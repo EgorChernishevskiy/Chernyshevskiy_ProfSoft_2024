@@ -40,6 +40,18 @@ class MainScreenViewModel(
             is MainScreenEvent.HideAllNotes -> {
                 _state.value = _state.value?.copy(showAllNotes = false)
             }
+            is MainScreenEvent.SelectCourse -> {
+                _state.value = state.value?.copy(
+                    selectedCourse = event.course,
+                    showAllCourses = false
+                )
+            }
+            MainScreenEvent.DeselectCourse -> {
+                _state.value = state.value?.copy(
+                    selectedCourse = null,
+                    showAllCourses = true
+                )
+            }
         }
     }
 
@@ -86,7 +98,7 @@ class MainScreenViewModel(
             _state.value = _state.value?.copy(isLoading = true)
             try {
                 val notesList = getNotesUseCase.execute()
-                val lastCommunityNote = notesList.lastOrNull()
+                val lastCommunityNote = notesList.firstOrNull()
                 _state.value = _state.value?.copy(communityNote = lastCommunityNote)
             } catch (e: Exception) {
                 _state.value = _state.value?.copy(error = e.message)
