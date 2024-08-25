@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -65,9 +66,9 @@ fun CommunityNoteCard(userName: String, title: String, userImageUrl: String, dat
         ) {
             Row(
                 modifier = Modifier
+                    .height(30.dp)
                     .clip(RoundedCornerShape(8.dp))
                     .background(Color(0xFF333333))
-                    .height(30.dp)
                     .padding(horizontal = 12.dp, vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
@@ -77,6 +78,7 @@ fun CommunityNoteCard(userName: String, title: String, userImageUrl: String, dat
                     contentDescription = null,
                     modifier = Modifier
                         .size(14.dp)
+                        .clip(CircleShape)
                         .padding(end = 4.dp)
                 )
                 Text(

@@ -20,14 +20,37 @@ class MainScreenViewModel(
 
     fun handleEvent(event: MainScreenEvent) {
         when (event) {
-            is MainScreenEvent.LoadCourses -> fetchCourses()
-            is MainScreenEvent.LoadNotes -> fetchNotes()
+            is MainScreenEvent.LoadCourses -> {
+                fetchCourses()
+            }
+            is MainScreenEvent.LoadNotes -> {
+                fetchNotes()
+            }
             is MainScreenEvent.ShowAllCourses -> {
                 _state.value = _state.value?.copy(showAllCourses = true)
                 loadCourses()
             }
             is MainScreenEvent.HideAllCourses -> {
                 _state.value = _state.value?.copy(showAllCourses = false)
+            }
+            is MainScreenEvent.ShowAllNotes -> {
+                _state.value = _state.value?.copy(showAllNotes = true)
+                loadNotes()
+            }
+            is MainScreenEvent.HideAllNotes -> {
+                _state.value = _state.value?.copy(showAllNotes = false)
+            }
+        }
+    }
+
+    private fun loadNotes() {
+        _state.value = _state.value?.copy(isLoading = true)
+        viewModelScope.launch {
+            try {
+                val notes = getNotesUseCase.execute()
+                _state.value = _state.value?.copy(notes = notes, isLoading = false)
+            } catch (e: Exception) {
+                _state.value = _state.value?.copy(error = e.message, isLoading = false)
             }
         }
     }
@@ -73,24 +96,3 @@ class MainScreenViewModel(
         }
     }
 }
-
-
-//private fun fetchCoursesAndNotes() {
-//    viewModelScope.launch {
-//        _state.value = MainScreenState(isLoading = true)
-//        try {
-//            val coursesList = getCoursesUseCase.execute()
-//            val notesList = getNotesUseCase.execute()
-//            val lastCommunityNote = notesList.lastOrNull()
-//
-//            _state.value = MainScreenState(
-//                courses = coursesList.take(6),
-//                communityNote = lastCommunityNote
-//            )
-//        } catch (e: Exception) {
-//            _state.value = MainScreenState(error = e.message)
-//        } finally {
-//            _state.value = _state.value?.copy(isLoading = false)
-//        }
-//    }
-//}

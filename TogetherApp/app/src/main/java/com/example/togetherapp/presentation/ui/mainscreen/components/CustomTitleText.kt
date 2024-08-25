@@ -10,29 +10,31 @@ import androidx.compose.ui.text.font.FontWeight
 @Composable
 fun CustomTitleText(title: String) {
     val words = title.split(" ")
-    val firstLine = StringBuilder()
-    val secondLine = StringBuilder()
-    val thirdLine = StringBuilder()
+    val lines = arrayOf(StringBuilder(), StringBuilder(), StringBuilder())
+    var currentLine = 0
+    val maxLineLength = 20
 
     for (word in words) {
-        when {
-            firstLine.isEmpty() || firstLine.length + word.length <= 20 -> firstLine.append("$word ")
-            secondLine.isEmpty() || secondLine.length + word.length <= 20 -> secondLine.append("$word ")
-            else -> thirdLine.append("$word ")
+        if (lines[currentLine].length + word.length <= maxLineLength) {
+            lines[currentLine].append("$word ")
+        } else {
+            currentLine++
+            if (currentLine > 2) break
+            lines[currentLine].append("$word ")
         }
     }
 
     Column {
         Text(
-            text = firstLine.toString().trim(),
+            text = lines[0].toString().trim(),
             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
         )
         Text(
-            text = secondLine.toString().trim(),
+            text = lines[1].toString().trim(),
             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
         )
         Text(
-            text = thirdLine.toString().trim(),
+            text = lines[2].toString().trim(),
             style = MaterialTheme.typography.bodyMedium,
             color = Color(0xFF806B00)
         )

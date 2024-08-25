@@ -5,4 +5,6 @@ sealed class MainScreenEvent {
     object LoadNotes : MainScreenEvent()
     object ShowAllCourses : MainScreenEvent()
     object HideAllCourses : MainScreenEvent()
+    object ShowAllNotes : MainScreenEvent()
+    object HideAllNotes : MainScreenEvent()
 }

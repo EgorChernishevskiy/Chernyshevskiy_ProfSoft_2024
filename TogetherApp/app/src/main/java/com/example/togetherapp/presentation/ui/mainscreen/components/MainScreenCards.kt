@@ -23,7 +23,7 @@ fun MainScreenCards(state: MainScreenState, viewModel: MainScreenViewModel){
     Spacer(modifier = Modifier.height(24.dp))
 
     SectionTitle(title = "Ваши заметки", showAll = true) {
-        viewModel.handleEvent(MainScreenEvent.ShowAllCourses)
+        viewModel.handleEvent(MainScreenEvent.ShowAllNotes)
     }
 
 
@@ -38,7 +38,7 @@ fun MainScreenCards(state: MainScreenState, viewModel: MainScreenViewModel){
     Spacer(modifier = Modifier.height(20.dp))
 
     SectionTitle(title = "Заметки сообщества", showAll = true) {
-        viewModel.handleEvent(MainScreenEvent.ShowAllCourses)
+        viewModel.handleEvent(MainScreenEvent.ShowAllNotes)
     }
 
     Spacer(modifier = Modifier.height(12.dp))
@@ -46,7 +46,7 @@ fun MainScreenCards(state: MainScreenState, viewModel: MainScreenViewModel){
     state.communityNote?.let { note ->
         CommunityNoteCard(
             userName = "${note.author.name} ${note.author.surname}",
-            title = note.title,
+            title = "${note.title} ${note.content[0].text}",
             date = note.date,
             userImageUrl = note.author.avatar
         )

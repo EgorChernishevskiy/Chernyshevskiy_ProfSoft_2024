@@ -45,78 +45,73 @@ fun MainScreenContent(
 
     var isSearching by remember { mutableStateOf(false) }
     var searchQuery by remember { mutableStateOf("") }
-
+    viewModel.handleEvent(MainScreenEvent.HideAllCourses)
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     if (state.showAllCourses) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            IconButton(onClick = { viewModel.handleEvent(MainScreenEvent.HideAllCourses) }) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_back_arrow),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
-                            Text(
-                                text = "Все курсы",
-                                style = MaterialTheme.typography.titleLarge,
-                                fontSize = 20.sp
-                            )
-                        }
-                    } else {
-                        if (!isSearching) {
-                            Text(
-                                text = "Главная",
-                                style = MaterialTheme.typography.titleLarge,
-                                fontSize = 20.sp
-                            )
-                        } else {
-                            TextField(
-                                value = searchQuery,
-                                onValueChange = { searchQuery = it },
-                                placeholder = {
-                                    if (searchQuery.isEmpty()) {
-                                        Text(
-                                            text = "Поиск",
-                                            color = Color(0xFF333333),
-                                            style = MaterialTheme.typography.titleSmall.copy(
-                                                fontSize = 14.sp
-                                            )
-                                        )
-                                    }
-                                },
-                                leadingIcon = {
-                                    Icon(
-                                        painter = painterResource(R.drawable.ic_searchnormal),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(16.dp)
-                                    )
-                                },
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(48.dp)
-                                    .padding(horizontal = 16.dp)
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .background(Color(0xFFD6B714)),
-                                colors = TextFieldDefaults.textFieldColors(
-                                    containerColor = Color.Transparent,
-                                    focusedIndicatorColor = Color.Transparent,
-                                    unfocusedIndicatorColor = Color.Transparent,
-                                    disabledIndicatorColor = Color.Transparent,
-                                    errorIndicatorColor = Color.Transparent
-                                ),
-                                textStyle = TextStyle(
-                                    fontSize = 14.sp
-                                ),
-                                singleLine = true
-                            )
+                        ShowAllTopBar(title = "Все курсы") {
+                            viewModel.handleEvent(MainScreenEvent.HideAllCourses)
                         }
                     }
+                    else if (state.showAllNotes) {
+                        ShowAllTopBar(title = "Заметки сообщества") {
+                            viewModel.handleEvent(MainScreenEvent.HideAllNotes)
+                        }
+                    }
+                    else if (!isSearching) {
+                        Text(
+                            text = "Главная",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontSize = 20.sp
+                        )
+                    }
+                    else {
+                        TextField(
+                            value = searchQuery,
+                            onValueChange = { searchQuery = it },
+                            placeholder = {
+                                if (searchQuery.isEmpty()) {
+                                    Text(
+                                        text = "Поиск",
+                                        color = Color(0xFF333333),
+                                        style = MaterialTheme.typography.titleSmall.copy(
+                                            fontSize = 14.sp
+                                        )
+                                    )
+                                }
+                            },
+                            leadingIcon = {
+                                Icon(
+                                    painter = painterResource(R.drawable.ic_searchnormal),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(48.dp)
+                                .padding(horizontal = 16.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(Color(0xFFD6B714)),
+                            colors = TextFieldDefaults.textFieldColors(
+                                containerColor = Color.Transparent,
+                                focusedIndicatorColor = Color.Transparent,
+                                unfocusedIndicatorColor = Color.Transparent,
+                                disabledIndicatorColor = Color.Transparent,
+                                errorIndicatorColor = Color.Transparent
+                            ),
+                            textStyle = TextStyle(
+                                fontSize = 14.sp
+                            ),
+                            singleLine = true
+                        )
+                    }
+
                 },
                 actions = {
-                    if (!isSearching && !state.showAllCourses) {
+                    if (!isSearching && !state.showAllCourses && !state.showAllNotes) {
                         IconButton(
                             onClick = { isSearching = true },
                             modifier = Modifier
@@ -172,6 +167,21 @@ fun MainScreenContent(
                             val course = state.courses[index]
                             Spacer(modifier = Modifier.height(20.dp))
                             CourseCard(title = course.title, tags = course.tags)
+                        }
+                    }
+                }
+
+                state.showAllNotes -> {
+                    LazyColumn {
+                        items(state.notes.size) { index ->
+                            val note = state.notes[index]
+                            Spacer(modifier = Modifier.height(20.dp))
+                            CommunityNoteCard(
+                                userName = "${note.author.name} ${note.author.surname}",
+                                title = "${note.title} ${note.content[0].text}",
+                                date = note.date,
+                                userImageUrl = note.author.avatar
+                            )
                         }
                     }
                 }
