@@ -1,8 +1,7 @@
-package com.example.togetherapp.presentation.ui.detailsscreen.components
+package com.example.togetherapp.presentation.ui.coursedetailsscreen.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -10,25 +9,14 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import coil.compose.rememberImagePainter
-import com.example.togetherapp.R
-import com.example.togetherapp.domain.model.course.CourseText
-import com.example.togetherapp.presentation.event.DetailsScreenEvent
-import com.example.togetherapp.presentation.event.MainScreenEvent
-import com.example.togetherapp.presentation.state.DetailsScreenState
+import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
+import com.example.togetherapp.presentation.state.CourseDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
-import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
-import com.example.togetherapp.presentation.viewmodel.DetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
 
 //onClick = { navController.popBackStack() }
 
@@ -36,15 +24,15 @@ import com.example.togetherapp.presentation.viewmodel.DetailsScreenViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsScreenContent(
-    viewModel: DetailsScreenViewModel,
+    viewModel: CourseDetailsScreenViewModel,
     navController: NavHostController,
     courseId: String,
     courseIndex: Int
 ) {
-    val state by viewModel.state.observeAsState(DetailsScreenState())
+    val state by viewModel.state.observeAsState(CourseDetailsScreenState())
 
     LaunchedEffect(courseId) {
-        viewModel.handleEvent(DetailsScreenEvent.LoadCourseDetails(courseId))
+        viewModel.handleEvent(CourseDetailsScreenEvent.LoadCourseDetails(courseId))
     }
 
     Scaffold(
@@ -72,7 +60,7 @@ fun DetailsScreenContent(
                     ErrorMessage(
                         errorMessage = state.error ?: "Что-то пошло не так",
                         onRetryClick = {
-                            viewModel.handleEvent(DetailsScreenEvent.LoadCourseDetails(courseId))
+                            viewModel.handleEvent(CourseDetailsScreenEvent.LoadCourseDetails(courseId))
                         }
                     )
                 }
@@ -116,13 +104,4 @@ fun DetailsScreenContent(
         }
     }
 }
-
-//@RequiresApi(Build.VERSION_CODES.O)
-//@Preview
-//@Composable
-//private fun MainScreenPreview() {
-//    TogetherAppTheme {
-//        DetailsScreenContent()
-//    }
-//}
 

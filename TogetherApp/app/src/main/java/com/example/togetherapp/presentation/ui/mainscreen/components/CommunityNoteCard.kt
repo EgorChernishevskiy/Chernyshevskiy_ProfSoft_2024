@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,12 +27,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.example.togetherapp.presentation.utils.formatDate
+import com.example.togetherapp.presentation.utils.formatNoteCardDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun CommunityNoteCard(userName: String, title: String, userImageUrl: String, date: String) {
-    val formattedDate = formatDate(date)
+fun CommunityNoteCard(
+    userName: String,
+    title: String,
+    userImageUrl: String,
+    date: String,
+    onClick: () -> Unit
+) {
+    val formattedDate = formatNoteCardDate(date)
 
     Box(
         modifier = Modifier
@@ -41,7 +48,8 @@ fun CommunityNoteCard(userName: String, title: String, userImageUrl: String, dat
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 12.dp, bottom = 20.dp),
+                .padding(top = 12.dp, bottom = 20.dp)
+                .clickable(onClick = onClick),
             colors = CardDefaults.cardColors(
                 containerColor = Color(0xFFFFD80C)
             ),

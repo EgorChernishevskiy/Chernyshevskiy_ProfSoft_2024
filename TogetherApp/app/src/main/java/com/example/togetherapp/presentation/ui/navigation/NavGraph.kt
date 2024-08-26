@@ -6,13 +6,15 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.togetherapp.presentation.ui.detailsscreen.DetailScreen
-import com.example.togetherapp.presentation.ui.loginscreen.LoginScreen
+import com.example.togetherapp.presentation.ui.coursedetailsscreen.DetailScreen
+import com.example.togetherapp.presentation.ui.auth.loginscreen.LoginScreen
 import com.example.togetherapp.presentation.ui.mainscreen.MainScreen
-import com.example.togetherapp.presentation.ui.registerscreen.RegisterScreen
+import com.example.togetherapp.presentation.ui.auth.registerscreen.RegisterScreen
+import com.example.togetherapp.presentation.ui.cnotedetailsscreen.CNoteDetailScreen
 import com.example.togetherapp.presentation.ui.splashscreen.SplashScreen
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
-import com.example.togetherapp.presentation.viewmodel.DetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 
@@ -22,7 +24,8 @@ fun NavGraph(
     authViewModel: AuthViewModel,
     splashScreenViewModel: SplashScreenViewModel,
     mainScreenViewModel: MainScreenViewModel,
-    detailsScreenViewModel: DetailsScreenViewModel
+    courseDetailsScreenViewModel: CourseDetailsScreenViewModel,
+    cNoteDetailsScreenViewModel: CNoteDetailsScreenViewModel
 ) {
     NavHost(navController, startDestination = "splash") {
         composable("splash") { SplashScreen(navController = navController, viewModel = splashScreenViewModel) }
@@ -39,10 +42,23 @@ fun NavGraph(
             val courseId = backStackEntry.arguments?.getString("courseId") ?: ""
             val courseIndex = backStackEntry.arguments?.getInt("courseIndex") ?: 0
             DetailScreen(
-                viewModel = detailsScreenViewModel,
+                viewModel = courseDetailsScreenViewModel,
                 navController = navController,
                 courseId = courseId,
                 courseIndex = courseIndex
+            )
+        }
+        composable(
+            "cnote/{noteId}",
+            arguments = listOf(
+                navArgument("noteId") { type = NavType.StringType },
+            )
+        ) { backStackEntry ->
+            val noteId = backStackEntry.arguments?.getString("noteId") ?: ""
+            CNoteDetailScreen(
+                viewModel = cNoteDetailsScreenViewModel,
+                navController = navController,
+                noteId = noteId
             )
         }
     }

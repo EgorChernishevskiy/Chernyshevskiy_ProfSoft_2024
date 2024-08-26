@@ -8,7 +8,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.togetherapp.presentation.ui.navigation.NavGraph
 import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
-import com.example.togetherapp.presentation.viewmodel.DetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 
@@ -17,7 +18,8 @@ class MainActivity : ComponentActivity() {
     private val authViewModel: AuthViewModel by viewModel()
     private val splashScreenViewModel: SplashScreenViewModel by viewModel()
     private val mainScreenViewModel: MainScreenViewModel by viewModel()
-    private val detailsScreenViewModel: DetailsScreenViewModel by viewModel()
+    private val courseDetailsScreenViewModel: CourseDetailsScreenViewModel by viewModel()
+    private val cNoteDetailsScreenViewModel: CNoteDetailsScreenViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +31,8 @@ class MainActivity : ComponentActivity() {
                     authViewModel = authViewModel,
                     splashScreenViewModel = splashScreenViewModel,
                     mainScreenViewModel = mainScreenViewModel,
-                    detailsScreenViewModel = detailsScreenViewModel
+                    courseDetailsScreenViewModel = courseDetailsScreenViewModel,
+                    cNoteDetailsScreenViewModel  = cNoteDetailsScreenViewModel,
                 )
             }
         }

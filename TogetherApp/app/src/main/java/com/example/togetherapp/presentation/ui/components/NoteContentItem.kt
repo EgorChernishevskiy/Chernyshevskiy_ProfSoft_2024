@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.ui.detailsscreen.components
+package com.example.togetherapp.presentation.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -17,25 +17,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.example.togetherapp.domain.model.course.CourseText
+import com.example.togetherapp.domain.model.note.NoteContent
 
 @Composable
-fun CourseContentItem(courseText: CourseText) {
+fun NoteContentItem(noteContent: NoteContent) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 16.dp)
+            .padding(
+                start = 16.dp,
+                end = 16.dp,
+                top = 20.dp,
+                bottom = 16.dp
+            )
     ) {
-        if (courseText.text.isNotBlank()) {
+        if (noteContent.text.isNotBlank()) {
             Text(
-                text = courseText.text,
+                text = noteContent.text,
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight(400),
                 textAlign = TextAlign.Justify,
                 color = Color.Gray
             )
         }
-        courseText.image?.let { imageUrl ->
+        noteContent.image?.let { imageUrl ->
             Spacer(modifier = Modifier.height(8.dp))
             Image(
                 painter = rememberImagePainter(imageUrl),

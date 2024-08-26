@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.ui.loginscreen.components
+package com.example.togetherapp.presentation.ui.auth.loginscreen.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

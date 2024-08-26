@@ -1,5 +1,7 @@
-package com.example.togetherapp.presentation.ui.detailsscreen.components
+package com.example.togetherapp.presentation.ui.components
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,9 +10,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,53 +20,52 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberImagePainter
-import com.example.togetherapp.R
-import com.example.togetherapp.presentation.state.DetailsScreenState
-import com.example.togetherapp.presentation.ui.components.IconButtonBack
+import com.example.togetherapp.presentation.state.CNoteDetailsScreenState
+import com.example.togetherapp.presentation.utils.formatNoteDetailsDate
 
+
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun CustomTopAppBar(
-    state: DetailsScreenState,
+fun NoteTopAppBar(
+    state: CNoteDetailsScreenState,
     onBackClick: () -> Unit,
-    courseIndex: Int
-) {
+){
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp)
+            .height(166.dp)
             .background(Color(0xFFFFD80C))
     ) {
         Column(modifier = Modifier.padding(top = 8.dp)) {
-            state.course?.let { course ->
+            state.note?.let { note ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButtonBack(onBackClick)
                     Text(
-                        text = "Лекция ${courseIndex + 1}",
+                        text = "Заметка",
                         style = MaterialTheme.typography.titleLarge,
                         fontSize = 20.sp
                     )
                 }
-                Spacer(modifier = Modifier.height(50.dp))
-                Column(modifier = Modifier.padding( horizontal = 16.dp))
+                Spacer(modifier = Modifier.height(47.dp))
+                Column(modifier = Modifier.padding(horizontal = 16.dp))
                 {
-                    course.title.split(" ").forEach { word ->
-                        Text(
-                            text = word,
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = course.description,
+                        text = formatNoteDetailsDate(note.date),
                         style = MaterialTheme.typography.titleSmall,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         color = Color(0xFF806B00),
                     )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = note.title,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1
+                    )
+
                     Spacer(modifier = Modifier.height(12.dp))
                 }
             }

@@ -4,22 +4,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.togetherapp.domain.model.course.Course
 import com.example.togetherapp.domain.usecase.course.GetCourseByIdUseCase
-import com.example.togetherapp.presentation.event.DetailsScreenEvent
-import com.example.togetherapp.presentation.state.DetailsScreenState
+import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
+import com.example.togetherapp.presentation.state.CourseDetailsScreenState
 import kotlinx.coroutines.launch
 
-class DetailsScreenViewModel(
+class CourseDetailsScreenViewModel(
     private val getCourseDetailsUseCase: GetCourseByIdUseCase
 ) : ViewModel() {
 
-    private val _state = MutableLiveData<DetailsScreenState>(DetailsScreenState())
-    val state: LiveData<DetailsScreenState> get() = _state
+    private val _state = MutableLiveData(CourseDetailsScreenState())
+    val state: LiveData<CourseDetailsScreenState> get() = _state
 
-    fun handleEvent(event: DetailsScreenEvent) {
+    fun handleEvent(event: CourseDetailsScreenEvent) {
         when (event) {
-            is DetailsScreenEvent.LoadCourseDetails -> {
+            is CourseDetailsScreenEvent.LoadCourseDetails -> {
                 loadCourseDetails(event.courseId)
             }
         }
@@ -30,9 +29,9 @@ class DetailsScreenViewModel(
         viewModelScope.launch {
             try {
                 val course = getCourseDetailsUseCase.execute(courseId)
-                _state.value = DetailsScreenState(course = course, isLoading = false)
+                _state.value = CourseDetailsScreenState(course = course, isLoading = false)
             } catch (e: Exception) {
-                _state.value = DetailsScreenState(error = e.message, isLoading = false)
+                _state.value = CourseDetailsScreenState(error = e.message, isLoading = false)
             }
         }
     }
