@@ -14,9 +14,9 @@ import com.example.togetherapp.data.mappers.locnote.LocNoteMapper
 import com.example.togetherapp.data.mappers.locnote.LocNoteMapperImpl
 import com.example.togetherapp.data.mappers.note.NoteMapper
 import com.example.togetherapp.data.mappers.note.NoteMapperImpl
-import com.example.togetherapp.data.repository.LocNoteRepositoryImpl
 import com.example.togetherapp.domain.repository.AuthRepository
 import com.example.togetherapp.domain.repository.CourseRepository
+import com.example.togetherapp.domain.repository.LocNoteRepository
 import com.example.togetherapp.domain.repository.NoteRepository
 import com.example.togetherapp.domain.repository.TokenRepository
 import com.example.togetherapp.domain.usecase.course.GetCoursesUseCase
@@ -79,6 +79,17 @@ val sharedPrefsModule = module {
     }
 }
 
+val databaseModule = module {
+    single {
+        Room.databaseBuilder(
+            get<Context>(),
+            NoteDatabase::class.java,
+            "note_database"
+        ).build()
+    }
+    single { get<NoteDatabase>().noteDao() }
+}
+
 val repositoryModule = module {
     single<AuthRepository> {
         com.example.togetherapp.data.repository.AuthRepositoryImpl(
@@ -100,22 +111,11 @@ val repositoryModule = module {
             get(), get()
         )
     }
-    single<LocNoteRepositoryImpl> {
+    single<LocNoteRepository> {
         com.example.togetherapp.data.repository.LocNoteRepositoryImpl(
             get(), get()
         )
     }
-}
-
-val databaseModule = module {
-    single {
-        Room.databaseBuilder(
-            get<Context>(),
-            NoteDatabase::class.java,
-            "note_database"
-        ).build()
-    }
-    single { get<NoteDatabase>().noteDao() }
 }
 
 val mapperModule = module {
@@ -146,14 +146,14 @@ val useCaseModule = module {
     single { AddCommentUseCase(get()) }
 
     single { GetAllLocalNotesUseCase(get()) }
-    single { GetLocalNoteByIdUseCase(get()) }
-    single { CreateLocalNoteUseCase(get()) }
+    //single { GetLocalNoteByIdUseCase(get()) }
+    //single { CreateLocalNoteUseCase(get()) }
 }
 
 val viewModelModule = module {
     viewModel { AuthViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { SplashScreenViewModel(get()) }
-    viewModel { MainScreenViewModel(get(), get()) }
+    viewModel { MainScreenViewModel(get(), get(), get()) }
     viewModel { CourseDetailsScreenViewModel(get()) }
     viewModel { CNoteDetailsScreenViewModel(get(), get()) }
 }
@@ -164,6 +164,6 @@ val appModules = listOf(
     repositoryModule,
     mapperModule,
     useCaseModule,
-    viewModelModule,
-    databaseModule
+    databaseModule,
+    viewModelModule
 )

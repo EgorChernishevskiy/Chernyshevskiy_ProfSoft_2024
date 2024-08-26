@@ -7,7 +7,7 @@ import com.example.togetherapp.data.database.utils.NoteContentConverter
 
 @Entity(tableName = "notes")
 data class NoteEntity(
-    @PrimaryKey val id: String,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val title: String,
     @TypeConverters(NoteContentConverter::class)
     val content: List<NoteContentEntity>,

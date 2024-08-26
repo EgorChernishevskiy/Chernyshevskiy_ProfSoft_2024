@@ -6,13 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.togetherapp.domain.usecase.course.GetCoursesUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNotesUseCase
+import com.example.togetherapp.domain.usecase.locnote.GetAllLocalNotesUseCase
 import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
 import kotlinx.coroutines.launch
 
 class MainScreenViewModel(
     private val getCoursesUseCase: GetCoursesUseCase,
-    private val getNotesUseCase: GetNotesUseCase
+    private val getNotesUseCase: GetNotesUseCase,
+    private val getAllLocalNotesUseCase: GetAllLocalNotesUseCase
 ) : ViewModel() {
 
     private val _state = MutableLiveData(MainScreenState())
@@ -25,6 +27,9 @@ class MainScreenViewModel(
             }
             is MainScreenEvent.LoadNotes -> {
                 fetchNotes()
+            }
+            is MainScreenEvent.LoadLocalNotes -> {
+                fetchLocalNotes()
             }
             is MainScreenEvent.ShowAllCourses -> {
                 _state.value = _state.value?.copy(showAllCourses = true)
@@ -39,6 +44,21 @@ class MainScreenViewModel(
             }
             is MainScreenEvent.HideAllNotes -> {
                 _state.value = _state.value?.copy(showAllNotes = false)
+            }
+        }
+    }
+
+    private fun fetchLocalNotes() {
+        viewModelScope.launch {
+            _state.value = _state.value?.copy(isLoading = true)
+            try {
+                val notesList = getAllLocalNotesUseCase.execute()
+                val lastLocalNote = notesList.firstOrNull()
+                _state.value = _state.value?.copy(localnote = lastLocalNote)
+            } catch (e: Exception) {
+                _state.value = _state.value?.copy(error = e.message)
+            } finally {
+                _state.value = _state.value?.copy(isLoading = false)
             }
         }
     }

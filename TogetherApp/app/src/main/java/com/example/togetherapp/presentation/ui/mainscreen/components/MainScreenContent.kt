@@ -45,6 +45,7 @@ fun MainScreenContent(
     LaunchedEffect(Unit) {
         viewModel.handleEvent(MainScreenEvent.LoadCourses)
         viewModel.handleEvent(MainScreenEvent.LoadNotes)
+        viewModel.handleEvent(MainScreenEvent.LoadLocalNotes)
     }
 
     var isSearching by remember { mutableStateOf(false) }
@@ -156,6 +157,7 @@ fun MainScreenContent(
                         onRetryClick = {
                             viewModel.handleEvent(MainScreenEvent.LoadCourses)
                             viewModel.handleEvent(MainScreenEvent.LoadNotes)
+                            viewModel.handleEvent(MainScreenEvent.LoadLocalNotes)
                         }
                     )
                 }
@@ -194,7 +196,7 @@ fun MainScreenContent(
                     }
                 }
 
-                state.courses.isNotEmpty() -> {
+                state.courses.isNotEmpty()  -> {
                     Spacer(modifier = Modifier.height(20.dp))
 
                     SectionTitle(title = "Ваши курсы", showAll = true) {

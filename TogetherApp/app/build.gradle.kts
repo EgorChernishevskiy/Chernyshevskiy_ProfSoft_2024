@@ -91,7 +91,9 @@ dependencies {
     releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
     //database
-    implementation ("androidx.room:room-runtime:2.5.0")
+    implementation ("androidx.room:room-runtime:2.5.0") // Use the latest version
     kapt ("androidx.room:room-compiler:2.5.0")
     implementation ("androidx.room:room-ktx:2.5.0")
+
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 }
