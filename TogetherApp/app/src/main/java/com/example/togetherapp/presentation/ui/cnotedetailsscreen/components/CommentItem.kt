@@ -21,14 +21,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.example.togetherapp.domain.model.note.Comment
+import com.example.togetherapp.domain.model.comnote.Comment
 
 @Composable
 fun CommentItem(comment: Comment){
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
             .background(
                 if (comment.author.role == 1) Color(0xFFFFD80C)
                 else Color.Transparent,

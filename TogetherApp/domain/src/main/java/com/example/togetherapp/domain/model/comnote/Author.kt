@@ -1,4 +1,4 @@
-package com.example.togetherapp.domain.model.note
+package com.example.togetherapp.domain.model.comnote
 
 data class Author(
     val id: String,

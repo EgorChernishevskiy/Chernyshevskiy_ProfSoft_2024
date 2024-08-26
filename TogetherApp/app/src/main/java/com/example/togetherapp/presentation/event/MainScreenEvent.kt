@@ -9,6 +9,4 @@ sealed class MainScreenEvent {
     object HideAllCourses : MainScreenEvent()
     object ShowAllNotes : MainScreenEvent()
     object HideAllNotes : MainScreenEvent()
-    data class SelectCourse(val course: Course) : MainScreenEvent()
-    object DeselectCourse : MainScreenEvent()
 }

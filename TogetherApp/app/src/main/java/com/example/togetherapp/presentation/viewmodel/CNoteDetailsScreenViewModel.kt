@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.togetherapp.domain.usecase.note.AddCommentUseCase
-import com.example.togetherapp.domain.usecase.note.GetNoteByIdUseCase
+import com.example.togetherapp.domain.usecase.comnote.AddCommentUseCase
+import com.example.togetherapp.domain.usecase.comnote.GetNoteByIdUseCase
 import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
 import com.example.togetherapp.presentation.state.CNoteDetailsScreenState
 import kotlinx.coroutines.launch

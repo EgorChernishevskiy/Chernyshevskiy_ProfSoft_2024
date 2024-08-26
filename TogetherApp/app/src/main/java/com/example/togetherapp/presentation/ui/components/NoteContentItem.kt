@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.example.togetherapp.domain.model.note.NoteContent
+import com.example.togetherapp.domain.model.comnote.NoteContent
 
 @Composable
 fun NoteContentItem(noteContent: NoteContent) {

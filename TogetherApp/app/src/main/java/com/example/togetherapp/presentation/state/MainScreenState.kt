@@ -1,7 +1,7 @@
 package com.example.togetherapp.presentation.state
 
 import com.example.togetherapp.domain.model.course.Course
-import com.example.togetherapp.domain.model.note.Note
+import com.example.togetherapp.domain.model.comnote.Note
 
 data  class MainScreenState (
     val courses: List<Course> = emptyList(),
@@ -11,5 +11,4 @@ data  class MainScreenState (
     val error: String? = null,
     val showAllCourses: Boolean = false,
     val showAllNotes: Boolean = false,
-    val selectedCourse: Course? = null
 )

@@ -2,7 +2,7 @@ package com.example.togetherapp.data.repository
 
 import com.example.togetherapp.data.api.NoteApi
 import com.example.togetherapp.data.mappers.note.NoteMapper
-import com.example.togetherapp.domain.model.note.Note
+import com.example.togetherapp.domain.model.comnote.Note
 import com.example.togetherapp.domain.repository.NoteRepository
 
 class NoteRepositoryImpl(

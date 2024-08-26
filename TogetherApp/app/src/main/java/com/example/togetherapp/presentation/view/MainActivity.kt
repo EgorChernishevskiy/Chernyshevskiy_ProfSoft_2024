@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
+import com.example.togetherapp.data.database.NoteDatabase
+import com.example.togetherapp.data.database.dao.NoteDao
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.togetherapp.presentation.ui.navigation.NavGraph
 import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
@@ -21,8 +23,14 @@ class MainActivity : ComponentActivity() {
     private val courseDetailsScreenViewModel: CourseDetailsScreenViewModel by viewModel()
     private val cNoteDetailsScreenViewModel: CNoteDetailsScreenViewModel by viewModel()
 
+    //private lateinit var noteDao: NoteDao
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+            // val db = NoteDatabase.getInstance(applicationContext)
+       // noteDao = db.noteDao()
+
         setContent {
             TogetherAppTheme {
                 val navController = rememberNavController()

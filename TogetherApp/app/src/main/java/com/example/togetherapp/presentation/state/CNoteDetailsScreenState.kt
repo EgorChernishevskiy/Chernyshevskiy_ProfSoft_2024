@@ -1,6 +1,6 @@
 package com.example.togetherapp.presentation.state
 
-import com.example.togetherapp.domain.model.note.Note
+import com.example.togetherapp.domain.model.comnote.Note
 
 data class CNoteDetailsScreenState (
     val note: Note? = null,

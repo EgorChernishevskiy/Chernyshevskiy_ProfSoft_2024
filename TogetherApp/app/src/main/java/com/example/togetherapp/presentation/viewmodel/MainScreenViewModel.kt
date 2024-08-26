@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.togetherapp.domain.usecase.course.GetCoursesUseCase
-import com.example.togetherapp.domain.usecase.note.GetNotesUseCase
+import com.example.togetherapp.domain.usecase.comnote.GetNotesUseCase
 import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
 import kotlinx.coroutines.launch
@@ -39,18 +39,6 @@ class MainScreenViewModel(
             }
             is MainScreenEvent.HideAllNotes -> {
                 _state.value = _state.value?.copy(showAllNotes = false)
-            }
-            is MainScreenEvent.SelectCourse -> {
-                _state.value = state.value?.copy(
-                    selectedCourse = event.course,
-                    showAllCourses = false
-                )
-            }
-            MainScreenEvent.DeselectCourse -> {
-                _state.value = state.value?.copy(
-                    selectedCourse = null,
-                    showAllCourses = true
-                )
             }
         }
     }

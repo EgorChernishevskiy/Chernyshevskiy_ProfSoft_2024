@@ -2,14 +2,19 @@ package com.example.togetherapp.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.example.togetherapp.data.database.NoteDatabase
 import com.example.togetherapp.data.interceptor.TokenInterceptor
 import com.example.togetherapp.data.mappers.auth.AuthMapper
 import com.example.togetherapp.data.mappers.auth.AuthMapperImpl
 import com.example.togetherapp.data.mappers.course.CourseMapper
 import com.example.togetherapp.data.mappers.course.CourseMapperImpl
+import com.example.togetherapp.data.mappers.locnote.LocNoteMapper
+import com.example.togetherapp.data.mappers.locnote.LocNoteMapperImpl
 import com.example.togetherapp.data.mappers.note.NoteMapper
 import com.example.togetherapp.data.mappers.note.NoteMapperImpl
+import com.example.togetherapp.data.repository.LocNoteRepositoryImpl
 import com.example.togetherapp.domain.repository.AuthRepository
 import com.example.togetherapp.domain.repository.CourseRepository
 import com.example.togetherapp.domain.repository.NoteRepository
@@ -24,9 +29,12 @@ import com.example.togetherapp.domain.usecase.auth.ValidateLastNameUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidatePasswordUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidatePhoneNumberUseCase
 import com.example.togetherapp.domain.usecase.course.GetCourseByIdUseCase
-import com.example.togetherapp.domain.usecase.note.AddCommentUseCase
-import com.example.togetherapp.domain.usecase.note.GetNoteByIdUseCase
-import com.example.togetherapp.domain.usecase.note.GetNotesUseCase
+import com.example.togetherapp.domain.usecase.comnote.AddCommentUseCase
+import com.example.togetherapp.domain.usecase.comnote.GetNoteByIdUseCase
+import com.example.togetherapp.domain.usecase.comnote.GetNotesUseCase
+import com.example.togetherapp.domain.usecase.locnote.CreateLocalNoteUseCase
+import com.example.togetherapp.domain.usecase.locnote.GetAllLocalNotesUseCase
+import com.example.togetherapp.domain.usecase.locnote.GetLocalNoteByIdUseCase
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
@@ -92,29 +100,54 @@ val repositoryModule = module {
             get(), get()
         )
     }
+    single<LocNoteRepositoryImpl> {
+        com.example.togetherapp.data.repository.LocNoteRepositoryImpl(
+            get(), get()
+        )
+    }
+}
+
+val databaseModule = module {
+    single {
+        Room.databaseBuilder(
+            get<Context>(),
+            NoteDatabase::class.java,
+            "note_database"
+        ).build()
+    }
+    single { get<NoteDatabase>().noteDao() }
 }
 
 val mapperModule = module {
     single<CourseMapper> { CourseMapperImpl() }
     single<NoteMapper> { NoteMapperImpl() }
     single<AuthMapper> { AuthMapperImpl() }
+    single<LocNoteMapper> { LocNoteMapperImpl() }
 }
 
 
 val useCaseModule = module {
     single { LoginUseCase(get()) }
     single { RegisterUseCase(get()) }
+
     single { CheckTokenUseCase(get()) }
     single { SaveTokenUseCase(get()) }
+
     single { ValidateFirstNameUseCase() }
     single { ValidateLastNameUseCase() }
     single { ValidatePhoneNumberUseCase() }
     single { ValidatePasswordUseCase() }
+
     single { GetCoursesUseCase(get()) }
     single { GetCourseByIdUseCase(get()) }
+
     single { GetNotesUseCase(get()) }
     single { GetNoteByIdUseCase(get()) }
     single { AddCommentUseCase(get()) }
+
+    single { GetAllLocalNotesUseCase(get()) }
+    single { GetLocalNoteByIdUseCase(get()) }
+    single { CreateLocalNoteUseCase(get()) }
 }
 
 val viewModelModule = module {
@@ -131,5 +164,6 @@ val appModules = listOf(
     repositoryModule,
     mapperModule,
     useCaseModule,
-    viewModelModule
+    viewModelModule,
+    databaseModule
 )

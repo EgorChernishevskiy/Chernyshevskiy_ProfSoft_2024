@@ -4,10 +4,10 @@ import com.example.togetherapp.data.model.note.AuthorDto
 import com.example.togetherapp.data.model.note.CommentDto
 import com.example.togetherapp.data.model.note.NoteContentDto
 import com.example.togetherapp.data.model.note.NoteDto
-import com.example.togetherapp.domain.model.note.Author
-import com.example.togetherapp.domain.model.note.Comment
-import com.example.togetherapp.domain.model.note.Note
-import com.example.togetherapp.domain.model.note.NoteContent
+import com.example.togetherapp.domain.model.comnote.Author
+import com.example.togetherapp.domain.model.comnote.Comment
+import com.example.togetherapp.domain.model.comnote.Note
+import com.example.togetherapp.domain.model.comnote.NoteContent
 
 class NoteMapperImpl : NoteMapper {
     override fun toDomain(dto: NoteDto): Note {

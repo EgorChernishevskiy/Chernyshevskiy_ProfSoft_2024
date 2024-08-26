@@ -71,6 +71,7 @@ fun CNoteDetailsScreenContent(
         Column(
             modifier = Modifier
                 .padding(paddingValues)
+                .fillMaxSize()
         ) {
             when {
                 state.isLoading -> {
@@ -93,7 +94,7 @@ fun CNoteDetailsScreenContent(
                 }
 
                 state.note != null -> {
-                    LazyColumn() {
+                    LazyColumn(modifier = Modifier.weight(1f)) {
                         item {
                             Column(
                                 modifier = Modifier.padding(
@@ -176,21 +177,23 @@ fun CNoteDetailsScreenContent(
                                 }
                             }
 
-                            AddComment(
-                                state = state,
-                                onCommentTextChanged = { newText ->
-                                    viewModel.handleEvent(
-                                        CNoteDetailsScreenEvent.UpdateCommentText(
-                                            newText
-                                        )
-                                    )
-                                },
-                                onCommentAdded = {
-                                    viewModel.handleEvent(CNoteDetailsScreenEvent.AddComment(noteId))
-                                }
-                            )
                         }
                     }
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    AddComment(
+                        state = state,
+                        onCommentTextChanged = { newText ->
+                            viewModel.handleEvent(
+                                CNoteDetailsScreenEvent.UpdateCommentText(
+                                    newText
+                                )
+                            )
+                        },
+                        onCommentAdded = {
+                            viewModel.handleEvent(CNoteDetailsScreenEvent.AddComment(noteId))
+                        }
+                    )
                 }
             }
         }

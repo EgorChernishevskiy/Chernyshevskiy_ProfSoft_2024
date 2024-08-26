@@ -1,6 +1,6 @@
-package com.example.togetherapp.domain.usecase.note
+package com.example.togetherapp.domain.usecase.comnote
 
-import com.example.togetherapp.domain.model.note.Note
+import com.example.togetherapp.domain.model.comnote.Note
 import com.example.togetherapp.domain.repository.NoteRepository
 
 class AddCommentUseCase(private val repository: NoteRepository) {
