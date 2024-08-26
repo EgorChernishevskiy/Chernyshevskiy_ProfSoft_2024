@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement.Absolute.Center
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -27,6 +28,7 @@ import com.example.togetherapp.R
 import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
 import com.example.togetherapp.presentation.ui.components.CenteredProgressIndicator
+import com.example.togetherapp.presentation.ui.components.CustomSearchButton
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 
@@ -47,95 +49,90 @@ fun MainScreenContent(
 
     var isSearching by remember { mutableStateOf(false) }
     var searchQuery by remember { mutableStateOf("") }
-    viewModel.handleEvent(MainScreenEvent.HideAllCourses)
+
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    if (state.showAllCourses) {
-                        ShowAllTopBar(title = "Все курсы") {
+            if (state.showAllCourses || state.showAllNotes) {
+                ShowAllTopBar(
+                    title = if (state.showAllCourses) "Все курсы" else "Заметки сообщества",
+                    onHideAllClick = {
+                        if (state.showAllCourses) {
                             viewModel.handleEvent(MainScreenEvent.HideAllCourses)
-                        }
-                    }
-                    else if (state.showAllNotes) {
-                        ShowAllTopBar(title = "Заметки сообщества") {
+                        } else if (state.showAllNotes) {
                             viewModel.handleEvent(MainScreenEvent.HideAllNotes)
                         }
                     }
-                    else if (!isSearching) {
-                        Text(
-                            text = "Главная",
-                            style = MaterialTheme.typography.titleLarge,
-                            fontSize = 20.sp
-                        )
-                    }
-                    else {
-                        TextField(
-                            value = searchQuery,
-                            onValueChange = { searchQuery = it },
-                            placeholder = {
-                                if (searchQuery.isEmpty()) {
-                                    Text(
-                                        text = "Поиск",
-                                        color = Color(0xFF333333),
-                                        style = MaterialTheme.typography.titleSmall.copy(
-                                            fontSize = 14.sp
+                )
+            } else {
+                TopAppBar(
+                    title = {
+                        if (state.showAllCourses) {
+                            ShowAllTopBar(title = "Все курсы") {
+                                viewModel.handleEvent(MainScreenEvent.HideAllCourses)
+                            }
+                        } else if (state.showAllNotes) {
+                            ShowAllTopBar(title = "Заметки сообщества") {
+                                viewModel.handleEvent(MainScreenEvent.HideAllNotes)
+                            }
+                        } else if (!isSearching) {
+                            Text(
+                                text = "Главная",
+                                style = MaterialTheme.typography.titleLarge,
+                                fontSize = 20.sp
+                            )
+                        } else {
+                            TextField(
+                                value = searchQuery,
+                                onValueChange = { searchQuery = it },
+                                placeholder = {
+                                    if (searchQuery.isEmpty()) {
+                                        Text(
+                                            text = "Поиск",
+                                            color = Color(0xFF333333),
+                                            style = MaterialTheme.typography.titleSmall.copy(
+                                                fontSize = 14.sp
+                                            )
                                         )
+                                    }
+                                },
+                                leadingIcon = {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_searchnormal),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(16.dp)
                                     )
-                                }
-                            },
-                            leadingIcon = {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_searchnormal),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(48.dp)
-                                .padding(horizontal = 16.dp)
-                                .clip(RoundedCornerShape(8.dp))
-                                .background(Color(0xFFD6B714)),
-                            colors = TextFieldDefaults.textFieldColors(
-                                containerColor = Color.Transparent,
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                                disabledIndicatorColor = Color.Transparent,
-                                errorIndicatorColor = Color.Transparent
-                            ),
-                            textStyle = TextStyle(
-                                fontSize = 14.sp
-                            ),
-                            singleLine = true
-                        )
-                    }
-
-                },
-                actions = {
-                    if (!isSearching && !state.showAllCourses && !state.showAllNotes) {
-                        IconButton(
-                            onClick = { isSearching = true },
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .background(Color(0xFFD6B714))
-                                .width(36.dp)
-                                .height(36.dp),
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_searchnormal),
-                                contentDescription = null,
+                                },
                                 modifier = Modifier
-                                    .width(16.dp)
-                                    .height(16.dp)
+                                    .fillMaxWidth()
+                                    .height(48.dp)
+                                    .padding(horizontal = 16.dp)
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(Color(0xFFD6B714)),
+                                colors = TextFieldDefaults.textFieldColors(
+                                    containerColor = Color.Transparent,
+                                    focusedIndicatorColor = Color.Transparent,
+                                    unfocusedIndicatorColor = Color.Transparent,
+                                    disabledIndicatorColor = Color.Transparent,
+                                    errorIndicatorColor = Color.Transparent
+                                ),
+                                textStyle = TextStyle(
+                                    fontSize = 14.sp
+                                ),
+                                singleLine = true
                             )
                         }
-                    }
-                },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = Color(0xFFFFD80C)
+
+                    },
+                    actions = {
+                        if (!isSearching && !state.showAllCourses && !state.showAllNotes) {
+                            CustomSearchButton()
+                        }
+                    },
+                    colors = TopAppBarDefaults.mediumTopAppBarColors(
+                        containerColor = Color(0xFFFFD80C)
+                    )
                 )
-            )
+            }
         },
 
         bottomBar = {
@@ -205,29 +202,34 @@ fun MainScreenContent(
                 }
 
                 else -> {
-                    Spacer(modifier = Modifier.height(20.dp))
-
-                    SectionTitle(title = "Ваши курсы", showAll = true) {
-                        viewModel.handleEvent(MainScreenEvent.ShowAllCourses)
-                    }
-
-                    Text(text = "Нет доступных курсов")
-
-                    Button(
-                        onClick = { viewModel.handleEvent(MainScreenEvent.LoadCourses) },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Black
-                        )
-                    ) {
-                        Text(
-                            text = "Повторить",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = Color.White
-                        )
-                    }
-
-                    MainScreenCards(state, viewModel, navController)
+                    CenteredProgressIndicator()
                 }
+
+//                else -> {
+//                    Spacer(modifier = Modifier.height(20.dp))
+//
+//                    SectionTitle(title = "Ваши курсы", showAll = true) {
+//                        viewModel.handleEvent(MainScreenEvent.ShowAllCourses)
+//                    }
+//
+//                    Text(text = "Нет доступных курсов")
+//
+//                    Button(
+//                        modifier = Modifier.align(Center),
+//                        onClick = { viewModel.handleEvent(MainScreenEvent.LoadCourses) },
+//                        colors = ButtonDefaults.buttonColors(
+//                            containerColor = Color.Black
+//                        )
+//                    ) {
+//                        Text(
+//                            text = "Повторить",
+//                            style = MaterialTheme.typography.bodyMedium,
+//                            color = Color.White
+//                        )
+//                    }
+//
+//                    MainScreenCards(state, viewModel, navController)
+//                }
             }
 
         }

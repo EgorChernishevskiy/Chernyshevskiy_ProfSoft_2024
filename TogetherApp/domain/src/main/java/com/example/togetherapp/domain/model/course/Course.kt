@@ -1,5 +1,6 @@
 package com.example.togetherapp.domain.model.course
 
+
 data class Course(
     val id: String,
     val title: String,

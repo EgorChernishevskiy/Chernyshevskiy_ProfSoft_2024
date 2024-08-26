@@ -38,7 +38,7 @@ fun CustomTopAppBar(
             .height(200.dp)
             .background(Color(0xFFFFD80C))
     ) {
-        Column() {
+        Column(modifier = Modifier.padding(top = 8.dp)) {
             state.course?.let { course ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButtonBack(onBackClick)
