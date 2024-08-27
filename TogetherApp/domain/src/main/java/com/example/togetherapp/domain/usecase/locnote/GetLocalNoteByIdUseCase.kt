@@ -4,7 +4,7 @@ import com.example.togetherapp.domain.model.locnote.LocNote
 import com.example.togetherapp.domain.repository.LocNoteRepository
 
 class GetLocalNoteByIdUseCase(private val repository: LocNoteRepository) {
-    suspend operator fun invoke(id: String): LocNote? {
+    suspend fun execute(id: String): LocNote? {
         return repository.getLocalNoteById(id)
     }
 }

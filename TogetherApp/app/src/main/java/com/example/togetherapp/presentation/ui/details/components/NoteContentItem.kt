@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.ui.components
+package com.example.togetherapp.presentation.ui.details.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -9,14 +9,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
+import com.example.togetherapp.R
 import com.example.togetherapp.domain.model.comnote.NoteContent
 
 @Composable
@@ -42,10 +46,19 @@ fun NoteContentItem(noteContent: NoteContent) {
         }
         noteContent.image?.let { imageUrl ->
             Spacer(modifier = Modifier.height(8.dp))
+
+            val imageRequest = ImageRequest.Builder(LocalContext.current)
+                .data(imageUrl)
+                .placeholder(R.drawable.no_image)
+                .error(R.drawable.no_image)
+                .build()
+
+            val painter = rememberImagePainter(imageRequest)
+
             Image(
-                painter = rememberImagePainter(imageUrl),
+                painter = painter,
                 contentDescription = null,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(193.dp)

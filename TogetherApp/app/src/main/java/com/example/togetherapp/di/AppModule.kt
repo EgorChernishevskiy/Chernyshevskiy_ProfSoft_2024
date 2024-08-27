@@ -38,6 +38,7 @@ import com.example.togetherapp.domain.usecase.locnote.GetLocalNoteByIdUseCase
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.LNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 import okhttp3.OkHttpClient
@@ -146,7 +147,7 @@ val useCaseModule = module {
     single { AddCommentUseCase(get()) }
 
     single { GetAllLocalNotesUseCase(get()) }
-    //single { GetLocalNoteByIdUseCase(get()) }
+    single { GetLocalNoteByIdUseCase(get()) }
     //single { CreateLocalNoteUseCase(get()) }
 }
 
@@ -156,6 +157,7 @@ val viewModelModule = module {
     viewModel { MainScreenViewModel(get(), get(), get()) }
     viewModel { CourseDetailsScreenViewModel(get()) }
     viewModel { CNoteDetailsScreenViewModel(get(), get()) }
+    viewModel { LNoteDetailsScreenViewModel(get()) }
 }
 
 val appModules = listOf(

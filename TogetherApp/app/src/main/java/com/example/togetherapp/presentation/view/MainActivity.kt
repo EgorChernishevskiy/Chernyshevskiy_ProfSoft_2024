@@ -12,6 +12,7 @@ import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.LNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
     private val mainScreenViewModel: MainScreenViewModel by viewModel()
     private val courseDetailsScreenViewModel: CourseDetailsScreenViewModel by viewModel()
     private val cNoteDetailsScreenViewModel: CNoteDetailsScreenViewModel by viewModel()
+    private val lNoteDetailsScreenViewModel: LNoteDetailsScreenViewModel by viewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,7 @@ class MainActivity : ComponentActivity() {
                     mainScreenViewModel = mainScreenViewModel,
                     courseDetailsScreenViewModel = courseDetailsScreenViewModel,
                     cNoteDetailsScreenViewModel = cNoteDetailsScreenViewModel,
+                    lNoteDetailsScreenViewModel =lNoteDetailsScreenViewModel
                 )
             }
         }

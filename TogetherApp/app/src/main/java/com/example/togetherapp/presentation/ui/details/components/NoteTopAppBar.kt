@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.ui.components
+package com.example.togetherapp.presentation.ui.details.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -20,16 +20,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.togetherapp.presentation.state.CNoteDetailsScreenState
+import com.example.togetherapp.domain.model.comnote.Note
+import com.example.togetherapp.domain.model.locnote.LocNote
+import com.example.togetherapp.presentation.state.note.LNoteDetailsScreenState
+import com.example.togetherapp.presentation.state.note.NoteDetailsScreenState
+import com.example.togetherapp.presentation.ui.components.IconButtonBack
 import com.example.togetherapp.presentation.utils.formatNoteDetailsDate
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun NoteTopAppBar(
-    state: CNoteDetailsScreenState,
+fun <T> NoteTopAppBar(
+    state: NoteDetailsScreenState<T>,
     onBackClick: () -> Unit,
-){
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -47,24 +51,17 @@ fun NoteTopAppBar(
                     )
                 }
                 Spacer(modifier = Modifier.height(47.dp))
-                Column(modifier = Modifier.padding(horizontal = 16.dp))
-                {
-                    Text(
-                        text = formatNoteDetailsDate(note.date),
-                        style = MaterialTheme.typography.titleSmall,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        color = Color(0xFF806B00),
-                    )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                    when (note) {
+                        is Note -> {
+                            NoteDateAndTitle(title = note.title, date = note.date)
+                        }
 
-                    Text(
-                        text = note.title,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        maxLines = 1
-                    )
+                        is LocNote -> {
+                            NoteDateAndTitle(title = note.title, date = note.date)
+                        }
+                    }
 
                     Spacer(modifier = Modifier.height(12.dp))
                 }

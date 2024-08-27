@@ -85,11 +85,11 @@ fun CommunityNoteCard(
                     painter = rememberImagePainter(userImageUrl),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(14.dp)
                         .clip(CircleShape)
-                        .padding(end = 4.dp)
+                        .size(14.dp)
                 )
                 Text(
+                    modifier = Modifier.padding(start = 4.dp),
                     text = userName,
                     color = Color.White,
                     style = MaterialTheme.typography.bodySmall

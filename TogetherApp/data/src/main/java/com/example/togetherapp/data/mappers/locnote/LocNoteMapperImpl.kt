@@ -2,8 +2,8 @@
 
     import com.example.togetherapp.data.database.entity.NoteContentEntity
     import com.example.togetherapp.data.database.entity.NoteEntity
+    import com.example.togetherapp.domain.model.comnote.NoteContent
     import com.example.togetherapp.domain.model.locnote.LocNote
-    import com.example.togetherapp.domain.model.locnote.LocNoteContent
 
     class LocNoteMapperImpl : LocNoteMapper {
         override fun mapToDomain(noteEntity: NoteEntity): LocNote {
@@ -11,7 +11,7 @@
                 id = noteEntity.id,
                 title = noteEntity.title,
                 content = noteEntity.content.map {
-                    LocNoteContent(it.text, it.image)
+                    NoteContent(it.text, it.image)
                 },
                 date = noteEntity.date
             )

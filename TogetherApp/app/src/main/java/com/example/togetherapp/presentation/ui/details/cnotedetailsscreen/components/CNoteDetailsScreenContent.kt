@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.ui.cnotedetailsscreen.components
+package com.example.togetherapp.presentation.ui.details.cnotedetailsscreen.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,7 +21,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -36,16 +34,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
 import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
-import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
-import com.example.togetherapp.presentation.state.CNoteDetailsScreenState
-import com.example.togetherapp.presentation.state.CourseDetailsScreenState
+import com.example.togetherapp.presentation.state.note.CNoteDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
-import com.example.togetherapp.presentation.ui.components.NoteContentItem
-import com.example.togetherapp.presentation.ui.components.NoteTopAppBar
-import com.example.togetherapp.presentation.ui.coursedetailsscreen.components.CourseContentItem
-import com.example.togetherapp.presentation.ui.coursedetailsscreen.components.CustomTopAppBar
+import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
+import com.example.togetherapp.presentation.ui.details.components.NoteTopAppBar
 import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

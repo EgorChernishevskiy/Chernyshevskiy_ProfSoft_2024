@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.togetherapp.domain.usecase.comnote.AddCommentUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNoteByIdUseCase
 import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
-import com.example.togetherapp.presentation.state.CNoteDetailsScreenState
+import com.example.togetherapp.presentation.state.note.CNoteDetailsScreenState
 import kotlinx.coroutines.launch
 
 class CNoteDetailsScreenViewModel(

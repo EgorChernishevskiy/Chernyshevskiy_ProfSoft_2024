@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.ui.cnotedetailsscreen.components
+package com.example.togetherapp.presentation.ui.details.cnotedetailsscreen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.togetherapp.R
-import com.example.togetherapp.presentation.state.CNoteDetailsScreenState
+import com.example.togetherapp.presentation.state.note.CNoteDetailsScreenState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

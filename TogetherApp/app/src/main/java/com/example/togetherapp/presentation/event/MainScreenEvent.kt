@@ -9,4 +9,6 @@ sealed class MainScreenEvent {
     object ShowAllNotes : MainScreenEvent()
     object HideAllNotes : MainScreenEvent()
     object NavigateToLogin : MainScreenEvent()
+    object ShowAllLocalNotes : MainScreenEvent()
+    object HideAllLocalNotes : MainScreenEvent()
 }

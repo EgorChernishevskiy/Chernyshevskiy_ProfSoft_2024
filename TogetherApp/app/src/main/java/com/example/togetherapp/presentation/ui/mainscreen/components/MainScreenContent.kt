@@ -53,29 +53,31 @@ fun MainScreenContent(
 
     Scaffold(
         topBar = {
-            if (state.showAllCourses || state.showAllNotes) {
+            if (state.showAllCourses || state.showAllNotes || state.showAllLocalNotes) {
+                val title: String
+                if (state.showAllCourses) {
+                    title = "Все курсы"
+                } else if (state.showAllLocalNotes) {
+                    title = "Ваши заметки"
+                } else {
+                    title = "Заметки сообщества"
+                }
                 ShowAllTopBar(
-                    title = if (state.showAllCourses) "Все курсы" else "Заметки сообщества",
+                    title = title,
                     onHideAllClick = {
                         if (state.showAllCourses) {
                             viewModel.handleEvent(MainScreenEvent.HideAllCourses)
                         } else if (state.showAllNotes) {
                             viewModel.handleEvent(MainScreenEvent.HideAllNotes)
+                        } else {
+                            viewModel.handleEvent(MainScreenEvent.HideAllLocalNotes)
                         }
                     }
                 )
             } else {
                 TopAppBar(
                     title = {
-                        if (state.showAllCourses) {
-                            ShowAllTopBar(title = "Все курсы") {
-                                viewModel.handleEvent(MainScreenEvent.HideAllCourses)
-                            }
-                        } else if (state.showAllNotes) {
-                            ShowAllTopBar(title = "Заметки сообщества") {
-                                viewModel.handleEvent(MainScreenEvent.HideAllNotes)
-                            }
-                        } else if (!isSearching) {
+                        if (!isSearching) {
                             Text(
                                 text = "Главная",
                                 style = MaterialTheme.typography.titleLarge,
@@ -125,7 +127,7 @@ fun MainScreenContent(
 
                     },
                     actions = {
-                        if (!isSearching && !state.showAllCourses && !state.showAllNotes) {
+                        if (!isSearching && !state.showAllCourses && !state.showAllNotes && !state.showAllLocalNotes) {
                             CustomSearchButton()
                         }
                     },
@@ -152,15 +154,14 @@ fun MainScreenContent(
                 }
 
                 state.error != null -> {
-                    if  (state.error == "Failed to fetch courses: Unauthorized"){
+                    if (state.error == "Failed to fetch courses: Unauthorized") {
                         if (!state.isNavigatedToLogin) {
                             viewModel.handleEvent(MainScreenEvent.NavigateToLogin)
                             navController.navigate("login") {
                                 popUpTo("splash") { inclusive = true }
                             }
                         }
-                    }
-                    else {
+                    } else {
                         ErrorMessage(
                             errorMessage = state.error ?: "Что-то пошло не так",
                             onRetryClick = {
@@ -206,13 +207,24 @@ fun MainScreenContent(
                     }
                 }
 
-                state.courses.isNotEmpty()  -> {
-                    Spacer(modifier = Modifier.height(20.dp))
-
-                    SectionTitle(title = "Ваши курсы", showAll = true) {
-                        viewModel.handleEvent(MainScreenEvent.ShowAllCourses)
+                state.showAllLocalNotes -> {
+                    LazyColumn {
+                        items(state.localNotes.size) { index ->
+                            val note = state.localNotes[index]
+                            Spacer(modifier = Modifier.height(20.dp))
+                            NoteCard(
+                                title = note.title,
+                                content = note.content[0].text,
+                                date = note.date,
+                                onClick = {
+                                    navController.navigate("lnote/${note.id}")
+                                }
+                            )
+                        }
                     }
+                }
 
+                state.courses.isNotEmpty() -> {
                     MainScreenCards(state, viewModel, navController)
                 }
 

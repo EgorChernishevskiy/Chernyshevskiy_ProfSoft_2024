@@ -25,28 +25,56 @@ class MainScreenViewModel(
             is MainScreenEvent.LoadCourses -> {
                 fetchCourses()
             }
+
             is MainScreenEvent.LoadNotes -> {
                 fetchNotes()
             }
+
             is MainScreenEvent.LoadLocalNotes -> {
                 fetchLocalNotes()
             }
+
             is MainScreenEvent.ShowAllCourses -> {
                 _state.value = _state.value?.copy(showAllCourses = true)
                 loadCourses()
             }
+
             is MainScreenEvent.HideAllCourses -> {
                 _state.value = _state.value?.copy(showAllCourses = false)
             }
+
             is MainScreenEvent.ShowAllNotes -> {
                 _state.value = _state.value?.copy(showAllNotes = true)
                 loadNotes()
             }
+
+            is MainScreenEvent.ShowAllLocalNotes -> {
+                _state.value = _state.value?.copy(showAllLocalNotes = true)
+                loadLocalNotes()
+            }
+
+            is MainScreenEvent.HideAllLocalNotes -> {
+                _state.value = _state.value?.copy(showAllLocalNotes = false)
+            }
+
             is MainScreenEvent.HideAllNotes -> {
                 _state.value = _state.value?.copy(showAllNotes = false)
             }
+
             is MainScreenEvent.NavigateToLogin -> {
                 _state.value = _state.value?.copy(isNavigatedToLogin = true)
+            }
+        }
+    }
+
+    private fun loadLocalNotes() {
+        _state.value = _state.value?.copy(isLoading = true)
+        viewModelScope.launch {
+            try {
+                val notes = getAllLocalNotesUseCase.execute()
+                _state.value = _state.value?.copy(localNotes = notes, isLoading = false)
+            } catch (e: Exception) {
+                _state.value = _state.value?.copy(error = e.message, isLoading = false)
             }
         }
     }

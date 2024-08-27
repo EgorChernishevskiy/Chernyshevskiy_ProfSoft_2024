@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.ui.coursedetailsscreen.components
+package com.example.togetherapp.presentation.ui.details.coursedetailsscreen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

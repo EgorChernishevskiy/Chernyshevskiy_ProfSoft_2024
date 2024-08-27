@@ -3,6 +3,7 @@ package com.example.togetherapp.presentation.ui.mainscreen.components
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,7 +29,7 @@ import com.example.togetherapp.presentation.utils.formatNoteCardDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun NoteCard(title: String, content: String, date: String) {
+fun NoteCard(title: String, content: String, date: String, onClick: () -> Unit) {
     val formattedDate = formatNoteCardDate(date)
     Box(
         modifier = Modifier
@@ -38,7 +39,8 @@ fun NoteCard(title: String, content: String, date: String) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 12.dp),
+                .padding(top = 12.dp)
+                .clickable(onClick = onClick),
             colors = CardDefaults.cardColors(
                 containerColor = Color(0xFFFFD80C)
             ),

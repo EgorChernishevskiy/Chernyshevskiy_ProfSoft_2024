@@ -17,6 +17,12 @@ import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainScreenCards(state: MainScreenState, viewModel: MainScreenViewModel, navController: NavHostController){
+
+    Spacer(modifier = Modifier.height(20.dp))
+
+    SectionTitle(title = "Ваши курсы", showAll = true) {
+        viewModel.handleEvent(MainScreenEvent.ShowAllCourses)
+    }
     Spacer(modifier = Modifier.height(12.dp))
 
     CustomHorizontalPager(courses = state.courses, navController)
@@ -24,9 +30,8 @@ fun MainScreenCards(state: MainScreenState, viewModel: MainScreenViewModel, navC
     Spacer(modifier = Modifier.height(24.dp))
 
     SectionTitle(title = "Ваши заметки", showAll = true) {
-        viewModel.handleEvent(MainScreenEvent.ShowAllNotes)
+        viewModel.handleEvent(MainScreenEvent.ShowAllLocalNotes)
     }
-
 
     Spacer(modifier = Modifier.height(12.dp))
 
@@ -34,7 +39,10 @@ fun MainScreenCards(state: MainScreenState, viewModel: MainScreenViewModel, navC
         NoteCard(
             title = note.title,
             content = note.content[0].text,
-            date = note.date
+            date = note.date,
+            onClick = {
+                navController.navigate("lnote/${note.id}")
+            }
         )
     }
 

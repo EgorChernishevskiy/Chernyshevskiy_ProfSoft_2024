@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.ui.cnotedetailsscreen.components
+package com.example.togetherapp.presentation.ui.details.cnotedetailsscreen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
