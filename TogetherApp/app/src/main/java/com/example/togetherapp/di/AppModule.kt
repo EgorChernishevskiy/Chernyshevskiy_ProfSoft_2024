@@ -85,7 +85,7 @@ val databaseModule = module {
             get<Context>(),
             NoteDatabase::class.java,
             "note_database"
-        ).build()
+        ).allowMainThreadQueries().build()
     }
     single { get<NoteDatabase>().noteDao() }
 }

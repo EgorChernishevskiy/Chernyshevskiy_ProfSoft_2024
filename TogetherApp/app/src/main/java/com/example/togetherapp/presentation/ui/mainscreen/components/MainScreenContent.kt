@@ -152,14 +152,24 @@ fun MainScreenContent(
                 }
 
                 state.error != null -> {
-                    ErrorMessage(
-                        errorMessage = state.error ?: "Что-то пошло не так",
-                        onRetryClick = {
-                            viewModel.handleEvent(MainScreenEvent.LoadCourses)
-                            viewModel.handleEvent(MainScreenEvent.LoadNotes)
-                            viewModel.handleEvent(MainScreenEvent.LoadLocalNotes)
+                    if  (state.error == "Failed to fetch courses: Unauthorized"){
+                        if (!state.isNavigatedToLogin) {
+                            viewModel.handleEvent(MainScreenEvent.NavigateToLogin)
+                            navController.navigate("login") {
+                                popUpTo("splash") { inclusive = true }
+                            }
                         }
-                    )
+                    }
+                    else {
+                        ErrorMessage(
+                            errorMessage = state.error ?: "Что-то пошло не так",
+                            onRetryClick = {
+                                viewModel.handleEvent(MainScreenEvent.LoadCourses)
+                                viewModel.handleEvent(MainScreenEvent.LoadNotes)
+                                viewModel.handleEvent(MainScreenEvent.LoadLocalNotes)
+                            }
+                        )
+                    }
                 }
 
                 state.showAllCourses -> {

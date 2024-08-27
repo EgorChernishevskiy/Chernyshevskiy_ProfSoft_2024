@@ -45,6 +45,9 @@ class MainScreenViewModel(
             is MainScreenEvent.HideAllNotes -> {
                 _state.value = _state.value?.copy(showAllNotes = false)
             }
+            is MainScreenEvent.NavigateToLogin -> {
+                _state.value = _state.value?.copy(isNavigatedToLogin = true)
+            }
         }
     }
 

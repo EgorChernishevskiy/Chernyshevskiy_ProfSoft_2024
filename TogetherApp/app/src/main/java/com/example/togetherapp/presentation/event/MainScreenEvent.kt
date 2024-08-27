@@ -1,7 +1,5 @@
 package com.example.togetherapp.presentation.event
 
-import com.example.togetherapp.domain.model.course.Course
-
 sealed class MainScreenEvent {
     object LoadCourses : MainScreenEvent()
     object LoadNotes : MainScreenEvent()
@@ -10,4 +8,5 @@ sealed class MainScreenEvent {
     object HideAllCourses : MainScreenEvent()
     object ShowAllNotes : MainScreenEvent()
     object HideAllNotes : MainScreenEvent()
+    object NavigateToLogin : MainScreenEvent()
 }

@@ -1,5 +1,7 @@
 package com.example.togetherapp.presentation.ui.mainscreen.components
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,9 +24,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.example.togetherapp.presentation.utils.formatNoteCardDate
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NoteCard(title: String, content: String, date: String) {
+    val formattedDate = formatNoteCardDate(date)
     Box(
         modifier = Modifier
             .fillMaxWidth(),
@@ -65,7 +70,7 @@ fun NoteCard(title: String, content: String, date: String) {
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = date,
+                text = formattedDate,
                 color = Color.White,
                 style = MaterialTheme.typography.bodySmall
             )

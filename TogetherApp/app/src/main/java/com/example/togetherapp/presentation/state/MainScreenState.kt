@@ -13,4 +13,5 @@ data  class MainScreenState (
     val error: String? = null,
     val showAllCourses: Boolean = false,
     val showAllNotes: Boolean = false,
+    val isNavigatedToLogin: Boolean = false
 )

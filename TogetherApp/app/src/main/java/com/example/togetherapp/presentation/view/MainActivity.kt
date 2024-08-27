@@ -23,13 +23,9 @@ class MainActivity : ComponentActivity() {
     private val courseDetailsScreenViewModel: CourseDetailsScreenViewModel by viewModel()
     private val cNoteDetailsScreenViewModel: CNoteDetailsScreenViewModel by viewModel()
 
-    //private lateinit var noteDao: NoteDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-            // val db = NoteDatabase.getInstance(applicationContext)
-       // noteDao = db.noteDao()
 
         setContent {
             TogetherAppTheme {
@@ -40,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     splashScreenViewModel = splashScreenViewModel,
                     mainScreenViewModel = mainScreenViewModel,
                     courseDetailsScreenViewModel = courseDetailsScreenViewModel,
-                    cNoteDetailsScreenViewModel  = cNoteDetailsScreenViewModel,
+                    cNoteDetailsScreenViewModel = cNoteDetailsScreenViewModel,
                 )
             }
         }

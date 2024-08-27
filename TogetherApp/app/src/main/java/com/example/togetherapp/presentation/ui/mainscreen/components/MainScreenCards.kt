@@ -30,11 +30,13 @@ fun MainScreenCards(state: MainScreenState, viewModel: MainScreenViewModel, navC
 
     Spacer(modifier = Modifier.height(12.dp))
 
-    NoteCard(
-        title = "Для создания новой Activity",
-        content = "Нужно лишь применить старый дедовский виkkkkkk",
-        date = "12 июля"
-    )
+    state.localnote?.let { note ->
+        NoteCard(
+            title = note.title,
+            content = note.content[0].text,
+            date = note.date
+        )
+    }
 
     Spacer(modifier = Modifier.height(20.dp))
 
