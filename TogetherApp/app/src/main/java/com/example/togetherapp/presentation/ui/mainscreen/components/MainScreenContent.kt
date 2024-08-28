@@ -138,7 +138,7 @@ fun MainScreenContent(
         },
 
         bottomBar = {
-            BottomNavigationBar()
+            BottomNavigationBar(navController)
         }
 
     ) { paddingValues ->
@@ -157,7 +157,7 @@ fun MainScreenContent(
                         if (!state.isNavigatedToLogin) {
                             viewModel.handleEvent(MainScreenEvent.NavigateToLogin)
                             navController.navigate("login") {
-                                popUpTo("splash") { inclusive = true }
+                                popUpTo("login") { inclusive = true }
                             }
                         }
                     } else {
@@ -230,42 +230,8 @@ fun MainScreenContent(
                 else -> {
                     CenteredProgressIndicator()
                 }
-
-//                else -> {
-//                    Spacer(modifier = Modifier.height(20.dp))
-//
-//                    SectionTitle(title = "Ваши курсы", showAll = true) {
-//                        viewModel.handleEvent(MainScreenEvent.ShowAllCourses)
-//                    }
-//
-//                    Text(text = "Нет доступных курсов")
-//
-//                    Button(
-//                        modifier = Modifier.align(Center),
-//                        onClick = { viewModel.handleEvent(MainScreenEvent.LoadCourses) },
-//                        colors = ButtonDefaults.buttonColors(
-//                            containerColor = Color.Black
-//                        )
-//                    ) {
-//                        Text(
-//                            text = "Повторить",
-//                            style = MaterialTheme.typography.bodyMedium,
-//                            color = Color.White
-//                        )
-//                    }
-//
-//                    MainScreenCards(state, viewModel, navController)
-//                }
             }
 
         }
     }
 }
-
-//@Preview
-//@Composable
-//private fun MainScreenPreview() {
-//    TogetherAppTheme {
-//        MainScreenContent()
-//    }
-//}

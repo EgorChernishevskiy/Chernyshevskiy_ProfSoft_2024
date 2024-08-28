@@ -10,12 +10,14 @@ import com.example.togetherapp.presentation.ui.details.coursedetailsscreen.Detai
 import com.example.togetherapp.presentation.ui.auth.loginscreen.LoginScreen
 import com.example.togetherapp.presentation.ui.mainscreen.MainScreen
 import com.example.togetherapp.presentation.ui.auth.registerscreen.RegisterScreen
+import com.example.togetherapp.presentation.ui.createnotescreen.CreateNoteScreen
 import com.example.togetherapp.presentation.ui.details.cnotedetailsscreen.CNoteDetailScreen
 import com.example.togetherapp.presentation.ui.details.lnotesdetails.LNoteDetailsScreen
 import com.example.togetherapp.presentation.ui.splashscreen.SplashScreen
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.CreateNoteViewModel
 import com.example.togetherapp.presentation.viewmodel.LNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
@@ -28,7 +30,8 @@ fun NavGraph(
     mainScreenViewModel: MainScreenViewModel,
     courseDetailsScreenViewModel: CourseDetailsScreenViewModel,
     cNoteDetailsScreenViewModel: CNoteDetailsScreenViewModel,
-    lNoteDetailsScreenViewModel: LNoteDetailsScreenViewModel
+    lNoteDetailsScreenViewModel: LNoteDetailsScreenViewModel,
+    createNoteViewModel: CreateNoteViewModel
 ) {
     NavHost(navController, startDestination = "splash") {
         composable("splash") { SplashScreen(navController = navController, viewModel = splashScreenViewModel) }
@@ -77,5 +80,6 @@ fun NavGraph(
                 noteId = noteId
             )
         }
+        composable("createnote") { CreateNoteScreen(viewModel = createNoteViewModel, navController = navController) }
     }
 }

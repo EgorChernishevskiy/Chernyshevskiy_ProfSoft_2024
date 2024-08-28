@@ -15,10 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.togetherapp.R
 
 @Composable
-fun BottomNavigationBar() {
+fun BottomNavigationBar(navController: NavHostController) {
     Surface(
         color = Color.White,
         modifier = Modifier.height(56.dp)
@@ -82,7 +83,7 @@ fun BottomNavigationBar() {
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
-                    onClick = { /* Handle add click */ }
+                    onClick = { navController.navigate("createnote") }
                 )
                 NavigationBarItem(
                     icon = {

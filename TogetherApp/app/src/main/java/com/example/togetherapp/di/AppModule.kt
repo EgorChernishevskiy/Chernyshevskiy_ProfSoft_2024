@@ -30,6 +30,7 @@ import com.example.togetherapp.domain.usecase.auth.ValidatePasswordUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidatePhoneNumberUseCase
 import com.example.togetherapp.domain.usecase.course.GetCourseByIdUseCase
 import com.example.togetherapp.domain.usecase.comnote.AddCommentUseCase
+import com.example.togetherapp.domain.usecase.comnote.CreateNoteUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNoteByIdUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNotesUseCase
 import com.example.togetherapp.domain.usecase.locnote.CreateLocalNoteUseCase
@@ -38,6 +39,7 @@ import com.example.togetherapp.domain.usecase.locnote.GetLocalNoteByIdUseCase
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.CreateNoteViewModel
 import com.example.togetherapp.presentation.viewmodel.LNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
@@ -145,10 +147,11 @@ val useCaseModule = module {
     single { GetNotesUseCase(get()) }
     single { GetNoteByIdUseCase(get()) }
     single { AddCommentUseCase(get()) }
+    single { CreateNoteUseCase(get()) }
 
     single { GetAllLocalNotesUseCase(get()) }
     single { GetLocalNoteByIdUseCase(get()) }
-    //single { CreateLocalNoteUseCase(get()) }
+    single { CreateLocalNoteUseCase(get()) }
 }
 
 val viewModelModule = module {
@@ -158,6 +161,7 @@ val viewModelModule = module {
     viewModel { CourseDetailsScreenViewModel(get()) }
     viewModel { CNoteDetailsScreenViewModel(get(), get()) }
     viewModel { LNoteDetailsScreenViewModel(get()) }
+    viewModel { CreateNoteViewModel(get(), get()) }
 }
 
 val appModules = listOf(
