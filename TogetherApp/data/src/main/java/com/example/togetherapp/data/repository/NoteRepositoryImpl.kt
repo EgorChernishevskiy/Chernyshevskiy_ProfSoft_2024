@@ -2,6 +2,7 @@ package com.example.togetherapp.data.repository
 
 import com.example.togetherapp.data.api.NoteApi
 import com.example.togetherapp.data.mappers.note.NoteMapper
+import com.example.togetherapp.domain.model.comnote.CreatedNote
 import com.example.togetherapp.domain.model.comnote.Note
 import com.example.togetherapp.domain.repository.NoteRepository
 
@@ -29,7 +30,7 @@ class NoteRepositoryImpl(
         }
     }
 
-    override suspend fun createNote(note: Note): Note {
+    override suspend fun createNote(note: CreatedNote): Note {
         val noteDto = mapper.toDto(note)
         val response = api.createNote(noteDto)
         if (response.isSuccessful) {

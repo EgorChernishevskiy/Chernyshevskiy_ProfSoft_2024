@@ -6,10 +6,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.togetherapp.R
 import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
@@ -35,7 +33,7 @@ fun MainScreenCards(state: MainScreenState, viewModel: MainScreenViewModel, navC
 
     Spacer(modifier = Modifier.height(12.dp))
 
-    state.localnote?.let { note ->
+    state.localNote?.let { note ->
         NoteCard(
             title = note.title,
             content = note.content[0].text,

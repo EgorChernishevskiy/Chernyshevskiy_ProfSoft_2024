@@ -1,5 +1,7 @@
     package com.example.togetherapp.data.mappers.locnote
 
+    import android.os.Build
+    import androidx.annotation.RequiresApi
     import com.example.togetherapp.data.database.entity.NoteContentEntity
     import com.example.togetherapp.data.database.entity.NoteEntity
     import com.example.togetherapp.domain.model.comnote.NoteContent
@@ -17,14 +19,14 @@
             )
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         override fun mapToEntity(note: LocNote): NoteEntity {
             return NoteEntity(
-                id = note.id,
+                id = 0,
                 title = note.title,
                 content = note.content.map {
                     NoteContentEntity(it.text, it.image)
-                },
-                date = note.date
+                }
             )
         }
     }

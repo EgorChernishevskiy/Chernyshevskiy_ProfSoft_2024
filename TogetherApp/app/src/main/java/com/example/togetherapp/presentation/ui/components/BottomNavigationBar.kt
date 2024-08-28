@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.ui.mainscreen.components
+package com.example.togetherapp.presentation.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

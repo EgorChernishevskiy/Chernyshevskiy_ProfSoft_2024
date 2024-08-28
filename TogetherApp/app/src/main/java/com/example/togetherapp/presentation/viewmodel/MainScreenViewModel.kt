@@ -85,7 +85,7 @@ class MainScreenViewModel(
             try {
                 val notesList = getAllLocalNotesUseCase.execute()
                 val lastLocalNote = notesList.firstOrNull()
-                _state.value = _state.value?.copy(localnote = lastLocalNote)
+                _state.value = _state.value?.copy(localNote = lastLocalNote)
             } catch (e: Exception) {
                 _state.value = _state.value?.copy(error = e.message)
             } finally {
