@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 
 @Composable
 fun CourseCard(title: String, tags: List<String>, onClick: () -> Unit) {
@@ -30,10 +31,19 @@ fun CourseCard(title: String, tags: List<String>, onClick: () -> Unit) {
         shape = RoundedCornerShape(8.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            title.split(" ").forEach { word ->
+            if (title.split(" ").count() <= 2) {
+                title.split(" ").forEach { word ->
+                    Text(
+                        text = word,
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                }
+            }
+            else {
                 Text(
-                    text = word,
-                    style = MaterialTheme.typography.titleLarge
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge,
+                    maxLines = 2
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))

@@ -46,9 +46,20 @@ fun CustomTopAppBar(
                 Spacer(modifier = Modifier.height(50.dp))
                 Column(modifier = Modifier.padding(horizontal = 16.dp))
                 {
-                    course.title.split(" ").forEach { word ->
+                    if (course.title.split(" ").count() <= 2) {
+                        course.title.split(" ").forEach { word ->
+                            Text(
+                                text = word,
+                                style = MaterialTheme.typography.titleLarge,
+                                fontWeight = FontWeight.Bold,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                    }
+                    else{
                         Text(
-                            text = word,
+                            text = course.title,
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
                             maxLines = 2,
