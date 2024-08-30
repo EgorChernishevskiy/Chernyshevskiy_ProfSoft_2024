@@ -32,7 +32,6 @@ fun NoteContentItem(noteContent: NoteContent) {
                 start = 16.dp,
                 end = 16.dp,
                 top = 20.dp,
-                bottom = 16.dp
             )
     ) {
         if (noteContent.text.isNotBlank()) {
@@ -44,26 +43,26 @@ fun NoteContentItem(noteContent: NoteContent) {
                 color = Color.Gray
             )
         }
-        noteContent.image?.let { imageUrl ->
-            Spacer(modifier = Modifier.height(8.dp))
+        if (noteContent.image.isNotBlank()) {
+            noteContent.image?.let { imageUrl ->
+                Spacer(modifier = Modifier.height(8.dp))
 
-            val imageRequest = ImageRequest.Builder(LocalContext.current)
-                .data(imageUrl)
-                .placeholder(R.drawable.no_image)
-                .error(R.drawable.no_image)
-                .build()
+                val imageRequest = ImageRequest.Builder(LocalContext.current)
+                    .data(imageUrl)
+                    .build()
 
-            val painter = rememberImagePainter(imageRequest)
+                val painter = rememberImagePainter(imageRequest)
 
-            Image(
-                painter = painter,
-                contentDescription = null,
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(193.dp)
-                    .clip(MaterialTheme.shapes.medium)
-            )
+                Image(
+                    painter = painter,
+                    contentDescription = null,
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(193.dp)
+                        .clip(MaterialTheme.shapes.medium)
+                )
+            }
         }
     }
 }

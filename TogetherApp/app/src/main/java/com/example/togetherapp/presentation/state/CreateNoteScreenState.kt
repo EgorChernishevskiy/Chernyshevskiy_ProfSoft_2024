@@ -15,6 +15,6 @@ data class CreateNoteScreenState(
     val addText: Boolean = false,
     val title: String = "Название",
     val noteContent: NoteContent? = null,
-    val addedItem: String? = null,
+    val addedItem: String = "",
     val error: String? = null
 )

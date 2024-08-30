@@ -40,24 +40,22 @@ class CreateNoteViewModel(
 
             is CreateNoteScreenEvent.OnCommunityCreated -> {
                 createCommunityNote()
-                _state.value = _state.value?.copy(isDone = true)
+                _state.value = _state.value?.copy(isDone = true, communityNote = null)
                 communityNoteIndex = 0
             }
 
             is CreateNoteScreenEvent.OnLocalCreated -> {
                 createLocalNote()
-                _state.value = _state.value?.copy(isDone = true)
+                _state.value = _state.value?.copy(isDone = true, localNote = null)
                 localNoteIndex = 0
             }
 
             is CreateNoteScreenEvent.OnAddText -> {
                 addTextContent()
-                _state.value = _state.value?.copy(addedItem = null, addText = false)
             }
 
             is CreateNoteScreenEvent.OnAddPhoto -> {
                 addPhotoContent()
-                _state.value = _state.value?.copy(addedItem = null, addPhoto = false)
             }
 
             is CreateNoteScreenEvent.OnShowAddPhoto -> {
@@ -72,8 +70,16 @@ class CreateNoteViewModel(
                 _state.value = _state.value?.copy(whatToAdd = true)
             }
 
+            is CreateNoteScreenEvent.OnDismissWhatToAdd -> {
+                _state.value = _state.value?.copy(whatToAdd = false)
+            }
+
             is CreateNoteScreenEvent.OnAddItemChange -> {
                 _state.value = _state.value?.copy(addedItem = event.addItem)
+            }
+
+            is CreateNoteScreenEvent.OnDismissAddItem -> {
+                _state.value = _state.value?.copy(addedItem = "", addPhoto = false, addText = false)
             }
         }
     }
