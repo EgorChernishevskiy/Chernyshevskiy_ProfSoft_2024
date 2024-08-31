@@ -34,10 +34,30 @@ fun NavGraph(
     createNoteViewModel: CreateNoteViewModel
 ) {
     NavHost(navController, startDestination = "splash") {
-        composable("splash") { SplashScreen(navController = navController, viewModel = splashScreenViewModel) }
-        composable("login") { LoginScreen(viewModel = authViewModel, navController = navController) }
-        composable("register") { RegisterScreen(viewModel = authViewModel, navController = navController) }
-        composable("home") { MainScreen(viewModel = mainScreenViewModel, navController = navController) }
+        composable("splash") {
+            SplashScreen(
+                navController = navController,
+                viewModel = splashScreenViewModel
+            )
+        }
+        composable("login") {
+            LoginScreen(
+                viewModel = authViewModel,
+                navController = navController
+            )
+        }
+        composable("register") {
+            RegisterScreen(
+                viewModel = authViewModel,
+                navController = navController
+            )
+        }
+        composable("home") {
+            MainScreen(
+                viewModel = mainScreenViewModel,
+                navController = navController
+            )
+        }
         composable(
             "details/{courseId}/{courseIndex}",
             arguments = listOf(
@@ -80,6 +100,11 @@ fun NavGraph(
                 noteId = noteId
             )
         }
-        composable("createnote") { CreateNoteScreen(viewModel = createNoteViewModel, navController = navController) }
+        composable("createnote") {
+            CreateNoteScreen(
+                viewModel = createNoteViewModel,
+                navController = navController
+            )
+        }
     }
 }

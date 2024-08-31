@@ -17,4 +17,5 @@ sealed class CreateNoteScreenEvent {
     object OnAddPhoto : CreateNoteScreenEvent()
     object OnLocalCreated : CreateNoteScreenEvent()
     object OnCommunityCreated : CreateNoteScreenEvent()
+    object OnResetState : CreateNoteScreenEvent()
 }

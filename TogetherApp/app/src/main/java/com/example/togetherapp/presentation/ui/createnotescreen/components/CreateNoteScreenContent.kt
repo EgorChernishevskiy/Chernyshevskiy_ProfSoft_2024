@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -66,7 +67,10 @@ fun CreateNoteScreenContent(
                         modifier = Modifier.padding(top = 8.dp, end = 16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        IconButtonBack { navController.popBackStack() }
+                        IconButtonBack {
+                            viewModel.handleEvent(CreateNoteScreenEvent.OnResetState)
+                            navController.popBackStack()
+                        }
                         Text(
                             text = "Новая заметка",
                             style = MaterialTheme.typography.titleLarge,
@@ -221,8 +225,7 @@ fun CreateNoteScreenContent(
                         onClick = {
                             if (state.isLocal) {
                                 viewModel.handleEvent(CreateNoteScreenEvent.OnLocalCreated)
-                            }
-                            else {
+                            } else {
                                 viewModel.handleEvent(CreateNoteScreenEvent.OnCommunityCreated)
                             }
                         },
@@ -235,7 +238,14 @@ fun CreateNoteScreenContent(
                             containerColor = Color(0xFF333333)
                         )
                     ) {
-                        Text(text = "Готово", color = Color.White)
+                        if (state.isLoading) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(30.dp),
+                                color = Color(0xFFD6B714)
+                            )
+                        } else {
+                            Text(text = "Готово", color = Color.White)
+                        }
                     }
                 }
             }
@@ -253,6 +263,15 @@ fun CreateNoteScreenContent(
                     viewModel.handleEvent(CreateNoteScreenEvent.OnShowAddPhoto)
                 }
             )
+        }
+        state.error?.let {
+            ErrorDialog(OnRetry = {
+                if (state.isLocal) {
+                    viewModel.handleEvent(CreateNoteScreenEvent.OnLocalCreated)
+                } else {
+                    viewModel.handleEvent(CreateNoteScreenEvent.OnCommunityCreated)
+                }
+            })
         }
 
         if (state.addPhoto || state.addText) {

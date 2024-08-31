@@ -153,11 +153,11 @@ fun MainScreenContent(
                 }
 
                 state.error != null -> {
-                    if (state.error == "Failed to fetch courses: Unauthorized") {
+                    if  (state.error!!.endsWith("Unauthorized")) {
                         if (!state.isNavigatedToLogin) {
                             viewModel.handleEvent(MainScreenEvent.NavigateToLogin)
                             navController.navigate("login") {
-                                popUpTo("login") { inclusive = true }
+                                popUpTo("home") { inclusive = true }
                             }
                         }
                     } else {

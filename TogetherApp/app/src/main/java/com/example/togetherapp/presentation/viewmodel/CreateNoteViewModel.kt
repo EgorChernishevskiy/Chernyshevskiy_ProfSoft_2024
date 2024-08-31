@@ -40,13 +40,13 @@ class CreateNoteViewModel(
 
             is CreateNoteScreenEvent.OnCommunityCreated -> {
                 createCommunityNote()
-                _state.value = _state.value?.copy(isDone = true, communityNote = null)
+                _state.value = _state.value?.copy(communityNote = null)
                 communityNoteIndex = 0
             }
 
             is CreateNoteScreenEvent.OnLocalCreated -> {
                 createLocalNote()
-                _state.value = _state.value?.copy(isDone = true, localNote = null)
+                _state.value = _state.value?.copy(localNote = null)
                 localNoteIndex = 0
             }
 
@@ -81,9 +81,18 @@ class CreateNoteViewModel(
             is CreateNoteScreenEvent.OnDismissAddItem -> {
                 _state.value = _state.value?.copy(addedItem = "", addPhoto = false, addText = false)
             }
+
+            is CreateNoteScreenEvent.OnResetState -> {
+                resetState()
+            }
         }
     }
 
+    private fun resetState() {
+        _state.value = CreateNoteScreenState()
+        localNoteIndex = 0
+        communityNoteIndex = 0
+    }
     private fun addPhotoContent() {
         val photoContent = NoteContent(
             text = "",
@@ -161,26 +170,28 @@ class CreateNoteViewModel(
 
     private fun createLocalNote() {
         val currentNote = _state.value?.localNote ?: return
+        _state.value = _state.value?.copy(isLoading = true)
 
         viewModelScope.launch {
             try {
                 createLocalNoteUseCase.execute(currentNote)
-                _state.value = _state.value?.copy(localNote = null)
+                _state.value = _state.value?.copy(localNote = null, isLoading = false)
             } catch (e: Exception) {
-                _state.value = _state.value?.copy(error = e.message)
+                _state.value = _state.value?.copy(error = e.message, isLoading = false)
             }
         }
     }
 
     private fun createCommunityNote() {
         val currentNote = _state.value?.communityNote ?: return
+        _state.value = _state.value?.copy(isLoading = true)
 
         viewModelScope.launch {
             try {
                 createNoteUseCase.execute(currentNote)
-                _state.value = _state.value?.copy(communityNote = null)
+                _state.value = _state.value?.copy(communityNote = null, isLoading = false)
             } catch (e: Exception) {
-                _state.value = _state.value?.copy(error = e.message)
+                _state.value = _state.value?.copy(error = e.message, isLoading = false)
             }
         }
     }

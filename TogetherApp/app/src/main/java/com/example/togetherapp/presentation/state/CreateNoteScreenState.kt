@@ -1,12 +1,11 @@
 package com.example.togetherapp.presentation.state
 
 import com.example.togetherapp.domain.model.comnote.CreatedNote
-import com.example.togetherapp.domain.model.comnote.Note
 import com.example.togetherapp.domain.model.comnote.NoteContent
 import com.example.togetherapp.domain.model.locnote.LocNote
 
 data class CreateNoteScreenState(
-    val isDone: Boolean = false,
+    val isLoading: Boolean = false,
     val isLocal: Boolean = true,
     val localNote: LocNote? = null,
     val communityNote: CreatedNote? = null,
