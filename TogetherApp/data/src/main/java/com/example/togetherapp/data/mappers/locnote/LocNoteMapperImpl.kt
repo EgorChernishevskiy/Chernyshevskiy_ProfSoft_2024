@@ -2,8 +2,8 @@
 
     import android.os.Build
     import androidx.annotation.RequiresApi
-    import com.example.togetherapp.data.database.entity.NoteContentEntity
-    import com.example.togetherapp.data.database.entity.NoteEntity
+    import com.example.togetherapp.data.database.entity.note.NoteContentEntity
+    import com.example.togetherapp.data.database.entity.note.NoteEntity
     import com.example.togetherapp.domain.model.comnote.NoteContent
     import com.example.togetherapp.domain.model.locnote.LocNote
 

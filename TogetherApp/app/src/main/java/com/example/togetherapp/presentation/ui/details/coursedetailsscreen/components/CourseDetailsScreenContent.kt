@@ -33,6 +33,7 @@ fun DetailsScreenContent(
 
     LaunchedEffect(courseId) {
         viewModel.handleEvent(CourseDetailsScreenEvent.LoadCourseDetails(courseId))
+        viewModel.handleEvent(CourseDetailsScreenEvent.CheckIfFavorite(courseId))
     }
 
     Scaffold(
@@ -40,7 +41,13 @@ fun DetailsScreenContent(
             CustomTopAppBar(
                 state = state,
                 onBackClick = { navController.popBackStack() },
-                courseIndex = courseIndex
+                courseIndex = courseIndex,
+                onFavoriteClick = {
+                    viewModel.handleEvent(
+                        if (state.isFavorite) CourseDetailsScreenEvent.RemoveFromFavorite
+                        else CourseDetailsScreenEvent.AddToFavorite
+                    )
+                }
             )
         }
     ) { paddingValues ->

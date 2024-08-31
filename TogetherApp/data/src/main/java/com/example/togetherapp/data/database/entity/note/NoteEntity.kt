@@ -1,11 +1,11 @@
-package com.example.togetherapp.data.database.entity
+package com.example.togetherapp.data.database.entity.note
 
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.togetherapp.data.database.utils.NoteContentConverter
+import com.example.togetherapp.data.database.converter.NoteContentConverter
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

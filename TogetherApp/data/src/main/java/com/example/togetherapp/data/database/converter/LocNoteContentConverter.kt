@@ -1,11 +1,11 @@
-package com.example.togetherapp.data.database.utils
+package com.example.togetherapp.data.database.converter
 
 import androidx.room.TypeConverter
-import com.example.togetherapp.data.database.entity.NoteContentEntity
+import com.example.togetherapp.data.database.entity.note.NoteContentEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class NoteContentConverter {
+class LocNoteContentConverter {
 
     @TypeConverter
     fun fromNoteContentList(content: List<NoteContentEntity>): String {

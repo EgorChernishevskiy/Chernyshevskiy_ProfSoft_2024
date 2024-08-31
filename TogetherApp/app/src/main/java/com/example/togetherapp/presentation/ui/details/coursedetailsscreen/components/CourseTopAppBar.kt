@@ -19,12 +19,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.togetherapp.presentation.state.CourseDetailsScreenState
+import com.example.togetherapp.presentation.ui.components.AddToFavoriteIcon
 import com.example.togetherapp.presentation.ui.components.IconButtonBack
 
 @Composable
 fun CustomTopAppBar(
     state: CourseDetailsScreenState,
     onBackClick: () -> Unit,
+    onFavoriteClick: () -> Unit,
     courseIndex: Int
 ) {
     Box(
@@ -42,6 +44,9 @@ fun CustomTopAppBar(
                         style = MaterialTheme.typography.titleLarge,
                         fontSize = 20.sp
                     )
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    AddToFavoriteIcon(state.isFavorite, onFavoriteClick)
                 }
                 Spacer(modifier = Modifier.height(50.dp))
                 Column(modifier = Modifier.padding(horizontal = 16.dp))

@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.togetherapp.data.database.entity.NoteEntity
+import com.example.togetherapp.data.database.entity.note.NoteEntity
 
 @Dao
 interface NoteDao {

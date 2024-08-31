@@ -1,4 +1,4 @@
-package com.example.togetherapp.data.database.entity
+package com.example.togetherapp.data.database.entity.note
 
 data class NoteContentEntity(
     val text: String,

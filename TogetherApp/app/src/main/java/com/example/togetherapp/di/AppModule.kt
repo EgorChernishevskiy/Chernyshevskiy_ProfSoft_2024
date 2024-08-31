@@ -5,17 +5,21 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.togetherapp.data.database.NoteDatabase
+import com.example.togetherapp.data.database.migration.MIGRATION_1_2
 import com.example.togetherapp.data.interceptor.TokenInterceptor
 import com.example.togetherapp.data.mappers.auth.AuthMapper
 import com.example.togetherapp.data.mappers.auth.AuthMapperImpl
 import com.example.togetherapp.data.mappers.course.CourseMapper
 import com.example.togetherapp.data.mappers.course.CourseMapperImpl
+import com.example.togetherapp.data.mappers.favorite.FavoriteMapper
+import com.example.togetherapp.data.mappers.favorite.FavoriteMapperImpl
 import com.example.togetherapp.data.mappers.locnote.LocNoteMapper
 import com.example.togetherapp.data.mappers.locnote.LocNoteMapperImpl
 import com.example.togetherapp.data.mappers.note.NoteMapper
 import com.example.togetherapp.data.mappers.note.NoteMapperImpl
 import com.example.togetherapp.domain.repository.AuthRepository
 import com.example.togetherapp.domain.repository.CourseRepository
+import com.example.togetherapp.domain.repository.FavoriteRepository
 import com.example.togetherapp.domain.repository.LocNoteRepository
 import com.example.togetherapp.domain.repository.NoteRepository
 import com.example.togetherapp.domain.repository.TokenRepository
@@ -33,6 +37,9 @@ import com.example.togetherapp.domain.usecase.comnote.AddCommentUseCase
 import com.example.togetherapp.domain.usecase.comnote.CreateNoteUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNoteByIdUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNotesUseCase
+import com.example.togetherapp.domain.usecase.favorite.AddFavoriteCourseUseCase
+import com.example.togetherapp.domain.usecase.favorite.CheckCourseFavoriteStatusUseCase
+import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteCourseUseCase
 import com.example.togetherapp.domain.usecase.locnote.CreateLocalNoteUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetAllLocalNotesUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetLocalNoteByIdUseCase
@@ -88,9 +95,13 @@ val databaseModule = module {
             get<Context>(),
             NoteDatabase::class.java,
             "note_database"
-        ).allowMainThreadQueries().build()
+        )
+            .addMigrations(MIGRATION_1_2)
+            .allowMainThreadQueries()
+            .build()
     }
     single { get<NoteDatabase>().noteDao() }
+    single { get<NoteDatabase>().favoriteDao() }
 }
 
 val repositoryModule = module {
@@ -119,6 +130,11 @@ val repositoryModule = module {
             get(), get()
         )
     }
+    single<FavoriteRepository> {
+        com.example.togetherapp.data.repository.FavoriteRepositoryImpl(
+            get(), get()
+        )
+    }
 }
 
 val mapperModule = module {
@@ -126,6 +142,7 @@ val mapperModule = module {
     single<NoteMapper> { NoteMapperImpl() }
     single<AuthMapper> { AuthMapperImpl() }
     single<LocNoteMapper> { LocNoteMapperImpl() }
+    single<FavoriteMapper> { FavoriteMapperImpl() }
 }
 
 
@@ -152,13 +169,17 @@ val useCaseModule = module {
     single { GetAllLocalNotesUseCase(get()) }
     single { GetLocalNoteByIdUseCase(get()) }
     single { CreateLocalNoteUseCase(get()) }
+
+    single { AddFavoriteCourseUseCase(get()) }
+    single { RemoveFavoriteCourseUseCase(get()) }
+    single { CheckCourseFavoriteStatusUseCase(get()) }
 }
 
 val viewModelModule = module {
     viewModel { AuthViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { SplashScreenViewModel(get()) }
     viewModel { MainScreenViewModel(get(), get(), get()) }
-    viewModel { CourseDetailsScreenViewModel(get()) }
+    viewModel { CourseDetailsScreenViewModel(get(), get(), get(), get()) }
     viewModel { CNoteDetailsScreenViewModel(get(), get()) }
     viewModel { LNoteDetailsScreenViewModel(get()) }
     viewModel { CreateNoteViewModel(get(), get()) }
