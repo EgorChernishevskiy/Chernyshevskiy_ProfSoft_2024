@@ -88,7 +88,8 @@ class CNoteDetailsScreenViewModel(
         viewModelScope.launch {
             try {
                 val course = geNoteDetailsUseCase.execute(courseId)
-                _state.value = CNoteDetailsScreenState(note = course, isLoading = false)
+                val isFavorite = _state.value?.isFavorite ?: false
+                _state.value = CNoteDetailsScreenState(note = course, isLoading = false, isFavorite = isFavorite)
             } catch (e: Exception) {
                 _state.value = CNoteDetailsScreenState(error = e.message, isLoading = false)
             }

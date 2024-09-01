@@ -44,6 +44,9 @@ import com.example.togetherapp.domain.usecase.favorite.AddFavoriteNoteUseCase
 import com.example.togetherapp.domain.usecase.favorite.CheckCourseFavoriteStatusUseCase
 import com.example.togetherapp.domain.usecase.favorite.CheckLocalNoteFavoriteStatusUseCase
 import com.example.togetherapp.domain.usecase.favorite.CheckNoteFavoriteStatusUseCase
+import com.example.togetherapp.domain.usecase.favorite.GetAllFavoriteComNotesUseCase
+import com.example.togetherapp.domain.usecase.favorite.GetAllFavoriteCoursesUseCase
+import com.example.togetherapp.domain.usecase.favorite.GetAllFavoriteLocalNotesUseCase
 import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteCourseUseCase
 import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteLocalNoteUseCase
 import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteNoteUseCase
@@ -54,6 +57,7 @@ import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.CreateNoteViewModel
+import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.LNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
@@ -187,6 +191,9 @@ val useCaseModule = module {
     single { CheckCourseFavoriteStatusUseCase(get()) }
     single { CheckNoteFavoriteStatusUseCase(get()) }
     single { CheckLocalNoteFavoriteStatusUseCase(get()) }
+    single { GetAllFavoriteCoursesUseCase(get()) }
+    single { GetAllFavoriteLocalNotesUseCase(get()) }
+    single { GetAllFavoriteComNotesUseCase(get()) }
 }
 
 val viewModelModule = module {
@@ -197,6 +204,7 @@ val viewModelModule = module {
     viewModel { CNoteDetailsScreenViewModel(get(), get(), get(), get(), get()) }
     viewModel { LNoteDetailsScreenViewModel(get(), get(), get(), get()) }
     viewModel { CreateNoteViewModel(get(), get()) }
+    viewModel { FavoriteScreenViewModel(get(), get(), get()) }
 }
 
 val appModules = listOf(

@@ -1,19 +1,33 @@
-package com.example.togetherapp.presentation.ui.mainscreen.components
+package com.example.togetherapp.presentation.ui.favoritescreen.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,33 +37,35 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.R
-import com.example.togetherapp.presentation.event.CreateNoteScreenEvent
+import com.example.togetherapp.domain.model.comnote.Note
+import com.example.togetherapp.domain.model.course.Course
+import com.example.togetherapp.domain.model.locnote.LocNote
+import com.example.togetherapp.presentation.event.FavoriteScreenEvent
 import com.example.togetherapp.presentation.event.MainScreenEvent
-import com.example.togetherapp.presentation.state.MainScreenState
+import com.example.togetherapp.presentation.state.FavoriteScreenState
 import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
 import com.example.togetherapp.presentation.ui.components.CenteredProgressIndicator
 import com.example.togetherapp.presentation.ui.components.CustomSearchButton
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
-import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
+import com.example.togetherapp.presentation.ui.mainscreen.components.CommunityNoteCard
+import com.example.togetherapp.presentation.ui.mainscreen.components.CourseCard
+import com.example.togetherapp.presentation.ui.mainscreen.components.MainScreenCards
+import com.example.togetherapp.presentation.ui.mainscreen.components.NoteCard
+import com.example.togetherapp.presentation.ui.mainscreen.components.ShowAllTopBar
+import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreenContent(
-    viewModel: MainScreenViewModel,
-    navController: NavHostController,
+fun FavoriteScreenContent(
+    viewModel: FavoriteScreenViewModel,
+    navController: NavHostController
 ) {
-
-    val state by viewModel.state.observeAsState(MainScreenState())
+    val state by viewModel.state.observeAsState(FavoriteScreenState())
 
     LaunchedEffect(Unit) {
-        viewModel.handleEvent(MainScreenEvent.LoadCourses)
-        viewModel.handleEvent(MainScreenEvent.LoadNotes)
-        viewModel.handleEvent(MainScreenEvent.LoadLocalNotes)
+        viewModel.handleEvent(FavoriteScreenEvent.LoadAllData)
     }
-
-    var isSearching by remember { mutableStateOf(false) }
-    var searchQuery by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -66,70 +82,25 @@ fun MainScreenContent(
                     title = title,
                     onHideAllClick = {
                         if (state.showAllCourses) {
-                            viewModel.handleEvent(MainScreenEvent.HideAllCourses)
+                            viewModel.handleEvent(FavoriteScreenEvent.HideAllCourses)
                         } else if (state.showAllNotes) {
-                            viewModel.handleEvent(MainScreenEvent.HideAllNotes)
+                            viewModel.handleEvent(FavoriteScreenEvent.HideAllNotes)
                         } else {
-                            viewModel.handleEvent(MainScreenEvent.HideAllLocalNotes)
+                            viewModel.handleEvent(FavoriteScreenEvent.HideAllLocalNotes)
                         }
                     }
                 )
             } else {
                 TopAppBar(
                     title = {
-                        if (!isSearching) {
-                            Text(
-                                text = "Главная",
-                                style = MaterialTheme.typography.titleLarge,
-                                fontSize = 20.sp
-                            )
-                        } else {
-                            TextField(
-                                value = searchQuery,
-                                onValueChange = { searchQuery = it },
-                                placeholder = {
-                                    if (searchQuery.isEmpty()) {
-                                        Text(
-                                            text = "Поиск",
-                                            color = Color(0xFF333333),
-                                            style = MaterialTheme.typography.titleSmall.copy(
-                                                fontSize = 14.sp
-                                            )
-                                        )
-                                    }
-                                },
-                                leadingIcon = {
-                                    Icon(
-                                        painter = painterResource(R.drawable.ic_searchnormal),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(16.dp)
-                                    )
-                                },
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(48.dp)
-                                    .padding(horizontal = 16.dp)
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .background(Color(0xFFD6B714)),
-                                colors = TextFieldDefaults.textFieldColors(
-                                    containerColor = Color.Transparent,
-                                    focusedIndicatorColor = Color.Transparent,
-                                    unfocusedIndicatorColor = Color.Transparent,
-                                    disabledIndicatorColor = Color.Transparent,
-                                    errorIndicatorColor = Color.Transparent
-                                ),
-                                textStyle = TextStyle(
-                                    fontSize = 14.sp
-                                ),
-                                singleLine = true
-                            )
-                        }
-
+                        Text(
+                            text = "Избранное",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontSize = 20.sp
+                        )
                     },
                     actions = {
-                        if (!isSearching && !state.showAllCourses && !state.showAllNotes && !state.showAllLocalNotes) {
-                            CustomSearchButton()
-                        }
+                        CustomSearchButton()
                     },
                     colors = TopAppBarDefaults.mediumTopAppBarColors(
                         containerColor = Color(0xFFFFD80C)
@@ -137,11 +108,9 @@ fun MainScreenContent(
                 )
             }
         },
-
         bottomBar = {
             BottomNavigationBar(navController)
         }
-
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -154,25 +123,31 @@ fun MainScreenContent(
                 }
 
                 state.error != null -> {
-                    if (state.error!!.endsWith("Unauthorized")) {
-                        if (!state.isNavigatedToLogin) {
-                            viewModel.handleEvent(MainScreenEvent.OnResetState)
-                            viewModel.handleEvent(MainScreenEvent.NavigateToLogin)
-                            navController.navigate("login") {
-                                popUpTo("home") { inclusive = true }
-                            }
+
+                    ErrorMessage(
+                        errorMessage = state.error ?: "Что-то пошло не так",
+                        onRetryClick = {
+                            viewModel.handleEvent(FavoriteScreenEvent.LoadCourses)
+                            viewModel.handleEvent(FavoriteScreenEvent.LoadNotes)
+                            viewModel.handleEvent(FavoriteScreenEvent.LoadLocalNotes)
                         }
-                    } else {
-                        ErrorMessage(
-                            errorMessage = state.error ?: "Что-то пошло не так",
-                            onRetryClick = {
-                                viewModel.handleEvent(MainScreenEvent.LoadCourses)
-                                viewModel.handleEvent(MainScreenEvent.LoadNotes)
-                                viewModel.handleEvent(MainScreenEvent.LoadLocalNotes)
-                            }
-                        )
-                    }
+                    )
+
                 }
+
+//                (state.courses.isEmpty() && state.notes.isEmpty() && state.localNotes.isEmpty()) -> {
+//                    Box(
+//                        modifier = Modifier
+//                            .fillMaxSize()
+//                            .padding(16.dp),
+//                        contentAlignment = Alignment.Center
+//                    ) {
+//                        Text(
+//                            text = "Пусто",
+//                            style = MaterialTheme.typography.titleMedium,
+//                        )
+//                    }
+//                }
 
                 state.showAllCourses -> {
                     LazyColumn {
@@ -225,12 +200,37 @@ fun MainScreenContent(
                     }
                 }
 
-                state.courses.isNotEmpty() -> {
-                    MainScreenCards(state, viewModel, navController)
-                }
-
                 else -> {
-                    CenteredProgressIndicator()
+                    var hasData = false
+
+                    if (state.courses.isNotEmpty()) {
+                        hasData = true
+                        FavoriteCourses(state, viewModel, navController)
+                    }
+
+                    if (state.localNotes.isNotEmpty()) {
+                        hasData = true
+                        FavoriteLocNotes(state, viewModel, navController)
+                    }
+
+                    if (state.notes.isNotEmpty()) {
+                        hasData = true
+                        FavoriteNotes(state, viewModel, navController)
+                    }
+
+                    if (!hasData) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(16.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "Пусто",
+                                style = MaterialTheme.typography.titleMedium,
+                            )
+                        }
+                    }
                 }
             }
 

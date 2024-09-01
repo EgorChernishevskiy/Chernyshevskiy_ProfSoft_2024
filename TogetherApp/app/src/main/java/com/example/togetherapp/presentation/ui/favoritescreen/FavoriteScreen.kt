@@ -1,0 +1,15 @@
+package com.example.togetherapp.presentation.ui.favoritescreen
+
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import com.example.togetherapp.presentation.ui.favoritescreen.components.FavoriteScreenContent
+import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
+
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun FavoriteScreen(viewModel: FavoriteScreenViewModel, navController: NavHostController) {
+    FavoriteScreenContent(viewModel, navController)
+}

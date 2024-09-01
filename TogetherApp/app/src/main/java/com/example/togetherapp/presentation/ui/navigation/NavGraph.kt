@@ -13,11 +13,13 @@ import com.example.togetherapp.presentation.ui.auth.registerscreen.RegisterScree
 import com.example.togetherapp.presentation.ui.createnotescreen.CreateNoteScreen
 import com.example.togetherapp.presentation.ui.details.cnotedetailsscreen.CNoteDetailScreen
 import com.example.togetherapp.presentation.ui.details.lnotesdetails.LNoteDetailsScreen
+import com.example.togetherapp.presentation.ui.favoritescreen.FavoriteScreen
 import com.example.togetherapp.presentation.ui.splashscreen.SplashScreen
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.CreateNoteViewModel
+import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.LNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
@@ -31,7 +33,8 @@ fun NavGraph(
     courseDetailsScreenViewModel: CourseDetailsScreenViewModel,
     cNoteDetailsScreenViewModel: CNoteDetailsScreenViewModel,
     lNoteDetailsScreenViewModel: LNoteDetailsScreenViewModel,
-    createNoteViewModel: CreateNoteViewModel
+    createNoteViewModel: CreateNoteViewModel,
+    favoriteScreenViewModel: FavoriteScreenViewModel
 ) {
     NavHost(navController, startDestination = "splash") {
         composable("splash") {
@@ -103,6 +106,12 @@ fun NavGraph(
         composable("createnote") {
             CreateNoteScreen(
                 viewModel = createNoteViewModel,
+                navController = navController
+            )
+        }
+        composable("favorite") {
+            FavoriteScreen(
+                viewModel = favoriteScreenViewModel,
                 navController = navController
             )
         }

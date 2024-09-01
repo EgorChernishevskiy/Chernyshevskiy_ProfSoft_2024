@@ -16,10 +16,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.togetherapp.R
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
+    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+
     Surface(
         color = Color.White,
         modifier = Modifier.height(56.dp)
@@ -44,12 +47,12 @@ fun BottomNavigationBar(navController: NavHostController) {
                                 .height(20.dp)
                         )
                     },
-                    selected = true,
+                    selected = currentRoute == "home",
                     colors = NavigationBarItemDefaults.colors(
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
-                    onClick = { /* Handle home click */ }
+                    onClick = { navController.navigate("home") }
                 )
                 NavigationBarItem(
                     icon = {
@@ -61,12 +64,12 @@ fun BottomNavigationBar(navController: NavHostController) {
                                 .height(20.dp)
                         )
                     },
-                    selected = false,
+                    selected = currentRoute == "favorite",
                     colors = NavigationBarItemDefaults.colors(
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
-                    onClick = { /* Handle favorite click */ }
+                    onClick = { navController.navigate("favorite") }
                 )
                 NavigationBarItem(
                     icon = {
