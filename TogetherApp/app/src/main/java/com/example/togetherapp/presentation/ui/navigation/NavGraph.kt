@@ -90,10 +90,10 @@ fun NavGraph(
         composable(
             "lnote/{noteId}",
             arguments = listOf(
-                navArgument("noteId") { type = NavType.StringType },
+                navArgument("noteId") { type = NavType.IntType },
             )
         ) { backStackEntry ->
-            val noteId = backStackEntry.arguments?.getString("noteId") ?: ""
+            val noteId = backStackEntry.arguments?.getInt("noteId") ?: 0
             LNoteDetailsScreen(
                 viewModel = lNoteDetailsScreenViewModel,
                 navController = navController,

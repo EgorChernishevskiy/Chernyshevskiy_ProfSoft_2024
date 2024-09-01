@@ -14,7 +14,7 @@ class LocNoteRepositoryImpl(
         return noteDao.getAllNotes().map { noteMapper.mapToDomain(it) }
     }
 
-    override suspend fun getLocalNoteById(id: String): LocNote? {
+    override suspend fun getLocalNoteById(id: Int): LocNote? {
         return noteDao.getNoteById(id)?.let { noteMapper.mapToDomain(it) }
     }
 

@@ -8,6 +8,7 @@ import com.example.togetherapp.domain.usecase.course.GetCoursesUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNotesUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetAllLocalNotesUseCase
 import com.example.togetherapp.presentation.event.MainScreenEvent
+import com.example.togetherapp.presentation.state.CreateNoteScreenState
 import com.example.togetherapp.presentation.state.MainScreenState
 import kotlinx.coroutines.launch
 
@@ -64,7 +65,16 @@ class MainScreenViewModel(
             is MainScreenEvent.NavigateToLogin -> {
                 _state.value = _state.value?.copy(isNavigatedToLogin = true)
             }
+
+            MainScreenEvent.OnResetState -> {
+                resetState()
+            }
+
         }
+    }
+
+    private fun resetState() {
+        _state.value = MainScreenState()
     }
 
     private fun loadLocalNotes() {

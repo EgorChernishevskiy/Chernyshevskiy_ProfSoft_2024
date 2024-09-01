@@ -13,7 +13,7 @@ import com.example.togetherapp.presentation.viewmodel.LNoteDetailsScreenViewMode
 fun LNoteDetailsScreen(
     viewModel: LNoteDetailsScreenViewModel,
     navController: NavHostController,
-    noteId: String
+    noteId: Int
 ) {
     LNoteDetailsScreenContent(viewModel, navController, noteId)
 }

@@ -14,10 +14,16 @@ import com.example.togetherapp.data.database.entity.favorite.FavoriteCourseEntit
 import com.example.togetherapp.data.database.entity.favorite.FavoriteNoteEntity
 import com.example.togetherapp.data.database.entity.note.NoteEntity
 import com.example.togetherapp.data.database.converter.TagsConverter
+import com.example.togetherapp.data.database.entity.favorite.FavoriteLocalNoteEntity
 
 @Database(
-    entities = [NoteEntity::class, FavoriteCourseEntity::class, FavoriteNoteEntity::class],
-    version = 2
+    entities = [
+        NoteEntity::class,
+        FavoriteCourseEntity::class,
+        FavoriteNoteEntity::class,
+        FavoriteLocalNoteEntity::class
+               ],
+    version = 3
 )
 @TypeConverters(
     NoteContentConverter::class,

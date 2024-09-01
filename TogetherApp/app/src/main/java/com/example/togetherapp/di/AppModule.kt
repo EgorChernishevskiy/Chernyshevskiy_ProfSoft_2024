@@ -6,6 +6,7 @@ import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.togetherapp.data.database.NoteDatabase
 import com.example.togetherapp.data.database.migration.MIGRATION_1_2
+import com.example.togetherapp.data.database.migration.MIGRATION_2_3
 import com.example.togetherapp.data.interceptor.TokenInterceptor
 import com.example.togetherapp.data.mappers.auth.AuthMapper
 import com.example.togetherapp.data.mappers.auth.AuthMapperImpl
@@ -38,8 +39,14 @@ import com.example.togetherapp.domain.usecase.comnote.CreateNoteUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNoteByIdUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNotesUseCase
 import com.example.togetherapp.domain.usecase.favorite.AddFavoriteCourseUseCase
+import com.example.togetherapp.domain.usecase.favorite.AddFavoriteLocalNoteUseCase
+import com.example.togetherapp.domain.usecase.favorite.AddFavoriteNoteUseCase
 import com.example.togetherapp.domain.usecase.favorite.CheckCourseFavoriteStatusUseCase
+import com.example.togetherapp.domain.usecase.favorite.CheckLocalNoteFavoriteStatusUseCase
+import com.example.togetherapp.domain.usecase.favorite.CheckNoteFavoriteStatusUseCase
 import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteCourseUseCase
+import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteLocalNoteUseCase
+import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteNoteUseCase
 import com.example.togetherapp.domain.usecase.locnote.CreateLocalNoteUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetAllLocalNotesUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetLocalNoteByIdUseCase
@@ -97,6 +104,7 @@ val databaseModule = module {
             "note_database"
         )
             .addMigrations(MIGRATION_1_2)
+            .addMigrations(MIGRATION_2_3)
             .allowMainThreadQueries()
             .build()
     }
@@ -172,7 +180,13 @@ val useCaseModule = module {
 
     single { AddFavoriteCourseUseCase(get()) }
     single { RemoveFavoriteCourseUseCase(get()) }
+    single { AddFavoriteNoteUseCase(get()) }
+    single { RemoveFavoriteNoteUseCase(get()) }
+    single { AddFavoriteLocalNoteUseCase(get()) }
+    single { RemoveFavoriteLocalNoteUseCase(get()) }
     single { CheckCourseFavoriteStatusUseCase(get()) }
+    single { CheckNoteFavoriteStatusUseCase(get()) }
+    single { CheckLocalNoteFavoriteStatusUseCase(get()) }
 }
 
 val viewModelModule = module {
@@ -180,8 +194,8 @@ val viewModelModule = module {
     viewModel { SplashScreenViewModel(get()) }
     viewModel { MainScreenViewModel(get(), get(), get()) }
     viewModel { CourseDetailsScreenViewModel(get(), get(), get(), get()) }
-    viewModel { CNoteDetailsScreenViewModel(get(), get()) }
-    viewModel { LNoteDetailsScreenViewModel(get()) }
+    viewModel { CNoteDetailsScreenViewModel(get(), get(), get(), get(), get()) }
+    viewModel { LNoteDetailsScreenViewModel(get(), get(), get(), get()) }
     viewModel { CreateNoteViewModel(get(), get()) }
 }
 

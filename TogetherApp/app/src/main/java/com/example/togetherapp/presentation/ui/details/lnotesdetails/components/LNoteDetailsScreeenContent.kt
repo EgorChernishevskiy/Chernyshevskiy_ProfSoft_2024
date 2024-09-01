@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
 import com.example.togetherapp.presentation.event.LNoteDetailsScreenEvent
 import com.example.togetherapp.presentation.state.note.LNoteDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
@@ -34,19 +35,26 @@ import com.example.togetherapp.presentation.viewmodel.LNoteDetailsScreenViewMode
 fun LNoteDetailsScreenContent(
     viewModel: LNoteDetailsScreenViewModel,
     navController: NavHostController,
-    noteId: String
+    noteId: Int
 ) {
     val state by viewModel.state.observeAsState(LNoteDetailsScreenState())
 
     LaunchedEffect(noteId) {
         viewModel.handleEvent(LNoteDetailsScreenEvent.LoadLNoteDetails(noteId))
+        viewModel.handleEvent(LNoteDetailsScreenEvent.CheckIfFavorite(noteId))
     }
 
     Scaffold(
         topBar = {
             NoteTopAppBar(
                 state = state,
-                onBackClick = { navController.popBackStack() }
+                onBackClick = { navController.popBackStack() },
+                onFavoriteClick = {
+                    viewModel.handleEvent(
+                        if (state.isFavorite) LNoteDetailsScreenEvent.RemoveFromFavorite
+                        else LNoteDetailsScreenEvent.AddToFavorite
+                    )
+                }
             )
         }
     ) { paddingValues ->

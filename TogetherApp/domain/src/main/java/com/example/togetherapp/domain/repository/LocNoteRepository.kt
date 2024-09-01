@@ -4,6 +4,6 @@ import com.example.togetherapp.domain.model.locnote.LocNote
 
 interface LocNoteRepository {
     suspend fun getAllLocalNotes(): List<LocNote>
-    suspend fun getLocalNoteById(id: String): LocNote?
+    suspend fun getLocalNoteById(id: Int): LocNote?
     suspend fun createLocalNote(note: LocNote)
 }

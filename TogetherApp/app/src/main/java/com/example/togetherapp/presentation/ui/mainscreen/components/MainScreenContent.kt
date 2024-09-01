@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.R
+import com.example.togetherapp.presentation.event.CreateNoteScreenEvent
 import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
 import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
@@ -155,6 +156,7 @@ fun MainScreenContent(
                 state.error != null -> {
                     if  (state.error!!.endsWith("Unauthorized")) {
                         if (!state.isNavigatedToLogin) {
+                            viewModel.handleEvent(MainScreenEvent.OnResetState)
                             viewModel.handleEvent(MainScreenEvent.NavigateToLogin)
                             navController.navigate("login") {
                                 popUpTo("home") { inclusive = true }

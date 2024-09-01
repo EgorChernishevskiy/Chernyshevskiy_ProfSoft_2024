@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
 import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
+import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
 import com.example.togetherapp.presentation.state.note.CNoteDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
@@ -50,6 +51,7 @@ fun CNoteDetailsScreenContent(
     val state by viewModel.state.observeAsState(CNoteDetailsScreenState())
 
     LaunchedEffect(noteId) {
+        viewModel.handleEvent(CNoteDetailsScreenEvent.CheckIfFavorite(noteId))
         viewModel.handleEvent(CNoteDetailsScreenEvent.LoadCNoteDetails(noteId))
     }
 
@@ -57,7 +59,13 @@ fun CNoteDetailsScreenContent(
         topBar = {
             NoteTopAppBar(
                 state = state,
-                onBackClick = { navController.popBackStack() }
+                onBackClick = { navController.popBackStack() },
+                onFavoriteClick = {
+                    viewModel.handleEvent(
+                        if (state.isFavorite) CNoteDetailsScreenEvent.RemoveFromFavorite
+                        else CNoteDetailsScreenEvent.AddToFavorite
+                    )
+                }
             )
         }
     ) { paddingValues ->

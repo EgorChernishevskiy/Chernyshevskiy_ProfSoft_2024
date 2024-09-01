@@ -11,4 +11,5 @@ sealed class MainScreenEvent {
     object NavigateToLogin : MainScreenEvent()
     object ShowAllLocalNotes : MainScreenEvent()
     object HideAllLocalNotes : MainScreenEvent()
+    object OnResetState : MainScreenEvent()
 }

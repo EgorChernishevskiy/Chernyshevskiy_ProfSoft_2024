@@ -24,6 +24,7 @@ import com.example.togetherapp.domain.model.comnote.Note
 import com.example.togetherapp.domain.model.locnote.LocNote
 import com.example.togetherapp.presentation.state.note.LNoteDetailsScreenState
 import com.example.togetherapp.presentation.state.note.NoteDetailsScreenState
+import com.example.togetherapp.presentation.ui.components.AddToFavoriteIcon
 import com.example.togetherapp.presentation.ui.components.IconButtonBack
 import com.example.togetherapp.presentation.utils.formatNoteDetailsDate
 
@@ -33,6 +34,7 @@ import com.example.togetherapp.presentation.utils.formatNoteDetailsDate
 fun <T> NoteTopAppBar(
     state: NoteDetailsScreenState<T>,
     onBackClick: () -> Unit,
+    onFavoriteClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -49,6 +51,9 @@ fun <T> NoteTopAppBar(
                         style = MaterialTheme.typography.titleLarge,
                         fontSize = 20.sp
                     )
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    AddToFavoriteIcon(state.isFavorite, onFavoriteClick)
                 }
                 Spacer(modifier = Modifier.height(47.dp))
 

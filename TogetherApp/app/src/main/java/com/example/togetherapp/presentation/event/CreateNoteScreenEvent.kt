@@ -1,8 +1,5 @@
 package com.example.togetherapp.presentation.event
 
-import com.example.togetherapp.domain.model.comnote.CreatedNote
-import com.example.togetherapp.domain.model.locnote.LocNote
-
 sealed class CreateNoteScreenEvent {
     data class OnTitleChange(val title: String) : CreateNoteScreenEvent()
     data class OnAddItemChange(val addItem: String) : CreateNoteScreenEvent()
@@ -12,7 +9,7 @@ sealed class CreateNoteScreenEvent {
     object OnDismissWhatToAdd : CreateNoteScreenEvent()
     object OnShowAddText : CreateNoteScreenEvent()
     object OnShowAddPhoto : CreateNoteScreenEvent()
-    object OnDismissAddItem: CreateNoteScreenEvent()
+    object OnDismissAddItem : CreateNoteScreenEvent()
     object OnAddText : CreateNoteScreenEvent()
     object OnAddPhoto : CreateNoteScreenEvent()
     object OnLocalCreated : CreateNoteScreenEvent()
