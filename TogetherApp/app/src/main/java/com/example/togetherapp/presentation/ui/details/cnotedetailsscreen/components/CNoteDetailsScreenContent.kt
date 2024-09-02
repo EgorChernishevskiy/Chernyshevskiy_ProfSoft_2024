@@ -34,12 +34,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
 import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
-import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
 import com.example.togetherapp.presentation.state.note.CNoteDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
 import com.example.togetherapp.presentation.ui.details.components.NoteTopAppBar
-import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.details.CNoteDetailsScreenViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

@@ -10,6 +10,8 @@ import com.example.togetherapp.data.database.migration.MIGRATION_2_3
 import com.example.togetherapp.data.interceptor.TokenInterceptor
 import com.example.togetherapp.data.mappers.auth.AuthMapper
 import com.example.togetherapp.data.mappers.auth.AuthMapperImpl
+import com.example.togetherapp.data.mappers.chat.ChatMapper
+import com.example.togetherapp.data.mappers.chat.ChatMapperImpl
 import com.example.togetherapp.data.mappers.course.CourseMapper
 import com.example.togetherapp.data.mappers.course.CourseMapperImpl
 import com.example.togetherapp.data.mappers.favorite.FavoriteMapper
@@ -19,6 +21,7 @@ import com.example.togetherapp.data.mappers.locnote.LocNoteMapperImpl
 import com.example.togetherapp.data.mappers.note.NoteMapper
 import com.example.togetherapp.data.mappers.note.NoteMapperImpl
 import com.example.togetherapp.domain.repository.AuthRepository
+import com.example.togetherapp.domain.repository.ChatRepository
 import com.example.togetherapp.domain.repository.CourseRepository
 import com.example.togetherapp.domain.repository.FavoriteRepository
 import com.example.togetherapp.domain.repository.LocNoteRepository
@@ -33,6 +36,8 @@ import com.example.togetherapp.domain.usecase.auth.ValidateFirstNameUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidateLastNameUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidatePasswordUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidatePhoneNumberUseCase
+import com.example.togetherapp.domain.usecase.chat.GetAllMessagesUseCase
+import com.example.togetherapp.domain.usecase.chat.SendMessageUseCase
 import com.example.togetherapp.domain.usecase.course.GetCourseByIdUseCase
 import com.example.togetherapp.domain.usecase.comnote.AddCommentUseCase
 import com.example.togetherapp.domain.usecase.comnote.CreateNoteUseCase
@@ -54,11 +59,12 @@ import com.example.togetherapp.domain.usecase.locnote.CreateLocalNoteUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetAllLocalNotesUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetLocalNoteByIdUseCase
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
-import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.CreateNoteViewModel
+import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.details.CNoteDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.details.CourseDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.LNoteDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 import okhttp3.OkHttpClient
@@ -92,6 +98,9 @@ val networkModule = module {
     single {
         get<Retrofit>().create(com.example.togetherapp.data.api.NoteApi::class.java)
     }
+    single {
+        get<Retrofit>().create(com.example.togetherapp.data.api.ChatApi::class.java)
+    }
 }
 
 val sharedPrefsModule = module {
@@ -123,7 +132,7 @@ val repositoryModule = module {
         )
     }
     single<TokenRepository> {
-        com.example.togetherapp.data.repository.TokenRepositoryImplementation(
+        com.example.togetherapp.data.repository.TokenRepositoryImpl(
             get()
         )
     }
@@ -147,6 +156,11 @@ val repositoryModule = module {
             get(), get()
         )
     }
+    single<ChatRepository> {
+        com.example.togetherapp.data.repository.ChatRepositoryImpl(
+            get(), get()
+        )
+    }
 }
 
 val mapperModule = module {
@@ -155,6 +169,7 @@ val mapperModule = module {
     single<AuthMapper> { AuthMapperImpl() }
     single<LocNoteMapper> { LocNoteMapperImpl() }
     single<FavoriteMapper> { FavoriteMapperImpl() }
+    single<ChatMapper> { ChatMapperImpl() }
 }
 
 
@@ -194,6 +209,9 @@ val useCaseModule = module {
     single { GetAllFavoriteCoursesUseCase(get()) }
     single { GetAllFavoriteLocalNotesUseCase(get()) }
     single { GetAllFavoriteComNotesUseCase(get()) }
+
+    single { GetAllMessagesUseCase(get()) }
+    single { SendMessageUseCase(get()) }
 }
 
 val viewModelModule = module {
@@ -203,8 +221,9 @@ val viewModelModule = module {
     viewModel { CourseDetailsScreenViewModel(get(), get(), get(), get()) }
     viewModel { CNoteDetailsScreenViewModel(get(), get(), get(), get(), get()) }
     viewModel { LNoteDetailsScreenViewModel(get(), get(), get(), get()) }
-    viewModel { CreateNoteViewModel(get(), get()) }
+    viewModel { CreateNoteScreenViewModel(get(), get()) }
     viewModel { FavoriteScreenViewModel(get(), get(), get()) }
+    viewModel { ChatScreenViewModel(get(), get()) }
 }
 
 val appModules = listOf(

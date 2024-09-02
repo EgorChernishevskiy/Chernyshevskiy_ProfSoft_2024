@@ -22,13 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
 import com.example.togetherapp.presentation.event.LNoteDetailsScreenEvent
 import com.example.togetherapp.presentation.state.note.LNoteDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
 import com.example.togetherapp.presentation.ui.details.components.NoteTopAppBar
-import com.example.togetherapp.presentation.viewmodel.LNoteDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreenViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

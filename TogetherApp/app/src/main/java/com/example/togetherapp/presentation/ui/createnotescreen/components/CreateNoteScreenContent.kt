@@ -1,9 +1,8 @@
 package com.example.togetherapp.presentation.ui.createnotescreen.components
 
-import androidx.compose.foundation.Image
+import  androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,7 +26,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -42,12 +40,12 @@ import com.example.togetherapp.presentation.state.CreateNoteScreenState
 import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
 import com.example.togetherapp.presentation.ui.components.IconButtonBack
 import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
-import com.example.togetherapp.presentation.viewmodel.CreateNoteViewModel
+import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
 
 
 @Composable
 fun CreateNoteScreenContent(
-    viewModel: CreateNoteViewModel,
+    viewModel: CreateNoteScreenViewModel,
     navController: NavHostController
 ) {
     val state by viewModel.state.observeAsState(CreateNoteScreenState())

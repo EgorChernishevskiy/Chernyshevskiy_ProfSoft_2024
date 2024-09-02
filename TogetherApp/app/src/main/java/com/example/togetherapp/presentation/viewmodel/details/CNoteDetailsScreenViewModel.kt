@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.viewmodel
+package com.example.togetherapp.presentation.viewmodel.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

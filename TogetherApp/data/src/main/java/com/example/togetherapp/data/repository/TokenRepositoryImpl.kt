@@ -3,7 +3,7 @@ package com.example.togetherapp.data.repository
 import android.content.SharedPreferences
 import com.example.togetherapp.domain.repository.TokenRepository
 
-class TokenRepositoryImplementation(private val sharedPreferences: SharedPreferences) :
+class TokenRepositoryImpl(private val sharedPreferences: SharedPreferences) :
     TokenRepository {
 
     override fun getToken(): String? {

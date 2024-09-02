@@ -5,7 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.example.togetherapp.presentation.ui.details.coursedetailsscreen.components.DetailsScreenContent
-import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.details.CourseDetailsScreenViewModel
 
 
 @RequiresApi(Build.VERSION_CODES.O)

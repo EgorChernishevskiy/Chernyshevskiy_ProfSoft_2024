@@ -16,7 +16,7 @@ import androidx.navigation.NavHostController
 import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
 import com.example.togetherapp.presentation.state.CourseDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
-import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.details.CourseDetailsScreenViewModel
 
 //onClick = { navController.popBackStack() }
 

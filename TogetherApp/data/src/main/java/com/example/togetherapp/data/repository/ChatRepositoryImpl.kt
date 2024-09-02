@@ -2,6 +2,7 @@ package com.example.togetherapp.data.repository
 
 import com.example.togetherapp.data.api.ChatApi
 import com.example.togetherapp.data.mappers.chat.ChatMapper
+import com.example.togetherapp.data.model.chat.SendMessageRequest
 import com.example.togetherapp.domain.model.chat.ChatMessage
 import com.example.togetherapp.domain.repository.ChatRepository
 
@@ -20,7 +21,7 @@ class ChatRepositoryImpl(
     }
 
     override suspend fun sendMessage(text: String): ChatMessage {
-        val response = chatApi.sendMessage(text)
+        val response = chatApi.sendMessage(SendMessageRequest(text))
         if (response.isSuccessful) {
             return response.body()?.data?.let { chatMessageMapper.toDomain(it) }
                 ?: throw Exception("Failed to send message")

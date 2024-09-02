@@ -103,7 +103,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
-                    onClick = { /* Handle notifications click */ }
+                    onClick = { navController.navigate("chat") }
                 )
                 NavigationBarItem(
                     icon = {

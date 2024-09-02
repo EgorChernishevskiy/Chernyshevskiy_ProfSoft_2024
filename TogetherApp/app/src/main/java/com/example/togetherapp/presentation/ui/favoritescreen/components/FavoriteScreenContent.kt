@@ -69,7 +69,7 @@ fun FavoriteScreenContent(
         viewModel.handleEvent(FavoriteScreenEvent.LoadNotes)
         viewModel.handleEvent(FavoriteScreenEvent.LoadLocalNotes)
     }
-    Log.d("FavoriteScreenContent", "Current state: courses=${state.courses.size}, notes=${state.localNote}, localNotes=${state.communityNote}, isLoading=${state.isLoading}")
+
     Scaffold(
         topBar = {
             if (state.showAllCourses || state.showAllNotes || state.showAllLocalNotes) {

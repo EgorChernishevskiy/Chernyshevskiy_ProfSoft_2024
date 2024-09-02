@@ -4,17 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
-import com.example.togetherapp.data.database.NoteDatabase
-import com.example.togetherapp.data.database.dao.NoteDao
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.togetherapp.presentation.ui.navigation.NavGraph
 import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
-import com.example.togetherapp.presentation.viewmodel.CNoteDetailsScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.CourseDetailsScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.CreateNoteViewModel
+import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.details.CNoteDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.details.CourseDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.LNoteDetailsScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 
@@ -26,8 +25,9 @@ class MainActivity : ComponentActivity() {
     private val courseDetailsScreenViewModel: CourseDetailsScreenViewModel by viewModel()
     private val cNoteDetailsScreenViewModel: CNoteDetailsScreenViewModel by viewModel()
     private val lNoteDetailsScreenViewModel: LNoteDetailsScreenViewModel by viewModel()
-    private val createNoteViewModel: CreateNoteViewModel by viewModel()
+    private val createNoteScreenViewModel: CreateNoteScreenViewModel by viewModel()
     private val favoriteScreenViewModel: FavoriteScreenViewModel by viewModel()
+    private val chatScreenViewModel: ChatScreenViewModel by viewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +44,9 @@ class MainActivity : ComponentActivity() {
                     courseDetailsScreenViewModel = courseDetailsScreenViewModel,
                     cNoteDetailsScreenViewModel = cNoteDetailsScreenViewModel,
                     lNoteDetailsScreenViewModel =lNoteDetailsScreenViewModel,
-                    createNoteViewModel = createNoteViewModel,
-                    favoriteScreenViewModel = favoriteScreenViewModel
+                    createNoteScreenViewModel = createNoteScreenViewModel,
+                    favoriteScreenViewModel = favoriteScreenViewModel,
+                    chatScreenViewModel = chatScreenViewModel
                 )
             }
         }

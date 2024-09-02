@@ -5,7 +5,7 @@ import com.example.togetherapp.data.model.note.AuthorDto
 import com.example.togetherapp.domain.model.chat.ChatMessage
 import com.example.togetherapp.domain.model.comnote.Author
 
-class ChatMapperImplementation : ChatMapper {
+class ChatMapperImpl : ChatMapper {
     override fun toDomain(dto: ChatMessageDto): ChatMessage {
         return ChatMessage(
             id = dto.id,

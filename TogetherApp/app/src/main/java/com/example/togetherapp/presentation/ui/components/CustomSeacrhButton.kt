@@ -2,6 +2,7 @@ package com.example.togetherapp.presentation.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -19,6 +20,7 @@ fun CustomSearchButton(){
     IconButton(
         onClick = {  },
         modifier = Modifier
+            .padding(end = 16.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(Color(0xFFD6B714))
             .width(36.dp)

@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.viewmodel
+package com.example.togetherapp.presentation.viewmodel.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,12 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.togetherapp.domain.usecase.course.GetCourseByIdUseCase
 import com.example.togetherapp.domain.usecase.favorite.AddFavoriteCourseUseCase
-import com.example.togetherapp.domain.usecase.favorite.AddFavoriteNoteUseCase
 import com.example.togetherapp.domain.usecase.favorite.CheckCourseFavoriteStatusUseCase
 import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteCourseUseCase
 import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
 import com.example.togetherapp.presentation.state.CourseDetailsScreenState
-import com.example.togetherapp.presentation.state.note.LNoteDetailsScreenState
 import kotlinx.coroutines.launch
 
 class CourseDetailsScreenViewModel(
