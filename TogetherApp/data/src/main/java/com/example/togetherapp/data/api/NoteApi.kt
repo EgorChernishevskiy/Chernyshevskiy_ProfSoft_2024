@@ -2,7 +2,6 @@ package com.example.togetherapp.data.api
 
 import com.example.togetherapp.data.model.note.CreateNoteResponse
 import com.example.togetherapp.data.model.note.CreatedNoteDto
-import com.example.togetherapp.data.model.note.NoteDto
 import com.example.togetherapp.data.model.note.NoteListResponse
 import com.example.togetherapp.data.model.note.NoteResponse
 import retrofit2.Response
