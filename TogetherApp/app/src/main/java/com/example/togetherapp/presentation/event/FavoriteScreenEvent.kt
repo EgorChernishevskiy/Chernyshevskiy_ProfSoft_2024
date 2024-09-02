@@ -10,5 +10,4 @@ sealed class FavoriteScreenEvent {
     object HideAllNotes : FavoriteScreenEvent()
     object ShowAllLocalNotes : FavoriteScreenEvent()
     object HideAllLocalNotes : FavoriteScreenEvent()
-    object LoadAllData : FavoriteScreenEvent()
 }

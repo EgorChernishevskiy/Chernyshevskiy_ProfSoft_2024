@@ -1,6 +1,7 @@
 package com.example.togetherapp.presentation.ui.favoritescreen.components
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -64,9 +65,11 @@ fun FavoriteScreenContent(
     val state by viewModel.state.observeAsState(FavoriteScreenState())
 
     LaunchedEffect(Unit) {
-        viewModel.handleEvent(FavoriteScreenEvent.LoadAllData)
+        viewModel.handleEvent(FavoriteScreenEvent.LoadCourses)
+        viewModel.handleEvent(FavoriteScreenEvent.LoadNotes)
+        viewModel.handleEvent(FavoriteScreenEvent.LoadLocalNotes)
     }
-
+    Log.d("FavoriteScreenContent", "Current state: courses=${state.courses.size}, notes=${state.localNote}, localNotes=${state.communityNote}, isLoading=${state.isLoading}")
     Scaffold(
         topBar = {
             if (state.showAllCourses || state.showAllNotes || state.showAllLocalNotes) {
@@ -135,19 +138,19 @@ fun FavoriteScreenContent(
 
                 }
 
-//                (state.courses.isEmpty() && state.notes.isEmpty() && state.localNotes.isEmpty()) -> {
-//                    Box(
-//                        modifier = Modifier
-//                            .fillMaxSize()
-//                            .padding(16.dp),
-//                        contentAlignment = Alignment.Center
-//                    ) {
-//                        Text(
-//                            text = "Пусто",
-//                            style = MaterialTheme.typography.titleMedium,
-//                        )
-//                    }
-//                }
+                (state.courses.isEmpty() && state.localNote == null && state.communityNote == null) -> {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Пусто",
+                            style = MaterialTheme.typography.titleMedium,
+                        )
+                    }
+                }
 
                 state.showAllCourses -> {
                     LazyColumn {
@@ -201,36 +204,9 @@ fun FavoriteScreenContent(
                 }
 
                 else -> {
-                    var hasData = false
-
-                    if (state.courses.isNotEmpty()) {
-                        hasData = true
-                        FavoriteCourses(state, viewModel, navController)
-                    }
-
-                    if (state.localNotes.isNotEmpty()) {
-                        hasData = true
-                        FavoriteLocNotes(state, viewModel, navController)
-                    }
-
-                    if (state.notes.isNotEmpty()) {
-                        hasData = true
-                        FavoriteNotes(state, viewModel, navController)
-                    }
-
-                    if (!hasData) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(16.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = "Пусто",
-                                style = MaterialTheme.typography.titleMedium,
-                            )
-                        }
-                    }
+                    FavoriteCourses(state, viewModel, navController)
+                    FavoriteLocNotes(state, viewModel, navController)
+                    FavoriteNotes(state, viewModel, navController)
                 }
             }
 

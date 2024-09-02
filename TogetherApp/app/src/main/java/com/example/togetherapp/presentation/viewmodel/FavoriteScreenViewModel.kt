@@ -1,5 +1,6 @@
 package com.example.togetherapp.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -61,35 +62,9 @@ class FavoriteScreenViewModel(
                 _state.value = _state.value?.copy(showAllNotes = true)
                 loadNotes()
             }
-
-            FavoriteScreenEvent.LoadAllData -> {
-                loadAllData()
-            }
         }
     }
 
-    private fun loadAllData() {
-        viewModelScope.launch {
-            _state.value = _state.value?.copy(isLoading = true)
-            try {
-                val notesList = getAllFavoriteComNotesUseCase.execute()
-                val lastCommunityNote = notesList.firstOrNull()
-                _state.value = _state.value?.copy(communityNote = lastCommunityNote)
-
-                val localNotesList = getAllFavoriteLocalNotesUseCase.execute()
-                val lastLocalNote = localNotesList.firstOrNull()
-                _state.value = _state.value?.copy(localNote = lastLocalNote)
-
-                val coursesList = getAllFavoriteCoursesUseCase.execute()
-                _state.value = _state.value?.copy(courses = coursesList.take(6))
-
-            } catch (e: Exception) {
-                _state.value = _state.value?.copy(error = e.message)
-            } finally {
-                _state.value = _state.value?.copy(isLoading = false)
-            }
-        }
-    }
 
     private fun loadNotes() {
         _state.value = _state.value?.copy(isLoading = true)
