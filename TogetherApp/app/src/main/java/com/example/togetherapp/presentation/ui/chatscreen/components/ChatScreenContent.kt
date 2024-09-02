@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -67,8 +68,12 @@ fun ChatScreenContent(viewModel: ChatScreenViewModel, navController: NavHostCont
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-            LazyColumn(modifier = Modifier.weight(1f)) {
-                items(state.messages) { message ->
+            val sortedMessages = state.messages.sortedBy { it.date }.asReversed()
+            LazyColumn(
+                modifier = Modifier.weight(1f),
+                reverseLayout = true
+            ) {
+                items(sortedMessages) { message ->
                     ChatMessageItem(
                         message = message,
                         //isCurrentUser = message.author.id == currentUserId
