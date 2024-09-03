@@ -1,4 +1,4 @@
-package com.example.togetherapp.domain.utils
+package com.example.togetherapp.presentation.utils
 
 import java.security.MessageDigest
 

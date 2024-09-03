@@ -15,6 +15,7 @@ import com.example.togetherapp.domain.usecase.auth.ValidatePasswordUseCase
 import com.example.togetherapp.domain.usecase.auth.ValidatePhoneNumberUseCase
 import com.example.togetherapp.presentation.event.AuthEvent
 import com.example.togetherapp.presentation.state.AuthState
+import com.example.togetherapp.presentation.utils.hashPassword
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
@@ -121,7 +122,7 @@ class AuthViewModel(
         }
 
         val hashedPassword =
-            com.example.togetherapp.domain.utils.hashPassword(_state.value?.loginPassword ?: "")
+            hashPassword(_state.value?.loginPassword ?: "")
         val loginParams = LoginParams(
             phone = _state.value?.loginPhoneNumber ?: "",
             passwordHashed = hashedPassword
@@ -141,7 +142,7 @@ class AuthViewModel(
         }
 
         val hashedPassword =
-            com.example.togetherapp.domain.utils.hashPassword(_state.value?.registerPassword ?: "")
+            hashPassword(_state.value?.registerPassword ?: "")
         val registerParams = RegisterParams(
             firstName = _state.value?.firstName ?: "",
             lastName = _state.value?.lastName ?: "",

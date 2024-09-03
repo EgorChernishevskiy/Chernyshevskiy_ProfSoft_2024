@@ -156,8 +156,8 @@ fun MainScreenContent(
                 state.error != null -> {
                     if (state.error!!.endsWith("Unauthorized")) {
                         if (!state.isNavigatedToLogin) {
-                            viewModel.handleEvent(MainScreenEvent.OnResetState)
                             viewModel.handleEvent(MainScreenEvent.NavigateToLogin)
+                            viewModel.handleEvent(MainScreenEvent.OnResetState)
                             navController.navigate("login") {
                                 popUpTo("home") { inclusive = true }
                             }

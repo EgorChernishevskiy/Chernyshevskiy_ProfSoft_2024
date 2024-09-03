@@ -20,6 +20,8 @@ import com.example.togetherapp.data.mappers.locnote.LocNoteMapper
 import com.example.togetherapp.data.mappers.locnote.LocNoteMapperImpl
 import com.example.togetherapp.data.mappers.note.NoteMapper
 import com.example.togetherapp.data.mappers.note.NoteMapperImpl
+import com.example.togetherapp.data.mappers.profile.UserProfileMapper
+import com.example.togetherapp.data.mappers.profile.UserProfileMapperImpl
 import com.example.togetherapp.domain.repository.AuthRepository
 import com.example.togetherapp.domain.repository.ChatRepository
 import com.example.togetherapp.domain.repository.CourseRepository
@@ -27,6 +29,7 @@ import com.example.togetherapp.domain.repository.FavoriteRepository
 import com.example.togetherapp.domain.repository.LocNoteRepository
 import com.example.togetherapp.domain.repository.NoteRepository
 import com.example.togetherapp.domain.repository.TokenRepository
+import com.example.togetherapp.domain.repository.UserProfileRepository
 import com.example.togetherapp.domain.usecase.course.GetCoursesUseCase
 import com.example.togetherapp.domain.usecase.auth.CheckTokenUseCase
 import com.example.togetherapp.domain.usecase.auth.LoginUseCase
@@ -58,6 +61,10 @@ import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteNoteUseCase
 import com.example.togetherapp.domain.usecase.locnote.CreateLocalNoteUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetAllLocalNotesUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetLocalNoteByIdUseCase
+import com.example.togetherapp.domain.usecase.profile.GetAllUserProfilesUseCase
+import com.example.togetherapp.domain.usecase.profile.GetUserProfileByIdUseCase
+import com.example.togetherapp.domain.usecase.profile.GetUserProfileUseCase
+import com.example.togetherapp.domain.usecase.profile.SetPhoneVisibilityUseCase
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.details.CNoteDetailsScreenViewModel
@@ -100,6 +107,9 @@ val networkModule = module {
     }
     single {
         get<Retrofit>().create(com.example.togetherapp.data.api.ChatApi::class.java)
+    }
+    single {
+        get<Retrofit>().create(com.example.togetherapp.data.api.UserProfileApi::class.java)
     }
 }
 
@@ -161,6 +171,11 @@ val repositoryModule = module {
             get(), get()
         )
     }
+    single<UserProfileRepository> {
+        com.example.togetherapp.data.repository.UserProfileRepositoryImpl(
+            get(), get()
+        )
+    }
 }
 
 val mapperModule = module {
@@ -170,6 +185,7 @@ val mapperModule = module {
     single<LocNoteMapper> { LocNoteMapperImpl() }
     single<FavoriteMapper> { FavoriteMapperImpl() }
     single<ChatMapper> { ChatMapperImpl() }
+    single<UserProfileMapper> { UserProfileMapperImpl() }
 }
 
 
@@ -212,6 +228,11 @@ val useCaseModule = module {
 
     single { GetAllMessagesUseCase(get()) }
     single { SendMessageUseCase(get()) }
+
+    single { GetAllUserProfilesUseCase(get()) }
+    single { GetUserProfileByIdUseCase(get()) }
+    single { GetUserProfileUseCase(get()) }
+    single { SetPhoneVisibilityUseCase(get()) }
 }
 
 val viewModelModule = module {
