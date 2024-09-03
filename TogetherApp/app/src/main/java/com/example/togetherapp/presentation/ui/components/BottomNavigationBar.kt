@@ -98,7 +98,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                                 .height(20.dp)
                         )
                     },
-                    selected = false,
+                    selected = currentRoute == "chat",
                     colors = NavigationBarItemDefaults.colors(
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
