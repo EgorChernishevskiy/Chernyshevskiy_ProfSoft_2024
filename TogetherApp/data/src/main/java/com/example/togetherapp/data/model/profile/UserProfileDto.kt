@@ -9,7 +9,7 @@ data class UserProfileDto(
     val surname: String,
     val avatar: String?,
     val role: Int,
-    val phone: String,
+    val phone: String?,
     val registerDate: String,
     val courses: List<CourseDto>,
     val notes: List<NoteDto>

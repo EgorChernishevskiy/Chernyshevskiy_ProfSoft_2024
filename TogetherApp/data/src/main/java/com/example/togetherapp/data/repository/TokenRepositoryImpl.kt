@@ -13,4 +13,8 @@ class TokenRepositoryImpl(private val sharedPreferences: SharedPreferences) :
     override fun saveToken(token: String) {
         sharedPreferences.edit().putString("TOKEN_KEY", token).apply()
     }
+
+    override fun clearToken() {
+        sharedPreferences.edit().remove("TOKEN_KEY").apply()
+    }
 }

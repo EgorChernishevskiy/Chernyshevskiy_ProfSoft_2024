@@ -1,6 +1,7 @@
 package com.example.togetherapp.presentation.ui.components
 
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -15,6 +16,8 @@ import com.example.togetherapp.R
 @Composable
 fun AddToFavoriteIcon(isLiked: Boolean, onClick: () -> Unit) {
     IconButton(
+        modifier = Modifier
+            .padding(end = 16.dp),
         onClick = { onClick() },
 
     ) {

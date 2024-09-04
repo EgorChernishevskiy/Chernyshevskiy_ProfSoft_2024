@@ -15,6 +15,7 @@ import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.ProfileScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 
 class MainActivity : ComponentActivity() {
@@ -28,6 +29,7 @@ class MainActivity : ComponentActivity() {
     private val createNoteScreenViewModel: CreateNoteScreenViewModel by viewModel()
     private val favoriteScreenViewModel: FavoriteScreenViewModel by viewModel()
     private val chatScreenViewModel: ChatScreenViewModel by viewModel()
+    private val profileScreenViewModel: ProfileScreenViewModel by viewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +48,8 @@ class MainActivity : ComponentActivity() {
                     lNoteDetailsScreenViewModel =lNoteDetailsScreenViewModel,
                     createNoteScreenViewModel = createNoteScreenViewModel,
                     favoriteScreenViewModel = favoriteScreenViewModel,
-                    chatScreenViewModel = chatScreenViewModel
+                    chatScreenViewModel = chatScreenViewModel,
+                    profileScreenViewModel = profileScreenViewModel
                 )
             }
         }

@@ -108,7 +108,7 @@ class FavoriteScreenViewModel(
             try {
                 val notesList = getAllFavoriteComNotesUseCase.execute()
                 val lastCommunityNote = notesList.firstOrNull()
-                _state.value = _state.value?.copy(communityNote = lastCommunityNote)
+                _state.value = _state.value?.copy(communityNote = lastCommunityNote, isLoading = false)
             } catch (e: Exception) {
                 _state.value = _state.value?.copy(error = e.message)
             } finally {

@@ -1,4 +1,4 @@
-package com.example.togetherapp.presentation.ui.components
+package com.example.togetherapp.presentation.ui.profilescreen.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -11,16 +11,15 @@ import androidx.compose.ui.unit.dp
 import com.example.togetherapp.R
 
 @Composable
-fun IconButtonBack(onHideAllClick: () -> Unit){
+fun ButtonAllUsers(onShowUsersClick: () -> Unit){
     IconButton(
-        modifier = Modifier
-            .padding(start = 6.dp),
-        onClick = { onHideAllClick() }
+        modifier = Modifier.padding(end = 16.dp),
+        onClick = { onShowUsersClick() }
     ) {
         Icon(
-            painter = painterResource(R.drawable.ic_back_arrow),
+            painter = painterResource(R.drawable.ic_all_users),
             contentDescription = null,
-            modifier = Modifier.size(20.dp)
+            modifier = Modifier.size(24.dp)
         )
     }
 }

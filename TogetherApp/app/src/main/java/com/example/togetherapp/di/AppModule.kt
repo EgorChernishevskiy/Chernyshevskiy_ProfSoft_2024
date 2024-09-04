@@ -64,6 +64,7 @@ import com.example.togetherapp.domain.usecase.locnote.GetLocalNoteByIdUseCase
 import com.example.togetherapp.domain.usecase.profile.GetAllUserProfilesUseCase
 import com.example.togetherapp.domain.usecase.profile.GetUserProfileByIdUseCase
 import com.example.togetherapp.domain.usecase.profile.GetUserProfileUseCase
+import com.example.togetherapp.domain.usecase.profile.LogOutUseCase
 import com.example.togetherapp.domain.usecase.profile.SetPhoneVisibilityUseCase
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
@@ -73,6 +74,7 @@ import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.ProfileScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
@@ -233,6 +235,7 @@ val useCaseModule = module {
     single { GetUserProfileByIdUseCase(get()) }
     single { GetUserProfileUseCase(get()) }
     single { SetPhoneVisibilityUseCase(get()) }
+    single { LogOutUseCase(get()) }
 }
 
 val viewModelModule = module {
@@ -245,6 +248,7 @@ val viewModelModule = module {
     viewModel { CreateNoteScreenViewModel(get(), get()) }
     viewModel { FavoriteScreenViewModel(get(), get(), get()) }
     viewModel { ChatScreenViewModel(get(), get()) }
+    viewModel { ProfileScreenViewModel(get(), get(), get(), get(), get()) }
 }
 
 val appModules = listOf(

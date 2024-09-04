@@ -204,9 +204,12 @@ fun FavoriteScreenContent(
                 }
 
                 else -> {
-                    FavoriteCourses(state, viewModel, navController)
+                    FavoriteCourses("Курсы", state.courses, { viewModel.handleEvent(FavoriteScreenEvent.ShowAllCourses) }, navController)
                     FavoriteLocNotes(state, viewModel, navController)
-                    FavoriteNotes(state, viewModel, navController)
+                    state.communityNote?.let {
+                        FavoriteNotes("Заметки сообщества",
+                            it, { viewModel.handleEvent(FavoriteScreenEvent.ShowAllNotes) }, navController)
+                    }
                 }
             }
 

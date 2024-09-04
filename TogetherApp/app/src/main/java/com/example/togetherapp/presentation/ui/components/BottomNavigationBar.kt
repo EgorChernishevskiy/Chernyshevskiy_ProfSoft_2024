@@ -115,12 +115,12 @@ fun BottomNavigationBar(navController: NavHostController) {
                                 .height(20.dp)
                         )
                     },
-                    selected = false,
+                    selected = currentRoute == "profile",
                     colors = NavigationBarItemDefaults.colors(
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
-                    onClick = { /* Handle profile click */ }
+                    onClick = { navController.navigate("profile") }
                 )
             }
         }
