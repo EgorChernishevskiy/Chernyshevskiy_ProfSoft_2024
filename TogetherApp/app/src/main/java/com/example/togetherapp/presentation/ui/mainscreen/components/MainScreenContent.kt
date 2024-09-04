@@ -213,14 +213,16 @@ fun MainScreenContent(
                         items(state.localNotes.size) { index ->
                             val note = state.localNotes[index]
                             Spacer(modifier = Modifier.height(20.dp))
-                            NoteCard(
-                                title = note.title,
-                                content = note.content[0].text,
-                                date = note.date,
-                                onClick = {
-                                    navController.navigate("lnote/${note.id}")
-                                }
-                            )
+                            note.content[0].text?.let {
+                                NoteCard(
+                                    title = note.title,
+                                    content = it,
+                                    date = note.date,
+                                    onClick = {
+                                        navController.navigate("lnote/${note.id}")
+                                    }
+                                )
+                            }
                         }
                     }
                 }

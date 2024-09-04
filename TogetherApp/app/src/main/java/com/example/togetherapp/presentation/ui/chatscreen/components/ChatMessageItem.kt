@@ -32,17 +32,14 @@ import java.util.Locale
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ChatMessageItem(message: ChatMessage) {
-//    val backgroundColor = if (isCurrentUser) Color.Yellow else Color.LightGray
-//    val horizontalArrangement = if (isCurrentUser) Arrangement.End else Arrangement.Start
-//    val paddingStart = if (isCurrentUser) 0.dp else 8.dp
-//    val paddingEnd = if (isCurrentUser) 8.dp else 0.dp
+fun ChatMessageItem(message: ChatMessage, isCurrentUser: Boolean) {
+    val horizontalArrangement = if (isCurrentUser) Arrangement.End else Arrangement.Start
+    val paddingStart = 12.dp
+    val paddingEnd = 12.dp
     val backgroundColor = if (message.author.role == 2) Color(0xFFFFD80C) else Color(0x66D7D7D7)
-    val horizontalArrangement = Arrangement.Start
-    val paddingStart = 8.dp
-    val paddingEnd = 0.dp
 
-    val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+    val inputFormatter =
+        DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
     val outputFormatter = DateTimeFormatter.ofPattern("dd.MM HH:mm", Locale.getDefault())
     val date = LocalDateTime.parse(message.date, inputFormatter)
     val formattedDate = date.format(outputFormatter)
@@ -54,76 +51,90 @@ fun ChatMessageItem(message: ChatMessage) {
         horizontalArrangement = horizontalArrangement,
         verticalAlignment = Alignment.Bottom
     ) {
-        Row(
-            modifier = Modifier
-                .clip(shape = RoundedCornerShape(20.dp))
-                .background(backgroundColor)
-        ) {
-
-            Image(
-                painter = rememberImagePainter(message.author.avatar),
-                contentDescription = null,
+        if (!isCurrentUser) {
+            Row(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(topStart = 20.dp))
-                    .size(40.dp)
-                    .padding(paddingStart),
-                contentScale = ContentScale.Crop,
-
-            )
-
-
-            Column(
-                modifier = Modifier
-                    .padding(end = paddingEnd)
-                    .padding(8.dp)
-                    .widthIn(max = 240.dp)
+                    .clip(shape = RoundedCornerShape(20.dp))
+                    .background(backgroundColor)
             ) {
-                Text(
-                    text = "${message.author.name} ${message.author.surname}",
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start
-                )
-                Text(
-                    text = message.message,
-                    color = Color.Black,
-                    textAlign = TextAlign.Start
-                )
+
+                Image(
+                    painter = rememberImagePainter(message.author.avatar),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(topStart = 20.dp))
+                        .size(40.dp)
+                        .padding(paddingStart),
+                    contentScale = ContentScale.Crop,
+
+                    )
+
+
+                Column(
+                    modifier = Modifier
+                        .padding(end = paddingEnd)
+                        .padding(8.dp)
+                        .widthIn(max = 200.dp)
+                ) {
+                    Text(
+                        text = "${message.author.name} ${message.author.surname}",
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start
+                    )
+                    Text(
+                        text = message.message,
+                        color = Color.Black,
+                        textAlign = TextAlign.Start
+                    )
+                }
+            }
+            Text(
+                text = formattedDate,
+                style = MaterialTheme.typography.bodySmall,
+                textAlign = TextAlign.Start,
+                modifier = Modifier.padding(start = 8.dp),
+            )
+        } else {
+            Text(
+                text = formattedDate,
+                style = MaterialTheme.typography.bodySmall,
+                textAlign = TextAlign.Start,
+                modifier = Modifier.padding(start = 8.dp),
+            )
+            Row(
+                modifier = Modifier
+                    .padding(start = 4.dp)
+                    .clip(shape = RoundedCornerShape(20.dp))
+                    .background(backgroundColor)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(start = paddingStart, end = paddingEnd)
+                        .padding(8.dp)
+                        .widthIn(max = 200.dp)
+                ) {
+                    Text(
+                        text = "${message.author.name} ${message.author.surname}",
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start
+                    )
+                    Text(
+                        text = message.message,
+                        color = Color.Black,
+                        textAlign = TextAlign.Start
+                    )
+                }
+                Image(
+                    painter = rememberImagePainter(message.author.avatar),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(topStart = 20.dp))
+                        .size(40.dp)
+                        .padding(paddingStart),
+                    contentScale = ContentScale.Crop,
+                    )
             }
         }
-        Text(
-            text = formattedDate,
-            style = MaterialTheme.typography.bodySmall,
-            textAlign = TextAlign.Start,
-            modifier = Modifier.padding(start = 8.dp),
-        )
     }
 }
 
-//{
-//    Text(
-//        text = "${message.author.name} ${message.author.surname}",
-//        fontWeight = FontWeight.Bold,
-//        textAlign = if (isCurrentUser) TextAlign.End else TextAlign.Start
-//    )
-//    Text(
-//        text = message.message,
-//        color = Color.Black,
-//        textAlign = if (isCurrentUser) TextAlign.End else TextAlign.Start
-//    )
-//    Text(
-//        text = message.date.format(dateFormat),
-//        style = MaterialTheme.typography.bodySmall,
-//        textAlign = if (isCurrentUser) TextAlign.End else TextAlign.Start
-//    )
-//}
-
-//        if (isCurrentUser) {
-//            Image(
-//                painter = rememberImagePainter(message.author.avatar),
-//                contentDescription = null,
-//                modifier = Modifier
-//                    .size(40.dp)
-//                    .padding(paddingEnd),
-//                contentScale = ContentScale.Crop
-//            )
-//        }

@@ -40,6 +40,7 @@ fun ChatScreenContent(viewModel: ChatScreenViewModel, navController: NavHostCont
 
     LaunchedEffect(Unit) {
         viewModel.handleEvent(ChatScreenEvent.LoadMessages)
+        viewModel.handleEvent(ChatScreenEvent.GetCurrentUserId)
     }
     Scaffold(
         topBar = {
@@ -70,13 +71,13 @@ fun ChatScreenContent(viewModel: ChatScreenViewModel, navController: NavHostCont
         ) {
             val sortedMessages = state.messages.sortedBy { it.date }.asReversed()
             LazyColumn(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(1f).padding(16.dp),
                 reverseLayout = true
             ) {
                 items(sortedMessages) { message ->
                     ChatMessageItem(
                         message = message,
-                        //isCurrentUser = message.author.id == currentUserId
+                        isCurrentUser = message.author.id == state.currentUserId
                     )
                 }
             }

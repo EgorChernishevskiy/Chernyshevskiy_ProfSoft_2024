@@ -247,7 +247,7 @@ val viewModelModule = module {
     viewModel { LNoteDetailsScreenViewModel(get(), get(), get(), get()) }
     viewModel { CreateNoteScreenViewModel(get(), get()) }
     viewModel { FavoriteScreenViewModel(get(), get(), get()) }
-    viewModel { ChatScreenViewModel(get(), get()) }
+    viewModel { ChatScreenViewModel(get(), get(), get()) }
     viewModel { ProfileScreenViewModel(get(), get(), get(), get(), get()) }
 }
 

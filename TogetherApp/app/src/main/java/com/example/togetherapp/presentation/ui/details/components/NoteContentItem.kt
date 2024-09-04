@@ -34,9 +34,9 @@ fun NoteContentItem(noteContent: NoteContent) {
                 top = 20.dp,
             )
     ) {
-        if (noteContent.text.isNotBlank()) {
+        if (noteContent.text!!.isNotBlank()) {
             Text(
-                text = noteContent.text,
+                text = noteContent.text!!,
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight(400),
                 textAlign = TextAlign.Justify,

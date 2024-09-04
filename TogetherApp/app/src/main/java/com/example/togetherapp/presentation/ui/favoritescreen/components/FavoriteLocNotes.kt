@@ -26,13 +26,15 @@ fun FavoriteLocNotes(state: FavoriteScreenState, viewModel: FavoriteScreenViewMo
     Spacer(modifier = Modifier.height(12.dp))
 
     state.localNote?.let { note ->
-        NoteCard(
-            title = note.title,
-            content = note.content[0].text,
-            date = note.date,
-            onClick = {
-                navController.navigate("lnote/${note.id}")
-            }
-        )
+        note.content[0].text?.let {
+            NoteCard(
+                title = note.title,
+                content = it,
+                date = note.date,
+                onClick = {
+                    navController.navigate("lnote/${note.id}")
+                }
+            )
+        }
     }
 }
