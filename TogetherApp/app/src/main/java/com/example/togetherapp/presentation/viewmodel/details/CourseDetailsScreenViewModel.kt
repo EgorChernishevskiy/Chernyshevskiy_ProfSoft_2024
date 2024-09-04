@@ -8,6 +8,7 @@ import com.example.togetherapp.domain.usecase.course.GetCourseByIdUseCase
 import com.example.togetherapp.domain.usecase.favorite.AddFavoriteCourseUseCase
 import com.example.togetherapp.domain.usecase.favorite.CheckCourseFavoriteStatusUseCase
 import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteCourseUseCase
+import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
 import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
 import com.example.togetherapp.presentation.state.CourseDetailsScreenState
 import kotlinx.coroutines.launch
@@ -24,6 +25,10 @@ class CourseDetailsScreenViewModel(
 
     fun handleEvent(event: CourseDetailsScreenEvent) {
         when (event) {
+            is CourseDetailsScreenEvent.OnErrorClear -> {
+                _state.value = _state.value?.copy(error = null)
+            }
+
             is CourseDetailsScreenEvent.LoadCourseDetails -> {
                 loadCourseDetails(event.courseId)
             }

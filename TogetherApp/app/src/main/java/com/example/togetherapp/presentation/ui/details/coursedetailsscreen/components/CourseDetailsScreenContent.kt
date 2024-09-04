@@ -18,10 +18,8 @@ import com.example.togetherapp.presentation.state.CourseDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.viewmodel.details.CourseDetailsScreenViewModel
 
-//onClick = { navController.popBackStack() }
 
 @RequiresApi(Build.VERSION_CODES.O)
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsScreenContent(
     viewModel: CourseDetailsScreenViewModel,
@@ -36,45 +34,65 @@ fun DetailsScreenContent(
         viewModel.handleEvent(CourseDetailsScreenEvent.CheckIfFavorite(courseId))
     }
 
-    Scaffold(
-        topBar = {
-            CustomTopAppBar(
-                state = state,
-                onBackClick = { navController.popBackStack() },
-                courseIndex = courseIndex,
-                onFavoriteClick = {
-                    viewModel.handleEvent(
-                        if (state.isFavorite) CourseDetailsScreenEvent.RemoveFromFavorite
-                        else CourseDetailsScreenEvent.AddToFavorite
-                    )
-                }
-            )
-        }
-    ) { paddingValues ->
-        Column(
+    Scaffold { paddingValues ->
+        LazyColumn(
             modifier = Modifier
+                .fillMaxSize()
                 .padding(paddingValues)
-                .padding(start = 16.dp, end = 16.dp, top = 20.dp)
         ) {
+            item {
+                CustomTopAppBar(
+                    state = state,
+                    onBackClick = { navController.popBackStack() },
+                    courseIndex = courseIndex,
+                    onFavoriteClick = {
+                        viewModel.handleEvent(
+                            if (state.isFavorite) CourseDetailsScreenEvent.RemoveFromFavorite
+                            else CourseDetailsScreenEvent.AddToFavorite
+                        )
+                    }
+                )
+            }
+
             when {
                 state.isLoading -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        CircularProgressIndicator()
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(top = 20.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
                     }
                 }
 
                 state.error != null -> {
-                    ErrorMessage(
-                        errorMessage = state.error ?: "Что-то пошло не так",
-                        onRetryClick = {
-                            viewModel.handleEvent(CourseDetailsScreenEvent.LoadCourseDetails(courseId))
-                        }
-                    )
+                    item {
+                        ErrorMessage(
+                            errorMessage = state.error ?: "Что-то пошло не так",
+                            onRetryClick = {
+                                viewModel.handleEvent(CourseDetailsScreenEvent.OnErrorClear)
+                                viewModel.handleEvent(
+                                    CourseDetailsScreenEvent.LoadCourseDetails(
+                                        courseId
+                                    )
+                                )
+                            }
+                        )
+                    }
                 }
 
                 state.course != null -> {
-                    LazyColumn(modifier = Modifier.padding(top = 20.dp)) {
-                        item {
+                    item {
+                        Column(
+                            modifier = Modifier.padding(
+                                start = 16.dp,
+                                end = 16.dp,
+                                top = 20.dp
+                            )
+                        ) {
                             Text(
                                 text = "Темы",
                                 fontWeight = FontWeight(700),
@@ -101,10 +119,10 @@ fun DetailsScreenContent(
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                         }
+                    }
 
-                        items(state.course!!.text.size) { index ->
-                            CourseContentItem(courseText = state.course!!.text[index])
-                        }
+                    items(state.course!!.text.size) { index ->
+                        CourseContentItem(courseText = state.course!!.text[index])
                     }
                 }
             }

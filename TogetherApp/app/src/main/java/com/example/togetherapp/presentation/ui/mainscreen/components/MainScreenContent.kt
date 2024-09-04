@@ -48,9 +48,6 @@ fun MainScreenContent(
         viewModel.handleEvent(MainScreenEvent.LoadLocalNotes)
     }
 
-    var isSearching by remember { mutableStateOf(false) }
-    var searchQuery by remember { mutableStateOf("") }
-
     Scaffold(
         topBar = {
             if (state.showAllCourses || state.showAllNotes || state.showAllLocalNotes) {
@@ -77,57 +74,14 @@ fun MainScreenContent(
             } else {
                 TopAppBar(
                     title = {
-                        if (!isSearching) {
-                            Text(
-                                text = "Главная",
-                                style = MaterialTheme.typography.titleLarge,
-                                fontSize = 20.sp
-                            )
-                        } else {
-                            TextField(
-                                value = searchQuery,
-                                onValueChange = { searchQuery = it },
-                                placeholder = {
-                                    if (searchQuery.isEmpty()) {
-                                        Text(
-                                            text = "Поиск",
-                                            color = Color(0xFF333333),
-                                            style = MaterialTheme.typography.titleSmall.copy(
-                                                fontSize = 14.sp
-                                            )
-                                        )
-                                    }
-                                },
-                                leadingIcon = {
-                                    Icon(
-                                        painter = painterResource(R.drawable.ic_searchnormal),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(16.dp)
-                                    )
-                                },
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(48.dp)
-                                    .padding(horizontal = 16.dp)
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .background(Color(0xFFD6B714)),
-                                colors = TextFieldDefaults.textFieldColors(
-                                    containerColor = Color.Transparent,
-                                    focusedIndicatorColor = Color.Transparent,
-                                    unfocusedIndicatorColor = Color.Transparent,
-                                    disabledIndicatorColor = Color.Transparent,
-                                    errorIndicatorColor = Color.Transparent
-                                ),
-                                textStyle = TextStyle(
-                                    fontSize = 14.sp
-                                ),
-                                singleLine = true
-                            )
-                        }
-
+                        Text(
+                            text = "Главная",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontSize = 20.sp
+                        )
                     },
                     actions = {
-                        if (!isSearching && !state.showAllCourses && !state.showAllNotes && !state.showAllLocalNotes) {
+                        if (!state.showAllCourses && !state.showAllNotes && !state.showAllLocalNotes) {
                             CustomSearchButton()
                         }
                     },
@@ -166,6 +120,7 @@ fun MainScreenContent(
                         ErrorMessage(
                             errorMessage = state.error ?: "Что-то пошло не так",
                             onRetryClick = {
+                                viewModel.handleEvent(MainScreenEvent.OnErrorClear)
                                 viewModel.handleEvent(MainScreenEvent.LoadCourses)
                                 viewModel.handleEvent(MainScreenEvent.LoadNotes)
                                 viewModel.handleEvent(MainScreenEvent.LoadLocalNotes)
@@ -227,7 +182,7 @@ fun MainScreenContent(
                     }
                 }
 
-                state.courses.isNotEmpty() -> {
+                state.courses.isNotEmpty() || state.localNote != null || state.communityNote != null -> {
                     MainScreenCards(state, viewModel, navController)
                 }
 

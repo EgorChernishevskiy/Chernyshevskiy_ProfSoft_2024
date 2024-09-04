@@ -7,4 +7,5 @@ sealed class CNoteDetailsScreenEvent {
     object AddToFavorite : CNoteDetailsScreenEvent()
     object RemoveFromFavorite : CNoteDetailsScreenEvent()
     data class CheckIfFavorite(val noteId: String) : CNoteDetailsScreenEvent()
+    object OnErrorClear : CNoteDetailsScreenEvent()
 }

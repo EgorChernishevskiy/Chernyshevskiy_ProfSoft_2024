@@ -265,8 +265,10 @@ fun CreateNoteScreenContent(
         state.error?.let {
             ErrorDialog(OnRetry = {
                 if (state.isLocal) {
+                    viewModel.handleEvent(CreateNoteScreenEvent.OnErrorClear)
                     viewModel.handleEvent(CreateNoteScreenEvent.OnLocalCreated)
                 } else {
+                    viewModel.handleEvent(CreateNoteScreenEvent.OnErrorClear)
                     viewModel.handleEvent(CreateNoteScreenEvent.OnCommunityCreated)
                 }
             })

@@ -113,7 +113,9 @@ fun ProfileScreenContent(
                         )
                     },
                     actions = {
-                        if (state.isMyProfile) {ButtonAllUsers { viewModel.handleEvent(ProfileScreenEvent.ShowAllUsers)} }
+                        if (state.isMyProfile) {
+                            ButtonAllUsers { viewModel.handleEvent(ProfileScreenEvent.ShowAllUsers) }
+                        }
                     },
                     colors = TopAppBarDefaults.mediumTopAppBarColors(
                         containerColor = Color(0xFFFFD80C)
@@ -215,109 +217,108 @@ fun ProfileScreenContent(
                     }
                 }
 
-                else -> {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(Color.LightGray)
-                            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
-                    ) {
-
-
-                        Row {
-                            Image(
-                                painter = rememberImagePainter(data = state.user?.avatar),
-                                contentDescription = "User Avatar",
-                                modifier = Modifier
-                                    .size(100.dp)
-                                    .clip(CircleShape),
-                                contentScale = ContentScale.Crop
-                            )
-
-                            Spacer(modifier = Modifier.width(20.dp))
-
-                            Column(
-                                modifier = Modifier.padding(bottom = 12.dp),
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.Start
-                            ) {
-                                Text(
-                                    text = "${state.user?.name}",
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold
+                else -> LazyColumn {
+                    item {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color.LightGray)
+                                .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                        ) {
+                            Row {
+                                Image(
+                                    painter = rememberImagePainter(data = state.user?.avatar),
+                                    contentDescription = "User Avatar",
+                                    modifier = Modifier
+                                        .size(100.dp)
+                                        .clip(CircleShape),
+                                    contentScale = ContentScale.Crop
                                 )
-                                Spacer(modifier = Modifier.height(6.dp))
-                                Text(
-                                    text = "${state.user?.surname}",
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                Spacer(modifier = Modifier.height(6.dp))
-                                Text(
-                                    text = "Дата регистрации: ${formatDateProfile(state.user?.registerDate ?: "")}",
-                                    fontSize = 14.sp,
-                                    color = Color.Gray
-                                )
-                                Spacer(modifier = Modifier.height(6.dp))
-                                Text(
-                                    text = "Роль: ${
-                                        when (state.user?.role) {
-                                            0 -> "Студент"
-                                            1 -> "Преподаватель"
-                                            2 -> "Админ"
-                                            else -> "Неизвестная роль"
-                                        }
-                                    }",
-                                    fontSize = 14.sp,
-                                    color = Color.Gray
-                                )
-                            }
-                        }
-                        Column(modifier = Modifier.padding(0.dp)) {
-                            if (state.user?.phone != null) {
-                                Text(
-                                    text = "Номер телефона: ${formatPhoneNumber(state.user?.phone)}",
-                                    fontSize = 14.sp,
-                                    color = Color.Black
-                                )
-                            }
 
-                            if (state.isMyProfile) {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically
+                                Spacer(modifier = Modifier.width(20.dp))
+
+                                Column(
+                                    modifier = Modifier.padding(bottom = 12.dp),
+                                    verticalArrangement = Arrangement.Center,
+                                    horizontalAlignment = Alignment.Start
                                 ) {
                                     Text(
-                                        text = "Показывать всем мой номер",
+                                        text = "${state.user?.name}",
+                                        fontSize = 20.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                    Spacer(modifier = Modifier.height(6.dp))
+                                    Text(
+                                        text = "${state.user?.surname}",
+                                        fontSize = 20.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                    Spacer(modifier = Modifier.height(6.dp))
+                                    Text(
+                                        text = "Дата регистрации: ${formatDateProfile(state.user?.registerDate ?: "")}",
+                                        fontSize = 14.sp,
+                                        color = Color.Gray
+                                    )
+                                    Spacer(modifier = Modifier.height(6.dp))
+                                    Text(
+                                        text = "Роль: ${
+                                            when (state.user?.role) {
+                                                0 -> "Студент"
+                                                1 -> "Преподаватель"
+                                                2 -> "Админ"
+                                                else -> "Неизвестная роль"
+                                            }
+                                        }",
+                                        fontSize = 14.sp,
+                                        color = Color.Gray
+                                    )
+                                }
+                            }
+
+                            Column(modifier = Modifier.padding(0.dp)) {
+                                state.user?.phone?.let {
+                                    Text(
+                                        text = "Номер телефона: ${formatPhoneNumber(it)}",
                                         fontSize = 14.sp,
                                         color = Color.Black
                                     )
-                                    Spacer(modifier = Modifier.weight(1f))
-                                    Switch(
-                                        checked = true,
-                                        onCheckedChange = { },
-                                        colors = SwitchDefaults.colors(
-                                            checkedTrackColor = Color.Black,
-                                            uncheckedTrackColor = Color(0xFFFFD80C),
-                                            checkedThumbColor = Color(0xFFFFD80C),
-                                            uncheckedThumbColor = Color(0xFFFFD80C)
-                                        ),
-                                        modifier = Modifier
-                                            .scale(0.7f)
-                                            .padding(end = 8.dp)
-                                    )
                                 }
-                            } else {
-                                Spacer(Modifier.height(15.dp))
+
+                                if (state.isMyProfile) {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            text = "Показывать всем мой номер",
+                                            fontSize = 14.sp,
+                                            color = Color.Black
+                                        )
+                                        Spacer(modifier = Modifier.weight(1f))
+                                        Switch(
+                                            checked = true,
+                                            onCheckedChange = { },
+                                            colors = SwitchDefaults.colors(
+                                                checkedTrackColor = Color.Black,
+                                                uncheckedTrackColor = Color(0xFFFFD80C),
+                                                checkedThumbColor = Color(0xFFFFD80C),
+                                                uncheckedThumbColor = Color(0xFFFFD80C)
+                                            ),
+                                            modifier = Modifier
+                                                .scale(0.7f)
+                                                .padding(end = 8.dp)
+                                        )
+                                    }
+                                } else {
+                                    Spacer(Modifier.height(15.dp))
+                                }
                             }
                         }
-
                     }
-                    LazyColumn(
-                        modifier = Modifier
-                            .padding(start = 16.dp, end = 16.dp)
-                    ) {
-                        state.user?.let {
-                            item {
+                    item {
+                        Column(
+                            modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp)
+                        ) {
+                            state.user?.let {
                                 FavoriteCourses(
                                     if (state.isMyProfile) "Ваши курсы" else "Курсы",
                                     it.courses,
@@ -325,20 +326,17 @@ fun ProfileScreenContent(
                                     navController
                                 )
                             }
-                            item {
-                                it.notes.firstOrNull()?.let { it1 ->
-                                    FavoriteNotes(
-                                        if (state.isMyProfile) "Ваши заметки" else "Заметки",
-                                        it1,
-                                        { viewModel.handleEvent(ProfileScreenEvent.ShowAllNotes) },
-                                        navController
-                                    )
-                                }
-                            }
-                        }
 
-                        if (state.isMyProfile) {
-                            item {
+                            state.user?.let {
+                                FavoriteNotes(
+                                    if (state.isMyProfile) "Ваши заметки" else "Заметки",
+                                    it.notes.firstOrNull(),
+                                    { viewModel.handleEvent(ProfileScreenEvent.ShowAllNotes) },
+                                    navController
+                                )
+                            }
+
+                            if (state.isMyProfile) {
                                 Button(
                                     onClick = {
                                         viewModel.handleEvent(ProfileScreenEvent.OnLogOut)
@@ -360,10 +358,9 @@ fun ProfileScreenContent(
                                         color = Color.Black,
                                         style = MaterialTheme.typography.titleSmall
                                     )
+
+                                    Spacer(modifier = Modifier.height(12.dp))
                                 }
-                            }
-                            item {
-                                Spacer(modifier = Modifier.height(12.dp))
                             }
                         }
                     }

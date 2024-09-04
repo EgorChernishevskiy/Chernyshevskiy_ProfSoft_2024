@@ -9,6 +9,7 @@ import com.example.togetherapp.domain.model.comnote.NoteContent
 import com.example.togetherapp.domain.model.locnote.LocNote
 import com.example.togetherapp.domain.usecase.comnote.CreateNoteUseCase
 import com.example.togetherapp.domain.usecase.locnote.CreateLocalNoteUseCase
+import com.example.togetherapp.presentation.event.ChatScreenEvent
 import com.example.togetherapp.presentation.event.CreateNoteScreenEvent
 import com.example.togetherapp.presentation.state.CreateNoteScreenState
 import kotlinx.coroutines.launch
@@ -25,6 +26,10 @@ class CreateNoteScreenViewModel(
 
     fun handleEvent(event: CreateNoteScreenEvent) {
         when (event) {
+            is CreateNoteScreenEvent.OnErrorClear -> {
+                _state.value = _state.value?.copy(error = null)
+            }
+
             is CreateNoteScreenEvent.OnCommunitySelected -> {
                 _state.value = _state.value?.copy(isLocal = false)
             }
@@ -92,6 +97,7 @@ class CreateNoteScreenViewModel(
         localNoteIndex = 0
         communityNoteIndex = 0
     }
+
     private fun addPhotoContent() {
         val photoContent = NoteContent(
             text = "",

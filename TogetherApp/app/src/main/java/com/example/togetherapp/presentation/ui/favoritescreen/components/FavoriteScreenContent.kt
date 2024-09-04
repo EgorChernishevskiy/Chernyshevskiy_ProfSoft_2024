@@ -130,6 +130,7 @@ fun FavoriteScreenContent(
                     ErrorMessage(
                         errorMessage = state.error ?: "Что-то пошло не так",
                         onRetryClick = {
+                            viewModel.handleEvent(FavoriteScreenEvent.OnErrorClear)
                             viewModel.handleEvent(FavoriteScreenEvent.LoadCourses)
                             viewModel.handleEvent(FavoriteScreenEvent.LoadNotes)
                             viewModel.handleEvent(FavoriteScreenEvent.LoadLocalNotes)
@@ -206,11 +207,26 @@ fun FavoriteScreenContent(
                 }
 
                 else -> {
-                    FavoriteCourses("Курсы", state.courses, { viewModel.handleEvent(FavoriteScreenEvent.ShowAllCourses) }, navController)
-                    FavoriteLocNotes(state, viewModel, navController)
-                    state.communityNote?.let {
-                        FavoriteNotes("Заметки сообщества",
-                            it, { viewModel.handleEvent(FavoriteScreenEvent.ShowAllNotes) }, navController)
+                    LazyColumn {
+                        item {
+                            FavoriteCourses(
+                                "Курсы",
+                                state.courses,
+                                { viewModel.handleEvent(FavoriteScreenEvent.ShowAllCourses) },
+                                navController
+                            )
+                        }
+                        item { FavoriteLocNotes(state, viewModel, navController) }
+                        item {
+                            state.communityNote?.let {
+                                FavoriteNotes(
+                                    "Заметки сообщества",
+                                    it,
+                                    { viewModel.handleEvent(FavoriteScreenEvent.ShowAllNotes) },
+                                    navController
+                                )
+                            }
+                        }
                     }
                 }
             }

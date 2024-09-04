@@ -8,8 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.togetherapp.domain.usecase.favorite.GetAllFavoriteComNotesUseCase
 import com.example.togetherapp.domain.usecase.favorite.GetAllFavoriteCoursesUseCase
 import com.example.togetherapp.domain.usecase.favorite.GetAllFavoriteLocalNotesUseCase
+import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
+import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
+import com.example.togetherapp.presentation.event.CreateNoteScreenEvent
 import com.example.togetherapp.presentation.event.FavoriteScreenEvent
+import com.example.togetherapp.presentation.event.LNoteDetailsScreenEvent
 import com.example.togetherapp.presentation.event.MainScreenEvent
+import com.example.togetherapp.presentation.event.ProfileScreenEvent
 import com.example.togetherapp.presentation.state.FavoriteScreenState
 import kotlinx.coroutines.launch
 
@@ -24,6 +29,10 @@ class FavoriteScreenViewModel(
 
     fun handleEvent(event: FavoriteScreenEvent) {
         when (event) {
+            is FavoriteScreenEvent.OnErrorClear -> {
+                _state.value = _state.value?.copy(error = null)
+            }
+
             is FavoriteScreenEvent.HideAllCourses -> {
                 _state.value = _state.value?.copy(showAllCourses = false)
             }
@@ -108,7 +117,8 @@ class FavoriteScreenViewModel(
             try {
                 val notesList = getAllFavoriteComNotesUseCase.execute()
                 val lastCommunityNote = notesList.firstOrNull()
-                _state.value = _state.value?.copy(communityNote = lastCommunityNote, isLoading = false)
+                _state.value =
+                    _state.value?.copy(communityNote = lastCommunityNote, isLoading = false)
             } catch (e: Exception) {
                 _state.value = _state.value?.copy(error = e.message)
             } finally {

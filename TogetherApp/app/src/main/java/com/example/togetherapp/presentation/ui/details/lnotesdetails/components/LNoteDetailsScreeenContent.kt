@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
 import com.example.togetherapp.presentation.event.LNoteDetailsScreenEvent
 import com.example.togetherapp.presentation.state.note.LNoteDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
@@ -43,68 +44,72 @@ fun LNoteDetailsScreenContent(
         viewModel.handleEvent(LNoteDetailsScreenEvent.CheckIfFavorite(noteId))
     }
 
-    Scaffold(
-        topBar = {
-            NoteTopAppBar(
-                state = state,
-                onBackClick = { navController.popBackStack() },
-                onFavoriteClick = {
-                    viewModel.handleEvent(
-                        if (state.isFavorite) LNoteDetailsScreenEvent.RemoveFromFavorite
-                        else LNoteDetailsScreenEvent.AddToFavorite
-                    )
-                }
-            )
-        }
-    ) { paddingValues ->
-        Column(
+    Scaffold { paddingValues ->
+        LazyColumn(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-            when {
-                state.isLoading -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            item {
+                NoteTopAppBar(
+                    state = state,
+                    onBackClick = { navController.popBackStack() },
+                    onFavoriteClick = {
+                        viewModel.handleEvent(
+                            if (state.isFavorite) LNoteDetailsScreenEvent.RemoveFromFavorite
+                            else LNoteDetailsScreenEvent.AddToFavorite
+                        )
+                    }
+                )
+            }
+
+            if (state.isLoading) {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(top = 20.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
                         CircularProgressIndicator()
                     }
                 }
+            }
 
-                state.error != null -> {
+            if (state.error != null) {
+                item {
                     ErrorMessage(
                         errorMessage = state.error ?: "Что-то пошло не так",
                         onRetryClick = {
+                            viewModel.handleEvent(LNoteDetailsScreenEvent.OnErrorClear)
                             viewModel.handleEvent(
-                                LNoteDetailsScreenEvent.LoadLNoteDetails(
-                                    noteId
-                                )
+                                LNoteDetailsScreenEvent.LoadLNoteDetails(noteId)
                             )
                         }
                     )
                 }
+            }
 
-                state.note != null -> {
-                    LazyColumn(modifier = Modifier.weight(1f)) {
-                        item {
-                            Column(
-                                modifier = Modifier.padding(
-                                    start = 16.dp,
-                                    end = 16.dp,
-                                    top = 20.dp
-                                )
-                            ) {
-                                Text(
-                                    text = "Текст",
-                                    fontWeight = FontWeight(700),
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
-                                Spacer(modifier = Modifier.height(8.dp))
-                            }
-                        }
-
-                        items(state.note!!.content.size) { index ->
-                            NoteContentItem(noteContent = state.note!!.content[index])
-                        }
+            state.note?.let { note ->
+                item {
+                    Column(
+                        modifier = Modifier.padding(
+                            start = 16.dp,
+                            end = 16.dp,
+                            top = 20.dp
+                        )
+                    ) {
+                        Text(
+                            text = "Текст",
+                            fontWeight = FontWeight(700),
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
                     }
+                }
+
+                items(note.content.size) { index ->
+                    NoteContentItem(noteContent = note.content[index])
                 }
             }
         }

@@ -8,6 +8,7 @@ import com.example.togetherapp.domain.usecase.favorite.AddFavoriteLocalNoteUseCa
 import com.example.togetherapp.domain.usecase.favorite.CheckLocalNoteFavoriteStatusUseCase
 import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteLocalNoteUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetLocalNoteByIdUseCase
+import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
 import com.example.togetherapp.presentation.event.LNoteDetailsScreenEvent
 import com.example.togetherapp.presentation.state.note.LNoteDetailsScreenState
 import kotlinx.coroutines.launch
@@ -24,6 +25,10 @@ class LNoteDetailsScreenViewModel(
 
     fun handleEvent(event: LNoteDetailsScreenEvent) {
         when (event) {
+            is LNoteDetailsScreenEvent.OnErrorClear -> {
+                _state.value = _state.value?.copy(error = null)
+            }
+
             is LNoteDetailsScreenEvent.LoadLNoteDetails -> {
                 loadLNoteDetails(event.noteId)
             }

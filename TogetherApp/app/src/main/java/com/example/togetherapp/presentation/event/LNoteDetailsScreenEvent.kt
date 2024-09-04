@@ -5,4 +5,5 @@ sealed class LNoteDetailsScreenEvent {
     object AddToFavorite : LNoteDetailsScreenEvent()
     object RemoveFromFavorite : LNoteDetailsScreenEvent()
     data class CheckIfFavorite(val noteId: Int) : LNoteDetailsScreenEvent()
+    object OnErrorClear : LNoteDetailsScreenEvent()
 }

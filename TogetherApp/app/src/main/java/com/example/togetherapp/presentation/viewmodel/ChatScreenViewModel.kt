@@ -8,6 +8,7 @@ import com.example.togetherapp.domain.usecase.chat.GetAllMessagesUseCase
 import com.example.togetherapp.domain.usecase.chat.SendMessageUseCase
 import com.example.togetherapp.domain.usecase.profile.GetUserProfileUseCase
 import com.example.togetherapp.presentation.event.ChatScreenEvent
+import com.example.togetherapp.presentation.event.FavoriteScreenEvent
 import com.example.togetherapp.presentation.state.ChatScreenState
 import kotlinx.coroutines.launch
 
@@ -22,6 +23,10 @@ class ChatScreenViewModel(
 
     fun handleEvent(event: ChatScreenEvent) {
         when (event) {
+            is ChatScreenEvent.OnErrorClear -> {
+                _state.value = _state.value?.copy(error = null)
+            }
+
             is ChatScreenEvent.LoadMessages -> {
                 loadMessages()
             }
@@ -69,7 +74,10 @@ class ChatScreenViewModel(
             try {
                 val newMessage = sendMessageUseCase.execute(text)
                 val updatedMessages = _state.value?.messages.orEmpty() + newMessage
-                _state.value = _state.value?.copy(messages = updatedMessages, currentUserId = newMessage.author.id)
+                _state.value = _state.value?.copy(
+                    messages = updatedMessages,
+                    currentUserId = newMessage.author.id
+                )
             } catch (e: Exception) {
                 _state.value = _state.value?.copy(error = e.message)
             }

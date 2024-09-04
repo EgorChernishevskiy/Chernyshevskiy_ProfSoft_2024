@@ -27,9 +27,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.presentation.event.ChatScreenEvent
 import com.example.togetherapp.presentation.event.FavoriteScreenEvent
+import com.example.togetherapp.presentation.event.ProfileScreenEvent
 import com.example.togetherapp.presentation.state.ChatScreenState
 import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
 import com.example.togetherapp.presentation.ui.components.CustomSearchButton
+import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -69,31 +71,41 @@ fun ChatScreenContent(viewModel: ChatScreenViewModel, navController: NavHostCont
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-            val sortedMessages = state.messages.sortedBy { it.date }.asReversed()
-            LazyColumn(
-                modifier = Modifier.weight(1f).padding(16.dp),
-                reverseLayout = true
-            ) {
-                items(sortedMessages) { message ->
-                    ChatMessageItem(
-                        message = message,
-                        isCurrentUser = message.author.id == state.currentUserId
-                    )
+            if (state.error != null) {
+                ErrorMessage(
+                    errorMessage = state.error ?: "Что-то пошло не так",
+                    onRetryClick = {
+                        viewModel.handleEvent(ChatScreenEvent.OnErrorClear)
+                        viewModel.handleEvent(ChatScreenEvent.LoadMessages)
+                        viewModel.handleEvent(ChatScreenEvent.GetCurrentUserId)
+                    }
+                )
+            } else {
+                val sortedMessages = state.messages.sortedBy { it.date }.asReversed()
+                LazyColumn(
+                    modifier = Modifier.weight(1f).padding(16.dp),
+                    reverseLayout = true
+                ) {
+                    items(sortedMessages) { message ->
+                        ChatMessageItem(
+                            message = message,
+                            isCurrentUser = message.author.id == state.currentUserId
+                        )
+                    }
                 }
-            }
 
-            ChatInput(onSendClicked = { messageText ->
-                viewModel.handleEvent(ChatScreenEvent.SendMessage(messageText))
-            },
-                onRefreshClicked = {
-                    viewModel.handleEvent(ChatScreenEvent.RefreshMessages)
+                ChatInput(onSendClicked = { messageText ->
+                    viewModel.handleEvent(ChatScreenEvent.SendMessage(messageText))
+                },
+                    onRefreshClicked = {
+                        viewModel.handleEvent(ChatScreenEvent.RefreshMessages)
+                    }
+                )
+
+                if (state.isLoading) {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
                 }
-            )
-
-            if (state.isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
             }
         }
     }
 }
-

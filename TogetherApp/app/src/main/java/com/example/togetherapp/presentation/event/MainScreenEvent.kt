@@ -12,4 +12,5 @@ sealed class MainScreenEvent {
     object ShowAllLocalNotes : MainScreenEvent()
     object HideAllLocalNotes : MainScreenEvent()
     object OnResetState : MainScreenEvent()
+    object OnErrorClear : MainScreenEvent()
 }

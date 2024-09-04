@@ -10,6 +10,7 @@ import com.example.togetherapp.domain.usecase.favorite.AddFavoriteNoteUseCase
 import com.example.togetherapp.domain.usecase.favorite.CheckNoteFavoriteStatusUseCase
 import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteNoteUseCase
 import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
+import com.example.togetherapp.presentation.event.ChatScreenEvent
 import com.example.togetherapp.presentation.state.note.CNoteDetailsScreenState
 import kotlinx.coroutines.launch
 
@@ -26,6 +27,10 @@ class CNoteDetailsScreenViewModel(
 
     fun handleEvent(event: CNoteDetailsScreenEvent) {
         when (event) {
+            is CNoteDetailsScreenEvent.OnErrorClear -> {
+                _state.value = _state.value?.copy(error = null)
+            }
+
             is CNoteDetailsScreenEvent.LoadCNoteDetails -> {
                 loadCNoteDetails(event.noteId)
             }
@@ -41,9 +46,11 @@ class CNoteDetailsScreenViewModel(
             is CNoteDetailsScreenEvent.AddToFavorite -> {
                 addToFavorite()
             }
+
             is CNoteDetailsScreenEvent.CheckIfFavorite -> {
                 checkIfFavorite(event.noteId)
             }
+
             is CNoteDetailsScreenEvent.RemoveFromFavorite -> {
                 removeFromFavorite()
             }
@@ -89,7 +96,11 @@ class CNoteDetailsScreenViewModel(
             try {
                 val course = geNoteDetailsUseCase.execute(courseId)
                 val isFavorite = _state.value?.isFavorite ?: false
-                _state.value = CNoteDetailsScreenState(note = course, isLoading = false, isFavorite = isFavorite)
+                _state.value = CNoteDetailsScreenState(
+                    note = course,
+                    isLoading = false,
+                    isFavorite = isFavorite
+                )
             } catch (e: Exception) {
                 _state.value = CNoteDetailsScreenState(error = e.message, isLoading = false)
             }

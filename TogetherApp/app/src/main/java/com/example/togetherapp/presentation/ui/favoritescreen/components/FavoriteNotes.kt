@@ -19,7 +19,7 @@ import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
 @Composable
 fun FavoriteNotes(
     title: String,
-    note: Note,
+    note: Note?,
     onShowAllClick: () -> Unit,
     navController: NavHostController
 ) {
@@ -32,14 +32,16 @@ fun FavoriteNotes(
     Spacer(modifier = Modifier.height(12.dp))
 
 
-    CommunityNoteCard(
-        userName = "${note.author.name} ${note.author.surname}",
-        title = "${note.title} ${note.content[0].text}",
-        date = note.date,
-        userImageUrl = note.author.avatar,
-        onClick = {
-            navController.navigate("cnote/${note.id}")
-        }
-    )
+    if (note != null) {
+        CommunityNoteCard(
+            userName = "${note.author.name} ${note.author.surname}",
+            title = "${note.title} ${note.content[0].text}",
+            date = note.date,
+            userImageUrl = note.author.avatar,
+            onClick = {
+                navController.navigate("cnote/${note.id}")
+            }
+        )
+    }
 
 }

@@ -55,145 +55,150 @@ fun CNoteDetailsScreenContent(
     }
 
     Scaffold(
-        topBar = {
-            NoteTopAppBar(
-                state = state,
-                onBackClick = { navController.popBackStack() },
-                onFavoriteClick = {
-                    viewModel.handleEvent(
-                        if (state.isFavorite) CNoteDetailsScreenEvent.RemoveFromFavorite
-                        else CNoteDetailsScreenEvent.AddToFavorite
-                    )
-                }
-            )
+        bottomBar = {
+            if (state.note != null) {
+                AddComment(
+                    state = state,
+                    onCommentTextChanged = { newText ->
+                        viewModel.handleEvent(
+                            CNoteDetailsScreenEvent.UpdateCommentText(newText)
+                        )
+                    },
+                    onCommentAdded = {
+                        viewModel.handleEvent(CNoteDetailsScreenEvent.AddComment(noteId))
+                    }
+                )
+            }
         }
     ) { paddingValues ->
-        Column(
+        LazyColumn(
             modifier = Modifier
-                .padding(paddingValues)
                 .fillMaxSize()
+                .padding(paddingValues)
         ) {
+            item {
+                NoteTopAppBar(
+                    state = state,
+                    onBackClick = { navController.popBackStack() },
+                    onFavoriteClick = {
+                        viewModel.handleEvent(
+                            if (state.isFavorite) CNoteDetailsScreenEvent.RemoveFromFavorite
+                            else CNoteDetailsScreenEvent.AddToFavorite
+                        )
+                    }
+                )
+            }
+
             when {
                 state.isLoading -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        CircularProgressIndicator()
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .height(200.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
                     }
                 }
 
                 state.error != null -> {
-                    ErrorMessage(
-                        errorMessage = state.error ?: "Что-то пошло не так",
-                        onRetryClick = {
-                            viewModel.handleEvent(
-                                CNoteDetailsScreenEvent.LoadCNoteDetails(
-                                    noteId
+                    item {
+                        ErrorMessage(
+                            errorMessage = state.error ?: "Что-то пошло не так",
+                            onRetryClick = {
+                                CNoteDetailsScreenEvent.OnErrorClear
+                                viewModel.handleEvent(
+                                    CNoteDetailsScreenEvent.LoadCNoteDetails(noteId)
                                 )
-                            )
-                        }
-                    )
+                            }
+                        )
+                    }
                 }
 
                 state.note != null -> {
-                    LazyColumn(modifier = Modifier.weight(1f)) {
-                        item {
-                            Column(
-                                modifier = Modifier.padding(
-                                    start = 16.dp,
-                                    end = 16.dp,
-                                    top = 20.dp
-                                )
+                    item {
+                        Column(
+                            modifier = Modifier.padding(
+                                start = 16.dp,
+                                end = 16.dp,
+                                top = 20.dp
+                            )
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .height(36.dp)
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(Color(0xFF333333))
+                                    .padding(horizontal = 12.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
                             ) {
-                                Row(
+                                Image(
+                                    painter = rememberImagePainter(state.note!!.author.avatar),
+                                    contentDescription = null,
                                     modifier = Modifier
-                                        .height(36.dp)
-                                        .clip(RoundedCornerShape(8.dp))
-                                        .background(Color(0xFF333333))
-                                        .padding(horizontal = 12.dp),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.Center
-                                ) {
-                                    Image(
-                                        painter = rememberImagePainter(state.note!!.author.avatar),
-                                        contentDescription = null,
-                                        modifier = Modifier
-                                            .size(20.dp)
-                                            .clip(CircleShape)
-                                            .padding(end = 4.dp)
-                                    )
-                                    Text(
-                                        text = "${state.note!!.author.name} ${state.note!!.author.surname}",
-                                        color = Color.White,
-                                        style = MaterialTheme.typography.bodyLarge,
-                                        fontWeight = FontWeight(600)
-                                    )
-                                }
-
-                                Spacer(modifier = Modifier.height(16.dp))
-
+                                        .size(20.dp)
+                                        .clip(CircleShape)
+                                        .padding(end = 4.dp)
+                                )
                                 Text(
-                                    text = "Текст",
-                                    fontWeight = FontWeight(700),
-                                    style = MaterialTheme.typography.bodyLarge
+                                    text = "${state.note!!.author.name} ${state.note!!.author.surname}",
+                                    color = Color.White,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    fontWeight = FontWeight(600)
                                 )
-                                Spacer(modifier = Modifier.height(8.dp))
-                            }
-                        }
-
-                        items(state.note!!.content.size) { index ->
-                            NoteContentItem(noteContent = state.note!!.content[index])
-                        }
-
-                        item {
-                            Column(
-                                modifier = Modifier.padding(
-                                    start = 16.dp,
-                                    end = 16.dp,
-                                    top = 20.dp
-                                )
-                            ) {
-                                Spacer(modifier = Modifier.height(20.dp))
-
-                                Row(
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(8.dp))
-                                        .background(Color(0x7D7D7777))
-                                        .fillMaxWidth()
-                                        .height(32.dp),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Text(
-                                        text = "Комментарии",
-                                        style = MaterialTheme.typography.titleMedium,
-                                        modifier = Modifier
-                                            .padding(start = 11.dp)
-                                    )
-
-                                }
-
-                                Spacer(modifier = Modifier.height(14.dp))
-
-                                state.note?.comments?.forEach { comment ->
-                                    CommentItem(comment)
-                                }
                             }
 
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = "Текст",
+                                fontWeight = FontWeight(700),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
                         }
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
 
-                    AddComment(
-                        state = state,
-                        onCommentTextChanged = { newText ->
-                            viewModel.handleEvent(
-                                CNoteDetailsScreenEvent.UpdateCommentText(
-                                    newText
-                                )
+                    items(state.note!!.content.size) { index ->
+                        NoteContentItem(noteContent = state.note!!.content[index])
+                    }
+
+                    item {
+                        Column(
+                            modifier = Modifier.padding(
+                                start = 16.dp,
+                                end = 16.dp,
+                                top = 20.dp
                             )
-                        },
-                        onCommentAdded = {
-                            viewModel.handleEvent(CNoteDetailsScreenEvent.AddComment(noteId))
+                        ) {
+                            Spacer(modifier = Modifier.height(20.dp))
+
+                            Row(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(Color(0x7D7D7777))
+                                    .fillMaxWidth()
+                                    .height(32.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "Комментарии",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    modifier = Modifier
+                                        .padding(start = 11.dp)
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.height(14.dp))
+
+                            state.note?.comments?.forEach { comment ->
+                                CommentItem(comment)
+                            }
                         }
-                    )
+                    }
                 }
             }
         }

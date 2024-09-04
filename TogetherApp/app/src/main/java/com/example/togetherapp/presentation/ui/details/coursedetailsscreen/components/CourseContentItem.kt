@@ -24,7 +24,7 @@ fun CourseContentItem(courseText: CourseText) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 16.dp)
+            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
     ) {
         if (courseText.text.isNotBlank()) {
             Text(
@@ -35,17 +35,19 @@ fun CourseContentItem(courseText: CourseText) {
                 color = Color.Gray
             )
         }
-        courseText.image?.let { imageUrl ->
-            Spacer(modifier = Modifier.height(8.dp))
-            Image(
-                painter = rememberImagePainter(imageUrl),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(193.dp)
-                    .clip(MaterialTheme.shapes.medium)
-            )
+        if (courseText.image?.isNotBlank() == true) {
+            courseText.image?.let { imageUrl ->
+                Spacer(modifier = Modifier.height(8.dp))
+                Image(
+                    painter = rememberImagePainter(imageUrl),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(193.dp)
+                        .clip(MaterialTheme.shapes.medium)
+                )
+            }
         }
     }
 }

@@ -5,5 +5,6 @@ sealed class CourseDetailsScreenEvent {
     object AddToFavorite : CourseDetailsScreenEvent()
     object RemoveFromFavorite : CourseDetailsScreenEvent()
     data class CheckIfFavorite(val courseId: String) : CourseDetailsScreenEvent()
+    object OnErrorClear : CourseDetailsScreenEvent()
 }
 
