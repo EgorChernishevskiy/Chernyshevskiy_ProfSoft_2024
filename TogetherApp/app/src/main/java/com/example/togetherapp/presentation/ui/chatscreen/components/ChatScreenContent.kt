@@ -33,11 +33,14 @@ import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
 import com.example.togetherapp.presentation.ui.components.CustomSearchButton
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatScreenContent(viewModel: ChatScreenViewModel, navController: NavHostController) {
+fun ChatScreenContent() {
+
+    val viewModel: ChatScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(ChatScreenState())
 
     LaunchedEffect(Unit) {
@@ -61,9 +64,6 @@ fun ChatScreenContent(viewModel: ChatScreenViewModel, navController: NavHostCont
                     containerColor = Color(0xFFFFD80C)
                 )
             )
-        },
-        bottomBar = {
-            BottomNavigationBar(navController)
         }
     ) { paddingValues ->
         Column(

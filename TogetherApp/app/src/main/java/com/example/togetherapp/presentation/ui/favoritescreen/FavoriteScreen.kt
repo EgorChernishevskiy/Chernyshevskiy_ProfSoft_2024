@@ -10,6 +10,6 @@ import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun FavoriteScreen(viewModel: FavoriteScreenViewModel, navController: NavHostController) {
-    FavoriteScreenContent(viewModel, navController)
+fun FavoriteScreen(navController: NavHostController) {
+    FavoriteScreenContent(navController)
 }

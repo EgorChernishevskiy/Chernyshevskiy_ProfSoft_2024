@@ -9,9 +9,8 @@ import com.example.togetherapp.presentation.ui.auth.registerscreen.components.Re
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 
 @Composable
-fun RegisterScreen(viewModel: AuthViewModel, navController: NavHostController) {
+fun RegisterScreen(navController: NavHostController) {
     RegisterScreenContent(
-        viewModel = viewModel,
         navController = navController,
         modifier = Modifier
             .background(Color(0xFFFFD80C))

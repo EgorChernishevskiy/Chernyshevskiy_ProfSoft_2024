@@ -22,14 +22,16 @@ import com.example.togetherapp.R
 import com.example.togetherapp.presentation.state.SplashScreenState
 import com.example.togetherapp.presentation.ui.components.Logo
 import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
+import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SplashScreenContent(
     modifier: Modifier = Modifier,
-    navController: NavHostController,
-    viewModel: SplashScreenViewModel
+    navController: NavHostController
 ) {
+    val viewModel: SplashScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(SplashScreenState())
 
     LaunchedEffect(state) {

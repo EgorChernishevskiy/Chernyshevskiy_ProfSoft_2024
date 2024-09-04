@@ -21,13 +21,15 @@ import com.example.togetherapp.presentation.state.AuthState
 import com.example.togetherapp.presentation.ui.components.AuthTextField
 import com.example.togetherapp.presentation.ui.components.Logo
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
+import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun RegisterScreenContent(
-    viewModel: AuthViewModel,
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val viewModel: AuthViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(AuthState())
     val snackbarHostState = remember { SnackbarHostState() }
 

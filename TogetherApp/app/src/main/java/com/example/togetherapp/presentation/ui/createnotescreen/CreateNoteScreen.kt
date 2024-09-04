@@ -7,8 +7,7 @@ import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
 
 @Composable
 fun CreateNoteScreen(
-    viewModel: CreateNoteScreenViewModel,
     navController: NavHostController
 ) {
-    CreateNoteScreenContent(viewModel, navController)
+    CreateNoteScreenContent(navController)
 }

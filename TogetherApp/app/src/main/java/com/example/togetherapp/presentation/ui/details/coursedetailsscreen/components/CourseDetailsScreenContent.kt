@@ -16,17 +16,19 @@ import androidx.navigation.NavHostController
 import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
 import com.example.togetherapp.presentation.state.CourseDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
+import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.details.CourseDetailsScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DetailsScreenContent(
-    viewModel: CourseDetailsScreenViewModel,
     navController: NavHostController,
     courseId: String,
     courseIndex: Int
 ) {
+    val viewModel: CourseDetailsScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(CourseDetailsScreenState())
 
     LaunchedEffect(courseId) {

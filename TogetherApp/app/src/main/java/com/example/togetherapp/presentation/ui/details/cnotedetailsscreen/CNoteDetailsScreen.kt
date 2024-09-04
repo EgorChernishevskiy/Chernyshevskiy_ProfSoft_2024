@@ -10,9 +10,8 @@ import com.example.togetherapp.presentation.viewmodel.details.CNoteDetailsScreen
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CNoteDetailScreen(
-    viewModel: CNoteDetailsScreenViewModel,
     navController: NavHostController,
     noteId: String
 ) {
-    CNoteDetailsScreenContent(viewModel, navController, noteId)
+    CNoteDetailsScreenContent(navController, noteId)
 }

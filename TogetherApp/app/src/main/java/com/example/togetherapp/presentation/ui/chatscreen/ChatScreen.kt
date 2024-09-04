@@ -9,9 +9,6 @@ import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ChatScreen(
-    viewModel: ChatScreenViewModel,
-    navController: NavHostController
-) {
-    ChatScreenContent(viewModel, navController)
+fun ChatScreen() {
+    ChatScreenContent()
 }

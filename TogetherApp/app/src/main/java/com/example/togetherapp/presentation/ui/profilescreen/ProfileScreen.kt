@@ -11,6 +11,6 @@ import com.example.togetherapp.presentation.viewmodel.ProfileScreenViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ProfileScreen(viewModel: ProfileScreenViewModel, navController: NavHostController) {
-    ProfileScreenContent(viewModel, navController)
+fun ProfileScreen(navController: NavHostController) {
+    ProfileScreenContent(navController)
 }

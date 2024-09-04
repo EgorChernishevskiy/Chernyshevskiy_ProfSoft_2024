@@ -8,6 +8,6 @@ import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 
 
 @Composable
-fun SplashScreen(navController: NavHostController, viewModel: SplashScreenViewModel) {
-    SplashScreenContent(Modifier,navController, viewModel)
+fun SplashScreen(navController: NavHostController) {
+    SplashScreenContent(Modifier,navController)
 }

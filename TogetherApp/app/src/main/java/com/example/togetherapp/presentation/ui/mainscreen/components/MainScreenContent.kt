@@ -31,15 +31,16 @@ import com.example.togetherapp.presentation.ui.components.CenteredProgressIndica
 import com.example.togetherapp.presentation.ui.components.CustomSearchButton
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenContent(
-    viewModel: MainScreenViewModel,
     navController: NavHostController,
 ) {
-
+    val viewModel: MainScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(MainScreenState())
 
     LaunchedEffect(Unit) {
@@ -90,12 +91,7 @@ fun MainScreenContent(
                     )
                 )
             }
-        },
-
-        bottomBar = {
-            BottomNavigationBar(navController)
         }
-
     ) { paddingValues ->
         Column(
             modifier = Modifier

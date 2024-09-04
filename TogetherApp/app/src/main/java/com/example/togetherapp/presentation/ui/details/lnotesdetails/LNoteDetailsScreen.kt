@@ -11,9 +11,8 @@ import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreen
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun LNoteDetailsScreen(
-    viewModel: LNoteDetailsScreenViewModel,
     navController: NavHostController,
     noteId: Int
 ) {
-    LNoteDetailsScreenContent(viewModel, navController, noteId)
+    LNoteDetailsScreenContent(navController, noteId)
 }

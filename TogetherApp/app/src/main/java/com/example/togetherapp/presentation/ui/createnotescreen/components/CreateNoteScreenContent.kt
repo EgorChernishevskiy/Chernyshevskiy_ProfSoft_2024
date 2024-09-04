@@ -41,13 +41,15 @@ import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
 import com.example.togetherapp.presentation.ui.components.IconButtonBack
 import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
 import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
+import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun CreateNoteScreenContent(
-    viewModel: CreateNoteScreenViewModel,
     navController: NavHostController
 ) {
+    val viewModel: CreateNoteScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(CreateNoteScreenState())
     Box(
         modifier = Modifier.fillMaxSize()

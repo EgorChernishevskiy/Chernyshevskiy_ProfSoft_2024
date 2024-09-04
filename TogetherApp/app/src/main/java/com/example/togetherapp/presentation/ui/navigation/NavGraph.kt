@@ -1,6 +1,7 @@
 package com.example.togetherapp.presentation.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -31,39 +32,26 @@ import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 @Composable
 fun NavGraph(
     navController: NavHostController,
-    authViewModel: AuthViewModel,
-    splashScreenViewModel: SplashScreenViewModel,
-    mainScreenViewModel: MainScreenViewModel,
-    courseDetailsScreenViewModel: CourseDetailsScreenViewModel,
-    cNoteDetailsScreenViewModel: CNoteDetailsScreenViewModel,
-    lNoteDetailsScreenViewModel: LNoteDetailsScreenViewModel,
-    createNoteScreenViewModel: CreateNoteScreenViewModel,
-    favoriteScreenViewModel: FavoriteScreenViewModel,
-    chatScreenViewModel: ChatScreenViewModel,
-    profileScreenViewModel: ProfileScreenViewModel
+    modifier: Modifier = Modifier
 ) {
-    NavHost(navController, startDestination = "splash") {
+    NavHost(navController, startDestination = "splash", modifier = modifier) {
         composable("splash") {
             SplashScreen(
-                navController = navController,
-                viewModel = splashScreenViewModel
+                navController = navController
             )
         }
         composable("login") {
             LoginScreen(
-                viewModel = authViewModel,
                 navController = navController
             )
         }
         composable("register") {
             RegisterScreen(
-                viewModel = authViewModel,
                 navController = navController
             )
         }
         composable("home") {
             MainScreen(
-                viewModel = mainScreenViewModel,
                 navController = navController
             )
         }
@@ -77,7 +65,6 @@ fun NavGraph(
             val courseId = backStackEntry.arguments?.getString("courseId") ?: ""
             val courseIndex = backStackEntry.arguments?.getInt("courseIndex") ?: 0
             DetailScreen(
-                viewModel = courseDetailsScreenViewModel,
                 navController = navController,
                 courseId = courseId,
                 courseIndex = courseIndex
@@ -91,7 +78,6 @@ fun NavGraph(
         ) { backStackEntry ->
             val noteId = backStackEntry.arguments?.getString("noteId") ?: ""
             CNoteDetailScreen(
-                viewModel = cNoteDetailsScreenViewModel,
                 navController = navController,
                 noteId = noteId
             )
@@ -104,32 +90,25 @@ fun NavGraph(
         ) { backStackEntry ->
             val noteId = backStackEntry.arguments?.getInt("noteId") ?: 0
             LNoteDetailsScreen(
-                viewModel = lNoteDetailsScreenViewModel,
                 navController = navController,
                 noteId = noteId
             )
         }
         composable("createnote") {
             CreateNoteScreen(
-                viewModel = createNoteScreenViewModel,
                 navController = navController
             )
         }
         composable("favorite") {
             FavoriteScreen(
-                viewModel = favoriteScreenViewModel,
                 navController = navController
             )
         }
         composable("chat") {
-            ChatScreen(
-                viewModel = chatScreenViewModel,
-                navController = navController
-            )
+            ChatScreen()
         }
         composable("profile") {
             ProfileScreen(
-                viewModel = profileScreenViewModel,
                 navController = navController
             )
         }

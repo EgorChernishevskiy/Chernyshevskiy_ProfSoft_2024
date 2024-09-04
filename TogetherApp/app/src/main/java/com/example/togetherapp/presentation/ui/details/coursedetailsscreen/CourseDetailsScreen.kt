@@ -11,9 +11,8 @@ import com.example.togetherapp.presentation.viewmodel.details.CourseDetailsScree
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DetailScreen(
-    viewModel: CourseDetailsScreenViewModel,
     navController: NavHostController,
     courseId: String,
     courseIndex: Int) {
-    DetailsScreenContent(viewModel, navController, courseId, courseIndex)
+    DetailsScreenContent(navController, courseId, courseIndex)
 }

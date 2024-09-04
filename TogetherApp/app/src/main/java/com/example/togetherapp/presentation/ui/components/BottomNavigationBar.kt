@@ -55,7 +55,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                     onClick = {
                         if (currentRoute != "home") {
                             navController.navigate("home") {
-                                launchSingleTop = true // prevents multiple copies of the same destination
+                                launchSingleTop = true
                                 restoreState = true
                             }
                         }

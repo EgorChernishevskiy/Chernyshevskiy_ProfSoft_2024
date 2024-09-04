@@ -53,15 +53,17 @@ import com.example.togetherapp.presentation.ui.mainscreen.components.CourseCard
 import com.example.togetherapp.presentation.ui.mainscreen.components.MainScreenCards
 import com.example.togetherapp.presentation.ui.mainscreen.components.NoteCard
 import com.example.togetherapp.presentation.ui.mainscreen.components.ShowAllTopBar
+import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteScreenContent(
-    viewModel: FavoriteScreenViewModel,
     navController: NavHostController
 ) {
+    val viewModel: FavoriteScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(FavoriteScreenState())
 
     LaunchedEffect(Unit) {
@@ -110,9 +112,6 @@ fun FavoriteScreenContent(
                     )
                 )
             }
-        },
-        bottomBar = {
-            BottomNavigationBar(navController)
         }
     ) { paddingValues ->
         Column(

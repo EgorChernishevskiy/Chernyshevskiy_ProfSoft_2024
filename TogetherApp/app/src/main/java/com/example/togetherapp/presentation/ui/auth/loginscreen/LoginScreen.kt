@@ -9,9 +9,8 @@ import com.example.togetherapp.presentation.ui.auth.loginscreen.components.Login
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 
 @Composable
-fun LoginScreen(viewModel: AuthViewModel, navController: NavHostController) {
+fun LoginScreen(navController: NavHostController) {
     LoginScreenContent(
-        viewModel = viewModel,
         navController = navController,
         modifier = Modifier
             .background(Color(0xFFFFD80C))

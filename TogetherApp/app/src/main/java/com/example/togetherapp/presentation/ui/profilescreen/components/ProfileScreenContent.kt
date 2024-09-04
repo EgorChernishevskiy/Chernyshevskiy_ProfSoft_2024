@@ -62,14 +62,15 @@ import com.example.togetherapp.presentation.utils.formatDateProfile
 import com.example.togetherapp.presentation.utils.formatPhoneNumber
 import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.ProfileScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreenContent(
-    viewModel: ProfileScreenViewModel,
     navController: NavHostController
 ) {
+    val viewModel: ProfileScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(ProfileScreenState())
 
     LaunchedEffect(Unit) {
@@ -122,9 +123,6 @@ fun ProfileScreenContent(
                     )
                 )
             }
-        },
-        bottomBar = {
-            BottomNavigationBar(navController)
         }
     ) { paddingValues ->
         Column(

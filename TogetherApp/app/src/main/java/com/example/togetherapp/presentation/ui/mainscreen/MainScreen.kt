@@ -14,6 +14,6 @@ import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MainScreen(viewModel: MainScreenViewModel, navController: NavHostController) {
-    MainScreenContent(viewModel, navController)
+fun MainScreen(navController: NavHostController) {
+    MainScreenContent(navController)
 }

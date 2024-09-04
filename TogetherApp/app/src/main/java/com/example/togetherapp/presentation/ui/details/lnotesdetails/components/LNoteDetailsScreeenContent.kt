@@ -28,15 +28,17 @@ import com.example.togetherapp.presentation.state.note.LNoteDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
 import com.example.togetherapp.presentation.ui.details.components.NoteTopAppBar
+import com.example.togetherapp.presentation.viewmodel.details.CNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun LNoteDetailsScreenContent(
-    viewModel: LNoteDetailsScreenViewModel,
     navController: NavHostController,
     noteId: Int
 ) {
+    val viewModel: LNoteDetailsScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(LNoteDetailsScreenState())
 
     LaunchedEffect(noteId) {
