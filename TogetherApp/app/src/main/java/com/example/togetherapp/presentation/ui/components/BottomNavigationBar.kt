@@ -52,7 +52,14 @@ fun BottomNavigationBar(navController: NavHostController) {
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
-                    onClick = { navController.navigate("home") }
+                    onClick = {
+                        if (currentRoute != "home") {
+                            navController.navigate("home") {
+                                launchSingleTop = true // prevents multiple copies of the same destination
+                                restoreState = true
+                            }
+                        }
+                    }
                 )
                 NavigationBarItem(
                     icon = {
@@ -69,7 +76,14 @@ fun BottomNavigationBar(navController: NavHostController) {
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
-                    onClick = { navController.navigate("favorite") }
+                    onClick = {
+                        if (currentRoute != "favorite") {
+                            navController.navigate("favorite") {
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    }
                 )
                 NavigationBarItem(
                     icon = {
@@ -86,7 +100,12 @@ fun BottomNavigationBar(navController: NavHostController) {
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
-                    onClick = { navController.navigate("createnote") }
+                    onClick = {
+                        navController.navigate("createnote") {
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
                 )
                 NavigationBarItem(
                     icon = {
@@ -103,7 +122,14 @@ fun BottomNavigationBar(navController: NavHostController) {
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
-                    onClick = { navController.navigate("chat") }
+                    onClick = {
+                        if (currentRoute != "chat") {
+                            navController.navigate("chat") {
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    }
                 )
                 NavigationBarItem(
                     icon = {
@@ -120,7 +146,14 @@ fun BottomNavigationBar(navController: NavHostController) {
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
-                    onClick = { navController.navigate("profile") }
+                    onClick = {
+                        if (currentRoute != "profile") {
+                            navController.navigate("profile") {
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    }
                 )
             }
         }
