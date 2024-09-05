@@ -21,5 +21,8 @@ interface NoteApi {
     suspend fun createNote(@Body note: CreatedNoteDto): Response<CreateNoteResponse>
 
     @POST("/api/community_notes/comment/{noteId}")
-    suspend fun addComment(@Path("noteId") noteId: String, @Body comment: Map<String, String>): Response<CreateNoteResponse>
+    suspend fun addComment(
+        @Path("noteId") noteId: String,
+        @Body comment: Map<String, String>
+    ): Response<CreateNoteResponse>
 }

@@ -29,16 +29,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
+import com.example.togetherapp.R
 import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
 import com.example.togetherapp.presentation.state.note.CNoteDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
 import com.example.togetherapp.presentation.ui.details.components.NoteTopAppBar
-import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.details.CNoteDetailsScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -108,7 +109,8 @@ fun CNoteDetailsScreenContent(
                 state.error != null -> {
                     item {
                         ErrorMessage(
-                            errorMessage = state.error ?: "Что-то пошло не так",
+                            errorMessage = state.error
+                                ?: stringResource(R.string.default_error_message),
                             onRetryClick = {
                                 CNoteDetailsScreenEvent.OnErrorClear
                                 viewModel.handleEvent(
@@ -156,7 +158,7 @@ fun CNoteDetailsScreenContent(
                             Spacer(modifier = Modifier.height(16.dp))
 
                             Text(
-                                text = "Текст",
+                                text = stringResource(R.string.create_note_text_label),
                                 fontWeight = FontWeight(700),
                                 style = MaterialTheme.typography.bodyLarge
                             )
@@ -187,7 +189,7 @@ fun CNoteDetailsScreenContent(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = "Комментарии",
+                                    text = stringResource(R.string.comment_text_label),
                                     style = MaterialTheme.typography.titleMedium,
                                     modifier = Modifier
                                         .padding(start = 11.dp)

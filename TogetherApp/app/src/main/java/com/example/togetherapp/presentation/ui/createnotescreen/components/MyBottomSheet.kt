@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,7 +57,7 @@ fun MyBottomSheet(
                         .padding(16.dp)
                 ) {
                     Text(
-                        text = "Что добавить?",
+                        text = stringResource(R.string.create_note_what_to_add_label),
                         fontSize = 16.sp,
                         fontWeight = FontWeight(700),
                         color = Color.Black,
@@ -81,7 +82,7 @@ fun MyBottomSheet(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Текст",
+                            text = stringResource(R.string.create_note_text_label),
                             fontSize = 14.sp,
                             fontWeight = FontWeight(500),
                             color = Color.Black
@@ -106,7 +107,7 @@ fun MyBottomSheet(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Ссылка на фото",
+                            text = stringResource(R.string.create_note_link_label),
                             fontSize = 14.sp,
                             fontWeight = FontWeight(500),
                             color = Color.Black

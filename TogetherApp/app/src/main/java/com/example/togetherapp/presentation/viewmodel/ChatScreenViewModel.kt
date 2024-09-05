@@ -8,7 +8,6 @@ import com.example.togetherapp.domain.usecase.chat.GetAllMessagesUseCase
 import com.example.togetherapp.domain.usecase.chat.SendMessageUseCase
 import com.example.togetherapp.domain.usecase.profile.GetUserProfileUseCase
 import com.example.togetherapp.presentation.event.ChatScreenEvent
-import com.example.togetherapp.presentation.event.FavoriteScreenEvent
 import com.example.togetherapp.presentation.state.ChatScreenState
 import kotlinx.coroutines.launch
 

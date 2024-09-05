@@ -2,36 +2,26 @@ package com.example.togetherapp.presentation.ui.mainscreen.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.R
-import com.example.togetherapp.presentation.event.CreateNoteScreenEvent
 import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
-import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
 import com.example.togetherapp.presentation.ui.components.CenteredProgressIndicator
 import com.example.togetherapp.presentation.ui.components.CustomSearchButton
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -54,11 +44,11 @@ fun MainScreenContent(
             if (state.showAllCourses || state.showAllNotes || state.showAllLocalNotes) {
                 val title: String
                 if (state.showAllCourses) {
-                    title = "Все курсы"
+                    title = stringResource(R.string.all_courses_top_bar_label)
                 } else if (state.showAllLocalNotes) {
-                    title = "Ваши заметки"
+                    title = stringResource(R.string.your_notes_top_bar_label)
                 } else {
-                    title = "Заметки сообщества"
+                    title = stringResource(R.string.com_notes_text_label)
                 }
                 ShowAllTopBar(
                     title = title,
@@ -76,7 +66,7 @@ fun MainScreenContent(
                 TopAppBar(
                     title = {
                         Text(
-                            text = "Главная",
+                            text = stringResource(R.string.home_page_title_label),
                             style = MaterialTheme.typography.titleLarge,
                             fontSize = 20.sp
                         )
@@ -114,7 +104,8 @@ fun MainScreenContent(
                         }
                     } else {
                         ErrorMessage(
-                            errorMessage = state.error ?: "Что-то пошло не так",
+                            errorMessage = state.error
+                                ?: stringResource(R.string.default_error_message),
                             onRetryClick = {
                                 viewModel.handleEvent(MainScreenEvent.OnErrorClear)
                                 viewModel.handleEvent(MainScreenEvent.LoadCourses)

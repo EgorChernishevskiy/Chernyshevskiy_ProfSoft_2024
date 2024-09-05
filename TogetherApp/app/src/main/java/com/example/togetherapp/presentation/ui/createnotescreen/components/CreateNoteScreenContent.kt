@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,7 +42,6 @@ import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
 import com.example.togetherapp.presentation.ui.components.IconButtonBack
 import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
 import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -72,7 +72,7 @@ fun CreateNoteScreenContent(
                             navController.popBackStack()
                         }
                         Text(
-                            text = "Новая заметка",
+                            text = stringResource(R.string.create_note_new_note_label),
                             style = MaterialTheme.typography.titleLarge,
                             fontSize = 20.sp
                         )
@@ -116,7 +116,7 @@ fun CreateNoteScreenContent(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "Локально",
+                            text = stringResource(R.string.create_note_local_label),
                             color = Color.Black,
                             fontSize = 14.sp
                         )
@@ -136,7 +136,7 @@ fun CreateNoteScreenContent(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "Сообщество",
+                            text = stringResource(R.string.create_note_community_label),
                             color = Color.Black,
                             fontSize = 14.sp
                         )
@@ -244,7 +244,10 @@ fun CreateNoteScreenContent(
                                 color = Color(0xFFD6B714)
                             )
                         } else {
-                            Text(text = "Готово", color = Color.White)
+                            Text(
+                                text = stringResource(R.string.create_note_ready_label),
+                                color = Color.White
+                            )
                         }
                     }
                 }
@@ -265,7 +268,7 @@ fun CreateNoteScreenContent(
             )
         }
         state.error?.let {
-            ErrorDialog(OnRetry = {
+            ErrorDialog(onRetry = {
                 if (state.isLocal) {
                     viewModel.handleEvent(CreateNoteScreenEvent.OnErrorClear)
                     viewModel.handleEvent(CreateNoteScreenEvent.OnLocalCreated)
@@ -280,8 +283,12 @@ fun CreateNoteScreenContent(
             viewModel.handleEvent(CreateNoteScreenEvent.OnDismissWhatToAdd)
             state.addedItem?.let {
                 AddItemDialog(
-                    title = if (state.addPhoto) "Добавить фото" else "Добавить текст",
-                    placeholder = if (state.addPhoto) "http://..." else "Введите текст...",
+                    title = if (state.addPhoto) stringResource(R.string.create_note_add_photo_label) else stringResource(
+                        R.string.create_note_add_text_label
+                    ),
+                    placeholder = if (state.addPhoto) stringResource(R.string.create_note_http_placeholder) else stringResource(
+                        R.string.create_note_add_text_placeholder
+                    ),
                     inputText = it,
                     onInputChange = { viewModel.handleEvent(CreateNoteScreenEvent.OnAddItemChange(it)) },
                     onCancel = {

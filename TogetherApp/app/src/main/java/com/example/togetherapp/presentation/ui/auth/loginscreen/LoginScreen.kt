@@ -6,7 +6,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import com.example.togetherapp.presentation.ui.auth.loginscreen.components.LoginScreenContent
-import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 
 @Composable
 fun LoginScreen(navController: NavHostController) {

@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.example.togetherapp.R
 
 @Composable
-fun IconButtonBack(onHideAllClick: () -> Unit){
+fun IconButtonBack(onHideAllClick: () -> Unit) {
     IconButton(
         modifier = Modifier
             .padding(start = 6.dp),

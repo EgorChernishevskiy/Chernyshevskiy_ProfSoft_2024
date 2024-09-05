@@ -35,7 +35,7 @@ class ProfileScreenViewModel(
                 _state.value = _state.value?.copy(showAllNotes = false)
             }
 
-            is ProfileScreenEvent.HideAllUsers-> {
+            is ProfileScreenEvent.HideAllUsers -> {
                 _state.value = _state.value?.copy(showAllUsers = false)
             }
 

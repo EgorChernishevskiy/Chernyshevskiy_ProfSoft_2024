@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -22,14 +21,12 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import com.example.togetherapp.R
 import com.example.togetherapp.presentation.event.ChatScreenEvent
-import com.example.togetherapp.presentation.event.FavoriteScreenEvent
-import com.example.togetherapp.presentation.event.ProfileScreenEvent
 import com.example.togetherapp.presentation.state.ChatScreenState
-import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
 import com.example.togetherapp.presentation.ui.components.CustomSearchButton
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
@@ -52,7 +49,7 @@ fun ChatScreenContent() {
             TopAppBar(
                 title = {
                     Text(
-                        text = "Чат",
+                        text = stringResource(R.string.chat_top_bar_label),
                         style = MaterialTheme.typography.titleLarge,
                         fontSize = 20.sp
                     )
@@ -73,7 +70,7 @@ fun ChatScreenContent() {
         ) {
             if (state.error != null) {
                 ErrorMessage(
-                    errorMessage = state.error ?: "Что-то пошло не так",
+                    errorMessage = state.error ?: stringResource(R.string.default_error_message),
                     onRetryClick = {
                         viewModel.handleEvent(ChatScreenEvent.OnErrorClear)
                         viewModel.handleEvent(ChatScreenEvent.LoadMessages)
@@ -83,7 +80,9 @@ fun ChatScreenContent() {
             } else {
                 val sortedMessages = state.messages.sortedBy { it.date }.asReversed()
                 LazyColumn(
-                    modifier = Modifier.weight(1f).padding(16.dp),
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(16.dp),
                     reverseLayout = true
                 ) {
                     items(sortedMessages) { message ->

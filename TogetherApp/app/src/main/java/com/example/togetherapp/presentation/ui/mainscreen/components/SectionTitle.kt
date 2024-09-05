@@ -16,8 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.togetherapp.R
 
 @Composable
 fun SectionTitle(title: String, showAll: Boolean, onShowAllClick: () -> Unit) {
@@ -48,7 +50,7 @@ fun SectionTitle(title: String, showAll: Boolean, onShowAllClick: () -> Unit) {
         if (showAll) {
             TextButton(onClick = { onShowAllClick() }) {
                 Text(
-                    text = "Все",
+                    text = stringResource(R.string.button_all_text_label),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight(500),
                     color = Color(0xFF646464)

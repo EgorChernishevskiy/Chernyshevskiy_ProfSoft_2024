@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,8 +21,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.togetherapp.R
 
 @Composable
 fun AddItemDialog(
@@ -69,8 +69,8 @@ fun AddItemDialog(
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(19.dp) // Установка высоты 19dp
-                        .padding(0.dp), // Без padding
+                        .height(19.dp)
+                        .padding(0.dp),
                     decorationBox = { innerTextField ->
                         if (inputText.isEmpty()) {
                             Text(
@@ -104,7 +104,7 @@ fun AddItemDialog(
 
                     ) {
                         Text(
-                            text = "Отмена",
+                            text = stringResource(R.string.create_note_cancel_label),
                             color = Color.Black,
                             fontSize = 16.sp
                         )
@@ -124,7 +124,7 @@ fun AddItemDialog(
                             .padding(horizontal = 8.dp, vertical = 4.dp)
                     ) {
                         Text(
-                            text = "Добавить",
+                            text = stringResource(R.string.create_note_add_label),
                             color = Color.Black,
                             fontSize = 16.sp
                         )

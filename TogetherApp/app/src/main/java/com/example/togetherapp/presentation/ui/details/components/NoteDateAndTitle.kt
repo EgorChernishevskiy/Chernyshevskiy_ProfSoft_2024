@@ -16,7 +16,7 @@ import com.example.togetherapp.presentation.utils.formatNoteDetailsDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun NoteDateAndTitle(title: String, date: String){
+fun NoteDateAndTitle(title: String, date: String) {
     Text(
         text = formatNoteDetailsDate(date),
         style = MaterialTheme.typography.titleSmall,

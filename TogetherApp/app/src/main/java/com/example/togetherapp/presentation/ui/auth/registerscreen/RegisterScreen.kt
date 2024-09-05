@@ -6,7 +6,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import com.example.togetherapp.presentation.ui.auth.registerscreen.components.RegisterScreenContent
-import com.example.togetherapp.presentation.viewmodel.AuthViewModel
 
 @Composable
 fun RegisterScreen(navController: NavHostController) {

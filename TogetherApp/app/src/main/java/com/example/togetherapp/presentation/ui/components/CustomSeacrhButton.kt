@@ -16,9 +16,9 @@ import androidx.compose.ui.unit.dp
 import com.example.togetherapp.R
 
 @Composable
-fun CustomSearchButton(){
+fun CustomSearchButton() {
     IconButton(
-        onClick = {  },
+        onClick = { },
         modifier = Modifier
             .padding(end = 16.dp)
             .clip(RoundedCornerShape(8.dp))

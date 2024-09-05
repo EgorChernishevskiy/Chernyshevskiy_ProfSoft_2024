@@ -9,7 +9,6 @@ import com.example.togetherapp.domain.model.comnote.NoteContent
 import com.example.togetherapp.domain.model.locnote.LocNote
 import com.example.togetherapp.domain.usecase.comnote.CreateNoteUseCase
 import com.example.togetherapp.domain.usecase.locnote.CreateLocalNoteUseCase
-import com.example.togetherapp.presentation.event.ChatScreenEvent
 import com.example.togetherapp.presentation.event.CreateNoteScreenEvent
 import com.example.togetherapp.presentation.state.CreateNoteScreenState
 import kotlinx.coroutines.launch

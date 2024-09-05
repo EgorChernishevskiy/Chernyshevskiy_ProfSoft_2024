@@ -14,10 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.togetherapp.R
 import com.example.togetherapp.presentation.state.CourseDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.AddToFavoriteIcon
 import com.example.togetherapp.presentation.ui.components.IconButtonBack
@@ -40,7 +42,10 @@ fun CustomTopAppBar(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButtonBack(onBackClick)
                     Text(
-                        text = "Лекция ${courseIndex + 1}",
+                        text = stringResource(
+                            R.string.course_top_bar_lection_text_label,
+                            courseIndex + 1
+                        ),
                         style = MaterialTheme.typography.titleLarge,
                         fontSize = 20.sp
                     )
@@ -61,8 +66,7 @@ fun CustomTopAppBar(
                                 overflow = TextOverflow.Ellipsis
                             )
                         }
-                    }
-                    else{
+                    } else {
                         Text(
                             text = course.title,
                             style = MaterialTheme.typography.titleLarge,

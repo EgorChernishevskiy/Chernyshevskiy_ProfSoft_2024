@@ -7,9 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.togetherapp.domain.usecase.course.GetCoursesUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNotesUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetAllLocalNotesUseCase
-import com.example.togetherapp.presentation.event.CreateNoteScreenEvent
 import com.example.togetherapp.presentation.event.MainScreenEvent
-import com.example.togetherapp.presentation.state.CreateNoteScreenState
 import com.example.togetherapp.presentation.state.MainScreenState
 import kotlinx.coroutines.launch
 

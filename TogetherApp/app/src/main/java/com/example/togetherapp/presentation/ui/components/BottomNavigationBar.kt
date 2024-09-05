@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.togetherapp.R
+import com.example.togetherapp.presentation.ui.navigation.Routes
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
@@ -47,14 +48,14 @@ fun BottomNavigationBar(navController: NavHostController) {
                                 .height(20.dp)
                         )
                     },
-                    selected = currentRoute == "home",
+                    selected = currentRoute == Routes.Home,
                     colors = NavigationBarItemDefaults.colors(
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
                     onClick = {
-                        if (currentRoute != "home") {
-                            navController.navigate("home") {
+                        if (currentRoute != Routes.Home) {
+                            navController.navigate(Routes.Home) {
                                 launchSingleTop = true
                                 restoreState = true
                             }
@@ -71,14 +72,14 @@ fun BottomNavigationBar(navController: NavHostController) {
                                 .height(20.dp)
                         )
                     },
-                    selected = currentRoute == "favorite",
+                    selected = currentRoute == Routes.Favorite,
                     colors = NavigationBarItemDefaults.colors(
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
                     onClick = {
-                        if (currentRoute != "favorite") {
-                            navController.navigate("favorite") {
+                        if (currentRoute != Routes.Favorite) {
+                            navController.navigate(Routes.Favorite) {
                                 launchSingleTop = true
                                 restoreState = true
                             }
@@ -101,7 +102,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         selectedIconColor = Color.Black
                     ),
                     onClick = {
-                        navController.navigate("createnote") {
+                        navController.navigate(Routes.CreateNote) {
                             launchSingleTop = true
                             restoreState = true
                         }
@@ -117,14 +118,14 @@ fun BottomNavigationBar(navController: NavHostController) {
                                 .height(20.dp)
                         )
                     },
-                    selected = currentRoute == "chat",
+                    selected = currentRoute == Routes.Chat,
                     colors = NavigationBarItemDefaults.colors(
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
                     onClick = {
-                        if (currentRoute != "chat") {
-                            navController.navigate("chat") {
+                        if (currentRoute != Routes.Chat) {
+                            navController.navigate(Routes.Chat) {
                                 launchSingleTop = true
                                 restoreState = true
                             }
@@ -141,14 +142,14 @@ fun BottomNavigationBar(navController: NavHostController) {
                                 .height(20.dp)
                         )
                     },
-                    selected = currentRoute == "profile",
+                    selected = currentRoute == Routes.Profile,
                     colors = NavigationBarItemDefaults.colors(
                         indicatorColor = Color(0x66D7D7D7),
                         selectedIconColor = Color.Black
                     ),
                     onClick = {
-                        if (currentRoute != "profile") {
-                            navController.navigate("profile") {
+                        if (currentRoute != Routes.Profile) {
+                            navController.navigate(Routes.Profile) {
                                 launchSingleTop = true
                                 restoreState = true
                             }

@@ -9,11 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.domain.model.comnote.Note
-import com.example.togetherapp.presentation.event.FavoriteScreenEvent
-import com.example.togetherapp.presentation.state.FavoriteScreenState
 import com.example.togetherapp.presentation.ui.mainscreen.components.CommunityNoteCard
 import com.example.togetherapp.presentation.ui.mainscreen.components.SectionTitle
-import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
+import com.example.togetherapp.presentation.ui.navigation.Routes
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -39,7 +37,12 @@ fun FavoriteNotes(
             date = note.date,
             userImageUrl = note.author.avatar,
             onClick = {
-                navController.navigate("cnote/${note.id}")
+                navController.navigate(
+                    Routes.CNoteDetail.replace(
+                        "{noteId}",
+                        note.id
+                    )
+                )
             }
         )
     }

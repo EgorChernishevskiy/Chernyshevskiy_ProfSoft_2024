@@ -1,7 +1,6 @@
 package com.example.togetherapp.data.api
 
 import com.example.togetherapp.data.model.chat.ChatListResponse
-import com.example.togetherapp.data.model.chat.ChatMessageDto
 import com.example.togetherapp.data.model.chat.ChatMessageResponse
 import com.example.togetherapp.data.model.chat.SendMessageRequest
 import retrofit2.Response

@@ -19,8 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.domain.model.course.Course
-import com.example.togetherapp.presentation.event.MainScreenEvent
-import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

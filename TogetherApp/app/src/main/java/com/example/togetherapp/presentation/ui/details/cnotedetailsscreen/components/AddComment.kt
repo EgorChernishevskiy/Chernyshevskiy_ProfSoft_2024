@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.togetherapp.R
 import com.example.togetherapp.presentation.state.note.CNoteDetailsScreenState
@@ -39,7 +40,12 @@ fun AddComment(
             modifier = Modifier
                 .weight(1f)
                 .padding(end = 8.dp),
-            placeholder = { Text(text = "Комментарий", color = Color.Gray) },
+            placeholder = {
+                Text(
+                    text = stringResource(R.string.comment_placeholder),
+                    color = Color.Gray
+                )
+            },
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = Color.DarkGray,
                 focusedTextColor = Color.Gray,

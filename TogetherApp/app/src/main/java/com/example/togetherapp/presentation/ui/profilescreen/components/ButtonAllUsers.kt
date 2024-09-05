@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.example.togetherapp.R
 
 @Composable
-fun ButtonAllUsers(onShowUsersClick: () -> Unit){
+fun ButtonAllUsers(onShowUsersClick: () -> Unit) {
     IconButton(
         modifier = Modifier.padding(end = 16.dp),
         onClick = { onShowUsersClick() }

@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.togetherapp.R
 import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
 import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
@@ -24,7 +26,10 @@ fun MainScreenCards(
         item {
             Spacer(modifier = Modifier.height(20.dp))
 
-            SectionTitle(title = "Ваши курсы", showAll = true) {
+            SectionTitle(
+                title = stringResource(R.string.your_courses_title_label),
+                showAll = true
+            ) {
                 viewModel.handleEvent(MainScreenEvent.ShowAllCourses)
             }
             Spacer(modifier = Modifier.height(12.dp))
@@ -35,7 +40,10 @@ fun MainScreenCards(
         item {
             Spacer(modifier = Modifier.height(24.dp))
 
-            SectionTitle(title = "Ваши заметки", showAll = true) {
+            SectionTitle(
+                title = stringResource(R.string.your_notes_top_bar_label),
+                showAll = true
+            ) {
                 viewModel.handleEvent(MainScreenEvent.ShowAllLocalNotes)
             }
 
@@ -58,7 +66,7 @@ fun MainScreenCards(
         item {
             Spacer(modifier = Modifier.height(20.dp))
 
-            SectionTitle(title = "Заметки сообщества", showAll = true) {
+            SectionTitle(title = stringResource(R.string.com_notes_text_label), showAll = true) {
                 viewModel.handleEvent(MainScreenEvent.ShowAllNotes)
             }
 

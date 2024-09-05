@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 
 @Composable
 fun CourseCard(title: String, tags: List<String>, onClick: () -> Unit) {
@@ -38,8 +37,7 @@ fun CourseCard(title: String, tags: List<String>, onClick: () -> Unit) {
                         style = MaterialTheme.typography.titleLarge,
                     )
                 }
-            }
-            else {
+            } else {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.titleLarge,

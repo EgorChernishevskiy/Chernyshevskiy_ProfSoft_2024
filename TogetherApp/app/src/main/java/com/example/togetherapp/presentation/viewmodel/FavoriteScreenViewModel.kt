@@ -1,6 +1,5 @@
 package com.example.togetherapp.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,13 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.togetherapp.domain.usecase.favorite.GetAllFavoriteComNotesUseCase
 import com.example.togetherapp.domain.usecase.favorite.GetAllFavoriteCoursesUseCase
 import com.example.togetherapp.domain.usecase.favorite.GetAllFavoriteLocalNotesUseCase
-import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
-import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
-import com.example.togetherapp.presentation.event.CreateNoteScreenEvent
 import com.example.togetherapp.presentation.event.FavoriteScreenEvent
-import com.example.togetherapp.presentation.event.LNoteDetailsScreenEvent
-import com.example.togetherapp.presentation.event.MainScreenEvent
-import com.example.togetherapp.presentation.event.ProfileScreenEvent
 import com.example.togetherapp.presentation.state.FavoriteScreenState
 import kotlinx.coroutines.launch
 

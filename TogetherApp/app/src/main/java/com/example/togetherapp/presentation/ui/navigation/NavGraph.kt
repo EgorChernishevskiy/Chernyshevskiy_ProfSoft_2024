@@ -2,7 +2,6 @@ package com.example.togetherapp.presentation.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -19,16 +18,6 @@ import com.example.togetherapp.presentation.ui.details.lnotesdetails.LNoteDetail
 import com.example.togetherapp.presentation.ui.favoritescreen.FavoriteScreen
 import com.example.togetherapp.presentation.ui.profilescreen.ProfileScreen
 import com.example.togetherapp.presentation.ui.splashscreen.SplashScreen
-import com.example.togetherapp.presentation.viewmodel.AuthViewModel
-import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.details.CNoteDetailsScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.details.CourseDetailsScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.ProfileScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 
 @Composable
 fun NavGraph(

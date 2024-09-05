@@ -10,19 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.togetherapp.presentation.ui.navigation.NavGraph
+import com.example.togetherapp.presentation.ui.navigation.Routes
 import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
-import com.example.togetherapp.presentation.viewmodel.AuthViewModel
-import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.details.CNoteDetailsScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.details.CourseDetailsScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.MainScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.ProfileScreenViewModel
-import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -37,7 +27,13 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(
                     bottomBar = {
-                        if (currentRoute in listOf("home", "favorite", "chat", "profile")) {
+                        if (currentRoute in listOf(
+                                Routes.Home,
+                                Routes.Favorite,
+                                Routes.Chat,
+                                Routes.Profile
+                            )
+                        ) {
                             BottomNavigationBar(navController)
                         }
                     }

@@ -24,7 +24,7 @@ import coil.compose.rememberImagePainter
 import com.example.togetherapp.domain.model.comnote.Comment
 
 @Composable
-fun CommentItem(comment: Comment){
+fun CommentItem(comment: Comment) {
     Row(
         modifier = Modifier
             .fillMaxWidth()

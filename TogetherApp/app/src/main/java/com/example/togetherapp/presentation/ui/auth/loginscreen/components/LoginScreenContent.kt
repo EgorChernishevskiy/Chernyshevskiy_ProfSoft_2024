@@ -20,8 +20,8 @@ import com.example.togetherapp.presentation.event.AuthEvent
 import com.example.togetherapp.presentation.state.AuthState
 import com.example.togetherapp.presentation.ui.components.AuthTextField
 import com.example.togetherapp.presentation.ui.components.Logo
+import com.example.togetherapp.presentation.ui.navigation.Routes
 import com.example.togetherapp.presentation.viewmodel.AuthViewModel
-import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -35,8 +35,8 @@ fun LoginScreenContent(
 
     if (state.loginSuccess) {
         LaunchedEffect(Unit) {
-            navController.navigate("home") {
-                popUpTo("login") { inclusive = true }
+            navController.navigate(Routes.Home) {
+                popUpTo(Routes.Login) { inclusive = true }
             }
         }
     }
@@ -131,7 +131,10 @@ fun LoginScreenContent(
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF333333))
         ) {
             if (state.isLoading) {
-                CircularProgressIndicator(modifier = Modifier.size(30.dp), color = Color(0xFFD6B714))
+                CircularProgressIndicator(
+                    modifier = Modifier.size(30.dp),
+                    color = Color(0xFFD6B714)
+                )
             } else {
                 Text(
                     text = stringResource(R.string.button_login_text_label),
@@ -144,7 +147,7 @@ fun LoginScreenContent(
         Spacer(modifier = Modifier.height(16.dp))
 
         TextButton(
-            onClick = { navController.navigate("register") },
+            onClick = { navController.navigate(Routes.Register) },
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .height(40.dp)

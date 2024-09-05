@@ -83,6 +83,7 @@ class AuthViewModel(
             is AuthEvent.OnLoginErrorMessageClear -> {
                 _state.value = _state.value?.copy(loginErrorMessage = null)
             }
+
             is AuthEvent.OnRegisterErrorMessageClear -> {
                 _state.value = _state.value?.copy(registerErrorMessage = null)
             }
@@ -100,12 +101,14 @@ class AuthViewModel(
     }
 
     private fun validateLoginPhoneNumber() {
-        val phoneNumberResult = validatePhoneNumberUseCase.execute(_state.value?.loginPhoneNumber ?: "")
+        val phoneNumberResult =
+            validatePhoneNumberUseCase.execute(_state.value?.loginPhoneNumber ?: "")
         _state.value = _state.value?.copy(loginPhoneNumberError = phoneNumberResult.errorMessage)
     }
 
     private fun validateRegisterPhoneNumber() {
-        val phoneNumberResult = validatePhoneNumberUseCase.execute(_state.value?.registerPhoneNumber ?: "")
+        val phoneNumberResult =
+            validatePhoneNumberUseCase.execute(_state.value?.registerPhoneNumber ?: "")
         _state.value = _state.value?.copy(registerPhoneNumberError = phoneNumberResult.errorMessage)
     }
 
@@ -161,7 +164,10 @@ class AuthViewModel(
                 _state.value = _state.value?.copy(isLoading = false, loginSuccess = true)
             } else {
                 _state.value =
-                    _state.value?.copy(isLoading = false, loginErrorMessage = result.exceptionOrNull()?.message)
+                    _state.value?.copy(
+                        isLoading = false,
+                        loginErrorMessage = result.exceptionOrNull()?.message
+                    )
             }
         }
     }
@@ -175,7 +181,10 @@ class AuthViewModel(
                 _state.value = _state.value?.copy(isLoading = false, registerSuccess = true)
             } else {
                 _state.value =
-                    _state.value?.copy(isLoading = false, registerErrorMessage = result.exceptionOrNull()?.message)
+                    _state.value?.copy(
+                        isLoading = false,
+                        registerErrorMessage = result.exceptionOrNull()?.message
+                    )
             }
         }
     }

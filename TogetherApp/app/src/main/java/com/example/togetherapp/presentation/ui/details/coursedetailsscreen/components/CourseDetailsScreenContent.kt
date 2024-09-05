@@ -10,13 +10,14 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.togetherapp.R
 import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
 import com.example.togetherapp.presentation.state.CourseDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
-import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.details.CourseDetailsScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -73,7 +74,8 @@ fun DetailsScreenContent(
                 state.error != null -> {
                     item {
                         ErrorMessage(
-                            errorMessage = state.error ?: "Что-то пошло не так",
+                            errorMessage = state.error
+                                ?: stringResource(R.string.default_error_message),
                             onRetryClick = {
                                 viewModel.handleEvent(CourseDetailsScreenEvent.OnErrorClear)
                                 viewModel.handleEvent(
@@ -96,7 +98,7 @@ fun DetailsScreenContent(
                             )
                         ) {
                             Text(
-                                text = "Темы",
+                                text = stringResource(R.string.course_themes_label),
                                 fontWeight = FontWeight(700),
                                 style = MaterialTheme.typography.bodyLarge
                             )
@@ -115,7 +117,7 @@ fun DetailsScreenContent(
                             Spacer(modifier = Modifier.height(16.dp))
 
                             Text(
-                                text = "Занятие",
+                                text = stringResource(R.string.course_class_text_label),
                                 fontWeight = FontWeight(700),
                                 style = MaterialTheme.typography.bodyLarge
                             )

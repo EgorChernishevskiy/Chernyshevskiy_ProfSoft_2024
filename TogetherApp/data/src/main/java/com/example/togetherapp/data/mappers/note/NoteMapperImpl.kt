@@ -86,15 +86,15 @@ class NoteMapperImpl : NoteMapper {
 
     override fun toDomain(dto: CreatedNoteDto): CreatedNote {
         return CreatedNote(
-            title = dto.title ,
-            content  =  dto.content.map { toDomain(it) }
+            title = dto.title,
+            content = dto.content.map { toDomain(it) }
         )
     }
 
     override fun toDto(domain: CreatedNote): CreatedNoteDto {
         return CreatedNoteDto(
-            title = domain.title ,
-            content  =  domain.content.map { toDto(it) }
+            title = domain.title,
+            content = domain.content.map { toDto(it) }
         )
     }
 }

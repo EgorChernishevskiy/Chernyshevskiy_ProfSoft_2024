@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import com.example.togetherapp.R
 
 @Composable
-fun ErrorDialog(OnRetry: () -> Unit) {
+fun ErrorDialog(onRetry: () -> Unit) {
     Box(
         modifier = Modifier
             .width(314.dp)
@@ -46,18 +47,18 @@ fun ErrorDialog(OnRetry: () -> Unit) {
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Упс, что-то пошло не так",
+                text = stringResource(R.string.create_note_error_message),
                 color = Color.White,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Попробуй снова",
+                text = stringResource(R.string.create_note_retry_label),
                 color = Color(0xFFFFD80C),
                 fontSize = 12.sp,
                 modifier = Modifier.clickable {
-                    OnRetry()
+                    onRetry()
                 }
             )
         }
@@ -67,5 +68,5 @@ fun ErrorDialog(OnRetry: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewErrorDialog() {
-    ErrorDialog(OnRetry = { /* Do nothing */ })
+    ErrorDialog(onRetry = { /* Do nothing */ })
 }

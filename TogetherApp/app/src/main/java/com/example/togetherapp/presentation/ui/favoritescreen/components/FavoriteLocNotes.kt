@@ -6,20 +6,27 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.togetherapp.R
 import com.example.togetherapp.presentation.event.FavoriteScreenEvent
 import com.example.togetherapp.presentation.state.FavoriteScreenState
 import com.example.togetherapp.presentation.ui.mainscreen.components.NoteCard
 import com.example.togetherapp.presentation.ui.mainscreen.components.SectionTitle
+import com.example.togetherapp.presentation.ui.navigation.Routes
 import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun FavoriteLocNotes(state: FavoriteScreenState, viewModel: FavoriteScreenViewModel, navController: NavHostController){
+fun FavoriteLocNotes(
+    state: FavoriteScreenState,
+    viewModel: FavoriteScreenViewModel,
+    navController: NavHostController
+) {
     Spacer(modifier = Modifier.height(24.dp))
 
-    SectionTitle(title = "Ваши заметки", showAll = true) {
+    SectionTitle(title = stringResource(R.string.favorite_loc_notes_title_label), showAll = true) {
         viewModel.handleEvent(FavoriteScreenEvent.ShowAllLocalNotes)
     }
 
@@ -32,7 +39,12 @@ fun FavoriteLocNotes(state: FavoriteScreenState, viewModel: FavoriteScreenViewMo
                 content = it,
                 date = note.date,
                 onClick = {
-                    navController.navigate("lnote/${note.id}")
+                    navController.navigate(
+                        Routes.LNoteDetail.replace(
+                            "{noteId}",
+                            note.id.toString()
+                        )
+                    )
                 }
             )
         }

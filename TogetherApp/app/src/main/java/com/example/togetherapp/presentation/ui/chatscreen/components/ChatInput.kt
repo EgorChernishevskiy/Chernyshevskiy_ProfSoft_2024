@@ -9,9 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -28,6 +25,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.example.togetherapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,7 +47,7 @@ fun ChatInput(
         TextField(
             value = text,
             onValueChange = { text = it },
-            placeholder = { Text("Сообщение", color = Color.Gray) },
+            placeholder = { Text(stringResource(R.string.chat_message_placeholder), color = Color.Gray) },
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 8.dp),

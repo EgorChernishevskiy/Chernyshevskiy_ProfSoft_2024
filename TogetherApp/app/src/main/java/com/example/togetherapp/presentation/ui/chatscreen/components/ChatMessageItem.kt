@@ -25,7 +25,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import coil.compose.rememberImagePainter
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -132,7 +131,7 @@ fun ChatMessageItem(message: ChatMessage, isCurrentUser: Boolean) {
                         .size(40.dp)
                         .padding(paddingStart),
                     contentScale = ContentScale.Crop,
-                    )
+                )
             }
         }
     }

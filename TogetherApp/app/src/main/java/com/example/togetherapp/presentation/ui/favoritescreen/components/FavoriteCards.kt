@@ -4,8 +4,6 @@ import com.example.togetherapp.presentation.ui.mainscreen.components.CommunityNo
 import com.example.togetherapp.presentation.ui.mainscreen.components.CustomHorizontalPager
 import com.example.togetherapp.presentation.ui.mainscreen.components.NoteCard
 import com.example.togetherapp.presentation.ui.mainscreen.components.SectionTitle
-
-
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Spacer
@@ -15,13 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.presentation.event.FavoriteScreenEvent
-import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.FavoriteScreenState
 import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun FavoriteCards(state: FavoriteScreenState, viewModel: FavoriteScreenViewModel, navController: NavHostController){
+fun FavoriteCards(
+    state: FavoriteScreenState,
+    viewModel: FavoriteScreenViewModel,
+    navController: NavHostController
+) {
 
     Spacer(modifier = Modifier.height(20.dp))
 

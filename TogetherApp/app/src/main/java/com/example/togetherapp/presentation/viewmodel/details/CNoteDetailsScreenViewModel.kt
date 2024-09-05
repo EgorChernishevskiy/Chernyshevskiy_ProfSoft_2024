@@ -10,7 +10,6 @@ import com.example.togetherapp.domain.usecase.favorite.AddFavoriteNoteUseCase
 import com.example.togetherapp.domain.usecase.favorite.CheckNoteFavoriteStatusUseCase
 import com.example.togetherapp.domain.usecase.favorite.RemoveFavoriteNoteUseCase
 import com.example.togetherapp.presentation.event.CNoteDetailsScreenEvent
-import com.example.togetherapp.presentation.event.ChatScreenEvent
 import com.example.togetherapp.presentation.state.note.CNoteDetailsScreenState
 import kotlinx.coroutines.launch
 

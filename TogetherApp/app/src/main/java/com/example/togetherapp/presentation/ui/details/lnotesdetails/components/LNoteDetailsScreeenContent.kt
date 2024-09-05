@@ -19,16 +19,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
+import com.example.togetherapp.R
 import com.example.togetherapp.presentation.event.LNoteDetailsScreenEvent
 import com.example.togetherapp.presentation.state.note.LNoteDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
 import com.example.togetherapp.presentation.ui.details.components.NoteTopAppBar
-import com.example.togetherapp.presentation.viewmodel.details.CNoteDetailsScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.details.LNoteDetailsScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -81,7 +81,8 @@ fun LNoteDetailsScreenContent(
             if (state.error != null) {
                 item {
                     ErrorMessage(
-                        errorMessage = state.error ?: "Что-то пошло не так",
+                        errorMessage = state.error
+                            ?: stringResource(R.string.default_error_message),
                         onRetryClick = {
                             viewModel.handleEvent(LNoteDetailsScreenEvent.OnErrorClear)
                             viewModel.handleEvent(
@@ -102,7 +103,7 @@ fun LNoteDetailsScreenContent(
                         )
                     ) {
                         Text(
-                            text = "Текст",
+                            text = stringResource(R.string.create_note_text_label),
                             fontWeight = FontWeight(700),
                             style = MaterialTheme.typography.bodyLarge
                         )

@@ -38,29 +38,24 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
 import com.example.togetherapp.R
-import com.example.togetherapp.presentation.event.FavoriteScreenEvent
 import com.example.togetherapp.presentation.event.ProfileScreenEvent
-import com.example.togetherapp.presentation.state.FavoriteScreenState
 import com.example.togetherapp.presentation.state.ProfileScreenState
-import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
 import com.example.togetherapp.presentation.ui.components.CenteredProgressIndicator
-import com.example.togetherapp.presentation.ui.components.CustomSearchButton
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.ui.favoritescreen.components.FavoriteCourses
-import com.example.togetherapp.presentation.ui.favoritescreen.components.FavoriteLocNotes
 import com.example.togetherapp.presentation.ui.favoritescreen.components.FavoriteNotes
 import com.example.togetherapp.presentation.ui.mainscreen.components.CommunityNoteCard
 import com.example.togetherapp.presentation.ui.mainscreen.components.CourseCard
 import com.example.togetherapp.presentation.ui.mainscreen.components.ShowAllTopBar
 import com.example.togetherapp.presentation.utils.formatDateProfile
 import com.example.togetherapp.presentation.utils.formatPhoneNumber
-import com.example.togetherapp.presentation.viewmodel.FavoriteScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.ProfileScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -81,13 +76,13 @@ fun ProfileScreenContent(
             if (state.showAllCourses || state.showAllNotes || state.showAllUsers || !state.isMyProfile) {
                 val title: String
                 if (state.showAllCourses) {
-                    title = "Все курсы"
+                    title = stringResource(R.string.all_courses_top_bar_label)
                 } else if (state.showAllNotes) {
-                    title = "Ваши заметки"
+                    title = stringResource(R.string.your_notes_top_bar_label)
                 } else if (!state.isMyProfile) {
-                    title = "Профиль"
+                    title = stringResource(R.string.profile_title_label)
                 } else {
-                    title = "Все пользователи"
+                    title = stringResource(R.string.all_users_top_bar_label)
                 }
                 ShowAllTopBar(
                     title = title,
@@ -108,7 +103,7 @@ fun ProfileScreenContent(
                 TopAppBar(
                     title = {
                         Text(
-                            text = "Профиль",
+                            text = stringResource(R.string.profile_title_label),
                             style = MaterialTheme.typography.titleLarge,
                             fontSize = 20.sp
                         )
@@ -137,7 +132,8 @@ fun ProfileScreenContent(
 
                 state.error != null -> {
                     ErrorMessage(
-                        errorMessage = state.error ?: "Что-то пошло не так",
+                        errorMessage = state.error
+                            ?: stringResource(R.string.default_error_message),
                         onRetryClick = {
                             viewModel.handleEvent(ProfileScreenEvent.OnErrorClear)
                             viewModel.handleEvent(ProfileScreenEvent.OnLoadUserProfile)
@@ -253,20 +249,23 @@ fun ProfileScreenContent(
                                     )
                                     Spacer(modifier = Modifier.height(6.dp))
                                     Text(
-                                        text = "Дата регистрации: ${formatDateProfile(state.user?.registerDate ?: "")}",
+                                        text = stringResource(
+                                            R.string.register_date_text_label,
+                                            formatDateProfile(state.user?.registerDate ?: "")
+                                        ),
                                         fontSize = 14.sp,
                                         color = Color.Gray
                                     )
                                     Spacer(modifier = Modifier.height(6.dp))
                                     Text(
-                                        text = "Роль: ${
-                                            when (state.user?.role) {
-                                                0 -> "Студент"
-                                                1 -> "Преподаватель"
-                                                2 -> "Админ"
-                                                else -> "Неизвестная роль"
+                                        text = stringResource(
+                                            R.string.role_text_label, when (state.user?.role) {
+                                                0 -> stringResource(R.string.student_text_label)
+                                                1 -> stringResource(R.string.teacher_text_label)
+                                                2 -> stringResource(R.string.admin_text_label)
+                                                else -> stringResource(R.string.unknown_role_text_label)
                                             }
-                                        }",
+                                        ),
                                         fontSize = 14.sp,
                                         color = Color.Gray
                                     )
@@ -276,7 +275,10 @@ fun ProfileScreenContent(
                             Column(modifier = Modifier.padding(0.dp)) {
                                 state.user?.phone?.let {
                                     Text(
-                                        text = "Номер телефона: ${formatPhoneNumber(it)}",
+                                        text = stringResource(
+                                            R.string.phone_number_text_label,
+                                            formatPhoneNumber(it)
+                                        ),
                                         fontSize = 14.sp,
                                         color = Color.Black
                                     )
@@ -287,7 +289,7 @@ fun ProfileScreenContent(
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Text(
-                                            text = "Показывать всем мой номер",
+                                            text = stringResource(R.string.show_number_text_label),
                                             fontSize = 14.sp,
                                             color = Color.Black
                                         )
@@ -318,7 +320,9 @@ fun ProfileScreenContent(
                         ) {
                             state.user?.let {
                                 FavoriteCourses(
-                                    if (state.isMyProfile) "Ваши курсы" else "Курсы",
+                                    if (state.isMyProfile) stringResource(R.string.your_courses_title_label) else stringResource(
+                                        R.string.courses_text_label
+                                    ),
                                     it.courses,
                                     { viewModel.handleEvent(ProfileScreenEvent.ShowAllCourses) },
                                     navController
@@ -327,7 +331,9 @@ fun ProfileScreenContent(
 
                             state.user?.let {
                                 FavoriteNotes(
-                                    if (state.isMyProfile) "Ваши заметки" else "Заметки",
+                                    if (state.isMyProfile) stringResource(R.string.your_notes_top_bar_label) else stringResource(
+                                        R.string.notes_text_label
+                                    ),
                                     it.notes.firstOrNull(),
                                     { viewModel.handleEvent(ProfileScreenEvent.ShowAllNotes) },
                                     navController
@@ -352,7 +358,7 @@ fun ProfileScreenContent(
                                         .height(40.dp)
                                 ) {
                                     Text(
-                                        text = "Выйти из аккаунта",
+                                        text = stringResource(R.string.log_out_string_label),
                                         color = Color.Black,
                                         style = MaterialTheme.typography.titleSmall
                                     )

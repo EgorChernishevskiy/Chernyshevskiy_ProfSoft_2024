@@ -15,14 +15,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.R
 import com.example.togetherapp.presentation.state.SplashScreenState
 import com.example.togetherapp.presentation.ui.components.Logo
-import com.example.togetherapp.presentation.ui.theme.TogetherAppTheme
-import com.example.togetherapp.presentation.viewmodel.ChatScreenViewModel
 import com.example.togetherapp.presentation.viewmodel.SplashScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -39,6 +36,7 @@ fun SplashScreenContent(
             state.navigateToHome -> navController.navigate("home") {
                 popUpTo("splash") { inclusive = true }
             }
+
             state.navigateToLogin -> navController.navigate("login") {
                 popUpTo("splash") { inclusive = true }
             }

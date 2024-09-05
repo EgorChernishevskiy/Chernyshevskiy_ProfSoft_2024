@@ -20,7 +20,7 @@ fun AddToFavoriteIcon(isLiked: Boolean, onClick: () -> Unit) {
             .padding(end = 16.dp),
         onClick = { onClick() },
 
-    ) {
+        ) {
         if (isLiked) {
             Icon(
                 painter = painterResource(R.drawable.favorite_liked),
@@ -30,8 +30,7 @@ fun AddToFavoriteIcon(isLiked: Boolean, onClick: () -> Unit) {
                     .width(36.dp)
                     .height(36.dp)
             )
-        }
-        else{
+        } else {
             Icon(
                 painter = painterResource(R.drawable.favorite_unliked),
                 contentDescription = null,
