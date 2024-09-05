@@ -1,6 +1,7 @@
 package com.example.togetherapp.presentation.ui.auth.registerscreen.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -52,156 +53,160 @@ fun RegisterScreenContent(
             }
         }
     }
+    LazyColumn(modifier = modifier.fillMaxSize()) {
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(start = 16.dp, end = 16.dp)
-    ) {
+        item {
+            Column(
+                modifier = modifier
+                    .fillMaxSize()
+                    .padding(start = 16.dp, end = 16.dp)
+            ) {
 
-        SnackbarHost(hostState = snackbarHostState)
+                SnackbarHost(hostState = snackbarHostState)
 
-        Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(40.dp))
 
-        Logo(
-            modifier = Modifier
-                .padding(top = 83.dp)
-                .align(Alignment.CenterHorizontally)
-        )
-
-        Spacer(modifier = Modifier.height(58.dp))
-
-        Text(
-            text = stringResource(R.string.register_text_label),
-            style = MaterialTheme.typography.titleLarge,
-            color = Color.Black,
-            modifier = Modifier.align(Alignment.Start)
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Text(
-            text = stringResource(R.string.register_subtext_label),
-            style = MaterialTheme.typography.bodyLarge,
-            fontSize = 14.sp,
-            color = Color(0xFF333333),
-            modifier = Modifier.align(Alignment.Start)
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        AuthTextField(
-            value = state.firstName,
-            onValueChange = { viewModel.handleEvent(AuthEvent.OnFirstNameChange(it)) },
-            label = stringResource(R.string.first_name_textfield),
-            errorMessage = state.firstNameError
-        )
-        if (state.firstNameError != null) {
-            Text(
-                text = state.firstNameError!!,
-                color = Color.Red,
-                modifier = Modifier
-                    .align(Alignment.End)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        AuthTextField(
-            value = state.lastName,
-            onValueChange = { viewModel.handleEvent(AuthEvent.OnLastNameChange(it)) },
-            label = stringResource(R.string.last_name_textfield),
-            errorMessage = state.lastNameError
-        )
-        if (state.lastNameError != null) {
-            Text(
-                text = state.lastNameError!!,
-                color = Color.Red,
-                modifier = Modifier
-                    .align(Alignment.End)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        AuthTextField(
-            value = state.registerPhoneNumber,
-            onValueChange = { viewModel.handleEvent(AuthEvent.OnRegisterPhoneNumberChange(it)) },
-            label = stringResource(R.string.phone_number_textfield),
-            errorMessage = state.registerPhoneNumberError
-        )
-        if (state.registerPhoneNumberError != null) {
-            Text(
-                text = state.registerPhoneNumberError!!,
-                color = Color.Red,
-                modifier = Modifier
-                    .align(Alignment.End)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        AuthTextField(
-            value = state.registerPassword,
-            onValueChange = { viewModel.handleEvent(AuthEvent.OnRegisterPasswordChange(it)) },
-            label = stringResource(R.string.password_textfield),
-            isPassword = true
-        )
-        if (state.registerPasswordError != null) {
-            Text(
-                text = state.registerPasswordError!!,
-                color = Color.Red,
-                modifier = Modifier
-                    .align(Alignment.End)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(60.dp))
-
-        Button(
-            onClick = {
-                viewModel.handleEvent(
-                    AuthEvent.Register(
-                        state.firstName,
-                        state.lastName,
-                        state.registerPhoneNumber,
-                        state.registerPassword
-                    )
+                Logo(
+                    modifier = Modifier
+                        .padding(top = 83.dp)
+                        .align(Alignment.CenterHorizontally)
                 )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(40.dp),
-            shape = RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF333333))
-        ) {
-            if (state.isLoading) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(30.dp),
-                    color = Color(0xFFD6B714)
-                )
-            } else {
+
+                Spacer(modifier = Modifier.height(58.dp))
+
                 Text(
                     text = stringResource(R.string.register_text_label),
-                    color = Color.White,
-                    style = MaterialTheme.typography.titleMedium
+                    style = MaterialTheme.typography.titleLarge,
+                    color = Color.Black,
+                    modifier = Modifier.align(Alignment.Start)
                 )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = stringResource(R.string.register_subtext_label),
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontSize = 14.sp,
+                    color = Color(0xFF333333),
+                    modifier = Modifier.align(Alignment.Start)
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                AuthTextField(
+                    value = state.firstName,
+                    onValueChange = { viewModel.handleEvent(AuthEvent.OnFirstNameChange(it)) },
+                    label = stringResource(R.string.first_name_textfield),
+                    errorMessage = state.firstNameError
+                )
+                if (state.firstNameError != null) {
+                    Text(
+                        text = state.firstNameError!!,
+                        color = Color.Red,
+                        modifier = Modifier
+                            .align(Alignment.End)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                AuthTextField(
+                    value = state.lastName,
+                    onValueChange = { viewModel.handleEvent(AuthEvent.OnLastNameChange(it)) },
+                    label = stringResource(R.string.last_name_textfield),
+                    errorMessage = state.lastNameError
+                )
+                if (state.lastNameError != null) {
+                    Text(
+                        text = state.lastNameError!!,
+                        color = Color.Red,
+                        modifier = Modifier
+                            .align(Alignment.End)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                AuthTextField(
+                    value = state.registerPhoneNumber,
+                    onValueChange = { viewModel.handleEvent(AuthEvent.OnRegisterPhoneNumberChange(it)) },
+                    label = stringResource(R.string.phone_number_textfield),
+                    errorMessage = state.registerPhoneNumberError
+                )
+                if (state.registerPhoneNumberError != null) {
+                    Text(
+                        text = state.registerPhoneNumberError!!,
+                        color = Color.Red,
+                        modifier = Modifier
+                            .align(Alignment.End)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                AuthTextField(
+                    value = state.registerPassword,
+                    onValueChange = { viewModel.handleEvent(AuthEvent.OnRegisterPasswordChange(it)) },
+                    label = stringResource(R.string.password_textfield),
+                    isPassword = true
+                )
+                if (state.registerPasswordError != null) {
+                    Text(
+                        text = state.registerPasswordError!!,
+                        color = Color.Red,
+                        modifier = Modifier
+                            .align(Alignment.End)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(60.dp))
+
+                Button(
+                    onClick = {
+                        viewModel.handleEvent(
+                            AuthEvent.Register(
+                                state.firstName,
+                                state.lastName,
+                                state.registerPhoneNumber,
+                                state.registerPassword
+                            )
+                        )
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(40.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF333333))
+                ) {
+                    if (state.isLoading) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(30.dp),
+                            color = Color(0xFFD6B714)
+                        )
+                    } else {
+                        Text(
+                            text = stringResource(R.string.register_text_label),
+                            color = Color.White,
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                TextButton(
+                    onClick = { navController.navigate(Routes.Login) },
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .height(40.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.login_with_account_text_label),
+                        color = Color.Black,
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                }
             }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        TextButton(
-            onClick = { navController.navigate(Routes.Login) },
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .height(40.dp)
-        ) {
-            Text(
-                text = stringResource(R.string.login_with_account_text_label),
-                color = Color.Black,
-                style = MaterialTheme.typography.titleSmall
-            )
         }
     }
 }
