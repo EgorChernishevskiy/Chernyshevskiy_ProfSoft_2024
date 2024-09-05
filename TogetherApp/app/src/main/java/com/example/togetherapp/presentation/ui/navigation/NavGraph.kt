@@ -2,6 +2,7 @@ package com.example.togetherapp.presentation.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -34,83 +35,55 @@ fun NavGraph(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    NavHost(navController, startDestination = "splash", modifier = modifier) {
-        composable("splash") {
-            SplashScreen(
-                navController = navController
-            )
+    NavHost(navController, startDestination = Routes.Splash, modifier = modifier) {
+        composable(Routes.Splash) {
+            SplashScreen(navController = navController)
         }
-        composable("login") {
-            LoginScreen(
-                navController = navController
-            )
+        composable(Routes.Login) {
+            LoginScreen(navController = navController)
         }
-        composable("register") {
-            RegisterScreen(
-                navController = navController
-            )
+        composable(Routes.Register) {
+            RegisterScreen(navController = navController)
         }
-        composable("home") {
-            MainScreen(
-                navController = navController
-            )
+        composable(Routes.Home) {
+            MainScreen(navController = navController)
         }
         composable(
-            "details/{courseId}/{courseIndex}",
+            Routes.Details,
             arguments = listOf(
                 navArgument("courseId") { type = NavType.StringType },
                 navArgument("courseIndex") { type = NavType.IntType }
             )
         ) { backStackEntry ->
-            val courseId = backStackEntry.arguments?.getString("courseId") ?: ""
-            val courseIndex = backStackEntry.arguments?.getInt("courseIndex") ?: 0
-            DetailScreen(
-                navController = navController,
-                courseId = courseId,
-                courseIndex = courseIndex
-            )
+            val courseId = backStackEntry.getStringArgument("courseId")
+            val courseIndex = backStackEntry.getIntArgument("courseIndex")
+            DetailScreen(navController = navController, courseId = courseId, courseIndex = courseIndex)
         }
         composable(
-            "cnote/{noteId}",
-            arguments = listOf(
-                navArgument("noteId") { type = NavType.StringType },
-            )
+            Routes.CNoteDetail,
+            arguments = listOf(navArgument("noteId") { type = NavType.StringType })
         ) { backStackEntry ->
-            val noteId = backStackEntry.arguments?.getString("noteId") ?: ""
-            CNoteDetailScreen(
-                navController = navController,
-                noteId = noteId
-            )
+            val noteId = backStackEntry.getStringArgument("noteId")
+            CNoteDetailScreen(navController = navController, noteId = noteId)
         }
         composable(
-            "lnote/{noteId}",
-            arguments = listOf(
-                navArgument("noteId") { type = NavType.IntType },
-            )
+            Routes.LNoteDetail,
+            arguments = listOf(navArgument("noteId") { type = NavType.IntType })
         ) { backStackEntry ->
-            val noteId = backStackEntry.arguments?.getInt("noteId") ?: 0
-            LNoteDetailsScreen(
-                navController = navController,
-                noteId = noteId
-            )
+            val noteId = backStackEntry.getIntArgument("noteId")
+            LNoteDetailsScreen(navController = navController, noteId = noteId)
         }
-        composable("createnote") {
-            CreateNoteScreen(
-                navController = navController
-            )
+        composable(Routes.CreateNote) {
+            CreateNoteScreen(navController = navController)
         }
-        composable("favorite") {
-            FavoriteScreen(
-                navController = navController
-            )
+        composable(Routes.Favorite) {
+            FavoriteScreen(navController = navController)
         }
-        composable("chat") {
+        composable(Routes.Chat) {
             ChatScreen()
         }
-        composable("profile") {
-            ProfileScreen(
-                navController = navController
-            )
+        composable(Routes.Profile) {
+            ProfileScreen(navController = navController)
         }
     }
 }
