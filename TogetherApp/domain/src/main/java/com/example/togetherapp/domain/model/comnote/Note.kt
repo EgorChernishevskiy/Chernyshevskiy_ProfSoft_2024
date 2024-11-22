@@ -1,6 +1,6 @@
 package com.example.togetherapp.domain.model.comnote
 
-data class Note(
+data class Note (
     val id: String,
     val title: String,
     val content: List<NoteContent>,
