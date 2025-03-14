@@ -12,7 +12,7 @@ import com.example.togetherapp.presentation.state.MainScreenState
 import kotlinx.coroutines.launch
 
 class MainScreenViewModel(
-    private val getCoursesUseCase: GetCoursesUseCase,
+    //private val getCoursesUseCase: GetCoursesUseCase,
     private val getNotesUseCase: GetNotesUseCase,
     private val getAllLocalNotesUseCase: GetAllLocalNotesUseCase
 ) : ViewModel() {
@@ -27,7 +27,7 @@ class MainScreenViewModel(
             }
 
             is MainScreenEvent.LoadCourses -> {
-                fetchCourses()
+                //fetchCourses()
             }
 
             is MainScreenEvent.LoadNotes -> {
@@ -40,7 +40,7 @@ class MainScreenViewModel(
 
             is MainScreenEvent.ShowAllCourses -> {
                 _state.value = _state.value?.copy(showAllCourses = true)
-                loadCourses()
+                //loadCourses()
             }
 
             is MainScreenEvent.HideAllCourses -> {
@@ -119,31 +119,31 @@ class MainScreenViewModel(
         }
     }
 
-    private fun loadCourses() {
-        _state.value = _state.value?.copy(isLoading = true)
-        viewModelScope.launch {
-            try {
-                val courses = getCoursesUseCase.execute()
-                _state.value = _state.value?.copy(courses = courses, isLoading = false)
-            } catch (e: Exception) {
-                _state.value = _state.value?.copy(error = e.message, isLoading = false)
-            }
-        }
-    }
+//    private fun loadCourses() {
+//        _state.value = _state.value?.copy(isLoading = true)
+//        viewModelScope.launch {
+//            try {
+//                val courses = getCoursesUseCase.execute()
+//                _state.value = _state.value?.copy(courses = courses, isLoading = false)
+//            } catch (e: Exception) {
+//                _state.value = _state.value?.copy(error = e.message, isLoading = false)
+//            }
+//        }
+//    }
 
-    private fun fetchCourses() {
-        viewModelScope.launch {
-            _state.value = _state.value?.copy(isLoading = true)
-            try {
-                val coursesList = getCoursesUseCase.execute()
-                _state.value = _state.value?.copy(courses = coursesList.take(6))
-            } catch (e: Exception) {
-                _state.value = _state.value?.copy(error = e.message)
-            } finally {
-                _state.value = _state.value?.copy(isLoading = false)
-            }
-        }
-    }
+//    private fun fetchCourses() {
+//        viewModelScope.launch {
+//            _state.value = _state.value?.copy(isLoading = true)
+//            try {
+//                val coursesList = getCoursesUseCase.execute()
+//                _state.value = _state.value?.copy(courses = coursesList.take(6))
+//            } catch (e: Exception) {
+//                _state.value = _state.value?.copy(error = e.message)
+//            } finally {
+//                _state.value = _state.value?.copy(isLoading = false)
+//            }
+//        }
+//    }
 
     private fun fetchNotes() {
         viewModelScope.launch {

@@ -14,19 +14,19 @@ class NoteRepositoryImpl(
     override suspend fun getNotes(): List<Note> {
         val response = api.getNotes()
         if (response.isSuccessful) {
-            return response.body()?.data?.map { mapper.toDomain(it) } ?: emptyList()
+            return response.body()?.map { mapper.toDomain(it) } ?: emptyList()
         } else {
-            throw Exception("Failed to fetch notes: ${response.message()}")
+            throw Exception("Ошибка загрузки заметок")
         }
     }
 
     override suspend fun getNoteById(noteId: String): Note {
-        val response = api.getNoteById(noteId)
+        val response = api.getNoteById(noteId.toInt()) // Конвертируем обратно в Int
         if (response.isSuccessful) {
-            return response.body()?.data?.let { mapper.toDomain(it) }
-                ?: throw Exception("Note not found")
+            return response.body()?.let { mapper.toDomain(it) }
+                ?: throw Exception("Заметка не найдена")
         } else {
-            throw Exception("Failed to fetch note: ${response.message()}")
+            throw Exception("Ошибка загрузки заметки")
         }
     }
 
@@ -34,7 +34,7 @@ class NoteRepositoryImpl(
         val noteDto = mapper.toDto(note)
         val response = api.createNote(noteDto)
         if (response.isSuccessful) {
-            return response.body()?.data?.let { mapper.toDomain(it) }
+            return response.body()?.let { mapper.toDomain(it) }
                 ?: throw Exception("Failed to create note")
         } else {
             throw Exception("Failed to create note: ${response.message()}")

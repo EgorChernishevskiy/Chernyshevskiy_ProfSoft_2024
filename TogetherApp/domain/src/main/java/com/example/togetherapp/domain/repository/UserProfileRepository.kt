@@ -6,6 +6,6 @@ import com.example.togetherapp.domain.model.profile.UserProfile
 interface UserProfileRepository {
     suspend fun getUserProfile(): UserProfile
     suspend fun getUserProfileById(userId: String): UserProfile
-    suspend fun getAllUserProfiles(): List<ProfilePreview>
+    suspend fun getAllUserProfiles(): List<UserProfile>
     suspend fun setPhoneVisibility(isVisible: Boolean): UserProfile
 }

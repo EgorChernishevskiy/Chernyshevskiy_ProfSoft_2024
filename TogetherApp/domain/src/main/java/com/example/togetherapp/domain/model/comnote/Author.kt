@@ -5,5 +5,6 @@ data class Author(
     val name: String,
     val surname: String,
     val avatar: String,
+    val email: String,
     val role: Int
 )

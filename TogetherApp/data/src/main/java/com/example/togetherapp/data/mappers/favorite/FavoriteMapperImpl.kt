@@ -56,6 +56,7 @@ class FavoriteMapperImpl : FavoriteMapper {
             content = entity.content,
             author = entity.author,
             date = entity.date,
+            topic = "",
             comments = entity.comments
         )
     }

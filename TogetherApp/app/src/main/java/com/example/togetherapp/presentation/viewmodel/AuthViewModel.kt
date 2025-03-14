@@ -24,7 +24,7 @@ class AuthViewModel(
     private val saveTokenUseCase: SaveTokenUseCase,
     private val validateFirstNameUseCase: ValidateFirstNameUseCase,
     private val validateLastNameUseCase: ValidateLastNameUseCase,
-    private val validatePhoneNumberUseCase: ValidatePhoneNumberUseCase,
+    //private val validatePhoneNumberUseCase: ValidatePhoneNumberUseCase,
     private val validatePasswordUseCase: ValidatePasswordUseCase
 ) : ViewModel() {
 
@@ -63,7 +63,7 @@ class AuthViewModel(
 
             is AuthEvent.OnLoginPhoneNumberChange -> {
                 _state.value = _state.value?.copy(loginPhoneNumber = event.phoneNumber)
-                validateLoginPhoneNumber()
+                //validateLoginPhoneNumber()
             }
 
             is AuthEvent.OnLoginPasswordChange -> {
@@ -72,7 +72,7 @@ class AuthViewModel(
 
             is AuthEvent.OnRegisterPhoneNumberChange -> {
                 _state.value = _state.value?.copy(registerPhoneNumber = event.phoneNumber)
-                validateRegisterPhoneNumber()
+                //validateRegisterPhoneNumber()
             }
 
             is AuthEvent.OnRegisterPasswordChange -> {
@@ -100,17 +100,17 @@ class AuthViewModel(
         _state.value = _state.value?.copy(lastNameError = lastNameResult.errorMessage)
     }
 
-    private fun validateLoginPhoneNumber() {
-        val phoneNumberResult =
-            validatePhoneNumberUseCase.execute(_state.value?.loginPhoneNumber ?: "")
-        _state.value = _state.value?.copy(loginPhoneNumberError = phoneNumberResult.errorMessage)
-    }
-
-    private fun validateRegisterPhoneNumber() {
-        val phoneNumberResult =
-            validatePhoneNumberUseCase.execute(_state.value?.registerPhoneNumber ?: "")
-        _state.value = _state.value?.copy(registerPhoneNumberError = phoneNumberResult.errorMessage)
-    }
+//    private fun validateLoginPhoneNumber() {
+//        val phoneNumberResult =
+//            validatePhoneNumberUseCase.execute(_state.value?.loginPhoneNumber ?: "")
+//        _state.value = _state.value?.copy(loginPhoneNumberError = phoneNumberResult.errorMessage)
+//    }
+//
+//    private fun validateRegisterPhoneNumber() {
+//        val phoneNumberResult =
+//            validatePhoneNumberUseCase.execute(_state.value?.registerPhoneNumber ?: "")
+//        _state.value = _state.value?.copy(registerPhoneNumberError = phoneNumberResult.errorMessage)
+//    }
 
     private fun validateRegisterPassword() {
         val passwordResult = validatePasswordUseCase.execute(_state.value?.registerPassword ?: "")
@@ -118,7 +118,7 @@ class AuthViewModel(
     }
 
     private fun submitLogin() {
-        validateLoginPhoneNumber()
+        //validateLoginPhoneNumber()
 
         if (_state.value?.loginPhoneNumberError != null || _state.value?.loginPasswordError != null) {
             return
@@ -136,7 +136,7 @@ class AuthViewModel(
     private fun submitRegister() {
         validateFirstName()
         validateLastName()
-        validateRegisterPhoneNumber()
+        //validateRegisterPhoneNumber()
         validateRegisterPassword()
         if (_state.value?.firstNameError != null || _state.value?.lastNameError != null ||
             _state.value?.registerPhoneNumberError != null || _state.value?.registerPasswordError != null

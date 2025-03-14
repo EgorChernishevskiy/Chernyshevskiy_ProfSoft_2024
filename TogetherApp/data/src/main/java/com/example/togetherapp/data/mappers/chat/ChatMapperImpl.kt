@@ -17,11 +17,12 @@ class ChatMapperImpl : ChatMapper {
 
     override fun toDomain(dto: AuthorDto): Author {
         return Author(
-            id = dto.id,
+            id = dto.id.toString(),
             name = dto.name,
             surname = dto.surname,
-            avatar = dto.avatar,
-            role = dto.role
+            avatar = dto.avatar ?: "",
+            email = dto.email,
+            role = 0
         )
     }
 
@@ -36,11 +37,11 @@ class ChatMapperImpl : ChatMapper {
 
     override fun toDto(domain: Author): AuthorDto {
         return AuthorDto(
-            id = domain.id,
+            id = domain.id.toInt(),
             name = domain.name,
             surname = domain.surname,
-            avatar = domain.avatar,
-            role = domain.role
+            avatar = domain.avatar.ifEmpty { null },
+            email = domain.email,
         )
     }
 }

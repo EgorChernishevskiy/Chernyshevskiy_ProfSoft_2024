@@ -9,7 +9,7 @@ class AuthMapperImpl : AuthMapper {
 
     override fun toLoginRequest(params: LoginParams): LoginRequest {
         return LoginRequest(
-            phone = params.phone,
+            email = params.phone,
             passwordHashed = params.passwordHashed
         )
     }
@@ -18,9 +18,8 @@ class AuthMapperImpl : AuthMapper {
         return RegisterRequest(
             name = params.firstName,
             surname = params.lastName,
-            phone = params.phoneNumber,
+            email = params.phoneNumber,
             passwordHashed = params.password,
-            avatar = ""
         )
     }
 }

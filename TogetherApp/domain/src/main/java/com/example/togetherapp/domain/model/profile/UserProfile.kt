@@ -8,9 +8,6 @@ data class UserProfile(
     val name: String,
     val surname: String,
     val avatar: String?,
-    val role: Int,
-    val phone: String?,
-    val registerDate: String,
-    val courses: List<Course>,
+    val email: String?,
     val notes: List<Note>
 )

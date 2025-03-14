@@ -1,5 +1,6 @@
 package com.example.togetherapp.presentation.state
 
+import com.example.togetherapp.data.model.profile.UserProfileDto
 import com.example.togetherapp.domain.model.comnote.Note
 import com.example.togetherapp.domain.model.locnote.LocNote
 import com.example.togetherapp.domain.model.profile.ProfilePreview
@@ -7,7 +8,7 @@ import com.example.togetherapp.domain.model.profile.UserProfile
 
 data class ProfileScreenState(
     val user: UserProfile? = null,
-    val usersList: List<ProfilePreview> = emptyList(),
+    val usersList: List<UserProfile> = emptyList(),
     val communityNote: Note? = null,
     val localNote: LocNote? = null,
     val isLoading: Boolean = true,

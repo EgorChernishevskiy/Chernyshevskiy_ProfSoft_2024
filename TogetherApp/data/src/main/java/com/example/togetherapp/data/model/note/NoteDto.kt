@@ -1,8 +1,9 @@
 package com.example.togetherapp.data.model.note
 
 data class NoteDto(
-    val id: String,
+    val id: Int,
     val title: String,
+    val topic: String,
     val content: List<NoteContentDto>,
     val author: AuthorDto,
     val date: String,

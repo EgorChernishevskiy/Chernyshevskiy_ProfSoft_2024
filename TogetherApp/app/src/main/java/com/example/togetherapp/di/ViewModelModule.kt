@@ -14,9 +14,9 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { AuthViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { AuthViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { SplashScreenViewModel(get()) }
-    viewModel { MainScreenViewModel(get(), get(), get()) }
+    viewModel { MainScreenViewModel(get(), get()) }
     viewModel { CourseDetailsScreenViewModel(get(), get(), get(), get()) }
     viewModel { CNoteDetailsScreenViewModel(get(), get(), get(), get(), get()) }
     viewModel { LNoteDetailsScreenViewModel(get(), get(), get(), get()) }

@@ -14,18 +14,24 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,11 +42,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.R
+import com.example.togetherapp.domain.utils.NoteTopic
 import com.example.togetherapp.presentation.event.CreateNoteScreenEvent
 import com.example.togetherapp.presentation.state.CreateNoteScreenState
 import com.example.togetherapp.presentation.ui.components.BottomNavigationBar
 import com.example.togetherapp.presentation.ui.components.IconButtonBack
 import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
+import com.example.togetherapp.presentation.utils.getTopicName
 import com.example.togetherapp.presentation.viewmodel.CreateNoteScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -51,6 +59,7 @@ fun CreateNoteScreenContent(
 ) {
     val viewModel: CreateNoteScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(CreateNoteScreenState())
+    var expanded by remember { mutableStateOf(false) } // Состояние для управления видимостью меню
     Box(
         modifier = Modifier.fillMaxSize()
     )
@@ -93,6 +102,34 @@ fun CreateNoteScreenContent(
                     .padding(16.dp)
                     .fillMaxSize()
             ) {
+                // Выпадающее меню для выбора темы
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentSize(Alignment.TopStart)
+                ) {
+                    Text(
+                        text = "Тема: ${state.topicName}",
+                        modifier = Modifier
+                            .clickable { expanded = true }
+                            .padding(8.dp)
+                    )
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        NoteTopic.entries.forEach { topic ->
+                            DropdownMenuItem(
+                                text = { Text(getTopicName(topic)) },
+                                onClick = {
+                                    viewModel.handleEvent(CreateNoteScreenEvent.OnTopicSelected(topic))
+                                    expanded = false
+                                }
+                            )
+                        }
+                    }
+                }
+
                 Row(
                     modifier = Modifier
                         .height(40.dp)

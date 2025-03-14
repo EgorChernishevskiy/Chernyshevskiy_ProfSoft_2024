@@ -24,11 +24,8 @@ class UserProfileMapperImpl : UserProfileMapper {
             name = dto.name,
             surname = dto.surname,
             avatar = dto.avatar,
-            role = dto.role,
-            phone = dto.phone,
-            registerDate = dto.registerDate,
-            courses = dto.courses.map { toDomain(it) },
-            notes = dto.notes.map { toDomain(it) }
+            email = dto.email,
+            notes = dto.notes?.map { toDomain(it) } ?: emptyList()
         )
     }
 
@@ -43,11 +40,12 @@ class UserProfileMapperImpl : UserProfileMapper {
 
     override fun toDomain(dto: NoteDto): Note {
         return Note(
-            id = dto.id,
+            id = dto.id.toString(),
             title = dto.title,
             content = dto.content.map { toDomain(it) },
             author = toDomain(dto.author),
             date = dto.date,
+            topic = dto.topic,
             comments = dto.comments.map { toDomain(it) }
         )
     }
@@ -55,17 +53,18 @@ class UserProfileMapperImpl : UserProfileMapper {
     override fun toDomain(dto: NoteContentDto): NoteContent {
         return NoteContent(
             text = dto.text,
-            image = dto.image
+            image = dto.image ?: ""
         )
     }
 
     override fun toDomain(dto: AuthorDto): Author {
         return Author(
-            id = dto.id,
+            id = dto.id.toString(),
             name = dto.name,
             surname = dto.surname,
-            avatar = dto.avatar,
-            role = dto.role
+            avatar = dto.avatar ?: "",
+            email = dto.email,
+            role = 0
         )
     }
 
@@ -101,10 +100,7 @@ class UserProfileMapperImpl : UserProfileMapper {
             name = domain.name,
             surname = domain.surname,
             avatar = domain.avatar,
-            role = domain.role,
-            phone = domain.phone,
-            registerDate = domain.registerDate,
-            courses = domain.courses.map { toDto(it) },
+            email = domain.email,
             notes = domain.notes.map { toDto(it) }
         )
     }
@@ -120,11 +116,12 @@ class UserProfileMapperImpl : UserProfileMapper {
 
     override fun toDto(domain: Note): NoteDto {
         return NoteDto(
-            id = domain.id,
+            id = domain.id.toInt(),
             title = domain.title,
             content = domain.content.map { toDto(it) },
             author = toDto(domain.author),
             date = domain.date,
+            topic = domain.topic,
             comments = domain.comments.map { toDto(it) }
         )
     }
@@ -138,11 +135,11 @@ class UserProfileMapperImpl : UserProfileMapper {
 
     override fun toDto(domain: Author): AuthorDto {
         return AuthorDto(
-            id = domain.id,
+            id = domain.id.toInt(),
             name = domain.name,
             surname = domain.surname,
             avatar = domain.avatar,
-            role = domain.role
+            email = domain.email
         )
     }
 

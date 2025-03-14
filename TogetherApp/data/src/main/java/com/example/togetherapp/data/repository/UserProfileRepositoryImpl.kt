@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.togetherapp.data.api.UserProfileApi
 import com.example.togetherapp.data.mappers.profile.UserProfileMapper
 import com.example.togetherapp.data.model.profile.ChangeVisibilityRequest
+import com.example.togetherapp.data.model.profile.UserProfileDto
 import com.example.togetherapp.domain.model.profile.ProfilePreview
 import com.example.togetherapp.domain.model.profile.UserProfile
 import com.example.togetherapp.domain.repository.UserProfileRepository
@@ -16,7 +17,7 @@ class UserProfileRepositoryImpl(
     override suspend fun getUserProfile(): UserProfile {
         val response = api.getUserProfile()
         if (response.isSuccessful) {
-            return response.body()?.data?.let { mapper.toDomain(it) }
+            return response.body()?.let { mapper.toDomain(it) }
                 ?: throw Exception("User profile not found")
         } else {
             throw Exception("Failed to fetch user profile: ${response.message()}")
@@ -35,10 +36,10 @@ class UserProfileRepositoryImpl(
         }
     }
 
-    override suspend fun getAllUserProfiles(): List<ProfilePreview> {
+    override suspend fun getAllUserProfiles(): List<UserProfile> {
         val response = api.getAllUserProfiles()
         if (response.isSuccessful) {
-            return response.body()?.data?.map { mapper.toDomain(it) } ?: emptyList()
+            return response.body()?.map { mapper.toDomain(it) } ?: emptyList()
         } else {
             throw Exception("Failed to fetch user profiles: ${response.message()}")
         }

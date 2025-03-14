@@ -11,6 +11,7 @@ import com.example.togetherapp.domain.usecase.comnote.CreateNoteUseCase
 import com.example.togetherapp.domain.usecase.locnote.CreateLocalNoteUseCase
 import com.example.togetherapp.presentation.event.CreateNoteScreenEvent
 import com.example.togetherapp.presentation.state.CreateNoteScreenState
+import com.example.togetherapp.presentation.utils.getTopicName
 import kotlinx.coroutines.launch
 
 class CreateNoteScreenViewModel(
@@ -25,6 +26,14 @@ class CreateNoteScreenViewModel(
 
     fun handleEvent(event: CreateNoteScreenEvent) {
         when (event) {
+
+            is CreateNoteScreenEvent.OnTopicSelected -> {
+                _state.value = _state.value?.copy(
+                    topic = event.topic, // Сохраняем значение enum
+                    topicName = getTopicName(event.topic) // Сохраняем название на русском
+                )
+            }
+
             is CreateNoteScreenEvent.OnErrorClear -> {
                 _state.value = _state.value?.copy(error = null)
             }
@@ -123,6 +132,7 @@ class CreateNoteScreenViewModel(
         } else {
             val currentCommunityNote = _state.value?.communityNote ?: CreatedNote(
                 title = _state.value!!.title,
+                topic = _state.value!!.topic,
                 content = mutableListOf()
             )
             val updatedContent = currentCommunityNote.content.toMutableList()
@@ -161,6 +171,7 @@ class CreateNoteScreenViewModel(
         } else {
             val currentCommunityNote = _state.value?.communityNote ?: CreatedNote(
                 title = _state.value!!.title,
+                topic = _state.value!!.topic,
                 content = mutableListOf()
             )
             val updatedContent = currentCommunityNote.content.toMutableList()

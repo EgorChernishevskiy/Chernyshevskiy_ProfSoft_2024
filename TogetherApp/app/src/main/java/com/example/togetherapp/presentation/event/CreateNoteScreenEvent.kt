@@ -1,6 +1,9 @@
 package com.example.togetherapp.presentation.event
 
+import com.example.togetherapp.domain.utils.NoteTopic
+
 sealed class CreateNoteScreenEvent {
+    data class OnTopicSelected(val topic: NoteTopic) : CreateNoteScreenEvent()
     data class OnTitleChange(val title: String) : CreateNoteScreenEvent()
     data class OnAddItemChange(val addItem: String) : CreateNoteScreenEvent()
     object OnLocalSelected : CreateNoteScreenEvent()

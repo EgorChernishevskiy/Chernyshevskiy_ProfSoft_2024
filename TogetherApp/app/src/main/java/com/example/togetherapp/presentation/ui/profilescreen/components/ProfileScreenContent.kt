@@ -141,26 +141,26 @@ fun ProfileScreenContent(
                     )
                 }
 
-                state.showAllCourses -> {
-                    LazyColumn(
-                        modifier = Modifier
-                            .padding(start = 16.dp, end = 16.dp)
-                    ) {
-                        state.user?.courses?.let {
-                            items(it.size) { index ->
-                                val course = state.user!!.courses[index]
-                                Spacer(modifier = Modifier.height(20.dp))
-                                CourseCard(
-                                    title = course.title,
-                                    tags = course.tags,
-                                    onClick = {
-                                        navController.navigate("details/${course.id}/${index}")
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
+//                state.showAllCourses -> {
+//                    LazyColumn(
+//                        modifier = Modifier
+//                            .padding(start = 16.dp, end = 16.dp)
+//                    ) {
+//                        state.user?.courses?.let {
+//                            items(it.size) { index ->
+//                                val course = state.user!!.courses[index]
+//                                Spacer(modifier = Modifier.height(20.dp))
+//                                CourseCard(
+//                                    title = course.title,
+//                                    tags = course.tags,
+//                                    onClick = {
+//                                        navController.navigate("details/${course.id}/${index}")
+//                                    }
+//                                )
+//                            }
+//                        }
+//                    }
+//                }
 
                 state.showAllNotes -> {
                     LazyColumn(
@@ -247,33 +247,33 @@ fun ProfileScreenContent(
                                         fontSize = 20.sp,
                                         fontWeight = FontWeight.Bold
                                     )
-                                    Spacer(modifier = Modifier.height(6.dp))
-                                    Text(
-                                        text = stringResource(
-                                            R.string.register_date_text_label,
-                                            formatDateProfile(state.user?.registerDate ?: "")
-                                        ),
-                                        fontSize = 14.sp,
-                                        color = Color.Gray
-                                    )
-                                    Spacer(modifier = Modifier.height(6.dp))
-                                    Text(
-                                        text = stringResource(
-                                            R.string.role_text_label, when (state.user?.role) {
-                                                0 -> stringResource(R.string.student_text_label)
-                                                1 -> stringResource(R.string.teacher_text_label)
-                                                2 -> stringResource(R.string.admin_text_label)
-                                                else -> stringResource(R.string.unknown_role_text_label)
-                                            }
-                                        ),
-                                        fontSize = 14.sp,
-                                        color = Color.Gray
-                                    )
+//                                    Spacer(modifier = Modifier.height(6.dp))
+//                                    Text(
+//                                        text = stringResource(
+//                                            R.string.register_date_text_label,
+//                                            formatDateProfile(state.user?.registerDate ?: "")
+//                                        ),
+//                                        fontSize = 14.sp,
+//                                        color = Color.Gray
+//                                    )
+//                                    Spacer(modifier = Modifier.height(6.dp))
+//                                    Text(
+//                                        text = stringResource(
+//                                            R.string.role_text_label, when (state.user?.role) {
+//                                                0 -> stringResource(R.string.student_text_label)
+//                                                1 -> stringResource(R.string.teacher_text_label)
+//                                                2 -> stringResource(R.string.admin_text_label)
+//                                                else -> stringResource(R.string.unknown_role_text_label)
+//                                            }
+//                                        ),
+//                                        fontSize = 14.sp,
+//                                        color = Color.Gray
+//                                    )
                                 }
                             }
 
                             Column(modifier = Modifier.padding(0.dp)) {
-                                state.user?.phone?.let {
+                                state.user?.email?.let {
                                     Text(
                                         text = stringResource(
                                             R.string.phone_number_text_label,
@@ -288,25 +288,26 @@ fun ProfileScreenContent(
                                     Row(
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
-                                        Text(
-                                            text = stringResource(R.string.show_number_text_label),
-                                            fontSize = 14.sp,
-                                            color = Color.Black
-                                        )
-                                        Spacer(modifier = Modifier.weight(1f))
-                                        Switch(
-                                            checked = true,
-                                            onCheckedChange = { },
-                                            colors = SwitchDefaults.colors(
-                                                checkedTrackColor = Color.Black,
-                                                uncheckedTrackColor = Color(0xFFFFD80C),
-                                                checkedThumbColor = Color(0xFFFFD80C),
-                                                uncheckedThumbColor = Color(0xFFFFD80C)
-                                            ),
-                                            modifier = Modifier
-                                                .scale(0.7f)
-                                                .padding(end = 8.dp)
-                                        )
+                                        Spacer(Modifier.height(15.dp))
+//                                        Text(
+//                                            text = stringResource(R.string.show_number_text_label),
+//                                            fontSize = 14.sp,
+//                                            color = Color.Black
+//                                        )
+//                                        Spacer(modifier = Modifier.weight(1f))
+//                                        Switch(
+//                                            checked = true,
+//                                            onCheckedChange = { },
+//                                            colors = SwitchDefaults.colors(
+//                                                checkedTrackColor = Color.Black,
+//                                                uncheckedTrackColor = Color(0xFFFFD80C),
+//                                                checkedThumbColor = Color(0xFFFFD80C),
+//                                                uncheckedThumbColor = Color(0xFFFFD80C)
+//                                            ),
+//                                            modifier = Modifier
+//                                                .scale(0.7f)
+//                                                .padding(end = 8.dp)
+//                                        )
                                     }
                                 } else {
                                     Spacer(Modifier.height(15.dp))
@@ -318,16 +319,16 @@ fun ProfileScreenContent(
                         Column(
                             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 12.dp)
                         ) {
-                            state.user?.let {
-                                FavoriteCourses(
-                                    if (state.isMyProfile) stringResource(R.string.your_courses_title_label) else stringResource(
-                                        R.string.courses_text_label
-                                    ),
-                                    it.courses,
-                                    { viewModel.handleEvent(ProfileScreenEvent.ShowAllCourses) },
-                                    navController
-                                )
-                            }
+//                            state.user?.let {
+//                                FavoriteCourses(
+//                                    if (state.isMyProfile) stringResource(R.string.your_courses_title_label) else stringResource(
+//                                        R.string.courses_text_label
+//                                    ),
+//                                    it.courses,
+//                                    { viewModel.handleEvent(ProfileScreenEvent.ShowAllCourses) },
+//                                    navController
+//                                )
+//                            }
 
                             state.user?.let {
                                 FavoriteNotes(

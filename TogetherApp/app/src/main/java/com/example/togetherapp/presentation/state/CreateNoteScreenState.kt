@@ -3,6 +3,8 @@ package com.example.togetherapp.presentation.state
 import com.example.togetherapp.domain.model.comnote.CreatedNote
 import com.example.togetherapp.domain.model.comnote.NoteContent
 import com.example.togetherapp.domain.model.locnote.LocNote
+import com.example.togetherapp.domain.utils.NoteTopic
+import com.example.togetherapp.presentation.utils.getTopicName
 
 data class CreateNoteScreenState(
     val isLoading: Boolean = false,
@@ -13,6 +15,8 @@ data class CreateNoteScreenState(
     val addPhoto: Boolean = false,
     val addText: Boolean = false,
     val title: String = "Название",
+    val topic: NoteTopic = NoteTopic.OIL, // Значение из enum
+    val topicName: String = getTopicName(NoteTopic.OIL), // Название на русском
     val noteContent: NoteContent? = null,
     val addedItem: String = "",
     val error: String? = null

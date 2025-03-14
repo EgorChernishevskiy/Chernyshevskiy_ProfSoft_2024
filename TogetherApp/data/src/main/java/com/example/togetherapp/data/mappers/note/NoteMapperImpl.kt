@@ -14,19 +14,21 @@ import com.example.togetherapp.domain.model.comnote.NoteContent
 class NoteMapperImpl : NoteMapper {
     override fun toDomain(dto: NoteDto): Note {
         return Note(
-            id = dto.id,
+            id = dto.id.toString(),
             title = dto.title,
             content = dto.content.map { toDomain(it) },
             author = toDomain(dto.author),
             date = dto.date,
+            topic = dto.topic,
             comments = dto.comments.map { toDomain(it) }
         )
     }
 
     override fun toDto(domain: Note): NoteDto {
         return NoteDto(
-            id = domain.id,
+            id = domain.id.toInt(),
             title = domain.title,
+            topic = domain.topic,
             content = domain.content.map { toDto(it) },
             author = toDto(domain.author),
             date = domain.date,
@@ -36,8 +38,8 @@ class NoteMapperImpl : NoteMapper {
 
     override fun toDomain(dto: NoteContentDto): NoteContent {
         return NoteContent(
-            text = dto.text,
-            image = dto.image
+            text = dto.text ?: "",
+            image = dto.image ?: ""
         )
     }
 
@@ -50,21 +52,22 @@ class NoteMapperImpl : NoteMapper {
 
     override fun toDomain(dto: AuthorDto): Author {
         return Author(
-            id = dto.id,
+            id = dto.id.toString(),
             name = dto.name,
             surname = dto.surname,
-            avatar = dto.avatar,
-            role = dto.role
+            avatar = dto.avatar ?: "",
+            email = dto.email,
+            role = 0
         )
     }
 
     override fun toDto(domain: Author): AuthorDto {
         return AuthorDto(
-            id = domain.id,
+            id = domain.id.toInt(),
             name = domain.name,
             surname = domain.surname,
-            avatar = domain.avatar,
-            role = domain.role
+            avatar = domain.avatar.ifEmpty { null },
+            email = domain.email
         )
     }
 
@@ -87,6 +90,7 @@ class NoteMapperImpl : NoteMapper {
     override fun toDomain(dto: CreatedNoteDto): CreatedNote {
         return CreatedNote(
             title = dto.title,
+            topic = dto.topic,
             content = dto.content.map { toDomain(it) }
         )
     }
@@ -94,6 +98,7 @@ class NoteMapperImpl : NoteMapper {
     override fun toDto(domain: CreatedNote): CreatedNoteDto {
         return CreatedNoteDto(
             title = domain.title,
+            topic = domain.topic,
             content = domain.content.map { toDto(it) }
         )
     }

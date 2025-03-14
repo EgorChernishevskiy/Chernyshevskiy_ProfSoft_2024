@@ -2,6 +2,7 @@ package com.example.togetherapp.data.repository
 
 import com.example.togetherapp.data.api.AuthApi
 import com.example.togetherapp.data.mappers.auth.AuthMapper
+import com.example.togetherapp.data.utils.toQueryMap
 import com.example.togetherapp.domain.model.auth.LoginParams
 import com.example.togetherapp.domain.model.auth.RegisterParams
 import com.example.togetherapp.domain.repository.AuthRepository
@@ -14,11 +15,13 @@ class AuthRepositoryImpl(
     override suspend fun login(params: LoginParams): Result<String> {
         val loginRequest = authMapper.toLoginRequest(params)
         return try {
-            val response = authApiService.login(loginRequest)
+            val response = authApiService.login(loginRequest.toQueryMap())
+
             if (response.isSuccessful) {
-                Result.success(response.body()?.data?.token ?: "")
+                val token = response.body()?.string() ?: ""
+                Result.success(token)
             } else {
-                Result.failure(Exception("Вход не удался"))
+                Result.failure(Exception("Ошибка логина: ${response.errorBody()?.string()}"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -28,7 +31,7 @@ class AuthRepositoryImpl(
     override suspend fun register(params: RegisterParams): Result<String> {
         val registerRequest = authMapper.toRegisterRequest(params)
         return try {
-            val response = authApiService.register(registerRequest)
+            val response = authApiService.register(registerRequest.toQueryMap())
             if (response.isSuccessful) {
                 Result.success(response.body()?.data?.token ?: "")
             } else {

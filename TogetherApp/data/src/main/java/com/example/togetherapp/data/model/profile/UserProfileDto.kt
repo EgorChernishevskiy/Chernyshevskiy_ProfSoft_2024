@@ -8,9 +8,6 @@ data class UserProfileDto(
     val name: String,
     val surname: String,
     val avatar: String?,
-    val role: Int,
-    val phone: String?,
-    val registerDate: String,
-    val courses: List<CourseDto>,
-    val notes: List<NoteDto>
+    val email: String?,
+    val notes: List<NoteDto>?
 )
