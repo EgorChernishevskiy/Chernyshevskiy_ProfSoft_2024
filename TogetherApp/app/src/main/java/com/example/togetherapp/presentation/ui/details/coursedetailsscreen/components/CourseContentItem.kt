@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.example.togetherapp.domain.model.course.ChallengeSubmissionDto
 import com.example.togetherapp.domain.model.course.CourseText
 
 @Composable
@@ -46,6 +49,40 @@ fun CourseContentItem(courseText: CourseText) {
                         .fillMaxWidth()
                         .height(193.dp)
                         .clip(MaterialTheme.shapes.medium)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun SubmissionItem(submission: ChallengeSubmissionDto) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = "Автор: ${submission.author}",
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = submission.text,
+                style = MaterialTheme.typography.bodyMedium
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+
+            if (submission.image.isNotEmpty()) {
+                Image(
+                    painter = rememberImagePainter(submission.image),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
                 )
             }
         }

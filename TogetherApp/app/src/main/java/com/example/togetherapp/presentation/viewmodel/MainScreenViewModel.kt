@@ -4,9 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.togetherapp.domain.usecase.comnote.GetNotesByTopicUseCase
 import com.example.togetherapp.domain.usecase.course.GetCoursesUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNotesUseCase
+import com.example.togetherapp.domain.usecase.course.GetChallengesByTopicUseCase
+import com.example.togetherapp.domain.usecase.course.GetChallengesUseCase
 import com.example.togetherapp.domain.usecase.locnote.GetAllLocalNotesUseCase
+import com.example.togetherapp.domain.utils.NoteTopic
 import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
 import kotlinx.coroutines.launch
@@ -14,7 +18,10 @@ import kotlinx.coroutines.launch
 class MainScreenViewModel(
     //private val getCoursesUseCase: GetCoursesUseCase,
     private val getNotesUseCase: GetNotesUseCase,
-    private val getAllLocalNotesUseCase: GetAllLocalNotesUseCase
+    private val getAllLocalNotesUseCase: GetAllLocalNotesUseCase,
+    private val getNotesByTopicUseCase: GetNotesByTopicUseCase,
+    private val getChallengesUseCase: GetChallengesUseCase,
+    private val getChallengesByTopicUseCase: GetChallengesByTopicUseCase
 ) : ViewModel() {
 
     private val _state = MutableLiveData(MainScreenState())
@@ -22,6 +29,23 @@ class MainScreenViewModel(
 
     fun handleEvent(event: MainScreenEvent) {
         when (event) {
+
+            is MainScreenEvent.LoadChallengesByTopic -> {
+                loadChallengesByTopic(event.topic)
+            }
+
+            is MainScreenEvent.LoadChallenges -> {
+                loadChallenges()
+            }
+
+            is MainScreenEvent.UpdateTopicName -> {
+                _state.value = _state.value?.copy(topicName = event.topicName)
+            }
+
+            is MainScreenEvent.LoadNotesByTopic -> {
+                loadNotesByTopic(event.topic)
+            }
+
             is MainScreenEvent.OnErrorClear -> {
                 _state.value = _state.value?.copy(error = null)
             }
@@ -40,7 +64,7 @@ class MainScreenViewModel(
 
             is MainScreenEvent.ShowAllCourses -> {
                 _state.value = _state.value?.copy(showAllCourses = true)
-                //loadCourses()
+                loadChallenges()
             }
 
             is MainScreenEvent.HideAllCourses -> {
@@ -73,6 +97,42 @@ class MainScreenViewModel(
                 resetState()
             }
 
+        }
+    }
+
+    private fun loadChallenges() {
+        _state.value = _state.value?.copy(isLoading = true)
+        viewModelScope.launch {
+            try {
+                val challenges = getChallengesUseCase.execute()
+                _state.value = _state.value?.copy(challenges = challenges, isLoading = false)
+            } catch (e: Exception) {
+                _state.value = _state.value?.copy(error = e.message, isLoading = false)
+            }
+        }
+    }
+
+    private fun loadChallengesByTopic(topic: NoteTopic) {
+        _state.value = _state.value?.copy(isLoading = true)
+        viewModelScope.launch {
+            try {
+                val challenges = getChallengesByTopicUseCase.execute(topic)
+                _state.value = _state.value?.copy(challenges = challenges, isLoading = false)
+            } catch (e: Exception) {
+                _state.value = _state.value?.copy(error = e.message, isLoading = false)
+            }
+        }
+    }
+
+    private fun loadNotesByTopic(topic: NoteTopic) {
+        _state.value = _state.value?.copy(isLoading = true)
+        viewModelScope.launch {
+            try {
+                val notes = getNotesByTopicUseCase.execute(topic)
+                _state.value = _state.value?.copy(notes = notes, isLoading = false)
+            } catch (e: Exception) {
+                _state.value = _state.value?.copy(error = e.message, isLoading = false)
+            }
         }
     }
 
@@ -112,8 +172,10 @@ class MainScreenViewModel(
         viewModelScope.launch {
             try {
                 val notes = getNotesUseCase.execute()
+                println("Загружены все заметки: ${notes.size}") // Логирование
                 _state.value = _state.value?.copy(notes = notes, isLoading = false)
             } catch (e: Exception) {
+                println("Ошибка при загрузке всех заметок: ${e.message}") // Логирование
                 _state.value = _state.value?.copy(error = e.message, isLoading = false)
             }
         }

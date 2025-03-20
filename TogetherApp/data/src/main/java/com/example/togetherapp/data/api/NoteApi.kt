@@ -1,5 +1,6 @@
 package com.example.togetherapp.data.api
 
+import com.example.togetherapp.data.model.note.CommentDto
 import com.example.togetherapp.data.model.note.CreateNoteResponse
 import com.example.togetherapp.data.model.note.CreatedNoteDto
 import com.example.togetherapp.data.model.note.NoteDto
@@ -10,20 +11,24 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface NoteApi {
     @GET("note/get_all")
     suspend fun getNotes(): Response<List<NoteDto>>
 
-    @GET("note/get/{noteId}")
-    suspend fun getNoteById(@Path("noteId") noteId: Int): Response<NoteDto>
+    @GET("note/get_by_topic")
+    suspend fun getNotesByTopic(@Query("topic") topic: String): Response<List<NoteDto>>
+
+    @GET("note/get")
+    suspend fun getNoteById(@Query("noteId") noteId: Int): Response<NoteDto>
 
     @POST("/note/create")
     suspend fun createNote(@Body note: CreatedNoteDto): Response<NoteDto>
 
-    @POST("/api/community_notes/comment/{noteId}")
+    @POST("note/add_comment")
     suspend fun addComment(
-        @Path("noteId") noteId: String,
-        @Body comment: Map<String, String>
-    ): Response<CreateNoteResponse>
+        @Query("noteId") noteId: String,
+        @Query("text") text: String
+    ): Response<CommentDto>
 }

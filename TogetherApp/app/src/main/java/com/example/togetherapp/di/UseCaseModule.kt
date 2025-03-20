@@ -13,9 +13,14 @@ import com.example.togetherapp.domain.usecase.chat.SendMessageUseCase
 import com.example.togetherapp.domain.usecase.comnote.AddCommentUseCase
 import com.example.togetherapp.domain.usecase.comnote.CreateNoteUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNoteByIdUseCase
+import com.example.togetherapp.domain.usecase.comnote.GetNotesByTopicUseCase
 import com.example.togetherapp.domain.usecase.comnote.GetNotesUseCase
+import com.example.togetherapp.domain.usecase.course.GetChallengeByIdUseCase
+import com.example.togetherapp.domain.usecase.course.GetChallengesByTopicUseCase
+import com.example.togetherapp.domain.usecase.course.GetChallengesUseCase
 import com.example.togetherapp.domain.usecase.course.GetCourseByIdUseCase
 import com.example.togetherapp.domain.usecase.course.GetCoursesUseCase
+import com.example.togetherapp.domain.usecase.course.SubmitChallengeAttemptUseCase
 import com.example.togetherapp.domain.usecase.favorite.AddFavoriteCourseUseCase
 import com.example.togetherapp.domain.usecase.favorite.AddFavoriteLocalNoteUseCase
 import com.example.togetherapp.domain.usecase.favorite.AddFavoriteNoteUseCase
@@ -50,10 +55,15 @@ val useCaseModule = module {
     factory { ValidatePhoneNumberUseCase() }
     factory { ValidatePasswordUseCase() }
 
+    factory { SubmitChallengeAttemptUseCase(get()) }
+    factory { GetChallengeByIdUseCase(get()) }
+    factory { GetChallengesByTopicUseCase(get()) }
+    factory { GetChallengesUseCase(get()) }
     factory { GetCoursesUseCase(get()) }
     factory { GetCourseByIdUseCase(get()) }
 
     factory { GetNotesUseCase(get()) }
+    factory { GetNotesByTopicUseCase(get()) }
     factory { GetNoteByIdUseCase(get()) }
     factory { AddCommentUseCase(get()) }
     factory { CreateNoteUseCase(get()) }

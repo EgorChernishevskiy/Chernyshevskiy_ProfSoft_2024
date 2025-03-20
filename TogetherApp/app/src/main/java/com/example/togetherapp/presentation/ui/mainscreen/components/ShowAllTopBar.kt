@@ -38,7 +38,7 @@ fun ShowAllTopBar(title: String, onHideAllClick: () -> Unit) {
 
             Spacer(modifier = Modifier.weight(1f))
 
-            CustomSearchButton()
+            //CustomSearchButton()
         }
     }
 }

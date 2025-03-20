@@ -88,7 +88,7 @@ fun FavoriteScreenContent(
                         )
                     },
                     actions = {
-                        CustomSearchButton()
+                        //CustomSearchButton()
                     },
                     colors = TopAppBarDefaults.mediumTopAppBarColors(
                         containerColor = Color(0xFFFFD80C)
@@ -201,14 +201,14 @@ fun FavoriteScreenContent(
 
                 else -> {
                     LazyColumn {
-                        item {
-                            FavoriteCourses(
-                                stringResource(R.string.courses_text_label),
-                                state.courses,
-                                { viewModel.handleEvent(FavoriteScreenEvent.ShowAllCourses) },
-                                navController
-                            )
-                        }
+//                        item {
+//                            FavoriteCourses(
+//                                stringResource(R.string.courses_text_label),
+//                                state.courses,
+//                                { viewModel.handleEvent(FavoriteScreenEvent.ShowAllCourses) },
+//                                navController
+//                            )
+//                        }
                         item { FavoriteLocNotes(state, viewModel, navController) }
                         item {
                             state.communityNote?.let {

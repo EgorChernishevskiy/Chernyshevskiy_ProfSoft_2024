@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
@@ -40,6 +41,7 @@ import com.example.togetherapp.presentation.state.note.CNoteDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
 import com.example.togetherapp.presentation.ui.details.components.NoteContentItem
 import com.example.togetherapp.presentation.ui.details.components.NoteTopAppBar
+import com.example.togetherapp.presentation.utils.getTopicName
 import com.example.togetherapp.presentation.viewmodel.details.CNoteDetailsScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -52,9 +54,17 @@ fun CNoteDetailsScreenContent(
     val viewModel: CNoteDetailsScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(CNoteDetailsScreenState())
 
+    val lazyListState = rememberLazyListState()
+
     LaunchedEffect(noteId) {
         viewModel.handleEvent(CNoteDetailsScreenEvent.CheckIfFavorite(noteId))
         viewModel.handleEvent(CNoteDetailsScreenEvent.LoadCNoteDetails(noteId))
+    }
+
+    LaunchedEffect(state.note) {
+        if (state.note != null) {
+            lazyListState.scrollToItem(state.note!!.comments.size)
+        }
     }
 
     Scaffold(
@@ -77,7 +87,8 @@ fun CNoteDetailsScreenContent(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(paddingValues),
+            state = lazyListState
         ) {
             item {
                 NoteTopAppBar(
@@ -156,6 +167,15 @@ fun CNoteDetailsScreenContent(
                             }
 
                             Spacer(modifier = Modifier.height(16.dp))
+
+                            // Отображение темы заметки
+                            Text(
+                                text = "Тема: ${getTopicName(state.note!!.topic)}", // Преобразуем тему в русское название
+                                fontWeight = FontWeight(700),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+
+                            Spacer(modifier = Modifier.height(8.dp))
 
                             Text(
                                 text = stringResource(R.string.create_note_text_label),

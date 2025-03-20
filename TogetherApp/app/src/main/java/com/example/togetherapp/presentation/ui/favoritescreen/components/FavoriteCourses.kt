@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.togetherapp.domain.model.course.ChallengeDto
 import com.example.togetherapp.domain.model.course.Course
 import com.example.togetherapp.presentation.ui.mainscreen.components.CustomHorizontalPager
 import com.example.togetherapp.presentation.ui.mainscreen.components.SectionTitle
@@ -13,7 +14,7 @@ import com.example.togetherapp.presentation.ui.mainscreen.components.SectionTitl
 @Composable
 fun FavoriteCourses(
     title: String,
-    courses: List<Course>,
+    courses: List<ChallengeDto>,
     onShowAllClick: () -> Unit,
     navController: NavHostController
 ) {
@@ -24,5 +25,5 @@ fun FavoriteCourses(
     }
     Spacer(modifier = Modifier.height(12.dp))
 
-    CustomHorizontalPager(courses = courses, navController)
+    CustomHorizontalPager(challenges = courses, navController)
 }
