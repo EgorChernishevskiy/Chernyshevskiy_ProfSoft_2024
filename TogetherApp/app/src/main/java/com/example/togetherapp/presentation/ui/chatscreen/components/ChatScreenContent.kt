@@ -55,7 +55,7 @@ fun ChatScreenContent() {
                     )
                 },
                 actions = {
-                    CustomSearchButton()
+                    //CustomSearchButton()
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = Color(0xFFFFD80C)

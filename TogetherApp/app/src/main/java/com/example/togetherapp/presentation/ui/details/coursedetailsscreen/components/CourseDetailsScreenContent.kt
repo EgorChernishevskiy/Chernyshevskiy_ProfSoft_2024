@@ -18,6 +18,7 @@ import com.example.togetherapp.R
 import com.example.togetherapp.presentation.event.CourseDetailsScreenEvent
 import com.example.togetherapp.presentation.state.CourseDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.ErrorMessage
+import com.example.togetherapp.presentation.utils.getTopicName
 import com.example.togetherapp.presentation.viewmodel.details.CourseDetailsScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -37,7 +38,30 @@ fun DetailsScreenContent(
         viewModel.handleEvent(CourseDetailsScreenEvent.CheckIfFavorite(courseId))
     }
 
-    Scaffold { paddingValues ->
+    Scaffold(
+        bottomBar = {
+            if (state.course != null) {
+                AddAttempt(
+                    state = state,
+                    onTextChanged = { newText ->
+                        viewModel.handleEvent(CourseDetailsScreenEvent.UpdateAttemptText(newText))
+                    },
+                    onImageUrlChanged = { newImageUrl ->
+                        viewModel.handleEvent(CourseDetailsScreenEvent.UpdateAttemptImageUrl(newImageUrl))
+                    },
+                    onAttemptAdded = {
+                        viewModel.handleEvent(
+                            CourseDetailsScreenEvent.SubmitAttempt(
+                                challengeId = state.course!!.id,
+                                image = state.attemptImageUrl,
+                                text = state.attemptText
+                            )
+                        )
+                    },
+                )
+            }
+        }
+    ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -97,36 +121,33 @@ fun DetailsScreenContent(
                                 top = 20.dp
                             )
                         ) {
+//                            Text(
+//                                text = "Техника: ${getTopicName(state.course!!.technique)}",
+//                                fontWeight = FontWeight(700),
+//                                style = MaterialTheme.typography.bodyLarge
+//                            )
+//                            Spacer(modifier = Modifier.height(8.dp))
+
                             Text(
-                                text = stringResource(R.string.course_themes_label),
+                                text = "Тема: ${state.course!!.theme}",
                                 fontWeight = FontWeight(700),
                                 style = MaterialTheme.typography.bodyLarge
                             )
-                            Spacer(modifier = Modifier.height(8.dp))
-
-                            state.course?.tags?.forEach { tag ->
-                                Text(
-                                    text = "\u2022 $tag",
-                                    style = MaterialTheme.typography.titleSmall,
-                                    fontWeight = FontWeight(400),
-                                    modifier = Modifier.padding(bottom = 4.dp),
-                                    color = Color.Gray
-                                )
-                            }
-
+//                            Spacer(modifier = Modifier.height(8.dp))
+//
+//                            Text(
+//                                text = "Палитра: ${state.course!!.palette}",
+//                                fontWeight = FontWeight(700),
+//                                style = MaterialTheme.typography.bodyLarge
+//                            )
                             Spacer(modifier = Modifier.height(16.dp))
-
-                            Text(
-                                text = stringResource(R.string.course_class_text_label),
-                                fontWeight = FontWeight(700),
-                                style = MaterialTheme.typography.bodyLarge
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
                         }
                     }
 
-                    items(state.course!!.text.size) { index ->
-                        CourseContentItem(courseText = state.course!!.text[index])
+                    state.course?.submissions?.forEach { submission ->
+                        item {
+                            SubmissionItem(submission = submission)
+                        }
                     }
                 }
             }

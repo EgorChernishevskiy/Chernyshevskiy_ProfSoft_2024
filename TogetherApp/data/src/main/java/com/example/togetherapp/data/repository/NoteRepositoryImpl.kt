@@ -2,9 +2,11 @@ package com.example.togetherapp.data.repository
 
 import com.example.togetherapp.data.api.NoteApi
 import com.example.togetherapp.data.mappers.note.NoteMapper
+import com.example.togetherapp.domain.model.comnote.Comment
 import com.example.togetherapp.domain.model.comnote.CreatedNote
 import com.example.togetherapp.domain.model.comnote.Note
 import com.example.togetherapp.domain.repository.NoteRepository
+import com.example.togetherapp.domain.utils.NoteTopic
 
 class NoteRepositoryImpl(
     private val api: NoteApi,
@@ -17,6 +19,15 @@ class NoteRepositoryImpl(
             return response.body()?.map { mapper.toDomain(it) } ?: emptyList()
         } else {
             throw Exception("Ошибка загрузки заметок")
+        }
+    }
+
+    override suspend fun getNotesByTopic(topic: NoteTopic): List<Note> {
+        val response = api.getNotesByTopic(topic.name)
+        if (response.isSuccessful) {
+            return response.body()?.map { mapper.toDomain(it) } ?: emptyList()
+        } else {
+            throw Exception("Ошибка загрузки заметок по теме")
         }
     }
 
@@ -41,11 +52,10 @@ class NoteRepositoryImpl(
         }
     }
 
-    override suspend fun addComment(noteId: String, text: String): Note {
-        val commentRequest = mapOf("text" to text)
-        val response = api.addComment(noteId, commentRequest)
+    override suspend fun addComment(noteId: String, text: String): Comment {
+        val response = api.addComment(noteId = noteId, text = text)
         if (response.isSuccessful) {
-            return response.body()?.data?.let { mapper.toDomain(it) }
+            return response.body()?.let { mapper.toDomain(it) }
                 ?: throw Exception("Failed to add comment")
         } else {
             throw Exception("Failed to add comment: ${response.message()}")

@@ -6,6 +6,7 @@ import com.example.togetherapp.data.database.entity.favorite.FavoriteNoteEntity
 import com.example.togetherapp.domain.model.course.Course
 import com.example.togetherapp.domain.model.comnote.Note
 import com.example.togetherapp.domain.model.locnote.LocNote
+import com.example.togetherapp.domain.utils.NoteTopic
 
 class FavoriteMapperImpl : FavoriteMapper {
 
@@ -56,7 +57,7 @@ class FavoriteMapperImpl : FavoriteMapper {
             content = entity.content,
             author = entity.author,
             date = entity.date,
-            topic = "",
+            topic = NoteTopic.OIL,
             comments = entity.comments
         )
     }

@@ -23,6 +23,7 @@ import com.example.togetherapp.R
 import com.example.togetherapp.presentation.state.CourseDetailsScreenState
 import com.example.togetherapp.presentation.ui.components.AddToFavoriteIcon
 import com.example.togetherapp.presentation.ui.components.IconButtonBack
+import com.example.togetherapp.presentation.utils.getTopicName
 
 @Composable
 fun CustomTopAppBar(
@@ -38,46 +39,33 @@ fun CustomTopAppBar(
             .background(Color(0xFFFFD80C))
     ) {
         Column(modifier = Modifier.padding(top = 8.dp)) {
-            state.course?.let { course ->
+            state.course?.let { challenge ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButtonBack(onBackClick)
                     Text(
-                        text = stringResource(
-                            R.string.course_top_bar_lection_text_label,
-                            courseIndex + 1
-                        ),
+                        text = "Челлендж",
                         style = MaterialTheme.typography.titleLarge,
                         fontSize = 20.sp
                     )
                     Spacer(modifier = Modifier.weight(1f))
 
-                    AddToFavoriteIcon(state.isFavorite, onFavoriteClick)
+                    //AddToFavoriteIcon(state.isFavorite, onFavoriteClick)
                 }
                 Spacer(modifier = Modifier.height(50.dp))
-                Column(modifier = Modifier.padding(horizontal = 16.dp))
-                {
-                    if (course.title.split(" ").count() <= 2) {
-                        course.title.split(" ").forEach { word ->
-                            Text(
-                                text = word,
-                                style = MaterialTheme.typography.titleLarge,
-                                fontWeight = FontWeight.Bold,
-                                maxLines = 2,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                        }
-                    } else {
-                        Text(
-                            text = course.title,
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(4.dp))
+                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                    // Отображаем тему челленджа
                     Text(
-                        text = course.description,
+                        text = "Техника: ${getTopicName(state.course!!.technique)}",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    // Отображаем палитру челленджа
+                    Text(
+                        text = "Палитра: ${challenge.palette}",
                         style = MaterialTheme.typography.titleSmall,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,

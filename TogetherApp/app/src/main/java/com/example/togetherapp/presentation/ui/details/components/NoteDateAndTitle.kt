@@ -12,13 +12,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.example.togetherapp.presentation.utils.formatNoteCardDate
 import com.example.togetherapp.presentation.utils.formatNoteDetailsDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NoteDateAndTitle(title: String, date: String) {
     Text(
-        text = formatNoteDetailsDate(date),
+        text = formatNoteCardDate(date),
         style = MaterialTheme.typography.titleSmall,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,

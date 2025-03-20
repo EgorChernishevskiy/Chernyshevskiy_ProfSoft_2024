@@ -37,14 +37,14 @@
     <string name="course_class_text_label">Занятие</string>
     <string name="course_top_bar_lection_text_label">Лекция %1$s</string>
     <string name="favorite_loc_notes_title_label">Ваши заметки</string>
-    <string name="all_courses_top_bar_label">Все курсы</string>
+    <string name="all_courses_top_bar_label">Все челленджи</string>
     <string name="your_notes_top_bar_label">Ваши заметки</string>
     <string name="com_notes_top_bar_label">Заметки сообщества</string>
     <string name="favorite_top_bar_label">Избранное</string>
     <string name="empty_text_label">Пусто</string>
     <string name="courses_text_label">Курсы</string>
     <string name="com_notes_text_label">Заметки сообщества</string>
-    <string name="your_courses_title_label">Ваши курсы</string>
+    <string name="your_courses_title_label">Еженедельные челленжди</string>
     <string name="home_page_title_label">Главная</string>
     <string name="button_all_text_label">Все</string>
     <string name="profile_title_label">Профиль</string>

@@ -34,7 +34,7 @@ fun MainScreenCards(
             }
             Spacer(modifier = Modifier.height(12.dp))
 
-            CustomHorizontalPager(courses = state.courses, navController)
+            CustomHorizontalPager(challenges = state.challenges, navController)
         }
 
         item {

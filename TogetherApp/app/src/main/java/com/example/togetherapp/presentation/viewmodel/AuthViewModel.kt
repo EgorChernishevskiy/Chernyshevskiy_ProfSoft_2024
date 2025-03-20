@@ -125,7 +125,7 @@ class AuthViewModel(
         }
 
         val hashedPassword =
-            hashPassword(_state.value?.loginPassword ?: "")
+            _state.value?.loginPassword ?: ""
         val loginParams = LoginParams(
             phone = _state.value?.loginPhoneNumber ?: "",
             passwordHashed = hashedPassword

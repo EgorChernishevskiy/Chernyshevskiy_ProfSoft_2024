@@ -11,13 +11,14 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface UserProfileApi {
     @GET("/user/get_profile")
     suspend fun getUserProfile(): Response<UserProfileDto>
 
-    @GET("/api/profile/{userId}")
-    suspend fun getUserProfileById(@Path("userId") userId: String): Response<UserProfileDto>
+    @GET("/user/profile")
+    suspend fun getUserProfileById(@Query("userId") userId: String): Response<UserProfileDto>
 
     @GET("/user/get_all_profiles")
     suspend fun getAllUserProfiles(): Response<List<UserProfileDto>>

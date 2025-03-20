@@ -18,16 +18,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.togetherapp.domain.model.course.ChallengeDto
 import com.example.togetherapp.domain.model.course.Course
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CustomHorizontalPager(courses: List<Course>, navController: NavHostController) {
+fun CustomHorizontalPager(challenges: List<ChallengeDto>, navController: NavHostController) {
     Box(
         modifier = Modifier.fillMaxWidth(),
     ) {
         val pagerState = rememberPagerState(
-            pageCount = { courses.size }
+            pageCount = { challenges.size }
         )
 
         Column(
@@ -38,10 +39,11 @@ fun CustomHorizontalPager(courses: List<Course>, navController: NavHostControlle
                 state = pagerState,
                 contentPadding = PaddingValues(end = 12.dp)
             ) { page ->
-                val course = courses[page]
-                CourseCard(
-                    title = course.title,
-                    tags = course.tags,
+                val course = challenges[page]
+                ChallengeCard(
+                    theme = course.theme,
+                    technique = course.technique,
+                    palette = course.palette,
                     onClick = { navController.navigate("details/${course.id}/${page}") }
                 )
             }
@@ -53,7 +55,7 @@ fun CustomHorizontalPager(courses: List<Course>, navController: NavHostControlle
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                repeat(courses.size) { index ->
+                repeat(challenges.size) { index ->
                     Box(
                         modifier = Modifier
                             .weight(1f)
