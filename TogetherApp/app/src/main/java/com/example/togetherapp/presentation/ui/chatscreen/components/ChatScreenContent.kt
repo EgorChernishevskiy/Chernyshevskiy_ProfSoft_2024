@@ -9,18 +9,25 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,11 +46,20 @@ fun ChatScreenContent() {
 
     val viewModel: ChatScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(ChatScreenState())
+    var showTopicDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         viewModel.handleEvent(ChatScreenEvent.LoadMessages)
         viewModel.handleEvent(ChatScreenEvent.GetCurrentUserId)
+        viewModel.subscribeToSSE()
     }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            viewModel.unsubscribeFromSSE() // Отписываемся от SSE
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -55,7 +71,12 @@ fun ChatScreenContent() {
                     )
                 },
                 actions = {
-                    //CustomSearchButton()
+                    IconButton(onClick = { showTopicDialog = true }) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_topic),
+                            contentDescription = "Select Topic"
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = Color(0xFFFFD80C)
@@ -78,7 +99,7 @@ fun ChatScreenContent() {
                     }
                 )
             } else {
-                val sortedMessages = state.messages.sortedBy { it.date }.asReversed()
+                val sortedMessages = state.messages.sortedBy { it.timestamp }.asReversed()
                 LazyColumn(
                     modifier = Modifier
                         .weight(1f)
@@ -88,7 +109,7 @@ fun ChatScreenContent() {
                     items(sortedMessages) { message ->
                         ChatMessageItem(
                             message = message,
-                            isCurrentUser = message.author.id == state.currentUserId
+                            isCurrentUser = message.sender == state.currentUserId
                         )
                     }
                 }
@@ -106,5 +127,15 @@ fun ChatScreenContent() {
                 }
             }
         }
+    }
+
+    if (showTopicDialog) {
+        TopicSelectionDialog(
+            onTopicSelected = { topic ->
+                viewModel.setCurrentTopic(topic)
+                showTopicDialog = false
+            },
+            onDismiss = { showTopicDialog = false }
+        )
     }
 }

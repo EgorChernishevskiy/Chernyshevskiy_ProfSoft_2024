@@ -9,9 +9,10 @@ class ChatMapperImpl : ChatMapper {
     override fun toDomain(dto: ChatMessageDto): ChatMessage {
         return ChatMessage(
             id = dto.id,
-            date = dto.date,
-            author = toDomain(dto.author),
-            message = dto.message
+            chatRoomId = dto.chatRoomId,
+            sender = dto.sender,
+            text = dto.text,
+            timestamp = dto.timestamp
         )
     }
 
@@ -29,9 +30,10 @@ class ChatMapperImpl : ChatMapper {
     override fun toDto(domain: ChatMessage): ChatMessageDto {
         return ChatMessageDto(
             id = domain.id,
-            date = domain.date,
-            author = toDto(domain.author),
-            message = domain.message
+            chatRoomId = domain.chatRoomId,
+            sender = domain.sender,
+            text = domain.text,
+            timestamp = domain.timestamp
         )
     }
 

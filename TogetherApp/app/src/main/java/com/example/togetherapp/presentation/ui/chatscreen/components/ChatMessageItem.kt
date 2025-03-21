@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import coil.compose.rememberImagePainter
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.util.Locale
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -35,12 +36,21 @@ fun ChatMessageItem(message: ChatMessage, isCurrentUser: Boolean) {
     val horizontalArrangement = if (isCurrentUser) Arrangement.End else Arrangement.Start
     val paddingStart = 12.dp
     val paddingEnd = 12.dp
-    val backgroundColor = if (message.author.role == 2) Color(0xFFFFD80C) else Color(0x66D7D7D7)
+    val backgroundColor = if (isCurrentUser) Color(0xFFFFD80C) else Color(0x66D7D7D7)
 
+    // Используем правильный формат для парсинга временной метки
     val inputFormatter =
-        DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+        DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.getDefault())
     val outputFormatter = DateTimeFormatter.ofPattern("dd.MM HH:mm", Locale.getDefault())
-    val date = LocalDateTime.parse(message.date, inputFormatter)
+
+    // Парсим временную метку
+    val date = try {
+        LocalDateTime.parse(message.timestamp, inputFormatter)
+    } catch (e: DateTimeParseException) {
+        // Если парсинг не удался, используем текущее время
+        LocalDateTime.now()
+    }
+
     val formattedDate = date.format(outputFormatter)
 
     Row(
@@ -56,18 +66,17 @@ fun ChatMessageItem(message: ChatMessage, isCurrentUser: Boolean) {
                     .clip(shape = RoundedCornerShape(20.dp))
                     .background(backgroundColor)
             ) {
-
+                // Аватар больше не используется, так как его нет в новом формате
+                // Если нужно, можно добавить заглушку
                 Image(
-                    painter = rememberImagePainter(message.author.avatar),
+                    painter = rememberImagePainter(data = "https://example.com/avatar.png"), // Заглушка
                     contentDescription = null,
                     modifier = Modifier
                         .clip(RoundedCornerShape(topStart = 20.dp))
                         .size(40.dp)
                         .padding(paddingStart),
                     contentScale = ContentScale.Crop,
-
-                    )
-
+                )
 
                 Column(
                     modifier = Modifier
@@ -76,12 +85,12 @@ fun ChatMessageItem(message: ChatMessage, isCurrentUser: Boolean) {
                         .widthIn(max = 200.dp)
                 ) {
                     Text(
-                        text = "${message.author.name} ${message.author.surname}",
+                        text = message.sender, // Используем sender вместо author
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Start
                     )
                     Text(
-                        text = message.message,
+                        text = message.text,
                         color = Color.Black,
                         textAlign = TextAlign.Start
                     )
@@ -113,18 +122,20 @@ fun ChatMessageItem(message: ChatMessage, isCurrentUser: Boolean) {
                         .widthIn(max = 200.dp)
                 ) {
                     Text(
-                        text = "${message.author.name} ${message.author.surname}",
+                        text = message.sender, // Используем sender вместо author
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Start
                     )
                     Text(
-                        text = message.message,
+                        text = message.text,
                         color = Color.Black,
                         textAlign = TextAlign.Start
                     )
                 }
+                // Аватар больше не используется, так как его нет в новом формате
+                // Если нужно, можно добавить заглушку
                 Image(
-                    painter = rememberImagePainter(message.author.avatar),
+                    painter = rememberImagePainter(data = "https://example.com/avatar.png"), // Заглушка
                     contentDescription = null,
                     modifier = Modifier
                         .clip(RoundedCornerShape(topStart = 20.dp))
