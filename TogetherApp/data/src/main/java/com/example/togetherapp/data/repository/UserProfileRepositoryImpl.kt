@@ -25,7 +25,12 @@ class UserProfileRepositoryImpl(
     }
 
     override suspend fun getUserProfileById(userId: String): UserProfile {
-        val response = api.getUserProfileById(userId)
+        val response = try {
+            api.getUserProfileById(userId.toLong())
+        } catch (e: NumberFormatException) {
+            throw Exception("Invalid user ID format")
+        }
+
         if (response.isSuccessful) {
             val responseBody = response.body()
             Log.d("UserProfileApi", "Response body: $responseBody")
@@ -52,6 +57,31 @@ class UserProfileRepositoryImpl(
                 ?: throw Exception("Failed to update phone visibility")
         } else {
             throw Exception("Failed to update phone visibility: ${response.message()}")
+        }
+    }
+
+
+    override suspend fun updateProfile(
+        name: String?,
+        surname: String?,
+        email: String?,
+        avatar: String?
+    ): UserProfile {
+        val response = api.updateProfile(
+            name = if (!name.isNullOrBlank()) name else null,
+            surname = if (!surname.isNullOrBlank()) surname else null,
+            email = if (!email.isNullOrBlank()) email else null,
+            avatar = if (!avatar.isNullOrBlank()) avatar else null
+        )
+
+        if (response.isSuccessful) {
+            return response.body()?.let { mapper.toDomain(it) }
+                ?: throw Exception("Failed to parse updated profile")
+        } else {
+            when (response.code()) {
+                400 -> throw Exception("Email already taken or invalid data")
+                else -> throw Exception("Failed to update profile: ${response.message()}")
+            }
         }
     }
 }

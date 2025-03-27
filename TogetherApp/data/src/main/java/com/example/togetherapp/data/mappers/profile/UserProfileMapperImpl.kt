@@ -12,6 +12,7 @@ import com.example.togetherapp.domain.model.comnote.Author
 import com.example.togetherapp.domain.model.comnote.Comment
 import com.example.togetherapp.domain.model.comnote.Note
 import com.example.togetherapp.domain.model.comnote.NoteContent
+import com.example.togetherapp.domain.model.course.ChallengeSubmissionDto
 import com.example.togetherapp.domain.model.course.Course
 import com.example.togetherapp.domain.model.course.CourseText
 import com.example.togetherapp.domain.model.profile.ProfilePreview
@@ -25,7 +26,16 @@ class UserProfileMapperImpl : UserProfileMapper {
             surname = dto.surname,
             avatar = dto.avatar,
             email = dto.email,
-            notes = dto.notes?.map { toDomain(it) } ?: emptyList()
+            notes = dto.notes?.map { toDomain(it) } ?: emptyList(),
+            submissions = dto.submissions?.map { submissionDto ->
+                ChallengeSubmissionDto(
+                    id = submissionDto.id,
+                    challengeId = submissionDto.challengeId,
+                    image = submissionDto.image,
+                    text = submissionDto.text,
+                    author = submissionDto.author
+                )
+            } ?: emptyList()
         )
     }
 
@@ -101,7 +111,16 @@ class UserProfileMapperImpl : UserProfileMapper {
             surname = domain.surname,
             avatar = domain.avatar,
             email = domain.email,
-            notes = domain.notes.map { toDto(it) }
+            notes = domain.notes.map { toDto(it) },
+            submissions = domain.submissions.map { submissionDto ->
+                ChallengeSubmissionDto(
+                    id = submissionDto.id,
+                    challengeId = submissionDto.challengeId,
+                    image = submissionDto.image,
+                    text = submissionDto.text,
+                    author = submissionDto.author
+                )
+            }
         )
     }
 

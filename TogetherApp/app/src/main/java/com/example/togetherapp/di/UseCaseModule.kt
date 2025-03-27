@@ -41,6 +41,7 @@ import com.example.togetherapp.domain.usecase.profile.GetUserProfileByIdUseCase
 import com.example.togetherapp.domain.usecase.profile.GetUserProfileUseCase
 import com.example.togetherapp.domain.usecase.profile.LogOutUseCase
 import com.example.togetherapp.domain.usecase.profile.SetPhoneVisibilityUseCase
+import com.example.togetherapp.domain.usecase.profile.UpdateProfileUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
@@ -88,6 +89,7 @@ val useCaseModule = module {
     factory { GetAllMessagesUseCase(get()) }
     factory { SendMessageUseCase(get()) }
 
+    factory { UpdateProfileUseCase(get()) }
     factory { GetAllUserProfilesUseCase(get()) }
     factory { GetUserProfileByIdUseCase(get()) }
     factory { GetUserProfileUseCase(get()) }

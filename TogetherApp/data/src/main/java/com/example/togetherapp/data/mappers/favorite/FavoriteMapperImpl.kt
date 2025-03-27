@@ -24,6 +24,7 @@ class FavoriteMapperImpl : FavoriteMapper {
         return FavoriteNoteEntity(
             id = note.id,
             title = note.title,
+            topic = note.topic,
             content = note.content,
             author = note.author,
             date = note.date,
@@ -54,10 +55,10 @@ class FavoriteMapperImpl : FavoriteMapper {
         return Note(
             id = entity.id,
             title = entity.title,
+            topic = entity.topic,
             content = entity.content,
             author = entity.author,
             date = entity.date,
-            topic = NoteTopic.OIL,
             comments = entity.comments
         )
     }

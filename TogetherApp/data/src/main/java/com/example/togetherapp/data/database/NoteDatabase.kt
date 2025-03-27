@@ -8,6 +8,7 @@ import com.example.togetherapp.data.database.converter.CommentConverter
 import com.example.togetherapp.data.database.converter.CourseTextConverter
 import com.example.togetherapp.data.database.converter.LocNoteContentConverter
 import com.example.togetherapp.data.database.converter.NoteContentConverter
+import com.example.togetherapp.data.database.converter.NoteTopicConverter
 import com.example.togetherapp.data.database.dao.FavoriteDao
 import com.example.togetherapp.data.database.dao.NoteDao
 import com.example.togetherapp.data.database.entity.favorite.FavoriteCourseEntity
@@ -23,13 +24,14 @@ import com.example.togetherapp.data.database.entity.favorite.FavoriteLocalNoteEn
         FavoriteNoteEntity::class,
         FavoriteLocalNoteEntity::class
                ],
-    version = 3
+    version = 4
 )
 @TypeConverters(
     NoteContentConverter::class,
     LocNoteContentConverter::class,
     CourseTextConverter::class,
     TagsConverter::class,
+    NoteTopicConverter::class,
     AuthorConverter::class,
     CommentConverter::class
 )

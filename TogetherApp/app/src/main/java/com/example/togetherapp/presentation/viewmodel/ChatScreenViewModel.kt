@@ -1,5 +1,8 @@
 package com.example.togetherapp.presentation.viewmodel
 
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.togetherapp.data.model.chat.ChatMessageDto
 import com.example.togetherapp.data.sse.SSEClient
 import com.example.togetherapp.domain.model.chat.ChatMessage
+import com.example.togetherapp.domain.repository.TokenRepository
 import com.example.togetherapp.domain.usecase.chat.GetAllMessagesUseCase
 import com.example.togetherapp.domain.usecase.chat.SendMessageUseCase
 import com.example.togetherapp.domain.usecase.profile.GetUserProfileUseCase
@@ -15,11 +19,13 @@ import com.example.togetherapp.presentation.event.ChatScreenEvent
 import com.example.togetherapp.presentation.state.ChatScreenState
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
+import java.io.EOFException
 
 class ChatScreenViewModel(
     private val getAllMessagesUseCase: GetAllMessagesUseCase,
     private val sendMessageUseCase: SendMessageUseCase,
-    private val getUserProfileUseCase: GetUserProfileUseCase
+    private val getUserProfileUseCase: GetUserProfileUseCase,
+    private val tokenRepository: TokenRepository
 ) : ViewModel() {
 
     private val _state = MutableLiveData(ChatScreenState())
@@ -27,53 +33,52 @@ class ChatScreenViewModel(
 
     private var currentTopic: NoteTopic = NoteTopic.OIL
     private lateinit var sseClient: SSEClient
-
-    fun subscribeToSSE() {
-        sseClient = SSEClient(
-            onEvent = { eventData ->
-                val newMessage = parseMessageFromEvent(eventData)
-                _state.postValue(_state.value?.copy(
-                    messages = _state.value?.messages.orEmpty() + newMessage
-                ))
-            },
-            onFailure = { error ->
-                _state.postValue(_state.value?.copy(error = error.message))
-            }
-        )
-        sseClient.subscribe(currentTopic)
-    }
-
-    fun unsubscribeFromSSE() {
-        sseClient.unsubscribe()
-    }
+    private val reconnectHandler = Handler(Looper.getMainLooper())
 
     init {
         initSSEClient()
     }
 
-
     private fun initSSEClient() {
         sseClient = SSEClient(
+            tokenRepository = tokenRepository, // 👈 Передаем в SSEClient
             onEvent = { eventData ->
-                // Парсим новое сообщение
-                val newMessage = parseMessageFromEvent(eventData)
-                // Обновляем LiveData через postValue
-                _state.postValue(_state.value?.copy(
-                    messages = _state.value?.messages.orEmpty() + newMessage
-                ))
+                Log.d("SSE_DEBUG", "Received event: $eventData")
+                try {
+                    val newMessage = parseMessageFromEvent(eventData)
+                    _state.postValue(_state.value?.copy(
+                        messages = _state.value?.messages.orEmpty() + newMessage
+                    ))
+                } catch (e: Exception) {
+                    Log.e("SSE_DEBUG", "Error processing event: ${e.stackTraceToString()}")
+                }
             },
             onFailure = { error ->
-                // Обновляем LiveData через postValue
-                _state.postValue(_state.value?.copy(error = error.message))
+                Log.e("SSE_DEBUG", "SSE failure: ${error.message}")
+                reconnectHandler.postDelayed({
+                    Log.d("SSE_DEBUG", "Attempting reconnect...")
+                    subscribeToSSE()
+                }, 5000)
             }
         )
     }
 
     fun setCurrentTopic(topic: NoteTopic) {
+        Log.d("SSE_DEBUG", "Switching to topic: $topic")
         currentTopic = topic
-        sseClient.unsubscribe() // Отписываемся от предыдущей темы
-        sseClient.subscribe(topic) // Подписываемся на новую тему
+        sseClient.unsubscribe()
+        sseClient.subscribe(topic)
         loadMessages()
+    }
+
+    fun subscribeToSSE() {
+        Log.d("SSE", "Подписка на SSE для темы: $currentTopic")
+        sseClient.subscribe(currentTopic)
+    }
+
+    fun unsubscribeFromSSE() {
+        Log.d("SSE", "Отписка от SSE")
+        sseClient.unsubscribe()
     }
 
     fun handleEvent(event: ChatScreenEvent) {
@@ -83,7 +88,11 @@ class ChatScreenViewModel(
             }
 
             is ChatScreenEvent.LoadMessages -> {
-                loadMessages()
+                if (state.value?.currentUserId == null) {
+                    getCurrentUserId { loadMessages() } // Загружаем ID перед сообщениями
+                } else {
+                    loadMessages()
+                }
             }
 
             is ChatScreenEvent.SendMessage -> {
@@ -100,12 +109,13 @@ class ChatScreenViewModel(
         }
     }
 
-    private fun getCurrentUserId() {
+    private fun getCurrentUserId(onSuccess: (() -> Unit)? = null) {
         _state.value = _state.value?.copy(isLoading = true)
         viewModelScope.launch {
             try {
                 val user = getUserProfileUseCase.execute()
-                _state.value = _state.value?.copy(currentUserId = user.id, isLoading = false)
+                _state.value = _state.value?.copy(currentUserId = user.name, isLoading = false)
+                onSuccess?.invoke() // Загружаем сообщения только после получения ID
             } catch (e: Exception) {
                 _state.value = _state.value?.copy(error = e.message, isLoading = false)
             }
@@ -141,7 +151,9 @@ class ChatScreenViewModel(
 
     private fun parseMessageFromEvent(eventData: String): ChatMessage {
         return try {
+            Log.d("SSE_DEBUG", "Parsing JSON: $eventData")
             Gson().fromJson(eventData, ChatMessageDto::class.java).let { dto ->
+                // Убедитесь, что sender - это строка, а не объект
                 ChatMessage(
                     id = dto.id,
                     chatRoomId = dto.chatRoomId,
@@ -151,7 +163,8 @@ class ChatScreenViewModel(
                 )
             }
         } catch (e: Exception) {
-            throw Exception("Failed to parse message: ${e.message}")
+            Log.e("SSE_DEBUG", "Parse error: ${e.stackTraceToString()}")
+            throw e
         }
     }
 

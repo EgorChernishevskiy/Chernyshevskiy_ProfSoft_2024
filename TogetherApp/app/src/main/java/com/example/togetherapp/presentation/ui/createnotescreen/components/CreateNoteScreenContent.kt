@@ -34,6 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -107,9 +108,13 @@ fun CreateNoteScreenContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentSize(Alignment.TopStart)
+                        .background(Color.LightGray.copy(alpha = 0.5f),
+                            shape = RoundedCornerShape(12.dp))
+                        .clip(RoundedCornerShape(12.dp))
                 ) {
                     Text(
                         text = "Тема: ${state.topicName}",
+                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
                         modifier = Modifier
                             .clickable { expanded = true }
                             .padding(8.dp)
@@ -129,6 +134,8 @@ fun CreateNoteScreenContent(
                         }
                     }
                 }
+
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Row(
                     modifier = Modifier

@@ -12,7 +12,7 @@ import com.example.togetherapp.R
 @Composable
 fun Logo(modifier: Modifier = Modifier) {
     Image(
-        painter = painterResource(id = R.drawable.ic_logo),
+        painter = painterResource(id = R.drawable.ic_logo_2),
         contentDescription = null,
         modifier = modifier
             .width(61.dp)

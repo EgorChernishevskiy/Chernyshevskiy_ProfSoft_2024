@@ -18,9 +18,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
@@ -32,12 +36,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -67,10 +75,28 @@ fun ProfileScreenContent(
 ) {
     val viewModel: ProfileScreenViewModel = koinViewModel()
     val state by viewModel.state.observeAsState(ProfileScreenState())
+    var showEditDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         viewModel.handleEvent(ProfileScreenEvent.OnLoadUserProfile)
     }
+
+    if (showEditDialog) {
+        EditProfileDialog(
+            currentProfile = state.user ?: return,
+            onDismiss = { showEditDialog = false },
+            onSave = { name, surname, email, avatarUrl ->
+                viewModel.updateProfile(
+                    name = name,
+                    surname = surname,
+                    email = email,
+                    avatar = avatarUrl
+                )
+            }
+        )
+    }
+
+
     Scaffold(
         topBar = {
             if (state.showAllCourses || state.showAllNotes || state.showAllUsers || !state.isMyProfile) {
@@ -219,7 +245,10 @@ fun ProfileScreenContent(
                                 .background(Color.LightGray)
                                 .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                         ) {
-                            Row {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
                                 Image(
                                     painter = rememberImagePainter(data = state.user?.avatar),
                                     contentDescription = "User Avatar",
@@ -232,7 +261,9 @@ fun ProfileScreenContent(
                                 Spacer(modifier = Modifier.width(20.dp))
 
                                 Column(
-                                    modifier = Modifier.padding(bottom = 12.dp),
+                                    modifier = Modifier
+                                        .padding(bottom = 12.dp)
+                                        .weight(1f),
                                     verticalArrangement = Arrangement.Center,
                                     horizontalAlignment = Alignment.Start
                                 ) {
@@ -247,28 +278,19 @@ fun ProfileScreenContent(
                                         fontSize = 20.sp,
                                         fontWeight = FontWeight.Bold
                                     )
-//                                    Spacer(modifier = Modifier.height(6.dp))
-//                                    Text(
-//                                        text = stringResource(
-//                                            R.string.register_date_text_label,
-//                                            formatDateProfile(state.user?.registerDate ?: "")
-//                                        ),
-//                                        fontSize = 14.sp,
-//                                        color = Color.Gray
-//                                    )
-//                                    Spacer(modifier = Modifier.height(6.dp))
-//                                    Text(
-//                                        text = stringResource(
-//                                            R.string.role_text_label, when (state.user?.role) {
-//                                                0 -> stringResource(R.string.student_text_label)
-//                                                1 -> stringResource(R.string.teacher_text_label)
-//                                                2 -> stringResource(R.string.admin_text_label)
-//                                                else -> stringResource(R.string.unknown_role_text_label)
-//                                            }
-//                                        ),
-//                                        fontSize = 14.sp,
-//                                        color = Color.Gray
-//                                    )
+                                }
+
+                                FloatingActionButton(
+                                    onClick = { showEditDialog = true },
+                                    modifier = Modifier.size(40.dp),
+                                    containerColor = Color(0xFFFFD80C),
+                                    contentColor = Color.Black
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Edit,
+                                        contentDescription = "Редактировать профиль",
+                                        modifier = Modifier.size(24.dp)
+                                    )
                                 }
                             }
 

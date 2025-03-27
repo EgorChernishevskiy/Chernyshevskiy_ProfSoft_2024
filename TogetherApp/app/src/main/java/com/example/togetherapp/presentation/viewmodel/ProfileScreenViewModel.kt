@@ -10,6 +10,7 @@ import com.example.togetherapp.domain.usecase.profile.GetUserProfileByIdUseCase
 import com.example.togetherapp.domain.usecase.profile.GetUserProfileUseCase
 import com.example.togetherapp.domain.usecase.profile.LogOutUseCase
 import com.example.togetherapp.domain.usecase.profile.SetPhoneVisibilityUseCase
+import com.example.togetherapp.domain.usecase.profile.UpdateProfileUseCase
 import com.example.togetherapp.presentation.event.ProfileScreenEvent
 import com.example.togetherapp.presentation.state.ProfileScreenState
 import kotlinx.coroutines.launch
@@ -19,6 +20,7 @@ class ProfileScreenViewModel(
     private val getAllUserProfilesUseCase: GetAllUserProfilesUseCase,
     private val getUserProfileByIdUseCase: GetUserProfileByIdUseCase,
     private val setPhoneVisibilityUseCase: SetPhoneVisibilityUseCase,
+    private val updateProfileUseCase: UpdateProfileUseCase,
     private val logOutUseCase: LogOutUseCase
 ) : ViewModel() {
 
@@ -122,6 +124,37 @@ class ProfileScreenViewModel(
             } catch (e: Exception) {
                 _state.value = _state.value?.copy(error = e.message, isLoading = false)
             }
+        }
+    }
+
+    fun updateProfile(
+        name: String? = null,
+        surname: String? = null,
+        email: String? = null,
+        avatar: String? = null
+    ) {
+        _state.value = _state.value?.copy(isLoading = true)
+        viewModelScope.launch {
+            updateProfileUseCase(
+                name = name,
+                surname = surname,
+                email = email,
+                avatar = avatar
+            ).fold(
+                onSuccess = { updatedProfile ->
+                    _state.value = _state.value?.copy(
+                        user = updatedProfile,
+                        isLoading = false,
+                        error = null
+                    )
+                },
+                onFailure = { e ->
+                    _state.value = _state.value?.copy(
+                        isLoading = false,
+                        error = e.message ?: "Failed to update profile"
+                    )
+                }
+            )
         }
     }
 

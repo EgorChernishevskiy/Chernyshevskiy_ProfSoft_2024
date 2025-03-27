@@ -2,6 +2,7 @@ package com.example.togetherapp.presentation.ui.mainscreen.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -18,9 +19,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.togetherapp.R
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
 import com.example.togetherapp.domain.utils.NoteTopic
 import com.example.togetherapp.presentation.event.MainScreenEvent
 import com.example.togetherapp.presentation.state.MainScreenState
@@ -126,14 +129,21 @@ fun MainScreenContent(
                 }
 
                 state.showAllCourses -> {
+
+                    Spacer(modifier = Modifier.height(8.dp))
                     // Выпадающее меню для выбора темы
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentSize(Alignment.TopStart)
+                            .background(Color.LightGray.copy(alpha = 0.5f),
+                                shape = RoundedCornerShape(12.dp))
+                            .clip(RoundedCornerShape(12.dp))
+
                     ) {
                         Text(
                             text = "Тема: ${state.topicName ?: "Все"}",
+                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
                             modifier = Modifier
                                 .clickable { expanded = true }
                                 .padding(8.dp)
@@ -179,14 +189,21 @@ fun MainScreenContent(
                 }
 
                 state.showAllNotes -> {
+
+                    Spacer(modifier = Modifier.height(8.dp))
                     // Выпадающее меню для выбора темы
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentSize(Alignment.TopStart)
+                            .background(Color.LightGray.copy(alpha = 0.5f),
+                                shape = RoundedCornerShape(12.dp))
+                                        .clip(RoundedCornerShape(12.dp))
+
                     ) {
                         Text(
                             text = "Тема: ${state.topicName ?: "Все"}",
+                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
                             modifier = Modifier
                                 .clickable { expanded = true }
                                 .padding(8.dp)

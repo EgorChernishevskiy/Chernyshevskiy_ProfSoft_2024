@@ -54,14 +54,14 @@ fun SplashScreenContent(
                 .width(65.dp)
         )
 
-        Image(
-            painter = painterResource(id = R.drawable.together_label),
-            contentDescription = null,
-            modifier = Modifier
-                .align(Alignment.Center)
-                .offset(y = 232.dp)
-                .width(69.dp)
-                .height(12.dp)
-        )
+//        Image(
+//            painter = painterResource(id = R.drawable.together_label),
+//            contentDescription = null,
+//            modifier = Modifier
+//                .align(Alignment.Center)
+//                .offset(y = 232.dp)
+//                .width(69.dp)
+//                .height(12.dp)
+//        )
     }
 }

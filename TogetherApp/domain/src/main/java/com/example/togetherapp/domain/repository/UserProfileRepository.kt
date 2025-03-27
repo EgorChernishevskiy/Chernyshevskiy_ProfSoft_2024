@@ -8,4 +8,10 @@ interface UserProfileRepository {
     suspend fun getUserProfileById(userId: String): UserProfile
     suspend fun getAllUserProfiles(): List<UserProfile>
     suspend fun setPhoneVisibility(isVisible: Boolean): UserProfile
+    suspend fun updateProfile(
+        name: String?,
+        surname: String?,
+        email: String?,
+        avatar: String?
+    ): UserProfile
 }
